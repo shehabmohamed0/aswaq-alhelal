@@ -23,7 +23,7 @@ import 'package:users_presentation/features/settings/pages/phone_info/phone_info
 import 'package:users_presentation/features/settings/pages/settings/settings_page.dart';
 import 'package:users_presentation/features/settings/pages/update_email/update_email_page.dart';
 
-import 'features/cart/presentation/pages/home_page.dart';
+import 'features/home/presentation/pages/home_page.dart';
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
 import 'features/institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
