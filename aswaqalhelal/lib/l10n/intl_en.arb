@@ -1,0 +1,22 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "invalidAmount": "invalid amount.",
+  "invalidCode": "invalid Code.",
+  "currency": "Currency",
+  "settings": "Settings",
+  "logout": "Logout",
+  "home": "Home",
+  "aswaqLhelal": "Aswaq Alhelal",
+  "noImage": "No image",
+  "uploadedSucceffully": "Uploaded succeffully",
+  "uploadingFailed": "uploading Failed",
+  "updateImage": "Update image",
+  "currencyConverter": "CURRENCY CONVERTER",
+  "somethingWentWrong": "someThing went wrong",
+  "incorrectNumber": "incorrect number",
+  "switchCurrencies": "Switch Currencies",
+  "privacyPolicy": "Privacy Policy"
+}

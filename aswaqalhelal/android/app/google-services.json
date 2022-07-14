@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "435245077591",
+    "project_id": "users-ffe5e",
+    "storage_bucket": "users-ffe5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435245077591:android:1b99b8c21d62021ce27f12",
+        "android_client_info": {
+          "package_name": "com.aswaqalhelal.aswaq_alhelal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435245077591-t91jkqr1l308vacpqadddm09ehev8ij4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aswaqalhelal.aswaq_alhelal",
+            "certificate_hash": "e52dabdf0a65651df377e860744cb82f43e150e6"
+          }
+        },
+        {
+          "client_id": "435245077591-q47hlok8e8h98ri7sqa1472tffp143e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx5kipvhrOgduttUfhabgHDTJefHZavy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435245077591-q47hlok8e8h98ri7sqa1472tffp143e4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "435245077591-62l90vbvmu208lrhrv0nkjeambjj4em5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.synamall.aswaqalhelal.aswaqAlhelal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435245077591:android:050d4ca46255f2a1e27f12",
+        "android_client_info": {
+          "package_name": "com.synamall.aswaqalhelal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435245077591-q47hlok8e8h98ri7sqa1472tffp143e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx5kipvhrOgduttUfhabgHDTJefHZavy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435245077591-q47hlok8e8h98ri7sqa1472tffp143e4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "435245077591-62l90vbvmu208lrhrv0nkjeambjj4em5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.synamall.aswaqalhelal.aswaqAlhelal"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

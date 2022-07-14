@@ -1,0 +1,15 @@
+{
+  "helloWorld": "اهلا بالعالم",
+  "@hellowWorld": {
+    "description": "dasdasdasdasdasdasd"
+  },
+  "invalidEmailAddress": "البريد الإلكترونى غير صحيح.",
+  "invalidName": "اسم المستخدم غير صحيح.",
+  "invalidPassword": "كلمة المرور يجب ان تكون على الاقل ٨ حروف",
+  "invalidPhoneNumber": "رقم الهاتف غير صحيح.",
+  "phoneNumberIsAlreadyRegistered": "رقم الهاتف مسجل مسبقا.",
+  "checkInternetConnection": "رجاءََ٫ تفقد اتصال الانترنت.",
+  "somethingWentWrong": "حدث خطأ ما.",
+  "required": "مطلوب",
+  "tryAgain": "حاول مجدداََ"
+}

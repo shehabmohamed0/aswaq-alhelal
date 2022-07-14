@@ -1,0 +1,15 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "invalidEmailAddress": "Invalid email address.",
+  "invalidName": "Invalid user name.",
+  "invalidPassword": "Password must be at least 8 character.",
+  "invalidPhoneNumber": "Invalid phone number.",
+  "phoneNumberIsAlreadyRegistered": "The phone number is already registered.",
+  "checkInternetConnection": "Please, check internet connection.",
+  "somethingWentWrong": "Something went wrong.",
+  "required": "Required",
+  "tryAgain": "Try again"
+}
