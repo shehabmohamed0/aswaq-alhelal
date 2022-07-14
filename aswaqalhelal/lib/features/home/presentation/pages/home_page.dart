@@ -1,8 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:aswaqalhelal/features/cart/presentation/pages/widgets/app_drawer.dart';
-import 'package:aswaqalhelal/l10n/l10n.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,12 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path/path.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:root_package/l10n/l10n.dart';
-import 'package:root_package/locator/locator.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
+
+import '../../../../l10n/l10n.dart';
+import '../../../home/presentation/pages/widgets/app_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

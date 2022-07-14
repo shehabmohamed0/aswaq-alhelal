@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:geo_logic/l10n/l10n.dart';
 import 'package:geo_presentation/l10n/l10n.dart';
+import 'package:geo_presentation/locator/locator.dart';
 import 'package:root_package/core/locale/locale_cubit.dart';
 import 'package:root_package/core/resources/theme_manager.dart';
 import 'package:root_package/l10n/l10n.dart';
@@ -13,7 +14,6 @@ import 'package:users_logic/l10n/l10n.dart';
 import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 import 'package:users_presentation/l10n/l10n.dart';
 import 'package:users_presentation/locator/locator.dart';
-import 'package:geo_presentation/locator/locator.dart';
 
 import 'bloc_observer.dart';
 import 'l10n/l10n.dart';

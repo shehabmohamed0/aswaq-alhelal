@@ -1,9 +1,9 @@
-import 'package:aswaqalhelal/core/converters/currency_coverter.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/converters/currency_coverter.dart';
 import '../../../../core/form_inputs/currency_amount.dart';
 import '../../../../core/form_inputs/currency_code.dart';
 import '../../domain/entities/currency.dart';
