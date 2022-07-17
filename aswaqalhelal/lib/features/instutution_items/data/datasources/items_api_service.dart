@@ -1,13 +1,12 @@
-import 'package:aswaqalhelal/core/params/add_item/params.dart';
-import 'package:aswaqalhelal/features/instutution_items/data/models/unit_model.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/params/add_item/params.dart';
 import '../../domain/entities/institution_item.dart';
-import '../../domain/usecases/add_ref_and_institution_item.dart';
 import '../models/institution_item_model.dart';
 import '../models/reference_item_model.dart';
+import '../models/unit_model.dart';
 
 abstract class ItemsApiService {
   Future<List<ReferenceItemModel>> searchItem(String val);
@@ -45,6 +44,8 @@ class ItemsApiServiceImpl implements ItemsApiService {
   Future<InstitutionItemModel> addInstitutionItem(
       AddInstitutionItemParams params) async {
     final collection = _firestore.collection(FirestorePath.items);
+    collection.where('institutionId' ,isEqualTo: params.itemName);
+
     final units = params.units
         .map((e) => {
               'name': e.name,
@@ -63,6 +64,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       id: ref.id,
       institutionId: params.institutionId,
       name: params.itemName,
+      creationTime: DateTime.now(),
       referenceId: params.referenceId,
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
     );
@@ -106,6 +108,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       institutionId: params.institutionId,
       name: params.itemName,
       referenceId: refDoc.id,
+      creationTime: DateTime.now(),
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
     );
   }

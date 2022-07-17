@@ -2,8 +2,8 @@ const Map<String, dynamic> country = {
   "name_en": "Egypt",
   "name_ar": "مصر",
   "governates": {
-    "Sharkia": {
-      "name_en": "Sharkia",
+    "Sharqia": {
+      "name_en": "Sharqia",
       "name_ar": "الشرقية",
       "cities": {
         "Zagzig": {

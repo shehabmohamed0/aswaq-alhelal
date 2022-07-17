@@ -1,5 +1,3 @@
-import 'package:aswaqalhelal/features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
-import 'package:aswaqalhelal/features/instutution_items/presentation/pages/add_item/widgets/unit_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
@@ -11,8 +9,10 @@ import 'package:root_package/widgets/snack_bar.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../bloc/bloc/add_item_bloc.dart';
+import '../../cubit/institution_items/instutution_items_cubit.dart';
 import 'add_unit_bottom_sheet.dart';
 import 'widgets/auto_suggest_text_field.dart';
+import 'widgets/unit_widget.dart';
 
 class AddItemPage extends HookWidget {
   const AddItemPage({Key? key}) : super(key: key);
@@ -23,7 +23,8 @@ class AddItemPage extends HookWidget {
     final focusNode = useFocusNode();
     final bloc = context.read<AddItemBloc>();
     final institutionId = ModalRoute.of(context)!.settings.arguments as String;
-
+    final itemsState =
+        context.read<InstitutionItemsCubit>().state as InstitutionItemsLoaded;
     return Scaffold(
       appBar: AppBar(title: const Text('Add item')),
       body: Padding(
@@ -190,7 +191,12 @@ class AddItemPage extends HookWidget {
                             state.units.isNotEmpty &&
                             !state.status.isSubmissionInProgress
                         ? () {
-                            bloc.add(AddItemSubmit(institutionId));
+                            bloc.add(
+                              AddItemSubmit(
+                                institutionId: institutionId,
+                                currentItems: itemsState.items,
+                              ),
+                            );
                           }
                         : null,
                     child: const Text('add'),

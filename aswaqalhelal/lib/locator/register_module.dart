@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/core/network/dio_factory.dart';
+import '../core/network/dio_factory.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

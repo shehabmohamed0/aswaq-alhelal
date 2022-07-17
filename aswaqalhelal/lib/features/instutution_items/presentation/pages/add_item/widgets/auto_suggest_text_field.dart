@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 enum AutoSiggestionState {
   loading,
@@ -30,7 +29,7 @@ class AutoSuggestTextField<T> extends StatefulWidget {
   final String? errorText;
   final Function(String val) onChanged;
   final List<T> suggestions;
-  final ItemBuilder<T> suggestionBuilder;
+  final Widget Function(BuildContext context, T t) suggestionBuilder;
   final Function(T suggestion) onSuggestionSelected;
   final Widget emptyWidget;
   final VoidCallback oneEmptyWidgetClicked;

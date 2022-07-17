@@ -1,9 +1,10 @@
-import 'package:aswaqalhelal/core/params/add_item/params.dart';
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
-import 'package:aswaqalhelal/features/instutution_items/domain/usecases/get_institution_items.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/packages/injectable.dart';
+
+import '../../../../../core/params/add_item/params.dart';
+import '../../../domain/entities/institution_item.dart';
+import '../../../domain/usecases/get_institution_items.dart';
 
 part 'instutution_items_state.dart';
 @injectable

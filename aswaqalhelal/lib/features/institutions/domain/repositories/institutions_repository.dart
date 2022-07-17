@@ -1,6 +1,6 @@
-import 'package:aswaqalhelal/core/params/add_institution_params.dart';
-import 'package:aswaqalhelal/core/params/update_institution_params.dart';
-import 'package:aswaqalhelal/features/institutions/domain/entities/institution.dart';
+import '../../../../core/params/add_institution_params.dart';
+import '../../../../core/params/update_institution_params.dart';
+import '../entities/institution.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/packages/dartz.dart';
 

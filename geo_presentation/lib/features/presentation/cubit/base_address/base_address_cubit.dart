@@ -1,10 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:geo_logic/core/failures/location_failure.dart';
-import 'package:geo_logic/core/params/addresses/add_address_params.dart';
 import 'package:geo_logic/core/params/addresses/delete_address_params.dart';
-import 'package:geo_logic/core/params/addresses/update_address_params.dart';
 import 'package:geo_logic/features/domain/entities/address.dart';
 import 'package:geo_logic/features/domain/entities/country.dart';
 import 'package:geo_logic/features/domain/entities/geo_point.dart';
@@ -17,7 +16,6 @@ import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/app_settings.dart';
 import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/formz.dart';
-import 'package:root_package/packages/injectable.dart';
 
 part 'base_address_state.dart';
 
@@ -43,6 +41,12 @@ abstract class BaseAddressCubit extends Cubit<AddAddressState> {
 
   FutureOr<void> initEdit(Address address) async {
     await _initCountryData((country) {
+
+      print(country.enName);
+      print(country.governates.entries.first.value.enName);
+      print(country.governates.entries.first.value.cities.entries.first.value.enName);
+
+      log(address.governate);
       final governate = country.governates[address.governate]!;
       final city = governate.cities[address.city];
       emit(

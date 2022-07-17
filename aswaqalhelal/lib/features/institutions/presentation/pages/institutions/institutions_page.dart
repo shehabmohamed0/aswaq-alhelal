@@ -1,13 +1,10 @@
-import 'package:aswaqalhelal/features/institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../../widgets/check_internet_connection_widget.dart';
-import '../../../domain/entities/institution.dart';
 import '../../cubit/institutions_cubit/institutions_cubit.dart';
-import '../add_institution/add_institution_page.dart';
+import 'institution_widget.dart';
 
 class InstitutionsPage extends StatelessWidget {
   const InstitutionsPage({Key? key}) : super(key: key);
@@ -71,66 +68,14 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(institutions.length, (index) {
-            return InstitutionWidget(institution: institutions[index]);
-          }),
+      body: GridView.builder(
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        padding: const EdgeInsets.all(16),
+        itemBuilder: (context, index) => InstitutionWidget(
+          institution: institutions[index],
         ),
-      ),
-    );
-  }
-}
-
-class InstitutionWidget extends StatelessWidget {
-  const InstitutionWidget({
-    Key? key,
-    required this.institution,
-  }) : super(key: key);
-
-  final Institution institution;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, Routes.institution,
-            arguments: institution);
-      },
-      child: Card(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                institution.officialName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                institution.brandName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                institution.commercialName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                institution.nickname,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
-        ),
+        itemCount: institutions.length,
       ),
     );
   }

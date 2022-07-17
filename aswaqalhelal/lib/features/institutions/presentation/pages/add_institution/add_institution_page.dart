@@ -1,5 +1,3 @@
-import 'package:aswaqalhelal/features/institutions/domain/entities/institution.dart';
-import 'package:aswaqalhelal/features/institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/form_inputs.dart';
@@ -11,7 +9,9 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../domain/entities/institution.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
+import '../../cubit/institutions_cubit/institutions_cubit.dart';
 
 class AddInstitutionPage extends StatelessWidget {
   const AddInstitutionPage({Key? key}) : super(key: key);

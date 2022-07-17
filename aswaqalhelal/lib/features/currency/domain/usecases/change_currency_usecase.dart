@@ -1,5 +1,5 @@
-import 'package:aswaqalhelal/features/currency/domain/entities/currency.dart';
-import 'package:aswaqalhelal/features/currency/domain/repositories/currency_repository.dart';
+import '../entities/currency.dart';
+import '../repositories/currency_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:root_package/packages/injectable.dart';
 

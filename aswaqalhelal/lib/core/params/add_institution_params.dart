@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/institutions/domain/entities/institution.dart';
+import '../../features/institutions/domain/entities/institution.dart';
 
 class AddInstitutionParams {
   final Institution institution;

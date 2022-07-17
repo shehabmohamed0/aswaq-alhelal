@@ -1,5 +1,5 @@
-import 'package:aswaqalhelal/core/params/add_institution_params.dart';
-import 'package:aswaqalhelal/core/params/update_institution_params.dart';
+import '../../../../core/params/add_institution_params.dart';
+import '../../../../core/params/update_institution_params.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart';
 

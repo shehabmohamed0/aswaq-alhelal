@@ -15,21 +15,15 @@ class InstitutionItem extends BaseItem {
     required String institutionId,
     required String name,
     required List<Unit> units,
+    required DateTime creationTime,
   }) : super(
           institutionId: institutionId,
           name: name,
+          creationTime: creationTime,
           units: units,
         );
 
   @override
-  List<Object?> get props => [
-        id,
-        name,
-        institutionId,
-        referenceId,
-        units,
-      ];
-
-  @override
-  bool? get stringify => true;
+  List<Object?> get props =>
+      [id, name, institutionId, referenceId, units, creationTime];
 }

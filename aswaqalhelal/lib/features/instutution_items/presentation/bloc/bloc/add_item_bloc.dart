@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:root_package/core/failures/server_failure.dart';
@@ -12,6 +11,7 @@ import 'package:root_package/packages/stream_transform.dart';
 
 import '../../../../../core/params/add_item/params.dart';
 import '../../../../../core/params/add_item/search_item_params.dart';
+import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../../domain/usecases/add_instition_item.dart';
@@ -103,6 +103,18 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
   FutureOr<void> _onAddItemSubmit(
       AddItemSubmit event, Emitter<AddItemState> emit) async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
+
+    final index =
+        event.currentItems.indexWhere((e) => e.name == state.itemName.value);
+
+    if (index != -1) {
+      emit(
+        state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errorMessage: 'Item name already exists.'),
+      );
+      return;
+    }
 
     if (state.isNewItem) {
       final either = await _addRefAndInstitutionItem(

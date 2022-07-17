@@ -13,6 +13,8 @@ InstitutionItemModel _$InstitutionItemModelFromJson(
       institutionId: json['institutionId'] as String,
       referenceId: json['referenceId'] as String,
       name: json['name'] as String,
+      creationTime: const TimestampConverter()
+          .fromJson(json['creationTime'] as Timestamp),
       unitModels: (json['units'] as List<dynamic>)
           .map((e) => UnitModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -23,6 +25,7 @@ Map<String, dynamic> _$InstitutionItemModelToJson(
     <String, dynamic>{
       'institutionId': instance.institutionId,
       'name': instance.name,
+      'creationTime': const TimestampConverter().toJson(instance.creationTime),
       'id': instance.id,
       'referenceId': instance.referenceId,
       'units': instance.unitModels,

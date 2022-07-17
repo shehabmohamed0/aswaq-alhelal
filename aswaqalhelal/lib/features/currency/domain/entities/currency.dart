@@ -1,5 +1,5 @@
-import 'package:root_package/packages/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:root_package/packages/json_annotation.dart';
 
 class Currency extends Equatable {
   const Currency([this.amount = 0]);

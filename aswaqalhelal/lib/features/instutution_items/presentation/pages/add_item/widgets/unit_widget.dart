@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/rxdart.dart';
 
 class UnitWidget extends StatelessWidget {
   const UnitWidget({

@@ -1,5 +1,3 @@
-import 'package:aswaqalhelal/features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
-import 'package:aswaqalhelal/features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_logic/features/domain/entities/geo_point.dart';
@@ -23,7 +21,6 @@ import 'package:users_presentation/features/settings/pages/phone_info/phone_info
 import 'package:users_presentation/features/settings/pages/settings/settings_page.dart';
 import 'package:users_presentation/features/settings/pages/update_email/update_email_page.dart';
 
-import 'features/home/presentation/pages/home_page.dart';
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
 import 'features/institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
@@ -31,8 +28,11 @@ import 'features/institutions/presentation/cubit/institutions_cubit/institutions
 import 'features/institutions/presentation/pages/add_institution/add_institution_page.dart';
 import 'features/institutions/presentation/pages/institution/institution_page.dart';
 import 'features/institutions/presentation/pages/institutions/institutions_page.dart';
+import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
+import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
+import 'features/items/presentation/pages/home_page.dart';
 import 'features/splash/splash_screen.dart';
 
 class AppRouter {
@@ -194,7 +194,8 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) => BlocProvider<InstitutionItemsCubit>(
-            create: (context) => locator()..getInstitutionsItems( settings.arguments as String),
+            create: (context) =>
+                locator()..getInstitutionsItems(settings.arguments as String),
             child: const InstitutionItemsPage(),
           ),
         );

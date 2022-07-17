@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:aswaqalhelal/core/params/add_item/params.dart';
-import 'package:aswaqalhelal/features/instutution_items/domain/usecases/add_ref_and_institution_item.dart';
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
+import '../../../../core/params/add_item/params.dart';
+import '../../domain/usecases/add_ref_and_institution_item.dart';
+import '../../domain/entities/institution_item.dart';
 import 'package:dartz/dartz.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';

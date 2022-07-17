@@ -55,7 +55,8 @@ dependencies:
   geolocator: ^8.2.1
   permission_handler: ^9.2.0
   app_settings: ^4.1.6
-
+  freezed_annotation: ^2.1.0
+  
 
 dev_dependencies:
   flutter_lints: ^1.0.0

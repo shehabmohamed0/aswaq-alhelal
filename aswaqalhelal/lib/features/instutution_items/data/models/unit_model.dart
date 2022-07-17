@@ -18,4 +18,6 @@ class UnitModel extends Unit {
       _$UnitModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UnitModelToJson(this);
+
+  
 }

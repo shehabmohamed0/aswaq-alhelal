@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/institutions/domain/entities/institution.dart';
+import '../../../domain/entities/institution.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/core/params/no_args_params.dart';

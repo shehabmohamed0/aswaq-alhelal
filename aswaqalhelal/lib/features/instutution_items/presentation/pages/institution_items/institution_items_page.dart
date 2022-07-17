@@ -1,13 +1,13 @@
-import 'package:aswaqalhelal/features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
-import 'package:aswaqalhelal/features/instutution_items/presentation/pages/add_item/add_items_page.dart';
+import '../../bloc/bloc/add_item_bloc.dart';
+import '../add_item/add_items_page.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../../widgets/check_internet_connection_widget.dart';
-import '../../../domain/entities/institution_item.dart';
 import '../../cubit/institution_items/instutution_items_cubit.dart';
+import '../../widgets/item_widget.dart';
 
 class InstitutionItemsPage extends StatelessWidget {
   const InstitutionItemsPage({Key? key}) : super(key: key);
@@ -148,81 +148,6 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
           children: List.generate(items.length, (index) {
             return ItemWidget(item: items[index]);
           }),
-        ),
-      ),
-    );
-  }
-}
-
-class ItemWidget extends StatelessWidget {
-  const ItemWidget({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
-
-  final InstitutionItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Card(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                item.id,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.referenceId,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.institutionId,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              ...item.units.map((e) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        e.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        '${e.price}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        '${e.quantity}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                );
-              }),
-              const SizedBox(height: 8),
-            ],
-          ),
         ),
       ),
     );

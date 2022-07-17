@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:aswaqalhelal/core/params/update_institution_params.dart';
-import 'package:aswaqalhelal/features/institutions/domain/usecases/update_institution.dart';
+import '../../../../../core/params/update_institution_params.dart';
+import '../../../domain/usecases/update_institution.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/form_inputs/required_string.dart';
 import 'package:root_package/packages/equatable.dart';
