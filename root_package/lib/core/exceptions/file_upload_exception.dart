@@ -1,0 +1,3 @@
+class FileUploadException implements Exception {
+
+}

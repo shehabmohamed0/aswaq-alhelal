@@ -24,6 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
             "Please, check internet connection."),
+        "failedToUploadTheFile":
+            MessageLookupByLibrary.simpleMessage("Failed to upload the file."),
+        "failedToUploadTheImage":
+            MessageLookupByLibrary.simpleMessage("Failed to upload the image."),
+        "failedToUploadTheImages": MessageLookupByLibrary.simpleMessage(
+            "Failed to upload the images."),
         "helloWorld": MessageLookupByLibrary.simpleMessage("Hello World!"),
         "invalidEmailAddress":
             MessageLookupByLibrary.simpleMessage("Invalid email address."),
