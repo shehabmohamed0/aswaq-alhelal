@@ -11,5 +11,8 @@
   "checkInternetConnection": "Please, check internet connection.",
   "somethingWentWrong": "Something went wrong.",
   "required": "Required",
-  "tryAgain": "Try again"
+  "tryAgain": "Try again",
+  "failedToUploadTheImage": "Failed to upload the image.",
+  "failedToUploadTheFile": "Failed to upload the file.",
+  "failedToUploadTheImages": "Failed to upload the images."
 }
