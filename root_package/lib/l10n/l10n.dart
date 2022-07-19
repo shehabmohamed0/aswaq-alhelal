@@ -25,6 +25,7 @@ class RootPackageLocalizations {
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+
   static Future<RootPackageLocalizations> load(Locale locale) {
     return MultipleLocalizations.load(
       initializeMessages,
@@ -145,6 +146,36 @@ class RootPackageLocalizations {
     return Intl.message(
       'Try again',
       name: 'tryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the image.`
+  String get failedToUploadTheImage {
+    return Intl.message(
+      'Failed to upload the image.',
+      name: 'failedToUploadTheImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the file.`
+  String get failedToUploadTheFile {
+    return Intl.message(
+      'Failed to upload the file.',
+      name: 'failedToUploadTheFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the images.`
+  String get failedToUploadTheImages {
+    return Intl.message(
+      'Failed to upload the images.',
+      name: 'failedToUploadTheImages',
       desc: '',
       args: [],
     );
