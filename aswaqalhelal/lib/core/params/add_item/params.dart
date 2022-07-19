@@ -19,14 +19,14 @@ class AddRefAndInstitutionItemParams {
 
 class AddInstitutionItemParams {
   final String itemName;
-  final File imageUrl;
+  final File imageFile;
   final List<Unit> units;
   final String institutionId;
   final String referenceId;
 
   AddInstitutionItemParams({
     required this.itemName,
-    required this.imageUrl,
+    required this.imageFile,
     required this.units,
     required this.institutionId,
     required this.referenceId,

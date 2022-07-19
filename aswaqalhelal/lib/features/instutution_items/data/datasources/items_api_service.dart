@@ -1,3 +1,4 @@
+import 'package:root_package/core/exceptions/file_upload_exception.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/firebase_storage.dart';
@@ -46,8 +47,14 @@ class ItemsApiServiceImpl implements ItemsApiService {
   Future<InstitutionItemModel> addInstitutionItem(
       AddInstitutionItemParams params) async {
     final collection = _firestore.collection(FirestorePath.items);
-    collection.where('institutionId', isEqualTo: params.itemName);
+    final ref = collection.doc();
 
+    final uploadRef = _firebaseStorage.ref('items/${ref.id}');
+    try {
+      final i = await uploadRef.putFile(params.imageFile);
+    } catch (e) {
+      throw FileUploadException();
+    }
     final units = params.units
         .map((e) => {
               'name': e.name,
@@ -55,7 +62,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
               'price': e.price,
             })
         .toList();
-    final ref = await collection.add({
+    ref.set({
       'name': params.itemName,
       'institutionId': params.institutionId,
       'referenceId': params.referenceId,
@@ -66,7 +73,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       id: ref.id,
       institutionId: params.institutionId,
       name: params.itemName,
-      imageUrl: params.imageUrl,
+      imageUrl: await uploadRef.getDownloadURL(),
       creationTime: DateTime.now(),
       referenceId: params.referenceId,
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
@@ -110,7 +117,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       id: doc.id,
       institutionId: params.institutionId,
       name: params.itemName,
-      imageUrl: params.imageFile,
+      imageUrl: 'params.imageFile',
       referenceId: refDoc.id,
       creationTime: DateTime.now(),
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),

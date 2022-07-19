@@ -143,7 +143,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       final either = await _addInstitutionItem(
         params: AddInstitutionItemParams(
           itemName: state.itemName.value,
-          imageUrl: state.imageFile!,
+          imageFile: state.imageFile!,
           institutionId: event.institutionId,
           referenceId: state.item!.id,
           units: state.units,
