@@ -1,5 +1,6 @@
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
+import 'package:root_package/packages/firebase_storage.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../../core/params/add_item/params.dart';
@@ -24,9 +25,10 @@ abstract class ItemsApiService {
 @LazySingleton(as: ItemsApiService)
 class ItemsApiServiceImpl implements ItemsApiService {
   final FirebaseFirestore _firestore;
+  final FirebaseStorage _firebaseStorage;
   final FirebaseAuth _auth;
 
-  ItemsApiServiceImpl(this._auth, this._firestore);
+  ItemsApiServiceImpl(this._auth, this._firestore, this._firebaseStorage);
   @override
   Future<List<ReferenceItemModel>> searchItem(String val) async {
     final collection = _firestore.collection(FirestorePath.itemsReference);
@@ -44,7 +46,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
   Future<InstitutionItemModel> addInstitutionItem(
       AddInstitutionItemParams params) async {
     final collection = _firestore.collection(FirestorePath.items);
-    collection.where('institutionId' ,isEqualTo: params.itemName);
+    collection.where('institutionId', isEqualTo: params.itemName);
 
     final units = params.units
         .map((e) => {
@@ -64,6 +66,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       id: ref.id,
       institutionId: params.institutionId,
       name: params.itemName,
+      imageUrl: params.imageUrl,
       creationTime: DateTime.now(),
       referenceId: params.referenceId,
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
@@ -107,6 +110,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       id: doc.id,
       institutionId: params.institutionId,
       name: params.itemName,
+      imageUrl: params.imageFile,
       referenceId: refDoc.id,
       creationTime: DateTime.now(),
       unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
@@ -118,7 +122,8 @@ class ItemsApiServiceImpl implements ItemsApiService {
       GetInstitutionItemsParams params) async {
     final collection = _firestore
         .collection(FirestorePath.items)
-        .where('institutionId', isEqualTo: params.institutionId);
+        .where('institutionId', isEqualTo: params.institutionId)
+        .orderBy('creationTime', descending: true);
     final querySnapshot = await collection.get();
     final institutionItems =
         querySnapshot.docs.map(InstitutionItemModel.fromFirestore).toList();

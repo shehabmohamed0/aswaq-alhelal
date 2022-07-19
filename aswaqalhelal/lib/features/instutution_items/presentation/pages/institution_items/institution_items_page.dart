@@ -1,13 +1,14 @@
-import '../../bloc/bloc/add_item_bloc.dart';
-import '../add_item/add_items_page.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../items/presentation/cubit/items_widget/items_widget_cubit.dart';
+import '../../../../items/presentation/pages/widgets/items_widget.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
+import '../../bloc/bloc/add_item_bloc.dart';
 import '../../cubit/institution_items/instutution_items_cubit.dart';
-import '../../widgets/item_widget.dart';
+import '../add_item/add_items_page.dart';
 
 class InstitutionItemsPage extends StatelessWidget {
   const InstitutionItemsPage({Key? key}) : super(key: key);
@@ -22,9 +23,12 @@ class InstitutionItemsPage extends StatelessWidget {
         if (state is InstitutionsItemsLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is InstitutionItemsLoaded) {
-          return _InstitutionsLoadedWidget(
-            state: state,
-            institutionId: institutionId,
+          return BlocProvider<ItemsWidgetCubit>(
+            create: (context) => locator()..initialized(state.items),
+            child: _InstitutionsLoadedWidget(
+              state: state,
+              institutionId: institutionId,
+            ),
           );
         } else if (state is InstitutionItemsEmpty) {
           return _InstitutionItemsEmptyWidget(
@@ -40,64 +44,6 @@ class InstitutionItemsPage extends StatelessWidget {
           return const SizedBox.shrink();
         }
       },
-    );
-  }
-}
-/*
-AppBar(
-        title: const Text('items'),
-        actions: [
-          TextButton(
-            style: TextButton.styleFrom(primary: Colors.black),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                Routes.addItem,
-                arguments: institutionId,
-              );
-            },
-            child: const Text('Add'),
-          )
-        ],
-      ),
-    
- */
-
-class _InstitutionItemsEmptyWidget extends StatelessWidget {
-  const _InstitutionItemsEmptyWidget({Key? key, required this.institutionId})
-      : super(key: key);
-  final String institutionId;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('You have no items'),
-        const SizedBox(height: 8),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8))),
-          child: const Text('Add item'),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              settings:
-                  RouteSettings(name: Routes.addItem, arguments: institutionId),
-              builder: (_) => MultiBlocProvider(
-                providers: [
-                  BlocProvider<AddItemBloc>(
-                    create: (context) => locator(),
-                  ),
-                  BlocProvider.value(
-                    value: context.read<InstitutionItemsCubit>(),
-                  ),
-                ],
-                child: const AddItemPage(),
-              ),
-            ));
-          },
-        )
-      ],
     );
   }
 }
@@ -130,7 +76,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
                       create: (context) => locator(),
                     ),
                     BlocProvider.value(
-                      value: context.read<InstitutionItemsCubit>(),
+                      value: context.read<ItemsWidgetCubit>(),
                     ),
                   ],
                   child: const AddItemPage(),
@@ -142,14 +88,47 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(items.length, (index) {
-            return ItemWidget(item: items[index]);
-          }),
-        ),
-      ),
+          padding: const EdgeInsets.all(8),
+          child: ItemsWidget.withoutProvider(items: items)),
+    );
+  }
+}
+
+class _InstitutionItemsEmptyWidget extends StatelessWidget {
+  const _InstitutionItemsEmptyWidget({Key? key, required this.institutionId})
+      : super(key: key);
+  final String institutionId;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('You have no items'),
+        const SizedBox(height: 8),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8))),
+          child: const Text('Add item'),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              settings:
+                  RouteSettings(name: Routes.addItem, arguments: institutionId),
+              builder: (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<AddItemBloc>(
+                    create: (context) => locator(),
+                  ),
+                  BlocProvider.value(
+                    value: context.read<ItemsWidgetCubit>(),
+                  ),
+                ],
+                child: const AddItemPage(),
+              ),
+            ));
+          },
+        )
+      ],
     );
   }
 }

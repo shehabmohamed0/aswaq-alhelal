@@ -34,10 +34,10 @@ class AddInstitutionPage extends StatelessWidget {
             EasyLoading.dismiss();
             state.isEdit
                 ? context
-                    .read<InstitutionsCubit>()
+                    .read<UserInstitutionsCubit>()
                     .updateInstitution(state.institution!)
                 : context
-                    .read<InstitutionsCubit>()
+                    .read<UserInstitutionsCubit>()
                     .addInstitution(state.institution!);
             Navigator.of(context).pop();
           } else if (state.status == FormzStatus.submissionInProgress) {

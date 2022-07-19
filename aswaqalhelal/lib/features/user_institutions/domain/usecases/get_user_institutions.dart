@@ -4,14 +4,13 @@ import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/core/usecase/usecase.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../user_institutions/domain/entities/institution.dart';
+import '../entities/institution.dart';
 import '../repositories/institutions_repository.dart';
 
-@LazySingleton()
-class GetInstitutions extends UseCase<List<Institution>, NoArgsParams> {
-  final InstitutionsRepository _repository;
-
-  GetInstitutions(this._repository);
+@lazySingleton
+class GetUserInstitutions extends UseCase<List<Institution>, NoArgsParams> {
+  GetUserInstitutions(this._repository);
+  final UserInstitutionsRepository _repository;
   @override
   Future<Either<Failure, List<Institution>>> call(
       {required NoArgsParams params}) {

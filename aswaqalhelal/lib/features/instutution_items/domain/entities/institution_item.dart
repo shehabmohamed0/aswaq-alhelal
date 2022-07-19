@@ -14,10 +14,12 @@ class InstitutionItem extends BaseItem {
     required this.referenceId,
     required String institutionId,
     required String name,
+    required String imageUrl,
     required List<Unit> units,
     required DateTime creationTime,
   }) : super(
           institutionId: institutionId,
+          imageUrl: imageUrl,
           name: name,
           creationTime: creationTime,
           units: units,

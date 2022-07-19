@@ -43,7 +43,8 @@ dependencies:
 
   
 
-
+  carousel_slider: ^4.1.1
+  
   #temp
   analyzer: ^4.1.0
   dio: ^4.0.6

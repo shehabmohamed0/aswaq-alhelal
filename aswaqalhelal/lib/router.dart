@@ -23,17 +23,17 @@ import 'package:users_presentation/features/settings/pages/update_email/update_e
 
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
-import 'features/institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
-import 'features/institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
-import 'features/institutions/presentation/pages/add_institution/add_institution_page.dart';
-import 'features/institutions/presentation/pages/institution/institution_page.dart';
-import 'features/institutions/presentation/pages/institutions/institutions_page.dart';
 import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
 import 'features/items/presentation/pages/home_page.dart';
 import 'features/splash/splash_screen.dart';
+import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
+import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
+import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
+import 'features/user_institutions/presentation/pages/institution/institution_page.dart';
+import 'features/user_institutions/presentation/pages/institutions/institutions_page.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -163,7 +163,7 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => BlocProvider<InstitutionsCubit>(
+          builder: (context) => BlocProvider<UserInstitutionsCubit>(
             create: (context) => locator()..getInstitutions(),
             child: const InstitutionsPage(),
           ),
@@ -176,8 +176,8 @@ class AppRouter {
               BlocProvider<AddInstitutionCubit>(
                 create: (context) => locator(),
               ),
-              BlocProvider<InstitutionsCubit>.value(
-                value: settings.arguments as InstitutionsCubit,
+              BlocProvider<UserInstitutionsCubit>.value(
+                value: settings.arguments as UserInstitutionsCubit,
               ),
             ],
             child: const AddInstitutionPage(),
@@ -193,9 +193,13 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => BlocProvider<InstitutionItemsCubit>(
-            create: (context) =>
-                locator()..getInstitutionsItems(settings.arguments as String),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<InstitutionItemsCubit>(
+                create: (context) => locator()
+                  ..getInstitutionsItems(settings.arguments as String),
+              ),
+            ],
             child: const InstitutionItemsPage(),
           ),
         );

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -51,21 +52,21 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     Emitter<AddItemState> emit,
   ) async {
     if (event.value.isNotEmpty && event.value.length > 2) {
-      emit(state.copyWith(suggestionState: AutoSiggestionState.loading));
+      emit(state.copyWith(suggestionState: AutoSuggestionState.loading));
       final either = await _searchItem(params: SearchItemParams(event.value));
       either.fold(
         (failure) {
           emit(
-            state.copyWith(suggestionState: AutoSiggestionState.error),
+            state.copyWith(suggestionState: AutoSuggestionState.error),
           );
         },
         (items) {
           emit(state.copyWith(
-              suggestions: items, suggestionState: AutoSiggestionState.loaded));
+              suggestions: items, suggestionState: AutoSuggestionState.loaded));
         },
       );
     } else {
-      emit(state.copyWith(suggestionState: AutoSiggestionState.emptyText));
+      emit(state.copyWith(suggestionState: AutoSuggestionState.emptyText));
     }
   }
 
@@ -102,6 +103,9 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
 
   FutureOr<void> _onAddItemSubmit(
       AddItemSubmit event, Emitter<AddItemState> emit) async {
+    if (state.status.isSubmissionInProgress) {
+      return;
+    }
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
     final index =
@@ -120,6 +124,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       final either = await _addRefAndInstitutionItem(
         params: AddRefAndInstitutionItemParams(
           itemName: state.itemName.value,
+          imageFile: state.imageFile!,
           units: state.units,
           institutionId: event.institutionId,
         ),
@@ -138,6 +143,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       final either = await _addInstitutionItem(
         params: AddInstitutionItemParams(
           itemName: state.itemName.value,
+          imageUrl: state.imageFile!,
           institutionId: event.institutionId,
           referenceId: state.item!.id,
           units: state.units,

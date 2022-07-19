@@ -7,6 +7,7 @@ import '../../../domain/entities/institution_item.dart';
 import '../../../domain/usecases/get_institution_items.dart';
 
 part 'instutution_items_state.dart';
+
 @injectable
 class InstitutionItemsCubit extends Cubit<InstitutionItemsState> {
   final GetInstitutionItems _getInstitutionItems;

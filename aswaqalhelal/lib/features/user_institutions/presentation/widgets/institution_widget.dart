@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
-import '../../../domain/entities/institution.dart';
+import '../../domain/entities/institution.dart';
 
 class InstitutionWidget extends StatelessWidget {
   const InstitutionWidget({

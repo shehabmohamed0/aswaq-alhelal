@@ -15,11 +15,13 @@ class ReferenceItemModel extends ReferenceItem {
     required String id,
     required String institutionId,
     required String name,
+    required String imageUrl,
     required DateTime creationTime,
     required this.unitModels,
   }) : super(
           id: id,
           name: name,
+          imageUrl: imageUrl,
           institutionId: institutionId,
           units: unitModels,
           creationTime: creationTime,
@@ -34,6 +36,7 @@ class ReferenceItemModel extends ReferenceItem {
   ReferenceItemModel _copyWithId(String id) => ReferenceItemModel(
         id: id,
         name: name,
+        imageUrl:imageUrl,
         institutionId: institutionId,
         unitModels: unitModels,
         creationTime: creationTime,

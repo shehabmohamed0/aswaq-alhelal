@@ -11,6 +11,7 @@ ReferenceItemModel _$ReferenceItemModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       institutionId: json['institutionId'] as String,
       name: json['name'] as String,
+      imageUrl: json['imageUrl'] as String,
       creationTime: const TimestampConverter()
           .fromJson(json['creationTime'] as Timestamp),
       unitModels: (json['units'] as List<dynamic>)
@@ -22,6 +23,7 @@ Map<String, dynamic> _$ReferenceItemModelToJson(ReferenceItemModel instance) =>
     <String, dynamic>{
       'institutionId': instance.institutionId,
       'name': instance.name,
+      'imageUrl': instance.imageUrl,
       'creationTime': const TimestampConverter().toJson(instance.creationTime),
       'id': instance.id,
       'units': instance.unitModels,

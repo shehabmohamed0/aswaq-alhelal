@@ -1,6 +1,7 @@
-import 'package:aswaqalhelal/features/institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/routes/routes.dart';
+
+import '../../../domain/entities/institution.dart';
 
 class InstitutionPage extends StatelessWidget {
   const InstitutionPage({Key? key}) : super(key: key);

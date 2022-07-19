@@ -4,19 +4,21 @@ part of 'add_item_bloc.dart';
 class AddItemState extends Equatable {
   final ReferenceItem? item;
   final RequiredString itemName;
+  final File? imageFile;
   final bool isNewItem;
   final List<Unit> units;
   final List<ReferenceItem> suggestions;
-  final AutoSiggestionState suggestionState;
+  final AutoSuggestionState suggestionState;
   final FormzStatus status;
   final String? errorMessage;
   final InstitutionItem? institutionItem;
   const AddItemState({
     this.item,
     this.isNewItem = true,
+    this.imageFile,
     this.itemName = const RequiredString.pure(),
     this.units = const [],
-    this.suggestionState = AutoSiggestionState.emptyText,
+    this.suggestionState = AutoSuggestionState.emptyText,
     this.suggestions = const [],
     this.status = FormzStatus.pure,
     this.errorMessage,
@@ -26,7 +28,7 @@ class AddItemState extends Equatable {
   AddItemState copyWith({
     ReferenceItem? item,
     List<Unit>? units,
-    AutoSiggestionState? suggestionState,
+    AutoSuggestionState? suggestionState,
     List<ReferenceItem>? suggestions,
     RequiredString? itemName,
     bool? isNewItem,

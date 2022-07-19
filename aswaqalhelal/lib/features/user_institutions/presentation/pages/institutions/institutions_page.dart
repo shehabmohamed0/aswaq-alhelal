@@ -4,16 +4,16 @@ import 'package:root_package/routes/routes.dart';
 
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../cubit/institutions_cubit/institutions_cubit.dart';
-import 'institution_widget.dart';
+import '../../widgets/institutions_grid_view.dart';
 
 class InstitutionsPage extends StatelessWidget {
   const InstitutionsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<InstitutionsCubit>();
+    final cubit = context.read<UserInstitutionsCubit>();
 
-    return BlocBuilder<InstitutionsCubit, InstitutionsState>(
+    return BlocBuilder<UserInstitutionsCubit, InstitutionsState>(
       builder: (context, state) {
         if (state is InstitutionsLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -45,39 +45,32 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final institutions = state.institutions;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Institutions'),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.addInstitution,
-                  arguments: context.read<InstitutionsCubit>());
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              alignment: Alignment.center,
-              child: const Text(
-                'Add',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: Colors.black87,
+        appBar: AppBar(
+          title: const Text('Institutions'),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.addInstitution,
+                    arguments: context.read<UserInstitutionsCubit>());
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Add',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
-      ),
-      body: GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) => InstitutionWidget(
-          institution: institutions[index],
+            )
+          ],
         ),
-        itemCount: institutions.length,
-      ),
-    );
+        body: InstitutionsGridView(
+          institutions: state.institutions,
+        ));
   }
 }
 
@@ -98,7 +91,7 @@ class _InstitutionsEmptyWidget extends StatelessWidget {
           child: const Text('Add institution'),
           onPressed: () {
             Navigator.pushNamed(context, Routes.addInstitution,
-                arguments: context.read<InstitutionsCubit>());
+                arguments: context.read<UserInstitutionsCubit>());
           },
         )
       ],

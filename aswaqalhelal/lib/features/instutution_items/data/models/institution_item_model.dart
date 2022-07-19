@@ -16,12 +16,14 @@ class InstitutionItemModel extends InstitutionItem {
     required String institutionId,
     required String referenceId,
     required String name,
+    required String imageUrl,
     required DateTime creationTime,
     required this.unitModels,
   }) : super(
             id: id,
             name: name,
             institutionId: institutionId,
+            imageUrl: imageUrl,
             referenceId: referenceId,
             units: unitModels,
             creationTime: creationTime);
@@ -35,6 +37,7 @@ class InstitutionItemModel extends InstitutionItem {
   InstitutionItemModel _copyWithId(String id) => InstitutionItemModel(
       id: id,
       name: name,
+      imageUrl: imageUrl,
       institutionId: institutionId,
       referenceId: referenceId,
       unitModels: unitModels,

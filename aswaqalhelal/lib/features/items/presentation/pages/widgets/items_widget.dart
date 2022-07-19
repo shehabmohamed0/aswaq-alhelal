@@ -1,63 +1,64 @@
-import 'package:aswaqalhelal/features/widgets/check_internet_connection_widget.dart';
+import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_presentation/features/presentation/widgets/normal_text_field.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 
-import '../../cubit/items/items_cubit.dart';
+import '../../cubit/items_widget/items_widget_cubit.dart';
 import 'item_grid_widget.dart';
 import 'item_list_tile.dart';
 
 class ItemsWidget extends StatelessWidget {
-  const ItemsWidget({Key? key}) : super(key: key);
+  factory ItemsWidget.withoutProvider({
+    Key? key,
+    required List<InstitutionItem> items,
+  }) =>
+      ItemsWidget._(
+        items: items,
+        hasItsOwnProvider: false,
+      );
+  factory ItemsWidget({
+    Key? key,
+    required List<InstitutionItem> items,
+  }) =>
+      ItemsWidget._(
+        items: items,
+        hasItsOwnProvider: true,
+      );
 
+  const ItemsWidget._({
+    Key? key,
+    required this.items,
+    this.hasItsOwnProvider = true,
+  }) : super(key: key);
+  final List<InstitutionItem> items;
+  final bool hasItsOwnProvider;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ItemsCubit>(
-      create: (context) => locator()..getItems(),
-      child: BlocBuilder<ItemsCubit, ItemsState>(
-        buildWhen: (previous, current) =>
-            previous.runtimeType != current.runtimeType,
+    if (hasItsOwnProvider) {
+      return BlocProvider<ItemsWidgetCubit>(
+        create: (context) => locator()..initialized(items),
+        child: BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
+          builder: (context, state) {
+            return _LoadedWidget(state: state);
+          },
+        ),
+      );
+    }
+
+    return BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
         builder: (context, state) {
-          return state.map(
-            initial: (initial) {
-              return const SizedBox.shrink();
-            },
-            loading: (loading) {
-              return const Center(child: CircularProgressIndicator());
-            },
-            error: (error) {
-              return CheckInternetConnection(onPressed: () {
-                context.read<ItemsCubit>().getItems();
-              });
-            },
-            loaded: (loaded) {
-              return BlocBuilder<ItemsCubit, ItemsState>(
-                builder: (context, state) {
-                  return state.maybeMap(
-                    loaded: (state) {
-                      return _LoadedWidget(
-                        state: state,
-                      );
-                    },
-                    orElse: () {
-                      return const SizedBox.shrink();
-                    },
-                  );
-                },
-              );
-            },
-          );
-        },
-      ),
-    );
+      return _LoadedWidget(
+        state: state,
+      );
+    });
   }
 }
 
-class PresentantWidget extends SliverPersistentHeaderDelegate {
+class PresistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   final _HeaderOptions _headerOptions;
-  PresentantWidget(
+  PresistentHeaderDelegate(
     this._headerOptions,
   );
   @override
@@ -83,12 +84,10 @@ class _LoadedWidget extends HookWidget {
     Key? key,
     required this.state,
   }) : super(key: key);
-
-  final Loaded state;
-
+  final ItemsWidgetState state;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ItemsCubit>();
+    final cubit = context.read<ItemsWidgetCubit>();
     final TextEditingController controller = useTextEditingController();
     final focusNode = useFocusNode();
     final ScrollController scrollController = useScrollController();
@@ -96,73 +95,63 @@ class _LoadedWidget extends HookWidget {
         ? state.searchItems
         : state.items;
 
-    return BlocListener<ItemsCubit, ItemsState>(
+    return BlocListener<ItemsWidgetCubit, ItemsWidgetState>(
       listenWhen: (previous, current) {
-        if (previous is Loaded && current is Loaded) {
-          return previous.isSearching != current.isSearching;
-        }
-        return false;
+        return previous.isSearching != current.isSearching;
       },
       listener: (context, state) {
-        state.mapOrNull(
-          loaded: (state) {
-            if (state.isSearching == true) {
-              focusNode.requestFocus();
-            }
-          },
-        );
+        if (state.isSearching == true) {
+          focusNode.requestFocus();
+        }
       },
-      child: RefreshIndicator(
-        onRefresh: () async {
-          await cubit.getItems();
-        },
-        child: CustomScrollView(
-          controller: scrollController,
-          slivers: [
-            SliverPersistentHeader(
-              floating: true,
-              delegate: PresentantWidget(
-                _HeaderOptions(
-                    state: state,
-                    cubit: cubit,
-                    searchController: controller,
-                    focusNode: focusNode),
-              ),
+      child: CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          SliverPersistentHeader(
+            floating: true,
+            delegate: PresistentHeaderDelegate(
+              _HeaderOptions(
+                  state: state,
+                  cubit: cubit,
+                  searchController: controller,
+                  focusNode: focusNode),
             ),
-            if (_isEmptySerch)
-              const SliverToBoxAdapter(
-                  child: Center(
-                      child: Text(
-                'No Items',
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.black45,
-                    fontWeight: FontWeight.w600),
-              )))
-            else if (state.displayItem.isGridView)
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+          ),
+          if (_isEmptySearch(state))
+            const SliverToBoxAdapter(
+              child: Center(
+                child: Text(
+                  'No Items',
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w600),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => ItemGridWidget(item: usedList[index]),
-                  childCount: usedList.length,
-                ),
-              )
-            else
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => ItemListTile(item: usedList[index]),
-                  childCount: usedList.length,
-                ),
-              )
-          ],
-        ),
+              ),
+            )
+          else if (state.displayItem.isGridView)
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ItemGridWidget(item: usedList[index]),
+                childCount: usedList.length,
+              ),
+            )
+          else
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ItemListTile(item: usedList[index]),
+                childCount: usedList.length,
+              ),
+            )
+        ],
       ),
     );
   }
 
-  bool get _isEmptySerch {
+  bool _isEmptySearch(ItemsWidgetState state) {
     return state.isSearching &&
         state.searchItems.isEmpty &&
         state.searchValue.isNotEmpty;
@@ -178,8 +167,8 @@ class _HeaderOptions extends StatelessWidget {
     required this.focusNode,
   }) : super(key: key);
 
-  final Loaded state;
-  final ItemsCubit cubit;
+  final ItemsWidgetState state;
+  final ItemsWidgetCubit cubit;
   final TextEditingController searchController;
   final FocusNode focusNode;
 
@@ -214,8 +203,8 @@ class _OptionsWidgets extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final Loaded state;
-  final ItemsCubit cubit;
+  final ItemsWidgetState state;
+  final ItemsWidgetCubit cubit;
 
   @override
   Widget build(BuildContext context) {

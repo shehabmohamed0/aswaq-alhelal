@@ -6,7 +6,7 @@ import '../../../../core/params/add_institution_params.dart';
 import '../../../../core/params/update_institution_params.dart';
 import '../models/institution_model.dart';
 
-abstract class InstitutionsServiceApi {
+abstract class UserInstitutionsServiceApi {
   Future<List<InstitutionModel>> getInstitutions();
 
   Future<InstitutionModel> addInstitution(AddInstitutionParams params);
@@ -14,12 +14,12 @@ abstract class InstitutionsServiceApi {
   Future<InstitutionModel> updateInstitution(UpdateInstitutionParams params);
 }
 
-@LazySingleton(as: InstitutionsServiceApi)
-class InstitutionsServiceApiImpl extends InstitutionsServiceApi {
+@LazySingleton(as: UserInstitutionsServiceApi)
+class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
 
-  InstitutionsServiceApiImpl(this._auth, this._firestore);
+  UserInstitutionsServiceApiImpl(this._auth, this._firestore);
   @override
   Future<List<InstitutionModel>> getInstitutions() async {
     final uid = _auth.currentUser!.uid;

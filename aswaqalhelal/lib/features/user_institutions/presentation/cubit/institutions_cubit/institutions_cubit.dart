@@ -1,17 +1,17 @@
-import '../../../domain/entities/institution.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../domain/usecases/get_institutions.dart';
+import '../../../domain/entities/institution.dart';
+import '../../../domain/usecases/get_user_institutions.dart';
 
 part 'institutions_state.dart';
 
 @injectable
-class InstitutionsCubit extends Cubit<InstitutionsState> {
-  InstitutionsCubit(this._getInstitutions) : super(InstitutionsInitial());
-  final GetInstitutions _getInstitutions;
+class UserInstitutionsCubit extends Cubit<InstitutionsState> {
+  UserInstitutionsCubit(this._getInstitutions) : super(InstitutionsInitial());
+  final GetUserInstitutions _getInstitutions;
 
   Future<void> getInstitutions() async {
     emit(InstitutionsLoading());
