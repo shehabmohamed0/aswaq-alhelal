@@ -5,6 +5,7 @@ class NormalTextFormField extends StatelessWidget {
   const NormalTextFormField(
       {Key? key,
       this.controller,
+      this.focusNode,
       this.labelText,
       this.errorText,
       this.hint,
@@ -16,6 +17,7 @@ class NormalTextFormField extends StatelessWidget {
       : super(key: key);
 
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? labelText;
   final String? errorText;
   final String? initialValue;
@@ -52,6 +54,7 @@ class NormalTextFormField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        focusNode: focusNode,
         controller: controller,
         initialValue: initialValue,
         enabled: enabled,

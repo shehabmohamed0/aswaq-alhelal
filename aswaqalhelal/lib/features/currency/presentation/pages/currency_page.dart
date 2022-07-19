@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/resources/color_manager.dart';
 import 'package:root_package/locator/locator.dart';
@@ -7,6 +6,7 @@ import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/formz.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../cubit/currency_cubit.dart';
 
 class CurrencyPage extends HookWidget {
@@ -124,32 +124,34 @@ class CurrencyPage extends HookWidget {
                             ),
                           ),
                         ),
-                        Ink(
-                          height: 50,
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(
-                              color: ColorManager.primary.withOpacity(0.1),
-                              border: Border.all(
-                                  color: ColorManager.primary, width: 2),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: InkWell(
-                            onTap: context.read<CurrencyCubit>().swap,
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.swap_vert,
-                                  size: 28,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                Text(
-                                  intl.switchCurrencies,
-                                  style: TextStyle(
-                                    color: ColorManager.primary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 17,
+                        SizedBox(
+                          child: Ink(
+                            height: 50,
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                color: ColorManager.primary.withOpacity(0.1),
+                                border: Border.all(
+                                    color: ColorManager.primary, width: 2),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: InkWell(
+                              onTap: context.read<CurrencyCubit>().swap,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.swap_vert,
+                                    size: 28,
+                                    color: Theme.of(context).primaryColor,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    intl.switchCurrencies,
+                                    style: TextStyle(
+                                      color: ColorManager.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         )

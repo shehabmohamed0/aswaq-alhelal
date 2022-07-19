@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/l10n/l10n.dart';
+import '../l10n/l10n.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 

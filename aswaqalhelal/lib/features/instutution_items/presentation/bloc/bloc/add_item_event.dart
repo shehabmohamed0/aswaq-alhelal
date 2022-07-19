@@ -36,5 +36,6 @@ class AddNewItem extends AddItemEvent {
 
 class AddItemSubmit extends AddItemEvent {
   final String institutionId;
-  AddItemSubmit(this.institutionId);
+  final List<InstitutionItem> currentItems;
+  AddItemSubmit({required this.institutionId, required this.currentItems});
 }

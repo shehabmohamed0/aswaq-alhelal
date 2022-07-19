@@ -11,12 +11,16 @@ class ReferenceItem extends BaseItem {
     required this.id,
     required String institutionId,
     required String name,
+    required String imageUrl,
     required List<Unit> units,
-  }) : super(institutionId: institutionId, name: name, units: units);
+    required DateTime creationTime,
+  }) : super(
+            institutionId: institutionId,
+            imageUrl: imageUrl,
+            name: name,
+            units: units,
+            creationTime: creationTime);
 
   @override
-  List<Object?> get props => [id, name, institutionId, units];
-
-  @override
-  bool? get stringify => true;
+  List<Object?> get props => [id, name, institutionId, units, creationTime];
 }
