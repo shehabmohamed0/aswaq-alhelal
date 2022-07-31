@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
+import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../cubit/institutions_cubit/institutions_cubit.dart';
@@ -12,7 +13,6 @@ class InstitutionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<UserInstitutionsCubit>();
-
     return BlocBuilder<UserInstitutionsCubit, InstitutionsState>(
       builder: (context, state) {
         if (state is InstitutionsLoading) {
@@ -43,7 +43,8 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final institutions = state.institutions;
+    final user = context.read<AppBloc>().state.user;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Institutions'),
@@ -70,6 +71,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
         ),
         body: InstitutionsGridView(
           institutions: state.institutions,
+          userId: user.id,
         ));
   }
 }

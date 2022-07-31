@@ -2,20 +2,28 @@ part of 'add_item_bloc.dart';
 
 @immutable
 class AddItemState extends Equatable {
-  final ReferenceItem? item;
   final RequiredString itemName;
-  final File? imageFile;
-  final bool isNewItem;
-  final List<Unit> units;
   final List<ReferenceItem> suggestions;
   final AutoSuggestionState suggestionState;
+  final RequiredObject<ReferenceItem> selectedItem;
+  final bool itemFromReference;
+  final bool addingNewItem;
+  final RequiredObject<File> imageFile;
+  final RequiredObject<String> imageUrl;
+  final List<Unit> units;
   final FormzStatus status;
   final String? errorMessage;
   final InstitutionItem? institutionItem;
+  final InstitutionItem? oldItem;
+
+  final bool isEdit;
+
   const AddItemState({
-    this.item,
-    this.isNewItem = true,
-    this.imageFile,
+    this.selectedItem = const RequiredObject<ReferenceItem>.pure(),
+    this.itemFromReference = false,
+    this.addingNewItem = false,
+    this.imageFile = const RequiredObject.pure(),
+    this.imageUrl = const RequiredObject.pure(),
     this.itemName = const RequiredString.pure(),
     this.units = const [],
     this.suggestionState = AutoSuggestionState.emptyText,
@@ -23,42 +31,58 @@ class AddItemState extends Equatable {
     this.status = FormzStatus.pure,
     this.errorMessage,
     this.institutionItem,
+    this.isEdit = false,
+    this.oldItem,
   });
 
   AddItemState copyWith({
-    ReferenceItem? item,
+    RequiredObject<ReferenceItem>? selectedItem,
     List<Unit>? units,
+    RequiredObject<File>? imageFile,
+    RequiredObject<String>? imageUrl,
     AutoSuggestionState? suggestionState,
     List<ReferenceItem>? suggestions,
     RequiredString? itemName,
-    bool? isNewItem,
+    bool? itemFromReference,
+    bool? addingNewItem,
     FormzStatus? status,
     String? errorMessage,
     InstitutionItem? institutionItem,
+    InstitutionItem? oldItem,
   }) {
     return AddItemState(
-      item: item ?? this.item,
+      selectedItem: selectedItem ?? this.selectedItem,
       itemName: itemName ?? this.itemName,
+      addingNewItem: addingNewItem ?? this.addingNewItem,
       units: units ?? this.units,
       suggestionState: suggestionState ?? this.suggestionState,
       suggestions: suggestions ?? this.suggestions,
-      isNewItem: isNewItem ?? this.isNewItem,
+      itemFromReference: itemFromReference ?? this.itemFromReference,
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       institutionItem: institutionItem ?? this.institutionItem,
+      isEdit: isEdit,
+      imageFile: imageFile ?? this.imageFile,
+      imageUrl: imageUrl ?? this.imageUrl,
+      oldItem: oldItem ?? this.oldItem,
     );
   }
 
   @override
   List<Object?> get props => [
-        isNewItem,
+        itemFromReference,
         suggestions,
         suggestionState,
-        item,
+        selectedItem,
         itemName,
         units,
         status,
         errorMessage,
-        institutionItem
+        institutionItem,
+        isEdit,
+        imageFile,
+        imageUrl,
+        oldItem,
+        addingNewItem
       ];
 }

@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_logic/features/domain/entities/geo_point.dart';
@@ -197,7 +198,8 @@ class AppRouter {
             providers: [
               BlocProvider<InstitutionItemsCubit>(
                 create: (context) => locator()
-                  ..getInstitutionsItems(settings.arguments as String),
+                  ..getInstitutionsItems(
+                      (settings.arguments as Institution).id),
               ),
             ],
             child: const InstitutionItemsPage(),

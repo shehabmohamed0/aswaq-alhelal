@@ -1,3 +1,3 @@
-class FileUploadException implements Exception {
+class UploadFileException implements Exception {
 
 }

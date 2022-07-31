@@ -1,39 +1,53 @@
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_presentation/features/presentation/widgets/normal_text_field.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 
+import '../../../../instutution_items/domain/entities/institution_item.dart';
 import '../../cubit/items_widget/items_widget_cubit.dart';
-import 'item_grid_widget.dart';
-import 'item_list_tile.dart';
+import 'items_sliver_grid_view.dart';
+import 'items_sliver_list_view.dart';
 
 class ItemsWidget extends StatelessWidget {
   factory ItemsWidget.withoutProvider({
     Key? key,
+    Function(InstitutionItem)? onItemPressed,
+    Function(InstitutionItem)? onItemLongPressed,
     required List<InstitutionItem> items,
   }) =>
       ItemsWidget._(
         items: items,
         hasItsOwnProvider: false,
+        onItemPressed: onItemPressed,
+        onItemLongPressed: onItemLongPressed,
       );
   factory ItemsWidget({
     Key? key,
     required List<InstitutionItem> items,
+    Function(InstitutionItem)? onItemPressed,
+    Function(InstitutionItem)? onItemLongPressed,
   }) =>
       ItemsWidget._(
         items: items,
-        hasItsOwnProvider: true,
+        hasItsOwnProvider: false,
+        onItemPressed: onItemPressed,
+        onItemLongPressed: onItemLongPressed,
       );
 
   const ItemsWidget._({
     Key? key,
     required this.items,
     this.hasItsOwnProvider = true,
+    this.onItemLongPressed,
+    this.onItemPressed,
   }) : super(key: key);
+
   final List<InstitutionItem> items;
   final bool hasItsOwnProvider;
+  final Function(InstitutionItem)? onItemPressed;
+  final Function(InstitutionItem)? onItemLongPressed;
+
   @override
   Widget build(BuildContext context) {
     if (hasItsOwnProvider) {
@@ -41,7 +55,10 @@ class ItemsWidget extends StatelessWidget {
         create: (context) => locator()..initialized(items),
         child: BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
           builder: (context, state) {
-            return _LoadedWidget(state: state);
+            return _LoadedWidget(
+                state: state,
+                onItemPressed: onItemPressed,
+                onItemLongPressed: onItemLongPressed);
           },
         ),
       );
@@ -51,6 +68,8 @@ class ItemsWidget extends StatelessWidget {
         builder: (context, state) {
       return _LoadedWidget(
         state: state,
+        onItemPressed: onItemPressed,
+        onItemLongPressed: onItemLongPressed,
       );
     });
   }
@@ -68,10 +87,10 @@ class PresistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 42;
+  double get maxExtent => 46;
 
   @override
-  double get minExtent => 42;
+  double get minExtent => 46;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
@@ -83,8 +102,12 @@ class _LoadedWidget extends HookWidget {
   const _LoadedWidget({
     Key? key,
     required this.state,
+    required this.onItemLongPressed,
+    required this.onItemPressed,
   }) : super(key: key);
   final ItemsWidgetState state;
+  final Function(InstitutionItem i)? onItemPressed;
+  final Function(InstitutionItem i)? onItemLongPressed;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ItemsWidgetCubit>();
@@ -111,10 +134,11 @@ class _LoadedWidget extends HookWidget {
             floating: true,
             delegate: PresistentHeaderDelegate(
               _HeaderOptions(
-                  state: state,
-                  cubit: cubit,
-                  searchController: controller,
-                  focusNode: focusNode),
+                state: state,
+                cubit: cubit,
+                searchController: controller,
+                focusNode: focusNode,
+              ),
             ),
           ),
           if (_isEmptySearch(state))
@@ -130,22 +154,18 @@ class _LoadedWidget extends HookWidget {
               ),
             )
           else if (state.displayItem.isGridView)
-            SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ItemGridWidget(item: usedList[index]),
-                childCount: usedList.length,
-              ),
+            SliverPadding(
+              padding: const EdgeInsets.all(8),
+              sliver: ItemsSliverGridView(
+                  onItemPressed: onItemPressed,
+                  institutions: usedList,
+                  onItemLongPressed: onItemLongPressed),
             )
           else
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ItemListTile(item: usedList[index]),
-                childCount: usedList.length,
-              ),
-            )
+            ItemsSliverListView(
+                onItemPressed: onItemPressed,
+                institutions: usedList,
+                onItemLongPressed: onItemLongPressed)
         ],
       ),
     );

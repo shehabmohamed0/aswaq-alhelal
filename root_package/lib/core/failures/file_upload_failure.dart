@@ -3,25 +3,25 @@ import 'package:root_package/core/failures/failure.dart';
 import '../../l10n/l10n.dart';
 import '../../locator/locator.dart';
 
-class FileUploadFailure extends Failure {
+class UploadFileFailure extends Failure {
   final String message;
 
-  FileUploadFailure._(this.message);
+  UploadFileFailure._(this.message);
 
-  factory FileUploadFailure() {
+  factory UploadFileFailure() {
     final intl = locator<RootPackageLocalizations>();
-    return FileUploadFailure._(intl.failedToUploadTheFile);
+    return UploadFileFailure._(intl.failedToUploadTheFile);
   }
-  factory FileUploadFailure.image() {
+  factory UploadFileFailure.image() {
     final intl = locator<RootPackageLocalizations>();
-    return FileUploadFailure._(intl.failedToUploadTheImage);
+    return UploadFileFailure._(intl.failedToUploadTheImage);
   }
-  factory FileUploadFailure.images() {
+  factory UploadFileFailure.images() {
     final intl = locator<RootPackageLocalizations>();
-    return FileUploadFailure._(intl.failedToUploadTheImages);
+    return UploadFileFailure._(intl.failedToUploadTheImages);
   }
-  factory FileUploadFailure.custom(String message) {
-    return FileUploadFailure._(message);
+  factory UploadFileFailure.custom(String message) {
+    return UploadFileFailure._(message);
   }
 }
 

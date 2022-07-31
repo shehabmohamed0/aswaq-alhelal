@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
 import '../../../user_institutions/presentation/widgets/institution_widget.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
@@ -13,6 +14,7 @@ class InstitutionsSliverWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<AppBloc>().state.user;
     return BlocProvider<InstitutionsCubit>(
       create: (context) => locator()..getInstitutions(),
       child: BlocBuilder<InstitutionsCubit, InstitutionsState>(
@@ -41,6 +43,8 @@ class InstitutionsSliverWidget extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                     (context, index) => InstitutionWidget(
                           institution: state.institutions[index],
+                          isUserInstitution:
+                              user.id == state.institutions[index].id,
                         ),
                     childCount: state.institutions.length),
               ),

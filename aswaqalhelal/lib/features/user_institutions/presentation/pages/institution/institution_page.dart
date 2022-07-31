@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
+import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
 import '../../../domain/entities/institution.dart';
 
@@ -8,6 +10,7 @@ class InstitutionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<AppBloc>();
     final institution =
         ModalRoute.of(context)!.settings.arguments as Institution;
     return Scaffold(

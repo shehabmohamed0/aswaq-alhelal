@@ -70,7 +70,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
     widget.focusNode.removeListener(_ensureVisible);
     super.dispose();
   }

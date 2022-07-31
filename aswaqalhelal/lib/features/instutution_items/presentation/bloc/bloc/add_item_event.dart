@@ -39,3 +39,26 @@ class AddItemSubmit extends AddItemEvent {
   final List<InstitutionItem> currentItems;
   AddItemSubmit({required this.institutionId, required this.currentItems});
 }
+
+class RemoveSelectionPressed extends AddItemEvent {
+  RemoveSelectionPressed();
+}
+
+class SelectImagePressed extends AddItemEvent {
+  final ImageSource source;
+  SelectImagePressed(this.source);
+}
+
+class InitEdit extends AddItemEvent {
+  final InstitutionItem item;
+
+  InitEdit(this.item);
+}
+
+class DeleteImageFile extends AddItemEvent {
+  DeleteImageFile();
+}
+
+class DeleteImageUrl extends AddItemEvent {
+  DeleteImageUrl();
+}

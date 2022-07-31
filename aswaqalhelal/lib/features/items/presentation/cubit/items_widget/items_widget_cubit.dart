@@ -39,7 +39,7 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
     emit(state.copyWith(items: sortedList));
   }
 
-  void updateInstitution(InstitutionItem institution) {
+  void updateInstitutionItem(InstitutionItem institution) {
     final index =
         state.items.indexWhere((element) => element.id == institution.id);
     final list = List.of(state.items)

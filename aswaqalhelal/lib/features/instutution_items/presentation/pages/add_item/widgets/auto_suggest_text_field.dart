@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 enum AutoSuggestionState {
   loading,
@@ -15,13 +18,16 @@ class AutoSuggestTextField<T> extends StatefulWidget {
     this.errorText,
     required this.suggestions,
     required this.suggestionBuilder,
+    required this.onSuggestionSelected,
     required this.errorWidget,
     required this.emptyWidget,
-    required this.oneEmptyWidgetClicked,
+    required this.onEmptyWidgetClicked,
     required this.loadingWidget,
     required this.onChanged,
     required this.suggestionState,
-    required this.onSuggestionSelected,
+    required this.onRemoveSelection,
+    required this.enabled,
+    required this.isEdit,
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -31,11 +37,14 @@ class AutoSuggestTextField<T> extends StatefulWidget {
   final List<T> suggestions;
   final Widget Function(BuildContext context, T t) suggestionBuilder;
   final Function(T suggestion) onSuggestionSelected;
+  final AutoSuggestionState suggestionState;
   final Widget emptyWidget;
-  final VoidCallback oneEmptyWidgetClicked;
+  final VoidCallback onEmptyWidgetClicked;
   final Widget loadingWidget;
   final Widget errorWidget;
-  final AutoSuggestionState suggestionState;
+  final VoidCallback onRemoveSelection;
+  final bool enabled;
+  final bool isEdit;
   @override
   State<AutoSuggestTextField<T>> createState() =>
       _AutoSuggestTextFieldState<T>();
@@ -44,7 +53,7 @@ class AutoSuggestTextField<T> extends StatefulWidget {
 class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
   late final LayerLink layerLink;
 
-  OverlayEntry? entry;
+  List<OverlayEntry> entries = [];
 
   @override
   void initState() {
@@ -55,8 +64,11 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
     widget.focusNode.addListener(
       () {
         if (widget.focusNode.hasFocus) {
+          log('show');
           showOverlay();
         } else {
+          log('Hide');
+
           hideOverlay();
         }
       },
@@ -65,9 +77,10 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
 
   void showOverlay() {
     final overlay = Overlay.of(context)!;
+
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
-    entry = OverlayEntry(
+    entries.add(OverlayEntry(
       builder: (context) => Positioned(
         width: size.width,
         child: CompositedTransformFollower(
@@ -78,8 +91,9 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               elevation: 8, color: Colors.white, child: buildOverlay()),
         ),
       ),
-    );
-    overlay.insert(entry!);
+    ));
+
+    overlay.insertAll(entries);
   }
 
   Widget buildOverlay() {
@@ -90,8 +104,7 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
         if (widget.suggestions.isEmpty) {
           return GestureDetector(
               onTap: () {
-                widget.oneEmptyWidgetClicked();
-                widget.focusNode.unfocus();
+                widget.onEmptyWidgetClicked();
               },
               child: widget.emptyWidget);
         }
@@ -101,7 +114,6 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               .map<Widget>(
                 (T suggestion) => InkWell(
                   onTap: () {
-                    widget.focusNode.unfocus();
                     widget.onSuggestionSelected(suggestion);
                   },
                   child: widget.suggestionBuilder(context, suggestion),
@@ -117,8 +129,10 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
   }
 
   void hideOverlay() {
-    entry?.remove();
-    entry = null;
+    for (var element in entries) {
+      element.remove();
+    }
+    entries.clear();
   }
 
   @override
@@ -129,14 +143,16 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
   @override
   void didUpdateWidget(covariant AutoSuggestTextField<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.enabled != widget.enabled) return;
     if (oldWidget.suggestionState != widget.suggestionState ||
         oldWidget.suggestions != widget.suggestions) {
-      hideOverlay();
-      Future.delayed(const Duration(milliseconds: 50)).then(
-        (value) {
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        hideOverlay();
+        SchedulerBinding.instance?.addPostFrameCallback((_) {
           showOverlay();
-        },
-      );
+        });
+      });
     }
   }
 
@@ -149,20 +165,42 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: layerLink,
-      child: TextField(
-        focusNode: widget.focusNode,
-        controller: widget.controller,
-        onChanged: widget.onChanged,
-        decoration: InputDecoration(
-          errorText: widget.errorText,
-          border: const OutlineInputBorder(),
-          disabledBorder: const OutlineInputBorder(),
-          errorBorder: const OutlineInputBorder(),
-          focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red)),
-          enabledBorder: const OutlineInputBorder(),
-          focusedBorder: const OutlineInputBorder(),
-        ),
+      child: Stack(
+        children: [
+          AbsorbPointer(
+            absorbing: !widget.enabled,
+            child: TextField(
+              focusNode: widget.focusNode,
+              controller: widget.controller,
+              onChanged: widget.onChanged,
+              decoration: InputDecoration(
+                filled: !widget.enabled,
+                fillColor: widget.enabled ? null : Colors.grey.shade200,
+                errorText: widget.errorText,
+                border: const OutlineInputBorder(),
+                disabledBorder: const OutlineInputBorder(),
+                errorBorder: const OutlineInputBorder(),
+                focusedErrorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red)),
+                enabledBorder:
+                    const OutlineInputBorder(borderSide: BorderSide()),
+                focusedBorder: const OutlineInputBorder(),
+              ),
+            ),
+          ),
+          if (!widget.enabled && !widget.isEdit)
+            Positioned.directional(
+              textDirection: TextDirection.ltr,
+              bottom: 12,
+              end: 10,
+              child: GestureDetector(
+                onTap: widget.onRemoveSelection,
+                child: const Icon(
+                  Icons.close_rounded,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

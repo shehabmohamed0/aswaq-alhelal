@@ -15,4 +15,6 @@ abstract class ItemsRepository {
 
   Future<Either<Failure, List<InstitutionItem>>> getInstitutionItems(
       GetInstitutionItemsParams params);
+  Future<Either<Failure, InstitutionItem>> updateInstitutionItems(
+      UpdateInstitutionItemParams params);
 }

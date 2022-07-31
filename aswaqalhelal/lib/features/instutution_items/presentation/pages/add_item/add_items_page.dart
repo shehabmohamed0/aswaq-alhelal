@@ -1,17 +1,23 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/packages/formz.dart';
+import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../items/presentation/cubit/items_widget/items_widget_cubit.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../bloc/bloc/add_item_bloc.dart';
+import '../../cubit/institution_items/instutution_items_cubit.dart';
 import 'add_unit_bottom_sheet.dart';
 import 'widgets/auto_suggest_text_field.dart';
+import 'widgets/image_bottom_sheet_widget.dart';
 import 'widgets/unit_widget.dart';
 
 class AddItemPage extends HookWidget {
@@ -27,9 +33,18 @@ class AddItemPage extends HookWidget {
     return MultiBlocListener(
       listeners: [
         BlocListener<AddItemBloc, AddItemState>(
-          listenWhen: (previous, current) =>
-              previous.status != current.status &&
-              previous.suggestionState != current.suggestionState,
+          listenWhen: (previous, current) => previous.isEdit != current.isEdit,
+          listener: (context, state) {
+            if (state.isEdit) {
+              controller.text = state.itemName.value;
+            }
+          },
+        ),
+        BlocListener<AddItemBloc, AddItemState>(
+          listenWhen: (p, c) =>
+              (p.status != c.status &&
+                  p.suggestionState != c.suggestionState) ||
+              p.status != c.status && p.suggestionState == c.suggestionState,
           listener: (context, state) {
             if (state.status.isSubmissionFailure) {
               EasyLoading.dismiss();
@@ -52,8 +67,32 @@ class AddItemPage extends HookWidget {
             } else if (state.status.isSubmissionSuccess) {
               EasyLoading.dismiss();
               final cubit = context.read<ItemsWidgetCubit>();
+
+              if (state.isEdit) {
+                cubit.updateInstitutionItem(state.institutionItem!);
+                Navigator.pop(context);
+                showSuccessSnackBar(context, 'Item Updated succefully');
+                return;
+              }
+              final institutionItemsCubit =
+                  context.read<InstitutionItemsCubit>();
+              if (institutionItemsCubit.state is InstitutionItemsEmpty) {
+                institutionItemsCubit.addItem(state.institutionItem!);
+              }
               cubit.addItem(state.institutionItem!);
               Navigator.pop(context);
+            }
+          },
+        ),
+        BlocListener<AddItemBloc, AddItemState>(
+          listenWhen: (previous, current) =>
+              previous.itemFromReference != current.itemFromReference,
+          listener: (context, state) {
+            if (!state.itemFromReference) {
+              controller.clear();
+              Future.delayed(const Duration(milliseconds: 50)).then((value) {
+                focusNode.requestFocus();
+              });
             }
           },
         ),
@@ -61,59 +100,175 @@ class AddItemPage extends HookWidget {
       child: Scaffold(
         appBar: AppBar(title: const Text('Add item')),
         body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Item name',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 4),
-              BlocBuilder<AddItemBloc, AddItemState>(
-                buildWhen: (previous, current) =>
-                    previous.suggestionState != current.suggestionState,
-                builder: (context, state) {
-                  return AutoSuggestTextField<ReferenceItem>(
-                    controller: controller,
-                    focusNode: focusNode,
-                    suggestionState: state.suggestionState,
-                    suggestions: state.suggestions,
-                    onSuggestionSelected: (item) {
-                      controller.text = item.name;
-                      bloc.add(AddItemSelectedEvent(item));
-                    },
-                    suggestionBuilder: (context, item) {
-                      return ListTile(title: Text(item.name));
-                    },
-                    oneEmptyWidgetClicked: () {
-                      bloc.add(AddNewItem(controller.text));
-                    },
-                    emptyWidget: const ListTile(
-                      title: Text('No Item found, add as new item.'),
-                    ),
-                    errorWidget: const ListTile(title: Text('Error')),
-                    loadingWidget: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: CircularProgressIndicator(),
+          padding: const EdgeInsets.all(8) - const EdgeInsets.only(bottom: 8),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Name',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 4),
+                BlocBuilder<AddItemBloc, AddItemState>(
+                  buildWhen: (previous, current) =>
+                      previous.suggestionState != current.suggestionState ||
+                      previous.itemFromReference != current.itemFromReference ||
+                      previous.addingNewItem != current.addingNewItem,
+                  builder: (context, state) {
+                    log(state.addingNewItem.toString());
+                    return AutoSuggestTextField<ReferenceItem>(
+                      controller: controller,
+                      focusNode: focusNode,
+                      enabled: !state.itemFromReference && !state.addingNewItem,
+                      isEdit: state.isEdit,
+                      onRemoveSelection: () {
+                        bloc.add(RemoveSelectionPressed());
+                        controller.clear();
+                      },
+                      suggestions: state.suggestions,
+                      onSuggestionSelected: (item) {
+                        controller.text = item.name;
+                        focusNode.unfocus();
+                        bloc.add(AddItemSelectedEvent(item));
+                      },
+                      suggestionBuilder: (context, item) {
+                        return ListTile(title: Text(item.name));
+                      },
+                      suggestionState: state.suggestionState,
+                      onEmptyWidgetClicked: () {
+                        focusNode.unfocus();
+                        bloc.add(AddNewItem(controller.text));
+                      },
+                      emptyWidget: const ListTile(
+                        title: Text('No Item found, add as new item.'),
+                      ),
+                      errorWidget: const ListTile(title: Text('Error')),
+                      loadingWidget: const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                      onChanged: (text) => bloc.add(AddItemSearch(text)),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Image',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                Center(
+                  child: SizedBox.square(
+                    dimension: MediaQuery.of(context).size.width / 2,
+                    child: Material(
+                      color: Colors.grey.shade200,
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => ImageBottomSheetWidget(
+                                    onCameraPressed: () {
+                                      bloc.add(
+                                        SelectImagePressed(
+                                          ImageSource.camera,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
+                                    onGalleryPressed: () {
+                                      bloc.add(
+                                        SelectImagePressed(
+                                          ImageSource.gallery,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
+                                  ));
+                        },
+                        child: BlocBuilder<AddItemBloc, AddItemState>(
+                          buildWhen: ((p, c) =>
+                              p.imageFile != c.imageFile ||
+                              p.imageUrl != c.imageUrl),
+                          builder: (context, state) {
+                            if (state.imageFile.value != null) {
+                              return Stack(children: [
+                                Image.file(
+                                  state.imageFile.value!,
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned(
+                                  top: 4,
+                                  right: 4,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          bloc.add(DeleteImageFile());
+                                        },
+                                        child: const Icon(Icons.close,
+                                            color: Colors.red)),
+                                  ),
+                                ),
+                              ]);
+                            } else if (state.imageFile.value == null &&
+                                state.imageUrl.value != null) {
+                              return Stack(children: [
+                                CachedNetworkImage(
+                                  imageUrl: state.imageUrl.value!,
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned(
+                                    top: 4,
+                                    right: 4,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey.shade200,
+                                      ),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            bloc.add(DeleteImageUrl());
+                                          },
+                                          child: const Icon(Icons.close,
+                                              color: Colors.red)),
+                                    ))
+                              ]);
+                            } else {
+                              return const Padding(
+                                padding: EdgeInsets.all(4),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    'Tap to\nSelect item image.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
-                    onChanged: (text) {
-                      bloc.add(AddItemSearch(text));
-                    },
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              BlocBuilder<AddItemBloc, AddItemState>(
-                buildWhen: (previous, current) =>
-                    previous.item != current.item ||
-                    previous.isNewItem != current.isNewItem ||
-                    previous.units != current.units,
-                builder: (context, state) {
-                  return Flexible(
-                    child: Column(
+                  ),
+                ),
+                const SizedBox(height: 16),
+                BlocBuilder<AddItemBloc, AddItemState>(
+                  buildWhen: (previous, current) =>
+                      previous.selectedItem != current.selectedItem ||
+                      previous.itemFromReference != current.itemFromReference ||
+                      previous.units != current.units,
+                  builder: (context, state) {
+                    return Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -166,7 +321,7 @@ class AddItemPage extends HookWidget {
                                       ? Colors.grey.shade100
                                       : Colors.grey.shade200,
                                   name: unit.name,
-                                  quantity: '//${unit.quantity}',
+                                  quantity: '${unit.quantity}',
                                   price: '${unit.price}',
                                   onRemove: () {
                                     bloc.add(RemoveUnitEvent(index));
@@ -185,38 +340,40 @@ class AddItemPage extends HookWidget {
                                 : Colors.grey.shade200,
                           ),
                       ],
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: BlocBuilder<AddItemBloc, AddItemState>(
-                  builder: (context, state) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8))),
-                      onPressed: state.itemName.value.isNotEmpty &&
-                              state.itemName.value.length > 2 &&
-                              state.units.isNotEmpty &&
-                              !state.status.isSubmissionInProgress
-                          ? () {
-                              bloc.add(
-                                AddItemSubmit(
-                                  institutionId: institutionId,
-                                  currentItems: itemsState.items,
-                                ),
-                              );
-                            }
-                          : null,
-                      child: const Text('add'),
                     );
                   },
                 ),
-              )
-            ],
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: BlocBuilder<AddItemBloc, AddItemState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8))),
+                        onPressed: state.itemName.value.isNotEmpty &&
+                                state.itemName.value.length > 2 &&
+                                state.units.isNotEmpty &&
+                                !state.status.isSubmissionInProgress &&
+                                (state.imageFile.value != null ||
+                                    state.imageUrl.value != null)
+                            ? () {
+                                bloc.add(
+                                  AddItemSubmit(
+                                    institutionId: institutionId,
+                                    currentItems: itemsState.items,
+                                  ),
+                                );
+                              }
+                            : null,
+                        child: const Text('add'),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
