@@ -7,7 +7,7 @@ class UpdateAddressParams {
   final String country;
   final String governate;
   final String city;
-  final String district;
+  final String neighborhood;
   final String description;
   final GeoPoint geoPoint;
 
@@ -16,7 +16,7 @@ class UpdateAddressParams {
     required this.country,
     required this.governate,
     required this.city,
-    required this.district,
+    required this.neighborhood,
     required this.description,
     required this.geoPoint,
   });
@@ -26,7 +26,7 @@ class UpdateAddressParams {
       country: country,
       governate: governate,
       city: city,
-      district: district,
+      neighborhood: neighborhood,
       description: description,
       geoPointModel: GeoPointModel(lat: geoPoint.lat, long: geoPoint.long));
 }

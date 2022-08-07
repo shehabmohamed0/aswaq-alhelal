@@ -1,85 +1,74 @@
 part of 'add_institution_cubit.dart';
 
+enum AddInstitutionStatus { initial, loading, failure, success }
+
 class AddInstitutionState extends Equatable {
-  final RequiredString officialName;
-  final RequiredString commercialName;
-  final RequiredString brandName;
-  final RequiredString nickName;
+  final int step;
+  final List<FormzStatus> stepFormStatus;
+  // step 0
+  final MinimumLengthString officialName;
+  final MinimumLengthString nickName;
+  // step 1
   final List<Email> emails;
   final List<PhoneNumber> phoneNumbers;
-  final FormzStatus status;
-  final String? errorMessage;
-  final Institution? institution;
-  final bool isEdit;
-  final String? id;
+  // step 2
+  final RequiredObject<AddressDetails> address;
 
+  final AddInstitutionStatus status;
+  final String? errorMessage;
+  final Institution? addedInstitution;
   const AddInstitutionState({
-    this.officialName = const RequiredString.pure(),
-    this.commercialName = const RequiredString.pure(),
-    this.brandName = const RequiredString.pure(),
-    this.nickName = const RequiredString.pure(),
-    this.emails = const [Email.pure()],
-    this.phoneNumbers = const [PhoneNumber.pure()],
-    this.status = FormzStatus.pure,
+    this.step = 0,
+    this.stepFormStatus = const [
+      FormzStatus.pure,
+      FormzStatus.pure,
+      FormzStatus.pure
+    ],
+    this.officialName = const MinimumLengthString.pure(2),
+    this.nickName = const MinimumLengthString.pure(2),
+    this.emails = const [],
+    this.phoneNumbers = const [],
+    this.address = const RequiredObject.pure(),
+    this.status = AddInstitutionStatus.initial,
     this.errorMessage,
-    this.institution,
-    this.isEdit = false,
-    this.id,
+    this.addedInstitution,
   });
 
-  @override
-  List<Object?> get props {
-    return [
-      officialName,
-      commercialName,
-      brandName,
-      nickName,
-      emails,
-      phoneNumbers,
-      status,
-      errorMessage,
-      institution,
-      isEdit,
-      id
-    ];
-  }
-
-  AddInstitutionState copyWith({
-    RequiredString? officialName,
-    RequiredString? commercialName,
-    RequiredString? brandName,
-    RequiredString? nickName,
-    List<Email>? emails,
-    List<PhoneNumber>? phoneNumbers,
-    FormzStatus? status,
-    String? errorMessage,
-    Institution? institution,
-  }) {
+  AddInstitutionState copyWith(
+      {int? step,
+      List<FormzStatus>? stepFormStatus,
+      MinimumLengthString? officialName,
+      MinimumLengthString? nickName,
+      List<Email>? emails,
+      List<PhoneNumber>? phoneNumbers,
+      RequiredObject<AddressDetails>? address,
+      AddInstitutionStatus? status,
+      String? errorMessage,
+      Institution? addedInstitution}) {
     return AddInstitutionState(
-      officialName: officialName ?? this.officialName,
-      commercialName: commercialName ?? this.commercialName,
-      brandName: brandName ?? this.brandName,
-      nickName: nickName ?? this.nickName,
-      emails: emails ?? this.emails,
-      phoneNumbers: phoneNumbers ?? this.phoneNumbers,
-      status: status ?? this.status,
-      errorMessage: errorMessage ?? this.errorMessage,
-      institution: institution ?? this.institution,
-      isEdit: isEdit,
-      id: id,
-    );
+        step: step ?? this.step,
+        stepFormStatus: stepFormStatus ?? this.stepFormStatus,
+        officialName: officialName ?? this.officialName,
+        nickName: nickName ?? this.nickName,
+        emails: emails ?? this.emails,
+        phoneNumbers: phoneNumbers ?? this.phoneNumbers,
+        address: address ?? this.address,
+        status: status ?? this.status,
+        errorMessage: errorMessage ?? this.errorMessage,
+        addedInstitution: addedInstitution ?? addedInstitution);
   }
 
-  Institution toInstitution([String id = '', String userId = '']) =>
-      Institution(
-        id: id,
-        userId: userId,
-        officialName: officialName.value,
-        commercialName: commercialName.value,
-        brandName: brandName.value,
-        nickname: nickName.value,
-        emails: emails.map((email) => email.value).toList(),
-        phoneNumbers:
-            phoneNumbers.map((phoneNumbers) => phoneNumbers.value).toList(),
-      );
+  @override
+  List<Object?> get props => [
+        step,
+        stepFormStatus,
+        officialName,
+        nickName,
+        emails,
+        phoneNumbers,
+        address,
+        status,
+        errorMessage,
+        addedInstitution
+      ];
 }

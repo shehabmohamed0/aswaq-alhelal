@@ -14,5 +14,6 @@
   "tryAgain": "Try again",
   "failedToUploadTheImage": "Failed to upload the image.",
   "failedToUploadTheFile": "Failed to upload the file.",
-  "failedToUploadTheImages": "Failed to upload the images."
+  "failedToUploadTheImages": "Failed to upload the images.",
+  "mustBeAtLeastNumberCharacter": "Must be at least {howMany, plural, one{1 character} other{{howMany} characters}}"
 }

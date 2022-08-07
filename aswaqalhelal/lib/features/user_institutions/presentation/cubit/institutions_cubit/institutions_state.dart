@@ -1,19 +1,19 @@
 part of 'institutions_cubit.dart';
 
-abstract class InstitutionsState extends Equatable {
-  const InstitutionsState();
+abstract class UserInstitutionsState extends Equatable {
+  const UserInstitutionsState();
 
   @override
   List<Object> get props => [];
 }
 
-class InstitutionsInitial extends InstitutionsState {}
+class InstitutionsInitial extends UserInstitutionsState {}
 
-class InstitutionsLoading extends InstitutionsState {}
+class InstitutionsLoading extends UserInstitutionsState {}
 
-class InstitutionsEmpty extends InstitutionsState {}
+class InstitutionsEmpty extends UserInstitutionsState {}
 
-class InstitutionsLoaded extends InstitutionsState {
+class InstitutionsLoaded extends UserInstitutionsState {
   final List<Institution> institutions;
 
   const InstitutionsLoaded({
@@ -31,4 +31,4 @@ class InstitutionsLoaded extends InstitutionsState {
   List<Object> get props => [institutions];
 }
 
-class InstitutionsError extends InstitutionsState {}
+class InstitutionsError extends UserInstitutionsState {}

@@ -1,4 +1,6 @@
+import 'package:geo_logic/features/domain/entities/address.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/equatable.dart';
 
 class Institution extends Equatable {
@@ -9,25 +11,24 @@ class Institution extends Equatable {
   @JsonKey()
   final String officialName;
   @JsonKey()
-  final String commercialName;
-  @JsonKey()
-  final String brandName;
-  @JsonKey()
-  final String nickname;
+  final String nickName;
   @JsonKey()
   final List<String> emails;
   @JsonKey()
   final List<String> phoneNumbers;
+  @TimestampConverter()
+  final DateTime creationTime;
 
+  final Address address;
   const Institution({
     required this.id,
     required this.userId,
     required this.officialName,
-    required this.commercialName,
-    required this.brandName,
-    required this.nickname,
+    required this.nickName,
     required this.emails,
     required this.phoneNumbers,
+    required this.address,
+    required this.creationTime,
   });
 
   @override
@@ -35,10 +36,10 @@ class Institution extends Equatable {
         id,
         userId,
         officialName,
-        commercialName,
-        brandName,
-        nickname,
+        nickName,
         emails,
-        phoneNumbers
+        phoneNumbers,
+        address,
+        creationTime
       ];
 }

@@ -33,7 +33,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
       'country': params.country,
       'governate': params.governate,
       'city': params.city,
-      'district': params.district,
+      'neighborhood': params.neighborhood,
       'description': params.description,
       'geoPoint': {'lat': params.geoPoint.lat, 'long': params.geoPoint.long},
       'saveTime': FieldValue.serverTimestamp()
@@ -43,7 +43,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
         country: params.country,
         governate: params.governate,
         city: params.city,
-        district: params.district,
+        neighborhood: params.neighborhood,
         description: params.description,
         geoPointModel: GeoPointModel(
             lat: params.geoPoint.lat, long: params.geoPoint.long));
@@ -78,7 +78,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
       'country': params.country,
       'governate': params.governate,
       'city': params.city,
-      'district': params.district,
+      'neighborhood': params.neighborhood,
       'description': params.description,
       'geoPoint': {'lat': params.geoPoint.lat, 'long': params.geoPoint.long},
     });

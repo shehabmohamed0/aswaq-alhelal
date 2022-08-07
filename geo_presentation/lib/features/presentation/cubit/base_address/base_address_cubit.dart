@@ -19,7 +19,6 @@ import 'package:root_package/packages/formz.dart';
 
 part 'base_address_state.dart';
 
-
 abstract class BaseAddressCubit extends Cubit<AddAddressState> {
   final GetCountry _getCountry;
   final GetCurrentLocation _getCurrentLocation;
@@ -41,11 +40,6 @@ abstract class BaseAddressCubit extends Cubit<AddAddressState> {
 
   FutureOr<void> initEdit(Address address) async {
     await _initCountryData((country) {
-
-      print(country.enName);
-      print(country.governates.entries.first.value.enName);
-      print(country.governates.entries.first.value.cities.entries.first.value.enName);
-
       log(address.governate);
       final governate = country.governates[address.governate]!;
       final city = governate.cities[address.city];
@@ -54,7 +48,7 @@ abstract class BaseAddressCubit extends Cubit<AddAddressState> {
           country: country,
           governate: RequiredObject<Governate>.dirty(governate),
           city: RequiredObject<City>.dirty(city),
-          district: RequiredString.dirty(address.district),
+          neighborhood: RequiredString.dirty(address.neighborhood),
           description: RequiredString.dirty(address.description),
           geoPoint: RequiredObject.dirty(address.geoPoint),
           status: FormzStatus.valid,
@@ -141,7 +135,7 @@ abstract class BaseAddressCubit extends Cubit<AddAddressState> {
     final status = Formz.validate([
       current.governate,
       current.city,
-      current.district,
+      current.neighborhood,
       current.description,
       current.geoPoint,
     ]);
@@ -158,7 +152,7 @@ abstract class BaseAddressCubit extends Cubit<AddAddressState> {
         current.copyWith(
           governate: RequiredObject.dirty(current.governate.value),
           city: RequiredObject.dirty(current.city.value),
-          district: RequiredString.dirty(current.district.value),
+          district: RequiredString.dirty(current.neighborhood.value),
           description: RequiredString.dirty(current.description.value),
           geoPoint: RequiredObject.dirty(current.geoPoint.value),
           status: status,

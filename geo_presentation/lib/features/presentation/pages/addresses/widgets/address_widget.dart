@@ -21,7 +21,7 @@ class AddressWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '${address.governate} - ${address.city} - ${address.district}',
+            '${address.governate} - ${address.city} - ${address.neighborhood}',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleLarge,

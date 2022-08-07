@@ -6,7 +6,7 @@ import 'geo_point_model.dart';
 
 part 'address_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class AddressModel extends Address {
   @JsonKey(name: 'geoPoint')
   final GeoPointModel geoPointModel;
@@ -16,7 +16,7 @@ class AddressModel extends Address {
     required String country,
     required String governate,
     required String city,
-    required String district,
+    required String neighborhood,
     required String description,
     required this.geoPointModel,
   }) : super(
@@ -24,7 +24,7 @@ class AddressModel extends Address {
           country: country,
           governate: governate,
           city: city,
-          district: district,
+          neighborhood: neighborhood,
           description: description,
           geoPoint: geoPointModel,
         );
@@ -34,7 +34,7 @@ class AddressModel extends Address {
       country: country,
       governate: governate,
       city: city,
-      district: district,
+      neighborhood: neighborhood,
       description: description,
       geoPointModel: geoPointModel);
 

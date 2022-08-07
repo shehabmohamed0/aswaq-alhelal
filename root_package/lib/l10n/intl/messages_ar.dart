@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(howMany) =>
+      "يجب ان تكون على الاقل ${Intl.plural(howMany, one: 'حرف واحد', two: 'حرفين', other: '${howMany} حروف')}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
@@ -39,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "كلمة المرور يجب ان تكون على الاقل ٨ حروف"),
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح."),
+        "mustBeAtLeastNumberCharacter": m0,
         "phoneNumberIsAlreadyRegistered":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف مسجل مسبقا."),
         "required": MessageLookupByLibrary.simpleMessage("مطلوب"),

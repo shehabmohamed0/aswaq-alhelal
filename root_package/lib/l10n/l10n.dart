@@ -180,6 +180,16 @@ class RootPackageLocalizations {
       args: [],
     );
   }
+
+  /// `Must be at least {howMany, plural, one{1 character} other{{howMany} characters}}`
+  String mustBeAtLeastNumberCharacter(num howMany) {
+    return Intl.message(
+      'Must be at least ${Intl.plural(howMany, one: '1 character', other: '$howMany characters')}',
+      name: 'mustBeAtLeastNumberCharacter',
+      desc: '',
+      args: [howMany],
+    );
+  }
 }
 
 class AppLocalizationDelegate

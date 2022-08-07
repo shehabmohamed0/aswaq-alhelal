@@ -19,32 +19,34 @@ class AutoSuggestTextField<T> extends StatefulWidget {
     required this.suggestions,
     required this.suggestionBuilder,
     required this.onSuggestionSelected,
-    required this.errorWidget,
-    required this.emptyWidget,
+    this.errorWidget,
+    this.labelText,
+    this.emptyWidget,
     required this.onEmptyWidgetClicked,
-    required this.loadingWidget,
+    this.loadingWidget,
     required this.onChanged,
     required this.suggestionState,
     required this.onRemoveSelection,
-    required this.enabled,
-    required this.isEdit,
+    this.enabled = true,
+    this.showRemoveButton = true,
   }) : super(key: key);
 
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final FocusNode focusNode;
   final String? errorText;
+  final String? labelText;
   final Function(String val) onChanged;
   final List<T> suggestions;
   final Widget Function(BuildContext context, T t) suggestionBuilder;
   final Function(T suggestion) onSuggestionSelected;
   final AutoSuggestionState suggestionState;
-  final Widget emptyWidget;
+  final Widget? emptyWidget;
   final VoidCallback onEmptyWidgetClicked;
-  final Widget loadingWidget;
-  final Widget errorWidget;
+  final Widget? loadingWidget;
+  final Widget? errorWidget;
   final VoidCallback onRemoveSelection;
+  final bool showRemoveButton;
   final bool enabled;
-  final bool isEdit;
   @override
   State<AutoSuggestTextField<T>> createState() =>
       _AutoSuggestTextFieldState<T>();
@@ -62,17 +64,19 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
     // WidgetsBinding.instance!.addPostFrameCallback((_) => showOverlay());
 
     widget.focusNode.addListener(
-      () {
-        if (widget.focusNode.hasFocus) {
-          log('show');
-          showOverlay();
-        } else {
-          log('Hide');
-
-          hideOverlay();
-        }
-      },
+      _listener,
     );
+  }
+
+  void _listener() {
+    if (widget.focusNode.hasFocus) {
+      log('show');
+      showOverlay();
+    } else {
+      log('Hide');
+
+      hideOverlay();
+    }
   }
 
   void showOverlay() {
@@ -80,33 +84,48 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
 
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
-    entries.add(OverlayEntry(
+    final entry = OverlayEntry(
       builder: (context) => Positioned(
         width: size.width,
         child: CompositedTransformFollower(
           link: layerLink,
-          showWhenUnlinked: false,
+          showWhenUnlinked: true,
           offset: Offset(0, size.height + 8),
           child: Material(
               elevation: 8, color: Colors.white, child: buildOverlay()),
         ),
       ),
-    ));
+    );
 
-    overlay.insertAll(entries);
+    overlay.insert(entry);
+    entries.add(entry);
   }
 
   Widget buildOverlay() {
     switch (widget.suggestionState) {
       case AutoSuggestionState.loading:
-        return widget.loadingWidget;
+        return widget.loadingWidget ??
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(4.0),
+                child: CircularProgressIndicator(),
+              ),
+            );
       case AutoSuggestionState.loaded:
         if (widget.suggestions.isEmpty) {
           return GestureDetector(
-              onTap: () {
-                widget.onEmptyWidgetClicked();
-              },
-              child: widget.emptyWidget);
+            onTap: () {
+              widget.onEmptyWidgetClicked();
+            },
+            child: widget.emptyWidget ??
+                ListTile(
+                  leading: const Icon(
+                    Icons.add,
+                    color: Colors.green,
+                  ),
+                  title: Text(widget.controller.text),
+                ),
+          );
         }
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -122,21 +141,22 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               .toList(),
         );
       case AutoSuggestionState.error:
-        return widget.errorWidget;
+        return widget.errorWidget ?? const ListTile(title: Text('Error'));
       case AutoSuggestionState.emptyText:
         return const SizedBox.shrink();
     }
   }
 
   void hideOverlay() {
-    for (var element in entries) {
-      element.remove();
+    for (var entry in entries) {
+      entry.remove();
     }
     entries.clear();
   }
 
   @override
   void dispose() {
+    widget.focusNode.removeListener(_listener);
     super.dispose();
   }
 
@@ -174,25 +194,19 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               controller: widget.controller,
               onChanged: widget.onChanged,
               decoration: InputDecoration(
+                labelText: widget.labelText,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 filled: !widget.enabled,
                 fillColor: widget.enabled ? null : Colors.grey.shade200,
                 errorText: widget.errorText,
-                border: const OutlineInputBorder(),
-                disabledBorder: const OutlineInputBorder(),
-                errorBorder: const OutlineInputBorder(),
-                focusedErrorBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red)),
-                enabledBorder:
-                    const OutlineInputBorder(borderSide: BorderSide()),
-                focusedBorder: const OutlineInputBorder(),
               ),
             ),
           ),
-          if (!widget.enabled && !widget.isEdit)
-            Positioned.directional(
-              textDirection: TextDirection.ltr,
-              bottom: 12,
-              end: 10,
+          if (!widget.enabled && widget.showRemoveButton)
+            PositionedDirectional(
+              bottom: 1,
+              end: 8,
+              top: 1,
               child: GestureDetector(
                 onTap: widget.onRemoveSelection,
                 child: const Icon(

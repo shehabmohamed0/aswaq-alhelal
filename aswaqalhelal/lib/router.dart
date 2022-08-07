@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_logic/features/domain/entities/geo_point.dart';
@@ -24,12 +23,13 @@ import 'package:users_presentation/features/settings/pages/update_email/update_e
 
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
+import 'features/home/presentation/pages/home_page.dart';
 import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
-import 'features/items/presentation/pages/home_page.dart';
 import 'features/splash/splash_screen.dart';
+import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
@@ -172,15 +172,8 @@ class AppRouter {
       case Routes.addInstitution:
         return _getPageRoute(
           routeName: settings.name,
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider<AddInstitutionCubit>(
-                create: (context) => locator(),
-              ),
-              BlocProvider<UserInstitutionsCubit>.value(
-                value: settings.arguments as UserInstitutionsCubit,
-              ),
-            ],
+          builder: (context) => BlocProvider<AddInstitutionCubit>(
+            create: (context) => locator(),
             child: const AddInstitutionPage(),
           ),
         );

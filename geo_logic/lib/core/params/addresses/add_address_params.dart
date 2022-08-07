@@ -4,7 +4,7 @@ class AddAddressParams {
   final String country;
   final String governate;
   final String city;
-  final String district;
+  final String neighborhood;
   final String description;
   final GeoPoint geoPoint;
   final String Function(String) collectionPath;
@@ -12,7 +12,7 @@ class AddAddressParams {
     required this.country,
     required this.governate,
     required this.city,
-    required this.district,
+    required this.neighborhood,
     required this.description,
     required this.geoPoint,
     required this.collectionPath

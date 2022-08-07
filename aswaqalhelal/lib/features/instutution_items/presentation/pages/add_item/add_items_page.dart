@@ -10,7 +10,7 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../items/presentation/cubit/items_widget/items_widget_cubit.dart';
+import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../bloc/bloc/add_item_bloc.dart';
@@ -121,7 +121,7 @@ class AddItemPage extends HookWidget {
                       controller: controller,
                       focusNode: focusNode,
                       enabled: !state.itemFromReference && !state.addingNewItem,
-                      isEdit: state.isEdit,
+                      showRemoveButton: state.isEdit,
                       onRemoveSelection: () {
                         bloc.add(RemoveSelectionPressed());
                         controller.clear();

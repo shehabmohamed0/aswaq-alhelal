@@ -2,6 +2,7 @@ import 'package:formz/formz.dart';
 
 import '../../l10n/l10n.dart';
 import '../../locator/locator.dart';
+import '../mixin/contact_mixin.dart';
 
 /// Validation errors for the [Phone Number] [FormzInput].
 enum PhoneValidationError {
@@ -12,7 +13,8 @@ enum PhoneValidationError {
 /// {@template phone}
 /// Form input for an phone input.
 /// {@endtemplate}
-class PhoneNumber extends FormzInput<String, PhoneValidationError> {
+class PhoneNumber extends FormzInput<String, PhoneValidationError>
+    implements ContactInput {
   /// {@macro phone}
   const PhoneNumber.pure() : super.pure('');
 
@@ -33,11 +35,16 @@ class PhoneNumber extends FormzInput<String, PhoneValidationError> {
     }
     return PhoneValidationError.invalid;
   }
+
+  @override
+  String content() {
+    return value;
+  }
 }
 
 extension PhoneValidationMessage on PhoneNumber {
   String? validationMessage() {
-     final intl = locator<RootPackageLocalizations>();
+    final intl = locator<RootPackageLocalizations>();
     if (invalid) {
       if (error == PhoneValidationError.invalid) {
         return intl.invalidPhoneNumber;

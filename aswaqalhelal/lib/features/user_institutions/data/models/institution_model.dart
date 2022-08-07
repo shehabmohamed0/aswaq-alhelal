@@ -1,30 +1,35 @@
+import 'package:geo_logic/features/data/models/address_model.dart';
+import 'package:geo_logic/features/domain/entities/address.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 
 import '../../domain/entities/institution.dart';
 
 part 'institution_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class InstitutionModel extends Institution {
+  @JsonKey(name: 'address')
+  final AddressModel addressModel;
   const InstitutionModel(
       {required String id,
       required String userId,
       required String officialName,
-      required String commercialName,
-      required String brandName,
-      required String nickname,
+      required String nickName,
       required List<String> emails,
-      required List<String> phoneNumbers})
+      required List<String> phoneNumbers,
+      required this.addressModel,
+      required DateTime creationTime})
       : super(
             id: id,
             userId: userId,
             officialName: officialName,
-            commercialName: commercialName,
-            brandName: brandName,
-            nickname: nickname,
+            nickName: nickName,
             emails: emails,
-            phoneNumbers: phoneNumbers);
+            phoneNumbers: phoneNumbers,
+            address: addressModel,
+            creationTime: creationTime);
 
   factory InstitutionModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -36,11 +41,11 @@ class InstitutionModel extends Institution {
       id: id,
       userId: userId,
       officialName: officialName,
-      commercialName: commercialName,
-      brandName: brandName,
-      nickname: nickname,
+      nickName: nickName,
       emails: emails,
-      phoneNumbers: phoneNumbers);
+      phoneNumbers: phoneNumbers,
+      addressModel: addressModel,
+      creationTime: creationTime);
   factory InstitutionModel.fromJson(Map<String, dynamic> json) =>
       _$InstitutionModelFromJson(json);
 

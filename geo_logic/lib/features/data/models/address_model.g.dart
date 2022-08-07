@@ -11,7 +11,7 @@ AddressModel _$AddressModelFromJson(Map<String, dynamic> json) => AddressModel(
       country: json['country'] as String,
       governate: json['governate'] as String,
       city: json['city'] as String,
-      district: json['district'] as String,
+      neighborhood: json['neighborhood'] as String,
       description: json['description'] as String,
       geoPointModel:
           GeoPointModel.fromJson(json['geoPoint'] as Map<String, dynamic>),
@@ -23,7 +23,7 @@ Map<String, dynamic> _$AddressModelToJson(AddressModel instance) =>
       'country': instance.country,
       'governate': instance.governate,
       'city': instance.city,
-      'district': instance.district,
+      'neighborhood': instance.neighborhood,
       'description': instance.description,
-      'geoPoint': instance.geoPointModel,
+      'geoPoint': instance.geoPointModel.toJson(),
     };

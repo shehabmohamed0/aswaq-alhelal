@@ -40,7 +40,7 @@ class AddAddressLoadedState extends AddAddressState {
   final Country country;
   final RequiredObject<Governate> governate;
   final RequiredObject<City> city;
-  final RequiredString district;
+  final RequiredString neighborhood;
   final RequiredString description;
   final RequiredObject<GeoPoint> geoPoint;
   final bool geoPointLoading;
@@ -52,7 +52,7 @@ class AddAddressLoadedState extends AddAddressState {
     required this.country,
     this.governate = const RequiredObject.pure(),
     this.city = const RequiredObject.pure(),
-    this.district = const RequiredString.pure(),
+    this.neighborhood = const RequiredString.pure(),
     this.description = const RequiredString.pure(),
     this.geoPoint = const RequiredObject.pure(),
     this.geoPointLoading = false,
@@ -78,7 +78,7 @@ class AddAddressLoadedState extends AddAddressState {
         country: country ?? this.country,
         governate: governate ?? this.governate,
         city: city ?? this.city,
-        district: district ?? this.district,
+        neighborhood: district ?? this.neighborhood,
         description: description ?? this.description,
         geoPoint: geoPoint ?? this.geoPoint,
         geoPointLoading: geoPointLoading ?? this.geoPointLoading,
@@ -96,7 +96,7 @@ class AddAddressLoadedState extends AddAddressState {
         country: country.enName,
         governate: governate.value!.enName,
         city: city.value!.enName,
-        district: district.value,
+        neighborhood: neighborhood.value,
         description: description.value,
         geoPoint: geoPoint.value!,
       );
@@ -105,7 +105,7 @@ class AddAddressLoadedState extends AddAddressState {
         country,
         governate,
         city,
-        district,
+        neighborhood,
         description,
         geoPoint,
         geoPointLoading,

@@ -14,12 +14,13 @@ class InstitutionsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) => InstitutionWidget(
-          institution: institutions[index],
-          isUserInstitution: institutions[index].id == userId),
+        institution: institutions[index],
+        isUserInstitution: institutions[index].id == userId,
+      ),
       itemCount: institutions.length,
     );
   }

@@ -64,7 +64,7 @@ class InstitutionWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      institution.commercialName,
+                      institution.nickName,
                       style: Theme.of(context).textTheme.labelLarge,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
@@ -13,7 +14,7 @@ class InstitutionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<UserInstitutionsCubit>();
-    return BlocBuilder<UserInstitutionsCubit, InstitutionsState>(
+    return BlocBuilder<UserInstitutionsCubit, UserInstitutionsState>(
       builder: (context, state) {
         if (state is InstitutionsLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -51,8 +52,16 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
           actions: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, Routes.addInstitution,
-                    arguments: context.read<UserInstitutionsCubit>());
+                Navigator.pushNamed(
+                  context,
+                  Routes.addInstitution,
+                ).then((institution) {
+                  if (institution != null) {
+                    context
+                        .read<UserInstitutionsCubit>()
+                        .addInstitution(institution as Institution);
+                  }
+                });
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -92,8 +101,17 @@ class _InstitutionsEmptyWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8))),
           child: const Text('Add institution'),
           onPressed: () {
-            Navigator.pushNamed(context, Routes.addInstitution,
-                arguments: context.read<UserInstitutionsCubit>());
+            Navigator.of(context)
+                .pushNamed(
+              Routes.addInstitution,
+            )
+                .then((institution) {
+              if ((institution) != null) {
+                context
+                    .read<UserInstitutionsCubit>()
+                    .addInstitution(institution as Institution);
+              }
+            });
           },
         )
       ],

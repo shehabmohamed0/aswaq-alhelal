@@ -11,14 +11,16 @@ InstitutionModel _$InstitutionModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
       officialName: json['officialName'] as String,
-      commercialName: json['commercialName'] as String,
-      brandName: json['brandName'] as String,
-      nickname: json['nickname'] as String,
+      nickName: json['nickName'] as String,
       emails:
           (json['emails'] as List<dynamic>).map((e) => e as String).toList(),
       phoneNumbers: (json['phoneNumbers'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      addressModel:
+          AddressModel.fromJson(json['address'] as Map<String, dynamic>),
+      creationTime: const TimestampConverter()
+          .fromJson(json['creationTime'] as Timestamp),
     );
 
 Map<String, dynamic> _$InstitutionModelToJson(InstitutionModel instance) =>
@@ -26,9 +28,9 @@ Map<String, dynamic> _$InstitutionModelToJson(InstitutionModel instance) =>
       'id': instance.id,
       'userId': instance.userId,
       'officialName': instance.officialName,
-      'commercialName': instance.commercialName,
-      'brandName': instance.brandName,
-      'nickname': instance.nickname,
+      'nickName': instance.nickName,
       'emails': instance.emails,
       'phoneNumbers': instance.phoneNumbers,
+      'creationTime': const TimestampConverter().toJson(instance.creationTime),
+      'address': instance.addressModel.toJson(),
     };

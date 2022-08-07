@@ -14,5 +14,7 @@
   "tryAgain": "حاول مجدداََ",
   "failedToUploadTheImage": "فشل رفع الصورة",
   "failedToUploadTheFile": "فشل رفع الملف",
-  "failedToUploadTheImages": "فشل رفع الصور"
+  "failedToUploadTheImages": "فشل رفع الصور",
+  "mustBeAtLeastNumberCharacter": "يجب ان تكون على الاقل {howMany, plural, one{حرف واحد} two{حرفين} other{{howMany} حروف}}"
+
 }

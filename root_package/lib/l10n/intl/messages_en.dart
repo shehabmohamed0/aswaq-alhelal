@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(howMany) =>
+      "Must be at least ${Intl.plural(howMany, one: '1 character', other: '${howMany} characters')}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
@@ -39,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password must be at least 8 character."),
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Invalid phone number."),
+        "mustBeAtLeastNumberCharacter": m0,
         "phoneNumberIsAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "The phone number is already registered."),
         "required": MessageLookupByLibrary.simpleMessage("Required"),

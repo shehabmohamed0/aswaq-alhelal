@@ -183,7 +183,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       return;
     }
 
-   
     if (!state.itemFromReference) {
       final either = await _addRefAndInstitutionItem(
         params: AddRefAndInstitutionItemParams(

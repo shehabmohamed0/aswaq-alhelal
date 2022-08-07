@@ -43,7 +43,7 @@ class AddressPage<T extends BaseAddressCubit> extends HookWidget {
             if (!state.initEdit) {
               governateController.text = state.governate.value?.enName ?? '';
               cityController.text = state.city.value?.enName ?? '';
-              districtController.text = state.district.value;
+              districtController.text = state.neighborhood.value;
               descriptionController.text = state.description.value;
               bloc.addAddressEditInitCompleted();
             }
@@ -164,7 +164,7 @@ class AddressPage<T extends BaseAddressCubit> extends HookWidget {
                   NormalTextFormField(
                     controller: districtController,
                     labelText: intl.districtVillageNeighbourhood,
-                    errorText: state.district.validationMessage,
+                    errorText: state.neighborhood.validationMessage,
                     onChanged: (district) {
                       bloc.districtChanged(district);
                     },

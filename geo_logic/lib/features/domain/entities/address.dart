@@ -13,7 +13,7 @@ class Address extends Equatable {
   @JsonKey()
   final String city;
   @JsonKey()
-  final String district;
+  final String neighborhood;
   @JsonKey()
   final String description;
 
@@ -24,12 +24,12 @@ class Address extends Equatable {
     required this.country,
     required this.governate,
     required this.city,
-    required this.district,
+    required this.neighborhood,
     required this.description,
     required this.geoPoint,
   });
 
   @override
   List<Object?> get props =>
-      [id, country, governate, city, district, geoPoint, description];
+      [id, country, governate, city, neighborhood, geoPoint, description];
 }

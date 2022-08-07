@@ -1,178 +1,127 @@
-import 'dart:developer';
-
-import '../../../../../core/params/update_institution_params.dart';
-import '../../../domain/usecases/update_institution.dart';
+import 'package:aswaqalhelal/core/params/add_institution_params.dart';
+import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
+import 'package:aswaqalhelal/features/user_institutions/domain/usecases/add_institution.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/form_inputs/required_string.dart';
+import 'package:flutter/material.dart';
+import 'package:root_package/core/failures/server_failure.dart';
+import 'package:root_package/core/form_inputs/form_inputs.dart';
+import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
+import 'package:root_package/core/form_inputs/required_object.dart';
 import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/root_package.dart';
 
-import '../../../../../core/params/add_institution_params.dart';
-import '../../../domain/entities/institution.dart';
-import '../../../domain/usecases/add_institution.dart';
+import '../../../../address_suggestions/domain/entities/entities.dart';
 
 part 'add_institution_state.dart';
 
 @injectable
 class AddInstitutionCubit extends Cubit<AddInstitutionState> {
-  AddInstitutionCubit(this._addInstitution, this._updateInstitution)
+  AddInstitutionCubit(this._addInstitution)
       : super(const AddInstitutionState());
-
   final AddInstitution _addInstitution;
-  final UpdateInstitution _updateInstitution;
-
-  void officialNameChanged(String val) {
-    final newOfficialName = RequiredString.dirty(val);
-    emit(state.copyWith(officialName: newOfficialName));
-  }
-
-  void initEdit(Institution institution) {
-    emit(
-      AddInstitutionState(
-        isEdit: true,
-        id: institution.id,
-        officialName: RequiredString.dirty(institution.officialName),
-        commercialName: RequiredString.dirty(institution.commercialName),
-        brandName: RequiredString.dirty(institution.brandName),
-        nickName: RequiredString.dirty(institution.nickname),
-        emails: institution.emails.map((e) => Email.dirty(e)).toList(),
-        phoneNumbers:
-            institution.phoneNumbers.map((e) => PhoneNumber.dirty(e)).toList(),
-      ),
-    );
-  }
-
-  void commercialNameChanged(String val) {
-    final newCommercialName = RequiredString.dirty(val);
-    emit(state.copyWith(commercialName: newCommercialName));
-  }
-
-  void brandNameChanged(String val) {
-    final newBrandName = RequiredString.dirty(val);
-    emit(state.copyWith(brandName: newBrandName));
-  }
-
-  void nickNameChanged(String val) {
-    final newNickName = RequiredString.dirty(val);
-    emit(state.copyWith(nickName: newNickName));
-  }
-
-  void addNewEmail() {
-    final newList = List.of(state.emails)..add(const Email.pure());
-    emit(state.copyWith(emails: newList));
-  }
-
-  void emailChanged(int index, String val) {
-    final newList = List.of(state.emails);
-    newList[index] = Email.dirty(val);
-    emit(state.copyWith(emails: newList));
-  }
-
-  void addNewPhoneNumber() {
-    log(state.phoneNumbers.toString());
-    final newList = List.of(state.phoneNumbers)..add(const PhoneNumber.pure());
-    log(newList.toString());
-
-    emit(state.copyWith(phoneNumbers: newList));
-  }
-
-  void phoneNumberChanged(int index, String val) {
-    final newList = List.of(state.phoneNumbers);
-    newList[index] = PhoneNumber.dirty(val);
-    emit(state.copyWith(phoneNumbers: newList));
-  }
-
-  void deletePhoneNumber(int index) {
-    final newList = List.of(state.phoneNumbers)..removeAt(index);
-    emit(state.copyWith(phoneNumbers: newList));
-  }
-
-  void deleteEmail(int index) {
-    final newList = List.of(state.emails)..removeAt(index);
-    emit(state.copyWith(emails: newList));
-  }
-
-  Future<void> submit() async {
-    if (state.status == FormzStatus.submissionInProgress) {
-      return;
-    }
-    final status = Formz.validate([
-      state.officialName,
-      state.commercialName,
-      state.brandName,
-      state.nickName,
-      ...state.emails,
-      ...state.phoneNumbers
-    ]);
-    if (status == FormzStatus.valid) {
-      emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      if (state.isEdit) {
-        await _updateCurrentInstitution(state.id!);
-      } else {
-        await _addNewInstitution();
+  VoidCallback? onStepContinue() {
+    return _onStep<VoidCallback?>(step0: () {
+      if (state.officialName.valid && state.nickName.valid) {
+        return () => emit(state.copyWith(step: 1));
       }
-    } else {
-      _emitNewDirtyData();
+      return null;
+    }, step1: () {
+      if (_isEmailsPhoneNumbersValid()) {
+        return () => emit(state.copyWith(step: 2));
+      }
+      return null;
+    }, step2: () {
+      if (state.address.valid &&
+          _isEmailsPhoneNumbersValid() &&
+          state.officialName.valid &&
+          state.nickName.valid) {
+        return _submit;
+      }
+      return null;
+    });
+  }
+
+  Future<void> _submit() async {
+    emit(state.copyWith(status: AddInstitutionStatus.loading));
+    final either = await _addInstitution(
+        params: AddInstitutionParams(
+      officialName: state.officialName.value,
+      nickName: state.nickName.value,
+      emails: state.emails.map((e) => e.value).toList(),
+      phoneNumbers: state.phoneNumbers.map((e) => e.value).toList(),
+      addressDetails: state.address.value!,
+    ));
+
+    either.fold((failure) {
+      failure as ServerFailure;
+      emit(state.copyWith(
+        status: AddInstitutionStatus.failure,
+        errorMessage: failure.message,
+      ));
+    }, (institution) {
+      emit(state.copyWith(
+        status: AddInstitutionStatus.success,
+        addedInstitution: institution,
+      ));
+    });
+  }
+
+  void previousStep() {
+    if (state.step > 0) {
+      emit(state.copyWith(step: state.step - 1));
     }
   }
 
-  void _emitNewDirtyData() {
-    emit(
-      AddInstitutionState(
-          officialName: RequiredString.dirty(state.officialName.value),
-          brandName: RequiredString.dirty(state.brandName.value),
-          commercialName: RequiredString.dirty(state.commercialName.value),
-          nickName: RequiredString.dirty(state.nickName.value),
-          emails:
-              List.of(state.emails.map((email) => Email.dirty(email.value))),
-          phoneNumbers: List.of(state.phoneNumbers
-              .map((phoneNumber) => PhoneNumber.dirty(phoneNumber.value)))),
-    );
+  T _onStep<T>({
+    required T Function() step0,
+    required T Function() step1,
+    required T Function() step2,
+  }) {
+    if (state.step == 0) {
+      return step0();
+    } else if (state.step == 1) {
+      return step1();
+    } else {
+      return step2();
+    }
   }
 
-  Future<void> _addNewInstitution() async {
-    final either = await _addInstitution(
-        params: AddInstitutionParams(state.toInstitution()));
-    either.fold(
-      (failure) {
-        if (failure is ServerFailure) {
-          emit(
-            state.copyWith(
-              status: FormzStatus.submissionFailure,
-              errorMessage: failure.message,
-            ),
-          );
-        }
-      },
-      (institution) {
-        emit(state.copyWith(
-            status: FormzStatus.submissionSuccess, institution: institution));
-      },
-    );
+  bool _isEmailsPhoneNumbersValid() {
+    final emailsState = Formz.validate(state.emails);
+    final phoneNumbersState = Formz.validate(state.phoneNumbers);
+    return emailsState == FormzStatus.valid &&
+        phoneNumbersState == FormzStatus.valid;
   }
 
-  Future<void> _updateCurrentInstitution(String id) async {
-    final either = await _updateInstitution(
-        params: UpdateInstitutionParams(state.toInstitution(id)));
-    either.fold(
-      (failure) {
-        if (failure is ServerFailure) {
-          emit(
-            state.copyWith(
-              status: FormzStatus.submissionFailure,
-              errorMessage: failure.message,
-            ),
-          );
-        }
-      },
-      (institution) {
-        emit(state.copyWith(
-          status: FormzStatus.submissionSuccess,
-          institution: institution,
-        ));
-      },
-    );
+  void onStepTapped(int value) {
+    emit(state.copyWith(step: value));
+  }
+
+  bool isActive(int index) {
+    return index <= state.step;
+  }
+
+  void officialNameChanged(String value) {
+    final newName = state.officialName.dirty(value);
+    emit(state.copyWith(officialName: newName));
+  }
+
+  void nickNameChanged(String value) {
+    final newName = state.nickName.dirty(value);
+    emit(state.copyWith(nickName: newName));
+  }
+
+  void addEmail(Email email) {
+    emit(state.copyWith(emails: List.of(state.emails)..add(email)));
+  }
+
+  void addPhoneNumber(PhoneNumber phoneNumber) {
+    emit(state.copyWith(
+        phoneNumbers: List.of(state.phoneNumbers)..add(phoneNumber)));
+  }
+
+  void addressChanged(AddressDetails addressDetails) {
+    emit(state.copyWith(address: RequiredObject.dirty(addressDetails)));
   }
 }

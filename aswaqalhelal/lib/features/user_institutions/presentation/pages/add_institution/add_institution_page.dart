@@ -1,17 +1,27 @@
-import 'package:dotted_border/dotted_border.dart';
+import 'package:aswaqalhelal/features/user_institutions/presentation/pages/add_institution/widgets/test.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/form_inputs/required_string.dart';
+import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
+import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
+import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/packages/formz.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../domain/entities/institution.dart';
+import '../../../../address_suggestions/domain/entities/entities.dart';
+import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
+import '../../../../address_suggestions/presentation/cubit/cubit/location_widget_cubit.dart';
+import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
+import '../../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
-import '../../cubit/institutions_cubit/institutions_cubit.dart';
+
+part 'widgets/address_step_widget.dart';
+part 'widgets/contacts_dialog.dart';
+part 'widgets/contacts_step_widget.dart';
+part 'widgets/name_step_widget.dart';
+part 'widgets/stepper_buttons.dart';
 
 class AddInstitutionPage extends StatelessWidget {
   const AddInstitutionPage({Key? key}) : super(key: key);
@@ -19,238 +29,93 @@ class AddInstitutionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddInstitutionCubit>();
-    final institution =
-        ModalRoute.of(context)?.settings.arguments as Institution?;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Add institution'),
+        title: const Text('Add Institution'),
       ),
-      body: BlocListener<AddInstitutionCubit, AddInstitutionState>(
+      bottomSheet: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(16),
+        child: const StepperButtons(),
+      ),
+      body: BlocConsumer<AddInstitutionCubit, AddInstitutionState>(
+        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          if (state.status == FormzStatus.submissionFailure) {
-            EasyLoading.dismiss();
-            showErrorSnackBar(context, state.errorMessage!);
-          } else if (state.status == FormzStatus.submissionSuccess) {
-            EasyLoading.dismiss();
-            state.isEdit
-                ? context
-                    .read<UserInstitutionsCubit>()
-                    .updateInstitution(state.institution!)
-                : context
-                    .read<UserInstitutionsCubit>()
-                    .addInstitution(state.institution!);
-            Navigator.of(context).pop();
-          } else if (state.status == FormzStatus.submissionInProgress) {
-            EasyLoading.show(
-                status: 'loading',
+          switch (state.status) {
+            case AddInstitutionStatus.initial:
+              break;
+            case AddInstitutionStatus.loading:
+              EasyLoading.show(
                 indicator: const FittedBox(
                   child: SpinKitRipple(
                     duration: Duration(milliseconds: 1200),
                     color: Colors.white,
                   ),
-                ));
+                ),
+                dismissOnTap: false,
+              );
+              break;
+            case AddInstitutionStatus.failure:
+              EasyLoading.dismiss();
+              showErrorSnackBar(context, state.errorMessage!);
+              break;
+            case AddInstitutionStatus.success:
+              EasyLoading.dismiss();
+              Navigator.of(context).pop(state.addedInstitution);
+              break;
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.all(8),
-          children: [
-            BlocBuilder<AddInstitutionCubit, AddInstitutionState>(
-              buildWhen: (previous, current) =>
-                  previous.brandName != current.brandName ||
-                  previous.commercialName != current.commercialName ||
-                  previous.nickName != current.nickName ||
-                  previous.officialName != current.officialName,
-              builder: (context, state) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Basic information',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      initialValue: institution?.officialName,
-                      onChanged: cubit.officialNameChanged,
-                      decoration: InputDecoration(
-                          labelText: 'Official name',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          errorText: state.officialName.validationMessage),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      initialValue: institution?.commercialName,
-                      onChanged: cubit.commercialNameChanged,
-                      decoration: InputDecoration(
-                          labelText: 'Commercial name',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          errorText: state.commercialName.validationMessage),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      initialValue: institution?.brandName,
-                      onChanged: cubit.brandNameChanged,
-                      decoration: InputDecoration(
-                        labelText: 'Brand name',
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        errorText: state.brandName.validationMessage,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      initialValue: institution?.nickname,
-                      onChanged: cubit.nickNameChanged,
-                      decoration: InputDecoration(
-                        labelText: 'Nick name',
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        errorText: state.nickName.validationMessage,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Contact information',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                'Emails',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-            BlocBuilder<AddInstitutionCubit, AddInstitutionState>(
-              buildWhen: (previous, current) =>
-                  previous.emails != current.emails,
-              builder: (context, state) {
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.emails.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      initialValue: index < (institution?.emails.length ?? 0)
-                          ? institution?.emails[index]
-                          : null,
-                      onChanged: (value) {
-                        cubit.emailChanged(index, value);
-                      },
-                      decoration: InputDecoration(
-                        errorText: state.emails[index].validationMessage,
-                        suffixIcon: index == 0
-                            ? null
-                            : DeleteIconButton(
-                                onPressed: () {
-                                  cubit.deleteEmail(index);
-                                },
-                              ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            DottedPlusButton(onPressed: cubit.addNewEmail),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                'Phone numbers',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-            BlocBuilder<AddInstitutionCubit, AddInstitutionState>(
-              buildWhen: (previous, current) =>
-                  previous.phoneNumbers != current.phoneNumbers,
-              builder: (context, state) {
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.phoneNumbers.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InternationalPhoneTextField(
-                      initialNumber:
-                          index < (institution?.phoneNumbers.length ?? 0)
-                              ? institution?.phoneNumbers[index]
-                              : null,
-                      errorText: state.phoneNumbers[index].validationMessage,
-                      onInputChanged: (phoneNumber) {
-                        cubit.phoneNumberChanged(
-                            index, phoneNumber.phoneNumber ?? '');
-                      },
-                      countries: const ['EG'],
-                      suffixIcon: index == 0
-                          ? null
-                          : DeleteIconButton(
-                              onPressed: () {
-                                cubit.deletePhoneNumber(index);
+        buildWhen: (p, c) => p.step != c.step,
+        builder: (context, state) {
+          return Column(
+            children: [
+              Flexible(
+                child: Theme(
+                  data: ThemeData(
+                      primaryColor: Theme.of(context).primaryColor,
+                      colorScheme: Theme.of(context)
+                          .colorScheme
+                          .copyWith(primary: Theme.of(context).primaryColor),
+                      inputDecorationTheme: const InputDecorationTheme(
+                          border: OutlineInputBorder())),
+                  child: Stepper(
+                      margin: EdgeInsets.zero,
+                      physics: const ClampingScrollPhysics(),
+                      controlsBuilder: (d, ds) => const SizedBox.shrink(),
+                      elevation: 0,
+                      onStepTapped: cubit.onStepTapped,
+                      currentStep: state.step,
+                      type: StepperType.horizontal,
+                      steps: [
+                        Step(
+                          title: const Text('Name'),
+                          isActive: cubit.isActive(0),
+                          content: _NameStepWidget(cubit: cubit),
+                        ),
+                        Step(
+                            title: const Text('Contacts'),
+                            isActive: cubit.isActive(1),
+                            content: const _ContactsStepWidget()),
+                        Step(
+                            title: const Text('Address'),
+                            isActive: cubit.isActive(2),
+                            content: AddUpdateAddressWidget(
+                              onAddressDetailsChanged: (addressDetails) {
+                                context
+                                    .read<AddInstitutionCubit>()
+                                    .addressChanged(addressDetails);
                               },
+                            )
+
+                            //const _AddressStepWidget(),
                             ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            DottedPlusButton(onPressed: cubit.addNewPhoneNumber),
-            const SizedBox(height: 16),
-            ElevatedButton(onPressed: cubit.submit, child: const Text('Submit'))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DeleteIconButton extends StatelessWidget {
-  const DeleteIconButton({Key? key, required this.onPressed}) : super(key: key);
-  final VoidCallback onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: const Icon(
-        Icons.delete,
-        color: Colors.red,
-      ),
-    );
-  }
-}
-
-class DottedPlusButton extends StatelessWidget {
-  const DottedPlusButton({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final VoidCallback onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0) +
-          const EdgeInsets.only(top: 8),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: DottedBorder(
-          borderType: BorderType.Rect,
-          dashPattern: const [8, 4],
-          padding: const EdgeInsets.all(8.0),
-          strokeWidth: 2,
-          color: Colors.black38,
-          strokeCap: StrokeCap.butt,
-          child: const Center(
-            child: Icon(
-              Icons.add,
-              color: Colors.black38,
-            ),
-          ),
-        ),
+                      ]),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

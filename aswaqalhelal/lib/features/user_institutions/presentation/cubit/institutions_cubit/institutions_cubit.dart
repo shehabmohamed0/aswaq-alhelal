@@ -9,7 +9,7 @@ import '../../../domain/usecases/get_user_institutions.dart';
 part 'institutions_state.dart';
 
 @injectable
-class UserInstitutionsCubit extends Cubit<InstitutionsState> {
+class UserInstitutionsCubit extends Cubit<UserInstitutionsState> {
   UserInstitutionsCubit(this._getInstitutions) : super(InstitutionsInitial());
   final GetUserInstitutions _getInstitutions;
 

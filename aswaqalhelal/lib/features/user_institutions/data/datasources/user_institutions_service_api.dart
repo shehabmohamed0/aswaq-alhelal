@@ -36,50 +36,39 @@ class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
   Future<InstitutionModel> addInstitution(AddInstitutionParams params) async {
     final uid = _auth.currentUser!.uid;
     final collection = _firestore.collection(FirestorePath.institutions());
-    final newDoc = await collection.add({
-      'userId': uid,
-      'officialName': params.institution.officialName,
-      'commercialName': params.institution.commercialName,
-      'brandName': params.institution.brandName,
-      'nickname': params.institution.nickname,
-      'emails': params.institution.emails,
-      'phoneNumbers': params.institution.phoneNumbers,
-      'creationTime': FieldValue.serverTimestamp()
-    });
-    final institutionModel = InstitutionModel(
-        id: newDoc.id,
-        userId: params.institution.userId,
-        officialName: params.institution.officialName,
-        commercialName: params.institution.commercialName,
-        brandName: params.institution.brandName,
-        nickname: params.institution.nickname,
-        emails: params.institution.emails,
-        phoneNumbers: params.institution.phoneNumbers);
-    return institutionModel;
+    final newDoc = collection.doc();
+    final newModel = params.toModel(newDoc.id, uid);
+    final data = newModel.toJson();
+    data['creationTime'] = FieldValue.serverTimestamp();
+    await newDoc.set(data);
+    return newModel;
   }
 
   @override
   updateInstitution(UpdateInstitutionParams params) async {
     final doc =
         _firestore.doc(FirestorePath.institution(params.institution.id));
-    await doc.update({
-      'officialName': params.institution.officialName,
-      'commercialName': params.institution.commercialName,
-      'brandName': params.institution.brandName,
-      'nickname': params.institution.nickname,
-      'emails': params.institution.emails,
-      'phoneNumbers': params.institution.phoneNumbers,
-    });
-    final institutionModel = InstitutionModel(
-        id: params.institution.id,
-        userId: params.institution.userId,
-        officialName: params.institution.officialName,
-        commercialName: params.institution.commercialName,
-        brandName: params.institution.brandName,
-        nickname: params.institution.nickname,
-        emails: params.institution.emails,
-        phoneNumbers: params.institution.phoneNumbers);
-    return institutionModel;
+    // TODO:
+    throw UnimplementedError();
+    //   await doc.update({
+    //     'officialName': params.institution.officialName,
+    //     'commercialName': params.institution.commercialName,
+    //     'brandName': params.institution.brandName,
+    //     'nickname': params.institution.nickName,
+    //     'emails': params.institution.emails,
+    //     'phoneNumbers': params.institution.phoneNumbers,
+    //   });
+    //   final institutionModel = InstitutionModel(
+    //       id: params.institution.id,
+    //       userId: params.institution.userId,
+    //       officialName: params.institution.officialName,
+    //       commercialName: params.institution.commercialName,
+    //       brandName: params.institution.brandName,
+    //       nickName: params.institution.nickName,
+    //       emails: params.institution.emails,
+    //       phoneNumbers: params.institution.phoneNumbers);
+    //   return institutionModel;
+    // }
   }
 }
 

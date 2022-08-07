@@ -24,4 +24,5 @@ class InstitutionsCubit extends Cubit<InstitutionsState> {
       emit(InstitutionsState.loaded(institutions: institutions));
     });
   }
+  
 }
