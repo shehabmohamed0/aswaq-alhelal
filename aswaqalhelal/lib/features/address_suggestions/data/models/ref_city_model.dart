@@ -4,18 +4,19 @@ import 'package:root_package/packages/cloud_firestore.dart';
 import '../../domain/entities/ref_city.dart';
 
 part 'ref_city_model.g.dart';
+
 @JsonSerializable()
 class RefCityModel extends RefCity {
-  const RefCityModel(
+   RefCityModel(
       {required String id,
       required String country,
       required String governate,
-      required String city})
+      required String name})
       : super(
           id: id,
           country: country,
           governate: governate,
-          city: city,
+          name: name,
         );
 
   factory RefCityModel.fromFirestore(
@@ -28,7 +29,7 @@ class RefCityModel extends RefCity {
         id: id,
         country: country,
         governate: governate,
-        city: city,
+        name: name,
       );
   factory RefCityModel.fromJson(Map<String, dynamic> json) =>
       _$RefCityModelFromJson(json);

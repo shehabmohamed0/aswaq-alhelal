@@ -8,8 +8,8 @@ import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../cubit/institutions_cubit/institutions_cubit.dart';
 import '../../widgets/institutions_grid_view.dart';
 
-class InstitutionsPage extends StatelessWidget {
-  const InstitutionsPage({Key? key}) : super(key: key);
+class UserInstitutionsPage extends StatelessWidget {
+  const UserInstitutionsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +81,10 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
         body: InstitutionsGridView(
           institutions: state.institutions,
           userId: user.id,
+          onPressed: (institution) {
+            Navigator.pushNamed(context, Routes.ownerInstitution,
+                arguments: institution);
+          },
         ));
   }
 }

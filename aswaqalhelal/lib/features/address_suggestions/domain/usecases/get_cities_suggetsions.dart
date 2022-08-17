@@ -3,13 +3,13 @@ import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/usecase/usecase.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../core/failures/address_suggestion/get_cities_suggestions_params.dart';
+import '../../../../core/params/address_suggestion/params.dart';
 import '../entities/ref_city.dart';
 import '../repositories/address_suggestions_repository.dart';
 
 @LazySingleton()
 class GetCitiesSuggestions
-    extends UseCase<List<RefCity>, GetCitiesSuggestionsParams> {
+    extends UseCase<List<RefCity>, GetCitiesSuggestionsParams> implements GetRefAddressParams{
   final AddressSuggestionsRepository _repository;
 
   GetCitiesSuggestions(this._repository);

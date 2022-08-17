@@ -2,12 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:geo_logic/core/failures/location_failure.dart';
-import 'package:geo_logic/core/params/addresses/delete_address_params.dart';
-import 'package:geo_logic/features/domain/entities/address.dart';
-import 'package:geo_logic/features/domain/entities/country.dart';
-import 'package:geo_logic/features/domain/entities/geo_point.dart';
-import 'package:geo_logic/features/domain/usecases/usecases.dart';
 import 'package:meta/meta.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/required_object.dart';

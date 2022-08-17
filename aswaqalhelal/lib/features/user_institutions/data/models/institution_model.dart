@@ -1,9 +1,8 @@
-import 'package:geo_logic/features/data/models/address_model.dart';
-import 'package:geo_logic/features/domain/entities/address.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 
+import '../../../address/data/models/address_model.dart';
 import '../../domain/entities/institution.dart';
 
 part 'institution_model.g.dart';

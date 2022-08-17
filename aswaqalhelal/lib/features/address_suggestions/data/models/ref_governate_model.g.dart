@@ -10,12 +10,12 @@ RefGovernateModel _$RefGovernateModelFromJson(Map<String, dynamic> json) =>
     RefGovernateModel(
       id: json['id'] as String? ?? '',
       country: json['country'] as String,
-      governate: json['governate'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$RefGovernateModelToJson(RefGovernateModel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'country': instance.country,
-      'governate': instance.governate,
     };

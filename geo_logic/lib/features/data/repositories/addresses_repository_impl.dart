@@ -5,7 +5,7 @@ import 'package:root_package/core/services/network_info.dart';
 import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../core/failures/location_failure.dart';
+import '../../../core/failures/address/location_failure.dart';
 import '../../../../core/params/addresses/add_address_params.dart';
 import '../../../../core/params/addresses/delete_address_params.dart';
 import '../../../../core/params/addresses/update_address_params.dart';

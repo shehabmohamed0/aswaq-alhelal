@@ -8,6 +8,7 @@ enum AutoSuggestionState {
   loaded,
   error,
   emptyText,
+  emptyShowNoSuggestions
 }
 
 class AutoSuggestTextField<T> extends StatefulWidget {
@@ -89,10 +90,13 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
         width: size.width,
         child: CompositedTransformFollower(
           link: layerLink,
-          showWhenUnlinked: true,
+          showWhenUnlinked: false,
           offset: Offset(0, size.height + 8),
           child: Material(
-              elevation: 8, color: Colors.white, child: buildOverlay()),
+            elevation: 8,
+            color: Colors.white,
+            child: buildOverlay(),
+          ),
         ),
       ),
     );
@@ -144,6 +148,10 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
         return widget.errorWidget ?? const ListTile(title: Text('Error'));
       case AutoSuggestionState.emptyText:
         return const SizedBox.shrink();
+      case AutoSuggestionState.emptyShowNoSuggestions:
+        return ListTile(
+          title: Text('No Suggestions'),
+        );
     }
   }
 

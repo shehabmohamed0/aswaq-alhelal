@@ -45,6 +45,9 @@ class InstitutionsSliverWidget extends StatelessWidget {
                           institution: state.institutions[index],
                           isUserInstitution:
                               user.id == state.institutions[index].id,
+                              onPressed: (){
+                                //TODO:
+                              },
                         ),
                     childCount: state.institutions.length),
               ),

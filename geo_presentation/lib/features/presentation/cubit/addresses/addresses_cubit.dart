@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geo_logic/features/domain/entities/address.dart';
-import 'package:geo_logic/features/domain/usecases/get_addresses.dart';
 import 'package:geo_logic/features/domain/usecases/usecases.dart';
 import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/injectable.dart';

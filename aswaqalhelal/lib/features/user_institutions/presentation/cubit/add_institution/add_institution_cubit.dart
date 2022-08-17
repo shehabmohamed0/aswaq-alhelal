@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/core/params/add_institution_params.dart';
 import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:aswaqalhelal/features/user_institutions/domain/usecases/add_institution.dart';
 import 'package:bloc/bloc.dart';
@@ -11,6 +10,7 @@ import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../address_suggestions/domain/entities/entities.dart';
 
 part 'add_institution_state.dart';

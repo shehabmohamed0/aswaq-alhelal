@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:geo_logic/l10n/l10n.dart';
-import 'package:geo_presentation/l10n/l10n.dart';
-import 'package:geo_presentation/locator/locator.dart';
 import 'package:root_package/core/locale/locale_cubit.dart';
 import 'package:root_package/core/resources/theme_manager.dart';
 import 'package:root_package/l10n/l10n.dart';
@@ -28,7 +25,7 @@ Future<void> main() {
       await RootPackageLocator.configureDependencies();
       configureDependencies(locator);
       UsersPresentation.configureDependencies(locator);
-      GeoPresentation.configureDependencies(locator);
+      // GeoPresentation.configureDependencies(locator);
       runApp(const App());
     },
     blocObserver: AppBlocObserver(),
@@ -77,8 +74,8 @@ class AppView extends StatelessWidget {
             RootPackageLocalizations.delegate,
             UsersLogicLocalizations.delegate,
             UsersPresentationLocalizations.delegate,
-            GeoLogicLocalizations.delegate,
-            GeoPresentationLocalizations.delegate,
+            // GeoLogicLocalizations.delegate,
+            // GeoPresentationLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,

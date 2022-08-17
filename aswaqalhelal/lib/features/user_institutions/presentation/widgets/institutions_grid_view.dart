@@ -4,13 +4,15 @@ import '../../domain/entities/institution.dart';
 import 'institution_widget.dart';
 
 class InstitutionsGridView extends StatelessWidget {
-  const InstitutionsGridView({
-    Key? key,
-    required this.institutions,
-    required this.userId,
-  }) : super(key: key);
+  const InstitutionsGridView(
+      {Key? key,
+      required this.institutions,
+      required this.userId,
+      required this.onPressed})
+      : super(key: key);
   final List<Institution> institutions;
   final String userId;
+  final void Function(Institution institution) onPressed;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -20,6 +22,9 @@ class InstitutionsGridView extends StatelessWidget {
       itemBuilder: (context, index) => InstitutionWidget(
         institution: institutions[index],
         isUserInstitution: institutions[index].id == userId,
+        onPressed: () {
+          onPressed(institutions[index]);
+        },
       ),
       itemCount: institutions.length,
     );

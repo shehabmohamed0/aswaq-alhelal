@@ -1,6 +1,6 @@
 import 'package:root_package/root_package.dart';
 
-import '../../../../core/failures/address_suggestion/params.dart';
+import '../../../../core/params/address_suggestion/params.dart';
 import '../entities/entities.dart';
 
 abstract class AddressSuggestionsRepository {

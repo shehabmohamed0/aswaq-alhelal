@@ -7,9 +7,13 @@ part 'ref_governate_model.g.dart';
 
 @JsonSerializable()
 class RefGovernateModel extends RefGovernate {
-  const RefGovernateModel(
-      {required String id, required String country, required String governate})
-      : super(id: id, country: country, governate: governate);
+  RefGovernateModel(
+      {required String id, required String country, required String name})
+      : super(
+          id: id,
+          country: country,
+          name: name,
+        );
 
   factory RefGovernateModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -20,7 +24,7 @@ class RefGovernateModel extends RefGovernate {
   RefGovernateModel _copyWithId(String id) => RefGovernateModel(
         id: id,
         country: country,
-        governate: governate,
+        name: name,
       );
   factory RefGovernateModel.fromJson(Map<String, dynamic> json) =>
       _$RefGovernateModelFromJson(json);

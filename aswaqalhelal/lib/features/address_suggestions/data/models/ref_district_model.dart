@@ -7,18 +7,18 @@ part 'ref_district_model.g.dart';
 
 @JsonSerializable()
 class RefNeighborhoodModel extends RefNeighborhood {
-  const RefNeighborhoodModel(
+   RefNeighborhoodModel(
       {required String id,
       required String country,
       required String governate,
       required String city,
-      required String neighborhood})
+      required String name})
       : super(
             id: id,
             country: country,
             governate: governate,
             city: city,
-            neighborhood: neighborhood);
+            name: name);
 
   factory RefNeighborhoodModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -31,7 +31,7 @@ class RefNeighborhoodModel extends RefNeighborhood {
       country: country,
       governate: governate,
       city: city,
-      neighborhood: neighborhood);
+      name: name);
   factory RefNeighborhoodModel.fromJson(Map<String, dynamic> json) =>
       _$RefNeighborhoodModelFromJson(json);
 

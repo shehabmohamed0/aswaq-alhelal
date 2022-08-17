@@ -26,11 +26,17 @@ class Routes {
 
   static const institutions = '/institutions';
   static const addInstitution = '/addInstitution';
+
+  static const ownerInstitution = '/ownerInstitution';
   
   
   static const institution = '/institution';
   static const institutionItems = '/institutionItems';
   static const addItem = '/addItem';
+
+
+  static const distributionAreas = '/distributionAreas';
+  static const addDistributionArea = '/addDistributionArea';
 
 
 

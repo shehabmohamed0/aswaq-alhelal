@@ -1,20 +1,20 @@
 import 'dart:async';
 
-import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/add_new_city.dart';
-import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/add_new_governate.dart';
-import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/add_new_neighborhood.dart';
 import 'package:bloc/bloc.dart';
-import 'package:geo_logic/features/domain/entities/geo_point.dart';
 import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/stream_transform.dart';
 
-import '../../../../core/failures/address_suggestion/params.dart';
+import '../../../../core/params/address_suggestion/params.dart';
+import '../../../address/domain/entities/geo_point.dart';
 import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_city.dart';
 import '../../domain/entities/ref_district.dart';
 import '../../domain/entities/ref_governate.dart';
+import '../../domain/usecases/add_new_city.dart';
+import '../../domain/usecases/add_new_governate.dart';
+import '../../domain/usecases/add_new_neighborhood.dart';
 import '../../domain/usecases/get_cities_suggetsions.dart';
 import '../../domain/usecases/get_districts_suggestions.dart';
 import '../../domain/usecases/get_governates_suggestions.dart';
@@ -211,7 +211,7 @@ class AddressSuggestionsBloc
       final failureOrGovernates = await _getCitiesSuggestions(
           params: GetCitiesSuggestionsParams(
         country: 'egypt',
-        governate: state.governateOrNull.fold(() => null, (a) => a)!.governate,
+        governate: state.governateOrNull.toNullable()!.name,
         searchText: event.searchText,
       ));
 
@@ -239,8 +239,8 @@ class AddressSuggestionsBloc
       final failureOrGovernates = await _getNeighborhoodsSuggestions(
           params: GetNeighborhoodsSuggestionsParams(
         country: 'egypt',
-        governate: state.governateOrNull.fold(() => null, (a) => a)!.governate,
-        city: state.cityOrNull.fold(() => null, (a) => a)!.city,
+        governate: state.governateOrNull.toNullable()!.name,
+        city: state.cityOrNull.toNullable()!.name,
         searchText: event.searchText,
       ));
 

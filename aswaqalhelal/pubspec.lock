@@ -571,6 +571,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.2"
   flutter_svg:
     dependency: transitive
     description:
@@ -637,20 +644,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
-  geo_logic:
-    dependency: "direct main"
-    description:
-      path: "../geo_logic"
-      relative: true
-    source: path
-    version: "0.0.1"
-  geo_presentation:
-    dependency: "direct main"
-    description:
-      path: "../geo_presentation"
-      relative: true
-    source: path
-    version: "0.0.1"
   geolocator:
     dependency: transitive
     description:

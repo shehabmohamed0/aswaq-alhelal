@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geo_logic/features/domain/entities/geo_point.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../address/domain/entities/geo_point.dart';
 import '../cubit/cubit/location_widget_cubit.dart';
 
 class LocationWidget extends StatelessWidget {

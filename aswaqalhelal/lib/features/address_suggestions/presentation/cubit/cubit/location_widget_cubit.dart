@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:geo_logic/core/failures/location_failure.dart';
-import 'package:geo_logic/features/domain/entities/geo_point.dart';
-import 'package:geo_logic/features/domain/usecases/get_current_location.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/app_settings.dart';
 import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/injectable.dart';
+
+import '../../../../../core/failures/address/location_failure.dart';
+import '../../../../address/domain/entities/geo_point.dart';
+import '../../../../address/domain/usecases/get_current_location.dart';
 
 part 'location_widget_state.dart';
 

@@ -1,20 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
 
-class RefGovernate extends Equatable {
-  @JsonKey(defaultValue: '')
-  final String id;
+import 'ref_address.dart';
+
+class RefGovernate extends RefAddress {
   @JsonKey()
   final String country;
-  @JsonKey()
-  final String governate;
 
-  const RefGovernate({
-    required this.id,
+  RefGovernate({
+    required String id,
     required this.country,
-    required this.governate,
-  });
+    required String name,
+  }) : super(id: id, name: name);
 
   @override
-  List<Object?> get props => [id, country, governate];
+  List<Object?> get props => [id, country, name];
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:geo_logic/features/domain/entities/geo_point.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 
+import '../../../../../address/domain/entities/geo_point.dart';
 import '../../../../../address_suggestions/domain/entities/ref_city.dart';
 import '../../../../../address_suggestions/domain/entities/ref_district.dart';
 import '../../../../../address_suggestions/domain/entities/ref_governate.dart';
-import '../../../../../address_suggestions/presentation/DTOs/address_details.dart';
+import '../../../../../address/presentation/DTOs/address_details.dart';
 import '../../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../../address_suggestions/presentation/cubit/cubit/location_widget_cubit.dart';
 import '../../../../../address_suggestions/presentation/widgets/location_widget.dart';
@@ -132,10 +132,10 @@ class AddUpdateAddressWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(governate.governate),
+                      title: Text(governate.name),
                     ),
                     onSuggestionSelected: (governate) {
-                      governateController.text = governate.governate;
+                      governateController.text = governate.name;
                       bloc.add(
                           AddressSuggestionsEvent.selectGovernate(governate));
                     },
@@ -176,10 +176,10 @@ class AddUpdateAddressWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(city.city),
+                      title: Text(city.name),
                     ),
                     onSuggestionSelected: (city) {
-                      cityController.text = city.city;
+                      cityController.text = city.name;
                       bloc.add(AddressSuggestionsEvent.selectCity(city));
                     },
                     onEmptyWidgetClicked: () {
@@ -221,10 +221,10 @@ class AddUpdateAddressWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(neighborhood.neighborhood),
+                      title: Text(neighborhood.name),
                     ),
                     onSuggestionSelected: (neighborhood) {
-                      neighborhoodController.text = neighborhood.neighborhood;
+                      neighborhoodController.text = neighborhood.name;
                       bloc.add(AddressSuggestionsEvent.selectNeighborhood(
                           neighborhood));
                     },

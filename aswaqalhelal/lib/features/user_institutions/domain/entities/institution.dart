@@ -1,7 +1,8 @@
-import 'package:geo_logic/features/domain/entities/address.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/equatable.dart';
+
+import '../../../address/domain/entities/address.dart';
 
 class Institution extends Equatable {
   @JsonKey(defaultValue: '')

@@ -115,10 +115,10 @@ class _AddressStepWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(governate.governate),
+                      title: Text(governate.name),
                     ),
                     onSuggestionSelected: (governate) {
-                      governateController.text = governate.governate;
+                      governateController.text = governate.name;
                       bloc.add(
                           AddressSuggestionsEvent.selectGovernate(governate));
                     },
@@ -159,10 +159,10 @@ class _AddressStepWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(city.city),
+                      title: Text(city.name),
                     ),
                     onSuggestionSelected: (city) {
-                      cityController.text = city.city;
+                      cityController.text = city.name;
                       bloc.add(AddressSuggestionsEvent.selectCity(city));
                     },
                     onEmptyWidgetClicked: () {
@@ -204,10 +204,10 @@ class _AddressStepWidget extends HookWidget {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      title: Text(neighborhood.neighborhood),
+                      title: Text(neighborhood.name),
                     ),
                     onSuggestionSelected: (neighborhood) {
-                      neighborhoodController.text = neighborhood.neighborhood;
+                      neighborhoodController.text = neighborhood.name;
                       bloc.add(AddressSuggestionsEvent.selectNeighborhood(
                           neighborhood));
                     },

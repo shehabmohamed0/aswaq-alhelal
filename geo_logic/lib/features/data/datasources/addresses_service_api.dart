@@ -8,7 +8,6 @@ import '../../../../core/params/addresses/delete_address_params.dart';
 import '../../../../core/params/addresses/update_address_params.dart';
 import '../models/address_model.dart';
 import '../models/country_model.dart';
-import '../models/geo_point_model.dart';
 
 abstract class AddressesServiceApi {
   Future<AddressModel> addAddress(AddAddressParams params);
@@ -28,26 +27,13 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
     final user = firebaseAuth.currentUser!;
     final addressesCollection =
         firestore.collection(FirebasePath.userAddresses(user.uid));
+    final ref = addressesCollection.doc();
+    final model = params.toModel(ref.id);
+    final modelJson = model.toJson();
+    modelJson['saveTime'] = FieldValue.serverTimestamp();
+    await ref.set(modelJson);
 
-    final ref = await addressesCollection.add({
-      'country': params.country,
-      'governate': params.governate,
-      'city': params.city,
-      'neighborhood': params.neighborhood,
-      'description': params.description,
-      'geoPoint': {'lat': params.geoPoint.lat, 'long': params.geoPoint.long},
-      'saveTime': FieldValue.serverTimestamp()
-    });
-    final address = AddressModel(
-        id: ref.id,
-        country: params.country,
-        governate: params.governate,
-        city: params.city,
-        neighborhood: params.neighborhood,
-        description: params.description,
-        geoPointModel: GeoPointModel(
-            lat: params.geoPoint.lat, long: params.geoPoint.long));
-    return address;
+    return model;
   }
 
   @override
@@ -73,16 +59,13 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   @override
   Future<AddressModel> updateAddress(UpdateAddressParams params) async {
     final user = firebaseAuth.currentUser!;
-    final addressDoc = firestore.doc(FirebasePath.userAddress(user.uid, params.id));
-    await addressDoc.update({
-      'country': params.country,
-      'governate': params.governate,
-      'city': params.city,
-      'neighborhood': params.neighborhood,
-      'description': params.description,
-      'geoPoint': {'lat': params.geoPoint.lat, 'long': params.geoPoint.long},
-    });
-    return params.toAddressModel;
+    final addressDoc =
+        firestore.doc(FirebasePath.userAddress(user.uid, params.id));
+
+    final model = params.toModel;
+
+    await addressDoc.update(model.toJson());
+    return model;
   }
 
   @override

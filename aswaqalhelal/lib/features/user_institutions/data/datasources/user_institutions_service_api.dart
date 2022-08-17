@@ -2,7 +2,7 @@ import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../core/params/add_institution_params.dart';
+import '../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../core/params/update_institution_params.dart';
 import '../models/institution_model.dart';
 

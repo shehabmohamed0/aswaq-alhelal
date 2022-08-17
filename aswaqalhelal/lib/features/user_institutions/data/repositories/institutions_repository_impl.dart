@@ -1,7 +1,7 @@
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart';
 
-import '../../../../core/params/add_institution_params.dart';
+import '../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../core/params/update_institution_params.dart';
 import '../../domain/entities/institution.dart';
 import '../../domain/repositories/institutions_repository.dart';

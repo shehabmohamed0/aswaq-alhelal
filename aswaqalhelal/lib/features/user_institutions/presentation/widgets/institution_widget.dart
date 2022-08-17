@@ -9,12 +9,12 @@ class InstitutionWidget extends StatelessWidget {
     Key? key,
     required this.institution,
     required this.isUserInstitution,
-
-    
+    required this.onPressed,
   }) : super(key: key);
 
   final Institution institution;
   final bool isUserInstitution;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,10 +36,7 @@ class InstitutionWidget extends StatelessWidget {
           ]),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, Routes.institutionItems,
-              arguments: institution);
-        },
+        onTap: onPressed,
         child: Padding(
           padding: const EdgeInsets.all(4),
           child: Column(

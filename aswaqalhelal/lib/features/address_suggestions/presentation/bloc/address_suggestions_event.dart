@@ -15,10 +15,9 @@ class AddressSuggestionsEvent with _$AddressSuggestionsEvent {
   const factory AddressSuggestionsEvent.selectNeighborhood(
       RefNeighborhood neighborhood) = SelectNeighborhood;
   const factory AddressSuggestionsEvent.unSelectGovernate() = UnSelectGovernate;
-  const factory AddressSuggestionsEvent.unSelectCity() =
-      UnSelectCity;
-  const factory AddressSuggestionsEvent.unSelectNeighborhood(
-     ) = UnSelectNeighborhood;
+  const factory AddressSuggestionsEvent.unSelectCity() = UnSelectCity;
+  const factory AddressSuggestionsEvent.unSelectNeighborhood() =
+      UnSelectNeighborhood;
 
   const factory AddressSuggestionsEvent.addNewGovernate(String governate) =
       AddNewGovernateEvent;
