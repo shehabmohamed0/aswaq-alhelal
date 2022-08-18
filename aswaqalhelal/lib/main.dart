@@ -42,9 +42,11 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppBloc>(
+          lazy: false,
           create: (_) => locator(),
         ),
         BlocProvider<LocaleCubit>(
+          lazy:  false,
           create: (context) => locator()..init(),
         ),
       ],

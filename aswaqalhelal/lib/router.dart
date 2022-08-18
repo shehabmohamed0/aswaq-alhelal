@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/address/domain/entities/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/locator/locator.dart';
@@ -16,6 +17,13 @@ import 'package:users_presentation/features/settings/pages/phone_info/phone_info
 import 'package:users_presentation/features/settings/pages/settings/settings_page.dart';
 import 'package:users_presentation/features/settings/pages/update_email/update_email_page.dart';
 
+import 'features/address/domain/entities/geo_point.dart';
+import 'features/address/presentation/bloc/select_location_map/select_location_map_bloc.dart';
+import 'features/address/presentation/cubit/add_edit_address/add_edit_address_cubit.dart';
+import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
+import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
+import 'features/address/presentation/pages/addresses/addresses_page.dart';
+import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
@@ -121,43 +129,48 @@ class AppRouter {
             child: const CurrencyPage(),
           ),
         );
-      // case Routes.addresses:
-      //   return _getPageRoute(
-      //     arguments: settings.arguments,
-      //     routeName: settings.name,
-      //     builder: (context) => BlocProvider<AddressesCubit>(
-      //       create: (context) => locator()..getAddresses(),
-      //       child: const AddressesPage(),
-      //     ),
-      //   );
-      // case Routes.addAddresses:
-      //   return _getPageRoute(
-      //     arguments: settings.arguments,
-      //     routeName: settings.name,
-      //     builder: (context) => BlocProvider<UserAddressCubit>(
-      //       create: (context) => locator(),
-      //       child: AddEditAddressPage(
-      //         onAddSuccess: (a) {},
-      //         onEditSuccess: (e) {},
-      //       ),
-      //     ),
-      //   );
-      // case Routes.selectLocationMap:
-      //   final geoPoint = settings.arguments as GeoPoint?;
-      //   return _getPageRoute(
-      //     routeName: settings.name,
-      //     arguments: geoPoint,
-      //     builder: (context) => BlocProvider<SelectLocationMapBloc>(
-      //       create: (context) {
-      //         if (geoPoint != null) {
-      //           return locator()..add(InitLocation(geoPoint));
-      //         } else {
-      //           return locator();
-      //         }
-      //       },
-      //       child: const SelectLocationMapPage(),
-      //     ),
-      //   );
+      case Routes.addresses:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) => BlocProvider<AddressesCubit>(
+            create: (context) => locator()..getAddresses(),
+            child: const AddressesPage(),
+          ),
+        );
+      case Routes.addAddresses:
+        final address = settings.arguments as Address?;
+
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) => BlocProvider<AddEditAddressCubit>(
+            create: (context) {
+              if (address == null) {
+                return locator();
+              } else {
+                return locator()..initEdit(address);
+              }
+            },
+            child: const AddEditAddressPage(),
+          ),
+        );
+      case Routes.selectLocationMap:
+        final geoPoint = settings.arguments as GeoPoint?;
+        return _getPageRoute(
+          routeName: settings.name,
+          arguments: geoPoint,
+          builder: (context) => BlocProvider<SelectLocationMapBloc>(
+            create: (context) {
+              if (geoPoint != null) {
+                return locator()..add(InitLocation(geoPoint));
+              } else {
+                return locator();
+              }
+            },
+            child: const SelectLocationMapPage(),
+          ),
+        );
       case Routes.institutions:
         return _getPageRoute(
           arguments: settings.arguments,

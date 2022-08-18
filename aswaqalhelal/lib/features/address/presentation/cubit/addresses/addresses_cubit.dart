@@ -4,19 +4,16 @@ import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../domain/entities/address.dart';
-import '../../../domain/usecases/add_address.dart';
 import '../../../domain/usecases/get_addresses.dart';
-import '../../../domain/usecases/update_address.dart';
 
 part 'addresses_state.dart';
 
 @injectable
 class AddressesCubit extends Cubit<AddressesState> {
   final GetAddresses _getAddresses;
-  final AddAddress _addAddress;
-  final UpdateAddress _updateAddress;
-  AddressesCubit(this._getAddresses, this._addAddress, this._updateAddress)
-      : super(AddressesInitial());
+  AddressesCubit(
+    this._getAddresses,
+  ) : super(AddressesInitial());
 
   Future<void> getAddresses() async {
     emit(AddressesLoading());

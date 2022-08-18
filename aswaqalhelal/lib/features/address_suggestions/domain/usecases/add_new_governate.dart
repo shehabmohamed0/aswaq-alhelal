@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/interfaces.dart';
 import 'package:dartz/dartz.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/usecase/usecase.dart';
@@ -9,8 +8,7 @@ import '../entities/ref_governate.dart';
 import '../repositories/address_suggestions_repository.dart';
 
 @LazySingleton()
-class AddNewGovernate extends UseCase<RefGovernate, AddNewGovernateParams>
-    implements AddRefGovernate {
+class AddNewGovernate extends UseCase<RefGovernate, AddNewGovernateParams> {
   final AddressSuggestionsRepository _repository;
 
   AddNewGovernate(this._repository);
@@ -18,11 +16,5 @@ class AddNewGovernate extends UseCase<RefGovernate, AddNewGovernateParams>
   Future<Either<Failure, RefGovernate>> call(
       {required AddNewGovernateParams params}) {
     return _repository.addNewGovenate(params);
-  }
-
-  @override
-  Future<Either<Failure, RefGovernate>> execute(
-      {required AddNewGovernateParams params}) {
-    return call(params: params);
   }
 }

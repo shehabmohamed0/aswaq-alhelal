@@ -10,7 +10,7 @@ import '../../../../core/params/address_suggestion/params.dart';
 import '../../../address/domain/entities/geo_point.dart';
 import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_city.dart';
-import '../../domain/entities/ref_district.dart';
+import '../../domain/entities/ref_neighborhood.dart';
 import '../../domain/entities/ref_governate.dart';
 import '../../domain/usecases/add_new_city.dart';
 import '../../domain/usecases/add_new_governate.dart';

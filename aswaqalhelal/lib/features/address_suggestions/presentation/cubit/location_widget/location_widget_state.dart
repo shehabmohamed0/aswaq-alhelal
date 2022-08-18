@@ -1,6 +1,13 @@
 part of 'location_widget_cubit.dart';
 
-enum LocationWidgetStatus { initial, loading, loaded, denied, deniedForever }
+enum LocationWidgetStatus {
+  initial,
+  initEdit,
+  loading,
+  loaded,
+  denied,
+  deniedForever
+}
 
 class LocationWidgetState extends Equatable {
   final Option<GeoPoint> geoPointOrNull;

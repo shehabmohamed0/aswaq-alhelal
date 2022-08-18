@@ -7,7 +7,6 @@ import '../../../../core/params/addresses/add_address_params.dart';
 import '../../../../core/params/addresses/delete_address_params.dart';
 import '../../../../core/params/addresses/update_address_params.dart';
 import '../models/address_model.dart';
-import '../models/country_model.dart';
 
 abstract class AddressesServiceApi {
   Future<AddressModel> addAddress(AddAddressParams params);
@@ -66,6 +65,4 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
     await addressDoc.update(model.toJson());
     return model;
   }
-
-  
 }

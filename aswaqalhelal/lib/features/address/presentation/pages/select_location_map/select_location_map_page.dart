@@ -26,7 +26,7 @@ class _SelectLocationMapPageState extends State<SelectLocationMapPage> {
     late GoogleMapController _mapController;
     return Scaffold(
       appBar: AppBar(
-        title: Text('intl.deliveryLocation'),
+        title: Text('Delivery location'),
         elevation: 1,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.white,
@@ -107,7 +107,7 @@ class _SelectLocationMapPageState extends State<SelectLocationMapPage> {
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8))),
-                      child:  Text('intl.confirm'),
+                      child: Text('Confirm'),
                       onPressed: () {
                         final geoPoint = GeoPoint(
                             lat: state.position.latitude,

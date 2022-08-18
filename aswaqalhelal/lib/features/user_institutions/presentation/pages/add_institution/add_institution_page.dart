@@ -11,8 +11,9 @@ import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../address_suggestions/domain/entities/entities.dart';
+import '../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
 import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
-import '../../../../address_suggestions/presentation/cubit/cubit/location_widget_cubit.dart';
+import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
 import '../../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';

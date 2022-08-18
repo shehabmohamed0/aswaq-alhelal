@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/address_suggestions/presentation/DTOs/ref_address_details.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -7,11 +8,11 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 
 import '../../../../../address/domain/entities/geo_point.dart';
 import '../../../../../address_suggestions/domain/entities/ref_city.dart';
-import '../../../../../address_suggestions/domain/entities/ref_district.dart';
+import '../../../../../address_suggestions/domain/entities/ref_neighborhood.dart';
 import '../../../../../address_suggestions/domain/entities/ref_governate.dart';
-import '../../../../../address/presentation/DTOs/address_details.dart';
+import '../../../../../address/presentation/DTOs/full_address_details.dart';
 import '../../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
-import '../../../../../address_suggestions/presentation/cubit/cubit/location_widget_cubit.dart';
+import '../../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../../address_suggestions/presentation/widgets/location_widget.dart';
 import '../../../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 
@@ -20,7 +21,8 @@ class AddUpdateAddressWidget extends HookWidget {
     Key? key,
     required this.onAddressDetailsChanged,
   }) : super(key: key);
-  final void Function(AddressDetails addressDetails) onAddressDetailsChanged;
+  final void Function(FullAddressDetails addressDetails)
+      onAddressDetailsChanged;
   @override
   Widget build(BuildContext context) {
     final governateController = useTextEditingController();
@@ -275,23 +277,30 @@ class AddUpdateAddressWidget extends HookWidget {
     }
   }
 
-  AddressDetails _getAddressDetailsGeoPointChanged(
+  FullAddressDetails _getAddressDetailsGeoPointChanged(
       AddressSuggestionsState suggestionState, GeoPoint geoPoint) {
-    return AddressDetails(
-      refGovernate: suggestionState.governateOrNull.toNullable()!,
-      refCity: suggestionState.cityOrNull.toNullable()!,
-      refNeighborhood: suggestionState.neighborhoodOrNull.toNullable()!,
+    return FullAddressDetails(
+      refAddressDetails: RefAddressDetails(
+        refGovernate: suggestionState.governateOrNull.toNullable()!,
+        refCity: suggestionState.cityOrNull.toNullable()!,
+        refNeighborhood: suggestionState.neighborhoodOrNull.toNullable()!,
+      ),
       geoPoint: geoPoint,
+      description: 'asdasd'
     );
   }
 
-  AddressDetails _getAddressDetailsRefDataChanged(
+  FullAddressDetails _getAddressDetailsRefDataChanged(
       AddressSuggestionsState state, LocationWidgetState locationState) {
-    return AddressDetails(
-      refGovernate: state.governateOrNull.toNullable()!,
-      refCity: state.cityOrNull.toNullable()!,
-      refNeighborhood: state.neighborhoodOrNull.toNullable()!,
+    return FullAddressDetails(
+      refAddressDetails: RefAddressDetails(
+        refGovernate: state.governateOrNull.toNullable()!,
+        refCity: state.cityOrNull.toNullable()!,
+        refNeighborhood: state.neighborhoodOrNull.toNullable()!,
+      ),
       geoPoint: locationState.geoPointOrNull.toNullable()!,
+      description: 'asdasd'
+
     );
   }
 

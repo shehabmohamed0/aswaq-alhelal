@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/interfaces.dart';
 import 'package:dartz/dartz.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/usecase/usecase.dart';
@@ -10,8 +9,7 @@ import '../repositories/address_suggestions_repository.dart';
 
 @LazySingleton()
 class AddNewNeighborhood
-    extends UseCase<RefNeighborhood, AddNewNeighborhoodParams>
-    implements AddRefNeighborhood {
+    extends UseCase<RefNeighborhood, AddNewNeighborhoodParams> {
   final AddressSuggestionsRepository _repository;
 
   AddNewNeighborhood(this._repository);
@@ -19,11 +17,5 @@ class AddNewNeighborhood
   Future<Either<Failure, RefNeighborhood>> call(
       {required AddNewNeighborhoodParams params}) {
     return _repository.addNewNeighborhood(params);
-  }
-
-  @override
-  Future<Either<Failure, RefNeighborhood>> execute(
-      {required AddNewNeighborhoodParams params}) {
-    return call(params: params);
   }
 }

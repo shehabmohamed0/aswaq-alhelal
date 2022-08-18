@@ -1,7 +1,7 @@
-part  of'../add_institution_page.dart';
+part of '../add_institution_page.dart';
 
-class _AddressStepWidget extends HookWidget {
-  const _AddressStepWidget({
+class AddressStepWidget extends HookWidget {
+  const AddressStepWidget({
     Key? key,
   }) : super(key: key);
 
@@ -234,14 +234,17 @@ class _AddressStepWidget extends HookWidget {
                     if (_neighborhoodIsNotNull(suggestionState)) {
                       _changeAddressInStepperCubit(
                         context,
-                        AddressDetails(
-                          refGovernate:
-                              suggestionState.governateOrNull.toNullable()!,
-                          refCity: suggestionState.cityOrNull.toNullable()!,
-                          refNeighborhood:
-                              suggestionState.neighborhoodOrNull.toNullable()!,
-                          geoPoint: geoPoint,
-                        ),
+                        FullAddressDetails(
+                            refAddressDetails: RefAddressDetails(
+                              refGovernate:
+                                  suggestionState.governateOrNull.toNullable()!,
+                              refCity: suggestionState.cityOrNull.toNullable()!,
+                              refNeighborhood: suggestionState
+                                  .neighborhoodOrNull
+                                  .toNullable()!,
+                            ),
+                            geoPoint: geoPoint,
+                            description: 'dasd'),
                       );
                     }
                   },
@@ -260,12 +263,14 @@ class _AddressStepWidget extends HookWidget {
 
     if (_geoPointIsNotNull(locationState)) {
       context.read<AddInstitutionCubit>().addressChanged(
-            AddressDetails(
-              refGovernate: state.governateOrNull.toNullable()!,
-              refCity: state.cityOrNull.toNullable()!,
-              refNeighborhood: state.neighborhoodOrNull.toNullable()!,
-              geoPoint: locationState.geoPointOrNull.toNullable()!,
-            ),
+            FullAddressDetails(
+                refAddressDetails: RefAddressDetails(
+                  refGovernate: state.governateOrNull.toNullable()!,
+                  refCity: state.cityOrNull.toNullable()!,
+                  refNeighborhood: state.neighborhoodOrNull.toNullable()!,
+                ),
+                geoPoint: locationState.geoPointOrNull.toNullable()!,
+                description: 'asdasd'),
           );
     }
   }
@@ -277,7 +282,7 @@ class _AddressStepWidget extends HookWidget {
       suggestionState.neighborhoodOrNull.isSome();
 
   void _changeAddressInStepperCubit(
-      BuildContext context, AddressDetails addressDetails) {
+      BuildContext context, FullAddressDetails addressDetails) {
     context.read<AddInstitutionCubit>().addressChanged(addressDetails);
   }
 }

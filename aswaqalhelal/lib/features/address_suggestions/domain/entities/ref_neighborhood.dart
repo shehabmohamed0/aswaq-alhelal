@@ -10,7 +10,7 @@ class RefNeighborhood extends RefAddress {
   @JsonKey()
   final String city;
 
-  RefNeighborhood(
+  const RefNeighborhood(
       {required String id,
       required this.country,
       required this.governate,

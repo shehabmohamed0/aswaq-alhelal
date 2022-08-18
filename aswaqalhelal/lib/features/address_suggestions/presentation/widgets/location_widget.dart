@@ -3,14 +3,20 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../address/domain/entities/geo_point.dart';
-import '../cubit/cubit/location_widget_cubit.dart';
+import '../cubit/location_widget/location_widget_cubit.dart';
 
 class LocationWidget extends StatelessWidget {
-  const LocationWidget({Key? key, required this.onGeoPointSelected})
+  const LocationWidget(
+      {Key? key, required this.onGeoPointSelected, this.geoPoint})
       : super(key: key);
   final void Function(GeoPoint geoPoint) onGeoPointSelected;
+  final GeoPoint? geoPoint;
+
   @override
   Widget build(BuildContext context) {
+    if (geoPoint != null) {
+      context.read<LocationWidgetCubit>().geoPointChanged(geoPoint!);
+    }
     return BlocConsumer<LocationWidgetCubit, LocationWidgetState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {

@@ -5,7 +5,7 @@ import 'package:root_package/packages/injectable.dart';
 
 import '../../../../core/params/address_suggestion/get_governates_suggestions_params.dart';
 import '../../../../core/params/address_suggestion/get_neighborhoodss_suggestions_params.dart';
-import '../entities/ref_district.dart';
+import '../entities/ref_neighborhood.dart';
 import '../repositories/address_suggestions_repository.dart';
 
 @LazySingleton()

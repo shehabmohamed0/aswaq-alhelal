@@ -6,11 +6,11 @@ import 'package:root_package/packages/injectable.dart';
 import '../../../../core/params/address_suggestion/params.dart';
 import '../entities/entities.dart';
 import '../repositories/address_suggestions_repository.dart';
-import 'interfaces.dart';
 
 @LazySingleton()
 class AddNewCity extends UseCase<RefCity, AddNewCityParams>
-    implements AddRefCity {
+    // implements AddRefCity 
+    {
   final AddressSuggestionsRepository _repository;
 
   AddNewCity(this._repository);

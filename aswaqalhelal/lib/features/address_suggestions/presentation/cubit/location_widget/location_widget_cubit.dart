@@ -19,7 +19,8 @@ class LocationWidgetCubit extends Cubit<LocationWidgetState> {
   final GetCurrentLocation _getCurrentLocation;
 
   void geoPointChanged(GeoPoint geoPoint) {
-    emit(state.copyWith(geoPointOrNull: some(geoPoint)));
+    emit(state.copyWith(
+        geoPointOrNull: some(geoPoint), status: LocationWidgetStatus.loaded));
   }
 
   Future<void> getCurrentLocation() async {
@@ -45,5 +46,12 @@ class LocationWidgetCubit extends Cubit<LocationWidgetState> {
       (GeoPoint geoPoint) => emit(state.copyWith(
           geoPointOrNull: some(geoPoint), status: LocationWidgetStatus.loaded)),
     );
+  }
+
+  void initEdit(GeoPoint geoPoint) {
+    emit(state.copyWith(
+      geoPointOrNull: some(geoPoint),
+      status: LocationWidgetStatus.initEdit,
+    ));
   }
 }

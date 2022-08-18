@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 
+import '../../../address_suggestions/domain/entities/entities.dart';
+import '../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
 import 'geo_point.dart';
 
 class Address extends Equatable {
@@ -37,7 +39,19 @@ class Address extends Equatable {
     required this.description,
     required this.geoPoint,
   });
-
+  RefAddressDetails toRefAddressDetails() => RefAddressDetails(
+        refGovernate:
+            RefGovernate(id: governateId, country: country, name: governate),
+        refCity: RefCity(
+            country: country, governate: governate, id: cityId, name: city),
+        refNeighborhood: RefNeighborhood(
+          country: country,
+          governate: governate,
+          city: city,
+          id: neighborhoodId,
+          name: neighborhood,
+        ),
+      );
   @override
   List<Object?> get props => [
         id,

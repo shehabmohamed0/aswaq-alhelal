@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 
-import '../../domain/entities/ref_district.dart';
+import '../../domain/entities/ref_neighborhood.dart';
 
 part 'ref_district_model.g.dart';
 

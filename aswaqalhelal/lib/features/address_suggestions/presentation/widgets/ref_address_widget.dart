@@ -4,21 +4,16 @@ import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../core/params/address_suggestion/add_address_new_governate_params.dart';
-import '../../../../core/params/address_suggestion/get_governates_suggestions_params.dart';
+import '../../../../core/params/address_suggestion/params.dart';
 import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_address.dart';
-import '../../domain/usecases/interfaces.dart';
 import '../bloc/address_suggestions2_bloc.dart';
 
 class RefAddressWidget<
     T extends RefAddress,
-    B extends AddressSuggestions2Bloc<
-        T,
-        GetRefAddressSuggestionsUsecase<T, GetRefAddressParams>,
-        GetRefAddressParams,
-        AddRefAddressUsecase<T, AddRefAddressParams>,
-        AddRefAddressParams>> extends StatelessWidget {
+    SP extends GetRefAddressParams,
+    AP extends AddRefAddressParams,
+    B extends AddressSuggestions2Bloc<T, SP, AP>> extends StatelessWidget {
   const RefAddressWidget({
     Key? key,
     required this.controller,
@@ -45,7 +40,12 @@ class RefAddressWidget<
         switch (state.status) {
           case AddressSuggestionsStatus.initial:
             break;
+          case AddressSuggestionsStatus.initEdit:
+            controller.text = state.addressSearch;
+            break;
           case AddressSuggestionsStatus.addressSelected:
+            focusNode.unfocus();
+            controller.text = state.addressOrNull.toNullable()!.name;
             onAddressSelected();
             break;
           case AddressSuggestionsStatus.addressUnSelected:
@@ -63,6 +63,7 @@ class RefAddressWidget<
             ));
             break;
           case AddressSuggestionsStatus.addingAddressSucess:
+            focusNode.unfocus();
             EasyLoading.dismiss();
             onAddressSelected();
             break;
@@ -76,14 +77,15 @@ class RefAddressWidget<
           p.addressSearch != c.addressSearch ||
           p.addressOrNull != c.addressOrNull ||
           p.suggestionState != c.suggestionState ||
-          p.suggestions != c.suggestions,
+          p.suggestions != c.suggestions ||
+          p.enabled != c.enabled,
       builder: (context, state) {
         final bloc = context.read<B>();
 
         return AutoSuggestTextField<T>(
           controller: controller,
           focusNode: focusNode,
-          labelText: 'Governate',
+          labelText: label,
           onChanged: (searctText) {
             searchAddress(bloc);
           },
@@ -97,15 +99,16 @@ class RefAddressWidget<
             title: Text(governate.name),
           ),
           onSuggestionSelected: (refAddress) {
-            bloc.add(AddressSuggestions2Event.selectRefAddress(refAddress));
+            bloc.add(AddressSuggestions2Event<T, SP, AP>.selectRefAddress(
+                refAddress));
           },
           onEmptyWidgetClicked: () {
             addNewAddress(bloc);
           },
-          enabled: state.addressOrNull.isNone(),
+          enabled: state.addressOrNull.isNone() && state.enabled,
           showRemoveButton: state.addressOrNull.isSome(),
           onRemoveSelection: () {
-            bloc.add(const AddressSuggestions2Event.unSelectRefAddress());
+            bloc.add(AddressSuggestions2Event<T, SP, AP>.unSelectRefAddress());
           },
         );
       },

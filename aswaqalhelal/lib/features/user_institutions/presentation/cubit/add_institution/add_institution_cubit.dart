@@ -121,7 +121,7 @@ class AddInstitutionCubit extends Cubit<AddInstitutionState> {
         phoneNumbers: List.of(state.phoneNumbers)..add(phoneNumber)));
   }
 
-  void addressChanged(AddressDetails addressDetails) {
+  void addressChanged(FullAddressDetails addressDetails) {
     emit(state.copyWith(address: RequiredObject.dirty(addressDetails)));
   }
 }

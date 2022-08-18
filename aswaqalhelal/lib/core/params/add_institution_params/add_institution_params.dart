@@ -8,7 +8,7 @@ class AddInstitutionParams {
   final String nickName;
   final List<String> emails;
   final List<String> phoneNumbers;
-  final AddressDetails addressDetails;
+  final FullAddressDetails addressDetails;
 
   AddInstitutionParams({
     required this.officialName,
@@ -29,9 +29,9 @@ class AddInstitutionParams {
         addressModel: AddressModel(
           id: 'addressId',
           country: 'egypt',
-          governate: addressDetails.refGovernate.name,
-          city: addressDetails.refCity.name,
-          neighborhood: addressDetails.refNeighborhood.name,
+          governate: addressDetails.refAddressDetails.refGovernate.name,
+          city: addressDetails.refAddressDetails.refCity.name,
+          neighborhood: addressDetails.refAddressDetails.refNeighborhood.name,
           description: 'description',
           geoPointModel: GeoPointModel(
             lat: addressDetails.geoPoint.lat,

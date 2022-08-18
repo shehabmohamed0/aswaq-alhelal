@@ -12,7 +12,7 @@ class AddInstitutionState extends Equatable {
   final List<Email> emails;
   final List<PhoneNumber> phoneNumbers;
   // step 2
-  final RequiredObject<AddressDetails> address;
+  final RequiredObject<FullAddressDetails> address;
 
   final AddInstitutionStatus status;
   final String? errorMessage;
@@ -41,7 +41,7 @@ class AddInstitutionState extends Equatable {
       MinimumLengthString? nickName,
       List<Email>? emails,
       List<PhoneNumber>? phoneNumbers,
-      RequiredObject<AddressDetails>? address,
+      RequiredObject<FullAddressDetails>? address,
       AddInstitutionStatus? status,
       String? errorMessage,
       Institution? addedInstitution}) {
