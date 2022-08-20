@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/address/domain/entities/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/locator/locator.dart';
@@ -17,6 +16,7 @@ import 'package:users_presentation/features/settings/pages/phone_info/phone_info
 import 'package:users_presentation/features/settings/pages/settings/settings_page.dart';
 import 'package:users_presentation/features/settings/pages/update_email/update_email_page.dart';
 
+import 'features/address/domain/entities/address.dart';
 import 'features/address/domain/entities/geo_point.dart';
 import 'features/address/presentation/bloc/select_location_map/select_location_map_bloc.dart';
 import 'features/address/presentation/cubit/add_edit_address/add_edit_address_cubit.dart';
@@ -33,7 +33,8 @@ import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
-import 'features/splash/splash_screen.dart';
+import 'features/start_up/presentation/pages/onboarding_page.dart';
+import 'features/start_up/presentation/pages/start_up_page.dart';
 import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
@@ -49,7 +50,13 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => const SplashScreen(),
+          builder: (context) => const StartUpPage(),
+        );
+      case Routes.onboarding:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) => const OnboardingPage(),
         );
       case Routes.landingPage:
         return _getPageRoute(

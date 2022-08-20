@@ -1,10 +1,14 @@
+import '../../../../core/params/address_suggestion/params.dart';
+import '../../domain/entities/entities.dart';
+import '../../domain/entities/ref_governate.dart';
+import '../../domain/usecases/get_cities_suggetsions.dart';
+import 'package:aswaqalhelal/features/address_suggestions/domain/usecases/usecases.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../core/params/address_suggestion/params.dart';
 import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_address.dart';
 import '../bloc/address_suggestions2_bloc.dart';
@@ -50,8 +54,9 @@ class RefAddressWidget<
             break;
           case AddressSuggestionsStatus.addressUnSelected:
             controller.clear();
-            focusNode.unfocus();
             onAddressUnSelected();
+            FocusScope.of(context).unfocus();
+
             break;
           case AddressSuggestionsStatus.loading:
             EasyLoading.show(

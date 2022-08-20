@@ -51,7 +51,7 @@ class AddressDetailsWidget extends HookWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.only(top: 4),
             child: RefAddressWidget<
                 RefGovernate,
                 GetGovernatesSuggestionsParams,
@@ -84,6 +84,7 @@ class AddressDetailsWidget extends HookWidget {
                 neighborhoodBloc.add(
                     const AddressSuggestions2Event.unSelectRefAddress(
                         enabled: false));
+
               },
             ),
           ),

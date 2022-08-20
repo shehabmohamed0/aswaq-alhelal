@@ -122,6 +122,8 @@ abstract class AddressSuggestions2Bloc<
     emit(state.copyWith(
       addressOrNull: none(),
       status: AddressSuggestionsStatus.addressUnSelected,
+      suggestionState: AutoSuggestionState.emptyText,
+      suggestions: [],
       enabled: event.enabled,
     ));
   }
