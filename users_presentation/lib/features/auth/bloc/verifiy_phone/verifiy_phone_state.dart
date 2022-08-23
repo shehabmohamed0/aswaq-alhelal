@@ -1,12 +1,13 @@
 part of 'verifiy_phone_cubit.dart';
 
 class VerifiyPhoneState extends Equatable {
-  const VerifiyPhoneState(
-      {this.otp = const OTP.pure(),
-      this.status = FormzStatus.pure,
-      this.autoRecievedCode = false,
-      this.autoVerified = false,
-      this.errorMessage});
+  const VerifiyPhoneState({
+    this.otp = const OTP.pure(),
+    this.status = FormzStatus.pure,
+    this.autoRecievedCode = false,
+    this.autoVerified = false,
+    this.errorMessage,
+  });
   final OTP otp;
   final FormzStatus status;
   final bool autoRecievedCode;

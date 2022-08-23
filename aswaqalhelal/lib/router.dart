@@ -34,7 +34,7 @@ import 'features/instutution_items/presentation/cubit/institution_items/instutut
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
 import 'features/start_up/presentation/pages/onboarding_page.dart';
-import 'features/start_up/presentation/pages/start_up_page.dart';
+import 'features/start_up/presentation/pages/start_up_Page.dart';
 import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
@@ -46,7 +46,7 @@ import 'features/user_institutions/presentation/pages/institutions/institutions_
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.splashPage:
+      case Routes.splashScreen:
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,

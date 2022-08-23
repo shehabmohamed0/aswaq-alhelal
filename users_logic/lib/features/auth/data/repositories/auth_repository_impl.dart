@@ -73,7 +73,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final isExists =
           await authApiService.isPhoneNumberExists(params.phoneNumber);
       return Right(isExists);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.internetConnection());
     }
   }
@@ -159,6 +160,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> verifyPhone(VerifyPhoneParams params) async {
     if (!await networkInfo.isConnected) {
+      log('message');
+
       return Left(ServerFailure.internetConnection());
     }
     try {

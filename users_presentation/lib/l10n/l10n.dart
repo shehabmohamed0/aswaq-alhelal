@@ -132,10 +132,10 @@ class UsersPresentationLocalizations {
   }
 
   /// `Login Account`
-  String get loginAccount {
+  String get accountLogin {
     return Intl.message(
       'Login Account',
-      name: 'loginAccount',
+      name: 'accountLogin',
       desc: '',
       args: [],
     );

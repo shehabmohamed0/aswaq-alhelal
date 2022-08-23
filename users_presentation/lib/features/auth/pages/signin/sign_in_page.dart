@@ -31,25 +31,6 @@ class SignInPage extends StatelessWidget {
     final intl = locator<UsersPresentationLocalizations>();
 
     return Scaffold(
-      bottomSheet: Container(
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton.icon(
-                onPressed: () {
-                  Localizations.localeOf(context).languageCode == 'ar'
-                      ? context.read<LocaleCubit>().toEnglish()
-                      : context.read<LocaleCubit>().toArabic();
-                },
-                icon: Icon(Icons.language),
-                label: Text(Localizations.localeOf(context).languageCode == 'ar'
-                    ? 'English'
-                    : 'العربية')),
-          ],
-        ),
-      ),
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: SafeArea(
@@ -64,7 +45,7 @@ class SignInPage extends StatelessWidget {
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Text(
-                    intl.loginAccount,
+                    intl.accountLogin,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
@@ -82,9 +63,7 @@ class SignInPage extends StatelessWidget {
                       leftDescription: intl.email,
                       rightDescription: intl.phoneNumber,
                       onLeftToggleActive: () {
-                        context
-                            .read<LoginFormSelectionCubit>()
-                            .showEmaileForm();
+                        context.read<LoginFormSelectionCubit>().showEmailForm();
                         context.read<PhoneSignInFormCubit>().reset();
                       },
                       onRightToggleActive: () {
@@ -120,6 +99,24 @@ class SignInPage extends StatelessWidget {
             ),
           ),
         )),
+      ),
+      bottomSheet: Container(
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton.icon(
+                onPressed: () {
+                  Localizations.localeOf(context).languageCode == 'ar'
+                      ? context.read<LocaleCubit>().toEnglish()
+                      : context.read<LocaleCubit>().toArabic();
+                },
+                icon: const Icon(Icons.language),
+                label: Text(Localizations.localeOf(context).languageCode == 'ar'
+                    ? 'English'
+                    : 'العربية')),
+          ],
+        ),
       ),
     );
   }

@@ -136,12 +136,12 @@ class AuthApiServiceImpl implements AuthApiService {
     required void Function(String p1) codeAutoRetrievalTimeout,
   }) async {
     return firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: verificationCompleted,
-        verificationFailed: verificationFailed,
-        codeSent: codeSent,
-        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-        timeout: const Duration(seconds: 10));
+      phoneNumber: phoneNumber,
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: codeSent,
+      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+    );
   }
 
   @override
@@ -165,7 +165,6 @@ class AuthApiServiceImpl implements AuthApiService {
     final phoneExists = await cloudFunctions
         .httpsCallable('isPhoneExist')
         .call<bool>({'phoneNumber': phoneNumber});
-
     return phoneExists.data;
   }
 }

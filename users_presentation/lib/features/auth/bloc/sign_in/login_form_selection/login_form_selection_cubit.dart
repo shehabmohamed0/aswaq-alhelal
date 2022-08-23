@@ -11,7 +11,7 @@ class LoginFormSelectionCubit extends Cubit<LoginFormSelectionState> {
     emit(LoginFormPhone());
   }
 
-  void showEmaileForm() {
+  void showEmailForm() {
     emit(LoginFormEmail());
   }
 }

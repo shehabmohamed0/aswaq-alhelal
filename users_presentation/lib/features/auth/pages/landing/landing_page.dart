@@ -6,6 +6,7 @@ import '../../bloc/app_status/app_bloc.dart';
 import '../../bloc/sign_in/email_sign_in_form/email_sign_in_form_cubit.dart';
 import '../../bloc/sign_in/login_form_selection/login_form_selection_cubit.dart';
 import '../../bloc/sign_in/phone_sign_in_form/phone_sign_in_form_cubit.dart';
+import '../signin/login_page.dart';
 import '../signin/sign_in_page.dart';
 
 class LandingPage extends StatelessWidget {
@@ -34,7 +35,7 @@ class LandingPage extends StatelessWidget {
                   create: (context) => locator(),
                 ),
               ],
-              child: const SignInPage(),
+              child: const LoginPage(),
             );
           case AppStatus.loading:
             return const Center(

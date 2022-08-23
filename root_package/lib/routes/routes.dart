@@ -1,6 +1,6 @@
 class Routes {
   Routes._();
-  static const splashPage = '/';
+  static const splashScreen = '/';
   static const onboarding = '/onboarding';
 
   static const landingPage = '/landing';

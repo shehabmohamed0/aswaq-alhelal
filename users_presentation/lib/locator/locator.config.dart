@@ -9,11 +9,11 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:sms_autofill/sms_autofill.dart' as _i7;
 import 'package:users_logic/features/auth/domain/usecases/usecases.dart' as _i6;
 import 'package:users_logic/features/auth/domain/usecases/verify_phone_number.dart'
-    as _i23;
+    as _i21;
 import 'package:users_logic/features/settings/domain/usecases/update_email.dart'
     as _i19;
 import 'package:users_logic/features/settings/domain/usecases/update_phone_number.dart'
-    as _i21;
+    as _i23;
 import 'package:users_logic/features/settings/domain/usecases/update_profile.dart'
     as _i4;
 import 'package:users_logic/users_logic.dart' as _i9;
@@ -37,9 +37,9 @@ import '../features/settings/bloc/account_info/account_info_cubit.dart' as _i3;
 import '../features/settings/bloc/add_email/add_email_cubit.dart' as _i12;
 import '../features/settings/bloc/add_email/add_email_verification_cubit.dart'
     as _i5;
-import '../features/settings/bloc/change_phone/update_phone_cubit.dart' as _i22;
+import '../features/settings/bloc/change_phone/update_phone_cubit.dart' as _i20;
 import '../features/settings/bloc/change_phone/update_phone_verification_cubit.dart'
-    as _i20;
+    as _i22;
 import '../features/settings/bloc/cubit/update_email_cubit.dart'
     as _i18; // ignore_for_file: unnecessary_lambdas
 
@@ -63,7 +63,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i13.LoginFormSelectionCubit>(
       () => _i13.LoginFormSelectionCubit());
   gh.factory<_i14.PhoneSignInFormCubit>(() => _i14.PhoneSignInFormCubit(
-      get<_i9.VerifyPhoneNumber>(), get<_i9.IsPhoneExistsUsecase>()));
+      get<_i9.VerifyPhoneNumber>(),
+      get<_i9.IsPhoneExistsUsecase>(),
+      get<_i9.SignInWithPhone>()));
   gh.factory<_i15.PhoneSignInVerificationCubit>(() =>
       _i15.PhoneSignInVerificationCubit(
           get<_i9.SignInWithPhone>(), get<_i7.SmsAutoFill>()));
@@ -74,10 +76,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i9.VerifyPhoneNumber>(), get<_i9.IsPhoneExistsUsecase>()));
   gh.factory<_i18.UpdateEmailCubit>(
       () => _i18.UpdateEmailCubit(get<_i19.UpdateEmail>()));
-  gh.factory<_i20.UpdatePhoneVerificationCubit>(() =>
-      _i20.UpdatePhoneVerificationCubit(
-          get<_i21.UpdatePhoneNumber>(), get<_i7.SmsAutoFill>()));
-  gh.factory<_i22.UpdatePhoneCubit>(
-      () => _i22.UpdatePhoneCubit(get<_i23.VerifyPhoneNumber>()));
+  gh.factory<_i20.UpdatePhoneCubit>(
+      () => _i20.UpdatePhoneCubit(get<_i21.VerifyPhoneNumber>()));
+  gh.factory<_i22.UpdatePhoneVerificationCubit>(() =>
+      _i22.UpdatePhoneVerificationCubit(
+          get<_i23.UpdatePhoneNumber>(), get<_i7.SmsAutoFill>()));
   return get;
 }
