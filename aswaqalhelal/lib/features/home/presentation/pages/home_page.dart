@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
 import '../../../../l10n/l10n.dart';
+import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../institutions/presentation/widgets/institutions_widget.dart';
 import '../cubit/items/items_cubit.dart';
 import 'widgets/app_drawer.dart';

@@ -1184,12 +1184,12 @@ packages:
     source: hosted
     version: "4.1.2"
   pinput:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: pinput
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.11"
+    version: "2.2.12"
   platform:
     dependency: transitive
     description:
@@ -1364,7 +1364,7 @@ packages:
     source: hosted
     version: "1.0.5"
   sms_autofill:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sms_autofill
       url: "https://pub.dartlang.org"
@@ -1531,20 +1531,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  users_logic:
-    dependency: "direct main"
-    description:
-      path: "../users_logic"
-      relative: true
-    source: path
-    version: "0.0.1"
-  users_presentation:
-    dependency: "direct main"
-    description:
-      path: "../users_presentation"
-      relative: true
-    source: path
-    version: "0.0.1"
   uuid:
     dependency: transitive
     description:

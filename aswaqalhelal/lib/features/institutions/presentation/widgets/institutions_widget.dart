@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
+import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../user_institutions/presentation/widgets/institution_widget.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../cubit/institutions_cubit.dart';

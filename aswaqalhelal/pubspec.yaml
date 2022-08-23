@@ -60,10 +60,11 @@ dependencies:
   path: ^1.8.0
   root_package:
     path: ../root_package
-  users_logic:
-    path: ../users_logic
-  users_presentation:
-    path: ../users_presentation
+
+
+  # users presentation
+  pinput: ^2.2.9  
+  sms_autofill: ^2.2.0
   # geo_logic:
   #   path: ../geo_logic
   # geo_presentation:
@@ -123,7 +124,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
-  enabled: false
+  enabled: true
   class_name: AppLocalizations
   main_locale: en
   arb_dir: lib/l10n

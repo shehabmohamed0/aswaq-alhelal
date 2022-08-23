@@ -2,19 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/routes/routes.dart';
-import 'package:users_presentation/features/auth/bloc/sign_up/complete_form/complete_form_cubit.dart';
-import 'package:users_presentation/features/auth/bloc/sign_up/sign_up_form/sign_up_form_cubit.dart';
-import 'package:users_presentation/features/auth/pages/landing/landing_page.dart';
-import 'package:users_presentation/features/auth/pages/signup/sign_up_page.dart';
-import 'package:users_presentation/features/settings/bloc/add_email/add_email_cubit.dart';
-import 'package:users_presentation/features/settings/bloc/cubit/update_email_cubit.dart';
-import 'package:users_presentation/features/settings/pages/account_info/account_info_page.dart';
-import 'package:users_presentation/features/settings/pages/add_email/add_email_page.dart';
-import 'package:users_presentation/features/settings/pages/change_phone/change_phone_page.dart';
-import 'package:users_presentation/features/settings/pages/contact_info/contact_info_page.dart';
-import 'package:users_presentation/features/settings/pages/phone_info/phone_info_page.dart';
-import 'package:users_presentation/features/settings/pages/settings/settings_page.dart';
-import 'package:users_presentation/features/settings/pages/update_email/update_email_page.dart';
 
 import 'features/address/domain/entities/address.dart';
 import 'features/address/domain/entities/geo_point.dart';
@@ -24,6 +11,10 @@ import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
 import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
 import 'features/address/presentation/pages/addresses/addresses_page.dart';
 import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
+import 'features/auth/presentation/bloc/sign_up/complete_form/complete_form_cubit.dart';
+import 'features/auth/presentation/bloc/sign_up/sign_up_form/sign_up_form_cubit.dart';
+import 'features/auth/presentation/pages/landing/landing_page.dart';
+import 'features/auth/presentation/pages/signup/sign_up_page.dart';
 import 'features/currency/presentation/cubit/currency_cubit.dart';
 import 'features/currency/presentation/pages/currency_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
@@ -33,8 +24,17 @@ import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
+import 'features/settings/presentation/bloc/add_email/add_email_cubit.dart';
+import 'features/settings/presentation/bloc/cubit/update_email_cubit.dart';
+import 'features/settings/presentation/pages/account_info/account_info_page.dart';
+import 'features/settings/presentation/pages/add_email/add_email_page.dart';
+import 'features/settings/presentation/pages/change_phone/change_phone_page.dart';
+import 'features/settings/presentation/pages/contact_info/contact_info_page.dart';
+import 'features/settings/presentation/pages/phone_info/phone_info_page.dart';
+import 'features/settings/presentation/pages/settings/settings_page.dart';
+import 'features/settings/presentation/pages/update_email/update_email_page.dart';
 import 'features/start_up/presentation/pages/onboarding_page.dart';
-import 'features/start_up/presentation/pages/start_up_Page.dart';
+import 'features/start_up/presentation/pages/splash_screen.dart';
 import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
@@ -50,7 +50,7 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => const StartUpPage(),
+          builder: (context) => const SplashScreen(),
         );
       case Routes.onboarding:
         return _getPageRoute(

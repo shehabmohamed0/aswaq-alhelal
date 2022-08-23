@@ -134,7 +134,10 @@ class SignUpPage extends HookWidget {
                               showErrorSnackBar(context, intl.error);
                             }
                           },
-                          icon: Icon(Icons.privacy_tip,color: ColorManager.primary.withBlue(255),),
+                          icon: Icon(
+                            Icons.privacy_tip,
+                            color: ColorManager.primary.withBlue(255),
+                          ),
                           label: Text(
                             intl.privacyPolicy,
                             style: TextStyle(

@@ -7,8 +7,8 @@ import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
-import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
+import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
 import '../../../../home/presentation/pages/widgets/items_widget.dart';
 import '../../../../user_institutions/domain/entities/institution.dart';

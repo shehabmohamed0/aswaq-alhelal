@@ -5,10 +5,10 @@ import 'package:root_package/packages/url_launcher.dart';
 import 'package:root_package/routes/routes.dart';
 import 'package:root_package/widgets/avatar.dart';
 import 'package:root_package/widgets/snack_bar.dart';
-import 'package:users_logic/features/auth/domain/entities/user.dart';
-import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
 
 import '../../../../../l10n/l10n.dart';
+import '../../../../auth/domain/entities/user.dart';
+import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);

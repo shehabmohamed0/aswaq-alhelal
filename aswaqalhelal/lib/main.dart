@@ -8,12 +8,9 @@ import 'package:root_package/core/resources/theme_manager.dart';
 import 'package:root_package/core/services/network_info.dart';
 import 'package:root_package/l10n/l10n.dart';
 import 'package:root_package/locator/locator.dart';
-import 'package:users_logic/l10n/l10n.dart';
-import 'package:users_presentation/features/auth/bloc/app_status/app_bloc.dart';
-import 'package:users_presentation/l10n/l10n.dart';
-import 'package:users_presentation/locator/locator.dart';
 
 import 'bloc_observer.dart';
+import 'features/auth/presentation/bloc/app_status/app_bloc.dart';
 import 'features/start_up/presentation/cubit/cubit/start_up_cubit.dart';
 import 'l10n/l10n.dart';
 import 'locator/locator.dart';
@@ -26,7 +23,7 @@ Future<void> main() {
       await Firebase.initializeApp();
       await RootPackageLocator.configureDependencies();
       configureDependencies(locator);
-      UsersPresentation.configureDependencies(locator);
+     // UsersPresentation.configureDependencies(locator);
       // GeoPresentation.configureDependencies(locator);
       runApp(const App());
     },
@@ -81,8 +78,8 @@ class AppView extends StatelessWidget {
           localizationsDelegates: const [
             AppLocalizations.delegate,
             RootPackageLocalizations.delegate,
-            UsersLogicLocalizations.delegate,
-            UsersPresentationLocalizations.delegate,
+            // UsersLogicLocalizations.delegate,
+            // UsersPresentationLocalizations.delegate,
             // GeoLogicLocalizations.delegate,
             // GeoPresentationLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
