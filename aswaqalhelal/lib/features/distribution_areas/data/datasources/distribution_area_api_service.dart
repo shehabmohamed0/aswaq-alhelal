@@ -25,13 +25,12 @@ class DistributionAreaApiServiceImpl extends DistributionAreaApiService {
   @override
   Future<List<DistributionAreaModel>> getDistriputionAreas(
       GetDistributionAreasParams params) async {
-    final doc = _firestore.doc('institutions/${params.institutionId}');
-    final snapshot = await doc.get();
-    final distriputionAreas =
-        snapshot.data()!['distributionAreas'] as Map<String, dynamic>?;
-    if (distriputionAreas == null) return [];
-    final models = distriputionAreas.entries
-        .map(DistributionAreaModel.fromMapEntry)
+    final collection = _firestore.collection('distributionAreas');
+    final distriputionAreas = await collection
+        .where('institutionId', isEqualTo: params.institutionId)
+        .get();
+    final models = distriputionAreas.docs
+        .map(DistributionAreaModel.fromFirestore)
         .toList();
 
     return models;
@@ -40,34 +39,32 @@ class DistributionAreaApiServiceImpl extends DistributionAreaApiService {
   @override
   Future<DistributionAreaModel> addDistriputionArea(
       AddDistributionAreaParams params) async {
-    final collection = _firestore.collection('institutions');
-    final doc = collection.doc(params.institutionId);
-    final newId = collection.doc().id;
-    final model = params.toModel(newId);
-    await doc.update({'distributionAreas.$newId': model.toJson()});
+    final collection = _firestore.collection('distributionAreas');
+    final doc = collection.doc();
+    final model = params.toModel(doc.id);
+    final jsonData = model.toJson();
+    jsonData['institutionId'] = params.institutionId;
+    await doc.set(jsonData);
     return model;
   }
 
   @override
   Future<String> deleteDistriputionArea(
       DeleteDistributionAreaParams params) async {
-    final collection = _firestore.collection('institutions');
-    final doc = collection.doc(params.institutionId);
+    final collection = _firestore.collection('distributionAreas');
+    final doc = collection.doc(params.distributionArea.id);
 
-    await doc.update({
-      'distributionAreas.${params.distributionArea.id}': FieldValue.delete()
-    });
+    await doc.delete();
     return params.distributionArea.id;
   }
 
   @override
   Future<DistributionAreaModel> updateDistriputionArea(
       UpdateDistributionAreaParams params) async {
-    final collection = _firestore.collection('institutions');
-    final doc = collection.doc(params.institutionId);
+    final collection = _firestore.collection('distributionAreas');
+    final doc = collection.doc(params.distributionArea.id);
     final model = params.toModel(params.distributionArea.id);
-    await doc.update(
-        {'distributionAreas.${params.distributionArea.id}': model.toJson()});
+    await doc.update(model.toJson());
 
     return model;
   }

@@ -83,8 +83,6 @@ class AddressesRepositoryImpl extends AddressesRepository {
     }
   }
 
-  
-
   @override
   Future<Either<Failure, GeoPoint>> getCurrentLocation() async {
     try {
@@ -95,6 +93,21 @@ class AddressesRepositoryImpl extends AddressesRepository {
     } on LocationDeniedForeverException {
       return Left(LocationDeniedForeverFailure(
           'Denied For ever, please go to settings'));
+    } on Exception {
+      return Left(ServerFailure.general());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Address>> addFirstAddress(
+      AddAddressParams params) async {
+    if (!await _networkInfo.isConnected) {
+      return Left(ServerFailure.internetConnection());
+    }
+
+    try {
+      final address = await _addressesServiceApi.addFirstAddress(params);
+      return Right(address);
     } on Exception {
       return Left(ServerFailure.general());
     }

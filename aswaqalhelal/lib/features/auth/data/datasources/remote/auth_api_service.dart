@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
@@ -166,6 +165,7 @@ class AuthApiServiceImpl implements AuthApiService {
     return phoneExists.data;
   }
 }
+
 class FirestorePath {
   static String user(String uid) => 'users/$uid';
   FirestorePath._();

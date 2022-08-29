@@ -13,18 +13,20 @@ abstract class AddressesServiceApi {
   Future<String> removeAddress(RemoveAddressParams params);
   Future<AddressModel> updateAddress(UpdateAddressParams params);
   Future<List<AddressModel>> getAddresses();
+
+  Future<AddressModel> addFirstAddress(AddAddressParams params);
 }
 
 @LazySingleton(as: AddressesServiceApi)
 class AddressesServiceApiImpl extends AddressesServiceApi {
-  final FirebaseAuth firebaseAuth;
-  final FirebaseFirestore firestore;
-  AddressesServiceApiImpl(this.firebaseAuth, this.firestore);
+  final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firestore;
+  AddressesServiceApiImpl(this._firebaseAuth, this._firestore);
   @override
   Future<AddressModel> addAddress(AddAddressParams params) async {
-    final user = firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser!;
     final addressesCollection =
-        firestore.collection(FirebasePath.userAddresses(user.uid));
+        _firestore.collection(FirebasePath.userAddresses(user.uid));
     final ref = addressesCollection.doc();
     final model = params.toModel(ref.id);
     final modelJson = model.toJson();
@@ -36,9 +38,9 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
 
   @override
   Future<List<AddressModel>> getAddresses() async {
-    final user = firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser!;
     final addressesCollection =
-        firestore.collection(FirebasePath.userAddresses(user.uid));
+        _firestore.collection(FirebasePath.userAddresses(user.uid));
     final snapshot = await addressesCollection.orderBy('saveTime').get();
     final addresses = snapshot.docs.map(AddressModel.fromFirestore).toList();
     return addresses;
@@ -46,9 +48,9 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
 
   @override
   Future<String> removeAddress(RemoveAddressParams params) async {
-    final user = firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser!;
     final addressDoc =
-        firestore.doc(FirebasePath.userAddress(user.uid, params.addressId));
+        _firestore.doc(FirebasePath.userAddress(user.uid, params.addressId));
 
     await addressDoc.delete();
     return params.addressId;
@@ -56,13 +58,31 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
 
   @override
   Future<AddressModel> updateAddress(UpdateAddressParams params) async {
-    final user = firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser!;
     final addressDoc =
-        firestore.doc(FirebasePath.userAddress(user.uid, params.id));
+        _firestore.doc(FirebasePath.userAddress(user.uid, params.id));
 
     final model = params.toModel;
 
     await addressDoc.update(model.toJson());
+    return model;
+  }
+
+  @override
+  Future<AddressModel> addFirstAddress(AddAddressParams params) async {
+    final user = _firebaseAuth.currentUser!;
+    final userRef = _firestore.doc('users/${user.uid}');
+    final addressesCollection =
+        _firestore.collection(FirebasePath.userAddresses(user.uid));
+    final ref = addressesCollection.doc();
+    final batch = _firestore.batch();
+    final model = params.toModel(ref.id);
+    final modelJson = model.toJson();
+    modelJson['saveTime'] = FieldValue.serverTimestamp();
+    batch.set(ref, modelJson);
+    batch.update(userRef, {'address': modelJson});
+
+    await batch.commit();
     return model;
   }
 }

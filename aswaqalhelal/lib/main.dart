@@ -5,7 +5,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:root_package/core/locale/locale_cubit.dart';
 import 'package:root_package/core/resources/theme_manager.dart';
-import 'package:root_package/core/services/network_info.dart';
 import 'package:root_package/l10n/l10n.dart';
 import 'package:root_package/locator/locator.dart';
 
@@ -23,7 +22,7 @@ Future<void> main() {
       await Firebase.initializeApp();
       await RootPackageLocator.configureDependencies();
       configureDependencies(locator);
-     // UsersPresentation.configureDependencies(locator);
+      // UsersPresentation.configureDependencies(locator);
       // GeoPresentation.configureDependencies(locator);
       runApp(const App());
     },
@@ -38,8 +37,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<NetworkInfo>().isConnected.then((value) => null);
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppBloc>(

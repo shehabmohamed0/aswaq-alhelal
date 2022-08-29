@@ -6,13 +6,13 @@ class UnitWidget extends StatelessWidget {
     required this.name,
     required this.quantity,
     required this.price,
-    required this.color,
+     this.color,
     this.onRemove,
   }) : super(key: key);
   final String name;
   final String quantity;
   final String price;
-  final Color color;
+  final Color? color;
   final VoidCallback? onRemove;
   @override
   Widget build(BuildContext context) {

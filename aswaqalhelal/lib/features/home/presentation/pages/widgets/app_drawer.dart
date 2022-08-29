@@ -31,15 +31,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.business_rounded),
             title: const Text('My institutions'),
           ),
-          ListTile(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.currency);
-            },
-            leading: const Icon(Icons.currency_exchange),
-            title: Text(
-              intl.currency,
-            ),
-          ),
+         
           ListTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.settings);
@@ -111,18 +103,21 @@ class _DrawerHeader extends StatelessWidget {
               },
             ),
             const SizedBox(height: 8),
+            if (user.name != null)
+              FittedBox(
+                child: Text(
+                  user.name!,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                ),
+              ),
             FittedBox(
               child: Text(
-                user.name,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 26,
-                      color: Colors.white,
-                    ),
+                user.phoneNumber,
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
-            ),
-            Text(
-              user.phoneNumber,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
         ),

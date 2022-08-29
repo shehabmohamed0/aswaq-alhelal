@@ -67,7 +67,7 @@ class LocationWidget extends StatelessWidget {
                 size: 28,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             OutlinedButton.icon(
               style: OutlinedButton.styleFrom(
                 primary: Theme.of(context).primaryColor,

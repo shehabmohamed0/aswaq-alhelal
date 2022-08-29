@@ -16,7 +16,7 @@ class InstitutionsSliverWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = context.read<AppBloc>().state.user;
     return BlocProvider<InstitutionsCubit>(
-      create: (context) => locator()..getInstitutions(),
+      create: (context) => locator()..getInstitutions(user.address!),
       child: BlocBuilder<InstitutionsCubit, InstitutionsState>(
         builder: (context, state) {
           return state.map(
@@ -32,26 +32,34 @@ class InstitutionsSliverWidget extends StatelessWidget {
                 ),
               );
             },
-            loaded: (state) => SliverPadding(
-              padding: const EdgeInsets.all(16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+            loaded: (state) {
+              if (state.institutions.isEmpty) {
+                return Align(
+                  alignment: Alignment.topCenter,
+                  child: Text('No Available institution'),
+                );
+              }
+              return SliverPadding(
+                padding: const EdgeInsets.all(16),
+                sliver: SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) => InstitutionWidget(
+                            institution: state.institutions[index],
+                            isUserInstitution:
+                                user.id == state.institutions[index].id,
+                            onPressed: () {
+                              //TODO:
+                            },
+                          ),
+                      childCount: state.institutions.length),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => InstitutionWidget(
-                          institution: state.institutions[index],
-                          isUserInstitution:
-                              user.id == state.institutions[index].id,
-                              onPressed: (){
-                                //TODO:
-                              },
-                        ),
-                    childCount: state.institutions.length),
-              ),
-            ),
+              );
+            },
             error: (error) => SliverToBoxAdapter(
               child: CheckInternetConnection(onPressed: () {}),
             ),

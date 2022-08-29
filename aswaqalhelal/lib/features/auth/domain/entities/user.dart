@@ -1,24 +1,27 @@
+import 'package:aswaqalhelal/features/address/domain/entities/address.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class User extends Equatable {
   @JsonKey(defaultValue: '')
   final String id;
-  final String name;
+  final String phoneNumber;
+  final String? name;
   final String? email;
   final String? photoURL;
-  final String phoneNumber;
   final DateTime? birthDate;
   final String? gender;
-
-  const User(
-      {required this.id,
-      required this.name,
-      required this.phoneNumber,
-      this.email,
-      this.photoURL,
-      this.birthDate,
-      this.gender});
+  final Address? address;
+  const User({
+    required this.id,
+    required this.name,
+    required this.phoneNumber,
+    this.email,
+    this.photoURL,
+    this.birthDate,
+    this.gender,
+    this.address,
+  });
 
   User copyWith({
     String? id,
@@ -28,15 +31,18 @@ class User extends Equatable {
     String? phoneNumber,
     DateTime? birthDate,
     String? gender,
+    Address? address,
   }) {
     return User(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        email: email ?? this.email,
-        photoURL: photoURL ?? this.photoURL,
-        phoneNumber: phoneNumber ?? this.phoneNumber,
-        birthDate: birthDate ?? this.birthDate,
-        gender: gender ?? this.gender);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      photoURL: photoURL ?? this.photoURL,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      birthDate: birthDate ?? this.birthDate,
+      gender: gender ?? this.gender,
+      address: address ?? this.address,
+    );
   }
 
   static const empty = User(id: '', name: '', phoneNumber: '');
@@ -49,5 +55,5 @@ class User extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, email, photoURL, phoneNumber, birthDate, gender];
+      [id, name, email, photoURL, phoneNumber, birthDate, gender, address];
 }

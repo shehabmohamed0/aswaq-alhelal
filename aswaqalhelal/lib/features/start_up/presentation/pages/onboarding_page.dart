@@ -12,9 +12,7 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   late final GlobalKey<IntroductionScreenState> introKey;
   final pages = [
-    {"title": "Title1", "body": "bodt1", "image": 'private.jpg'},
-    {"title": "Title1", "body": "bodt1", "image": 'private.jpg'},
-    {"title": "Title1", "body": "bodt1", "image": 'private.jpg'},
+    {"title": "Title1", "body": "body1", "image": 'private.jpg'},
   ];
 
   @override
@@ -28,15 +26,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return IntroductionScreen(
         key: introKey,
         globalBackgroundColor: Colors.white,
-        pages: pages
-            .map((page) => PageViewModel(
-                title: page['title']!,
-                body: page['body']!,
-                decoration: walkThroughPageDecoration,
-                image: Image.asset(
-                  'assets/images/${page['image']}',
-                )))
-            .toList(),
+        pages: [
+          PageViewModel(
+            title: pages[0]['title']!,
+            body: pages[0]['body']!,
+            decoration: walkThroughPageDecoration,
+            image: Image.asset(
+              'assets/images/${pages[0]['image']}',
+            ),
+          ),
+          PageViewModel(
+            title: pages[0]['title']!,
+            body: pages[0]['body']!,
+            decoration: walkThroughPageDecoration,
+            image: Image.asset(
+              'assets/images/${pages[0]['image']}',
+            ),
+          ),
+        ],
         onDone: () {
           Navigator.pushNamed(context, Routes.landingPage);
         },

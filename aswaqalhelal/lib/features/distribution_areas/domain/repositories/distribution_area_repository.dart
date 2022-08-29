@@ -45,6 +45,7 @@ class AddDistributionAreaParams {
 
   DistributionAreaModel toModel(String id) => DistributionAreaModel(
         id: id,
+        institutionId: institutionId,
         parentId: _getParentId(),
         country: 'egypt',
         governate: refGovernate.name,
@@ -71,6 +72,7 @@ class UpdateDistributionAreaParams {
   DistributionAreaModel toModel(String id) => DistributionAreaModel(
         id: id,
         parentId: _getParentId(),
+        institutionId: institutionId,
         country: 'egypt',
         governate: refGovernate.name,
         city: refCity?.name,
@@ -78,6 +80,9 @@ class UpdateDistributionAreaParams {
       );
   String _getParentId() {
     if (refNeighborhood != null) {
+      return refNeighborhood!.id;
+    }
+    if (refCity != null) {
       return refCity!.id;
     }
     return refGovernate.id;

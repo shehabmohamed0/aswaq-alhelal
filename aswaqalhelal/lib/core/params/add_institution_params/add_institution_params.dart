@@ -18,28 +18,32 @@ class AddInstitutionParams {
     required this.addressDetails,
   });
 
-  InstitutionModel toModel(String id, String userId) => InstitutionModel(
-        id: id,
-        userId: userId,
-        officialName: officialName,
-        nickName: nickName,
-        emails: emails,
-        creationTime: DateTime.now(),
-        phoneNumbers: phoneNumbers,
-        addressModel: AddressModel(
-          id: 'addressId',
-          country: 'egypt',
-          governate: addressDetails.refAddressDetails.refGovernate.name,
-          city: addressDetails.refAddressDetails.refCity.name,
-          neighborhood: addressDetails.refAddressDetails.refNeighborhood.name,
-          description: 'description',
-          geoPointModel: GeoPointModel(
-            lat: addressDetails.geoPoint.lat,
-            long: addressDetails.geoPoint.long,
-          ),
-          cityId: '',
-          governateId: '',
-          neighborhoodId: '',
+  InstitutionModel toModel(String id, String userId) {
+    final refAddressDetails = addressDetails.refAddressDetails;
+    final geoPoint = addressDetails.geoPoint;
+    return InstitutionModel(
+      id: id,
+      userId: userId,
+      officialName: officialName,
+      nickName: nickName,
+      emails: emails,
+      creationTime: DateTime.now(),
+      phoneNumbers: phoneNumbers,
+      addressModel: AddressModel(
+        id: 'addressId',
+        country: 'egypt',
+        governateId: refAddressDetails.refGovernate.id,
+        governate: refAddressDetails.refGovernate.name,
+        cityId: refAddressDetails.refCity.id,
+        city: refAddressDetails.refCity.name,
+        neighborhoodId: refAddressDetails.refNeighborhood.id,
+        neighborhood: refAddressDetails.refNeighborhood.name,
+        description: 'description',
+        geoPointModel: GeoPointModel(
+          lat: geoPoint.lat,
+          long: geoPoint.long,
         ),
-      );
+      ),
+    );
+  }
 }

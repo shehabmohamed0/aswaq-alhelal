@@ -21,7 +21,7 @@ class AccountInfoCubit extends Cubit<AccountInfoState> {
   void initialize(User user) {
     emit(
       state.copyWith(
-          name: Name.dirty(user.name),
+          name: Name.dirty(user.name ?? ''),
           birthDate: user.birthDate,
           gender: user.gender),
     );

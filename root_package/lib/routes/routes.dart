@@ -18,7 +18,6 @@ class Routes {
   static const otp = '/otp';
   static const addEmail = '/addEmail';
   static const updateEmail = '/updateEmail';
-  static const currency = '/currency';
   static const privacyPolicy = '/privacyPolicy';
   
   
@@ -35,6 +34,7 @@ class Routes {
   static const institution = '/institution';
   static const institutionItems = '/institutionItems';
   static const addItem = '/addItem';
+  static const institutionReceipts = '/institutionReceipts';
 
 
   static const distributionAreas = '/distributionAreas';

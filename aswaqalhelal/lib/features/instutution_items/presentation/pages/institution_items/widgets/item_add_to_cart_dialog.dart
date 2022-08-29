@@ -25,6 +25,7 @@ class ItemAddToCartDialog extends StatelessWidget {
           listener: (context, state) {
             if (state.cartSubmitted) {
               Navigator.of(context).pop(CartItem(
+                  id: '',
                   item: item,
                   selectedUnit: state.selectedUnit!,
                   quantity: state.quantity));

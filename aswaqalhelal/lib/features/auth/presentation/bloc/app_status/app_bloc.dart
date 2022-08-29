@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -26,9 +27,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
   void _onUserChanged(AppUserChanged event, Emitter<AppState> emit) {
     emit(
-      event.user.isNotEmpty
-          ? AppState.authenticated(event.user)
-          : const AppState.unauthenticated(),
+      event.user.isEmpty
+          ? const AppState.unauthenticated()
+          : event.user.address != null
+              ? AppState.authenticated(event.user)
+              : AppState.authenticatedWithoutAddress(event.user),
     );
   }
 

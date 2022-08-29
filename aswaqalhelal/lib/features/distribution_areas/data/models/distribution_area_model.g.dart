@@ -10,6 +10,7 @@ DistributionAreaModel _$DistributionAreaModelFromJson(
         Map<String, dynamic> json) =>
     DistributionAreaModel(
       id: json['id'] as String? ?? '',
+      institutionId: json['institutionId'] as String,
       parentId: json['parentId'] as String,
       country: json['country'] as String,
       governate: json['governate'] as String,
@@ -21,6 +22,7 @@ Map<String, dynamic> _$DistributionAreaModelToJson(
         DistributionAreaModel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'institutionId': instance.institutionId,
       'parentId': instance.parentId,
       'country': instance.country,
       'governate': instance.governate,

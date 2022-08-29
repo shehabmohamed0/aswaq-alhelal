@@ -15,11 +15,11 @@ import 'features/auth/presentation/bloc/sign_up/complete_form/complete_form_cubi
 import 'features/auth/presentation/bloc/sign_up/sign_up_form/sign_up_form_cubit.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
 import 'features/auth/presentation/pages/signup/sign_up_page.dart';
-import 'features/currency/presentation/cubit/currency_cubit.dart';
-import 'features/currency/presentation/pages/currency_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
+import 'features/institution_receipts/presentation/cubit/institution_receipts_cubit.dart';
+import 'features/institution_receipts/presentation/pages/receipt_page.dart';
 import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
@@ -39,7 +39,6 @@ import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
-import 'features/user_institutions/presentation/pages/institution/institution_page.dart';
 import 'features/user_institutions/presentation/pages/institution/owner_institution.dart';
 import 'features/user_institutions/presentation/pages/institutions/institutions_page.dart';
 
@@ -127,15 +126,7 @@ class AppRouter {
             child: const UpdateEmailPage(),
           ),
         );
-      case Routes.currency:
-        return _getPageRoute(
-          arguments: settings.arguments,
-          routeName: settings.name,
-          builder: (context) => BlocProvider<CurrencyCubit>(
-            create: (context) => locator(),
-            child: const CurrencyPage(),
-          ),
-        );
+     
       case Routes.addresses:
         return _getPageRoute(
           arguments: settings.arguments,
@@ -201,12 +192,7 @@ class AppRouter {
             child: const AddInstitutionPage(),
           ),
         );
-      case Routes.institution:
-        return _getPageRoute(
-          arguments: settings.arguments,
-          routeName: settings.name,
-          builder: (context) => const InstitutionPage(),
-        );
+
       case Routes.institutionItems:
         return _getPageRoute(
           arguments: settings.arguments,
@@ -241,6 +227,16 @@ class AppRouter {
                 LoadDistributionAreas((settings.arguments as Institution).id),
               ),
             child: const DistributionAreasPage(),
+          ),
+        );
+      case Routes.institutionReceipts:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) => BlocProvider<InstitutionReceiptsCubit>(
+            create: (context) => locator()
+              ..getInstitutionItems((settings.arguments as Institution).id),
+            child: const InstitutionReceiptPage(),
           ),
         );
 

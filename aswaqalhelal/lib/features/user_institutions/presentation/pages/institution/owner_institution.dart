@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../domain/entities/institution.dart';
@@ -26,7 +27,10 @@ class OwnerInstitution extends StatelessWidget {
               backgroundColor: Colors.lightBlueAccent,
               iconData: Icons.category_rounded,
               title: 'Items',
-              onTap: () {},
+              onTap: () {
+                 Navigator.pushNamed(context, Routes.institutionItems,
+                    arguments: institution);
+              },
             ),
             GridTile(
               backgroundColor: Colors.tealAccent.shade400,
@@ -44,6 +48,15 @@ class OwnerInstitution extends StatelessWidget {
               },
             ),
             GridTile(
+              backgroundColor: Colors.lightGreen,
+              iconData: FontAwesomeIcons.moneyBillTransfer,
+              title: 'Receipts',
+              onTap: () {
+                Navigator.pushNamed(context, Routes.institutionReceipts,
+                    arguments: institution);
+              },
+            ),
+            GridTile(
               backgroundColor: Colors.deepPurpleAccent,
               iconData: Icons.settings,
               title: 'Settings',
@@ -57,14 +70,19 @@ class OwnerInstitution extends StatelessWidget {
 }
 
 class GridTile extends StatelessWidget {
-  const GridTile({
+  GridTile({
     Key? key,
     this.extent,
     this.backgroundColor,
     required this.iconData,
     required this.title,
     required this.onTap,
-  }) : super(key: key);
+  }) : super(key: key) {
+    assert(
+      iconData != Icons.abc,
+      '',
+    );
+  }
 
   final double? extent;
   final Color? backgroundColor;
@@ -89,7 +107,7 @@ class GridTile extends StatelessWidget {
                 flex: 7,
                 child: FittedBox(
                   fit: BoxFit.contain,
-                  child: Icon(iconData, color: Colors.grey.shade100),
+                  child: FaIcon(iconData, color: Colors.grey.shade100),
                 ),
               ),
               Expanded(

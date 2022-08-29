@@ -8,10 +8,11 @@ extension UserExtention on auth.User? {
     if (user != null) {
       return UserModel(
           id: user.uid,
-          name: user.displayName ?? '',
+          name: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
-          phoneNumber: user.phoneNumber ?? '');
+          phoneNumber: user.phoneNumber ?? '',
+          addressModel: null);
     } else {
       return UserModel.empty;
     }

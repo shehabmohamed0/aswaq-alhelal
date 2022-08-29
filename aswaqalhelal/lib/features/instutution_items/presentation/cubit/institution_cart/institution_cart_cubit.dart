@@ -34,6 +34,7 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
               final newQuantity = e.quantity + cartItem.quantity;
               totalPrice += newQuantity * e.selectedUnit.price;
               return CartItem(
+                  id: '',
                   item: e.item,
                   selectedUnit: e.selectedUnit,
                   quantity: newQuantity);
@@ -50,9 +51,7 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
   }
 
   void add(cartItem) {
-    emit(state.copyWith(
-      cartItems: List.of(state.cartItems)
-    ));
+    emit(state.copyWith(cartItems: List.of(state.cartItems)));
   }
 
   void reduce(cartItem) {}

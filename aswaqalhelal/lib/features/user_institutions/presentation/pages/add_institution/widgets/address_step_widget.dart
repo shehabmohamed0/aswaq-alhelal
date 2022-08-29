@@ -56,6 +56,7 @@ class AddressStepWidget extends HookWidget {
               neighborhoodController.clear();
               break;
             case AddressSuggestionsStatus.neighborhoodUnSelected:
+              context.read<AddInstitutionCubit>().addressChanged(null);
               neighborhoodFocusNode.unfocus();
               neighborhoodController.clear();
               break;
