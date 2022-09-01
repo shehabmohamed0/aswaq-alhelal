@@ -25,7 +25,6 @@ class DistributionAreasRepositoryImpl extends DistributionAreasRepository {
       final distributionAreas = await _apiService.getDistriputionAreas(params);
       return Right(distributionAreas);
     } catch (e) {
-      rethrow;
       return Left(ServerFailure.general());
     }
   }

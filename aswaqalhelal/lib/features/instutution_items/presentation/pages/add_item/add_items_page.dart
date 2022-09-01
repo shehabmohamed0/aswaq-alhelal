@@ -96,6 +96,20 @@ class AddItemPage extends HookWidget {
             }
           },
         ),
+        BlocListener<AddItemBloc, AddItemState>(
+          listenWhen: (previous, current) =>
+              previous.unitStatus != current.unitStatus,
+          listener: (context, state) {
+            switch (state.unitStatus) {
+              case UnitStatus.initial:
+                break;
+              case UnitStatus.exsists:
+                showErrorSnackBar(context, 'Unit exsists before');
+
+                break;
+            }
+          },
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(title: const Text('Add item')),
@@ -121,7 +135,7 @@ class AddItemPage extends HookWidget {
                       controller: controller,
                       focusNode: focusNode,
                       enabled: !state.itemFromReference && !state.addingNewItem,
-                      showRemoveButton: state.isEdit,
+                      showRemoveButton: !state.isEdit,
                       onRemoveSelection: () {
                         bloc.add(RemoveSelectionPressed());
                         controller.clear();
@@ -133,16 +147,19 @@ class AddItemPage extends HookWidget {
                         bloc.add(AddItemSelectedEvent(item));
                       },
                       suggestionBuilder: (context, item) {
-                        return ListTile(title: Text(item.name));
+                        return ListTile(
+                          title: Text(item.name),
+                          leading: Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ),
+                        );
                       },
                       suggestionState: state.suggestionState,
                       onEmptyWidgetClicked: () {
                         focusNode.unfocus();
                         bloc.add(AddNewItem(controller.text));
                       },
-                      emptyWidget: const ListTile(
-                        title: Text('No Item found, add as new item.'),
-                      ),
                       errorWidget: const ListTile(title: Text('Error')),
                       loadingWidget: const Center(
                         child: Padding(

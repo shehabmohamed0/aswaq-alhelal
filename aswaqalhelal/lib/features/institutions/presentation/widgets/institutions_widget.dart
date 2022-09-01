@@ -34,9 +34,19 @@ class InstitutionsSliverWidget extends StatelessWidget {
             },
             loaded: (state) {
               if (state.institutions.isEmpty) {
-                return Align(
-                  alignment: Alignment.topCenter,
-                  child: Text('No Available institution'),
+                return const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 200,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'No Available institution\nin your address',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
                 );
               }
               return SliverPadding(

@@ -12,6 +12,7 @@ class AddItemState extends Equatable {
   final RequiredObject<String> imageUrl;
   final List<Unit> units;
   final FormzStatus status;
+  final UnitStatus unitStatus;
   final String? errorMessage;
   final InstitutionItem? institutionItem;
   final InstitutionItem? oldItem;
@@ -29,6 +30,7 @@ class AddItemState extends Equatable {
     this.suggestionState = AutoSuggestionState.emptyText,
     this.suggestions = const [],
     this.status = FormzStatus.pure,
+    this.unitStatus = UnitStatus.initial,
     this.errorMessage,
     this.institutionItem,
     this.isEdit = false,
@@ -46,6 +48,7 @@ class AddItemState extends Equatable {
     bool? itemFromReference,
     bool? addingNewItem,
     FormzStatus? status,
+    UnitStatus? unitStatus,
     String? errorMessage,
     InstitutionItem? institutionItem,
     InstitutionItem? oldItem,
@@ -59,6 +62,7 @@ class AddItemState extends Equatable {
       suggestions: suggestions ?? this.suggestions,
       itemFromReference: itemFromReference ?? this.itemFromReference,
       status: status ?? this.status,
+      unitStatus: unitStatus ?? this.unitStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       institutionItem: institutionItem ?? this.institutionItem,
       isEdit: isEdit,
@@ -77,6 +81,7 @@ class AddItemState extends Equatable {
         itemName,
         units,
         status,
+        unitStatus,
         errorMessage,
         institutionItem,
         isEdit,
@@ -86,3 +91,5 @@ class AddItemState extends Equatable {
         addingNewItem
       ];
 }
+
+enum UnitStatus { initial, exsists }

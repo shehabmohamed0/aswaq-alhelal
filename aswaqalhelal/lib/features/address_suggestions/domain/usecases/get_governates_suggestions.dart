@@ -7,7 +7,7 @@ import '../../../../core/params/address_suggestion/get_governates_suggestions_pa
 import '../entities/ref_governate.dart';
 import '../repositories/address_suggestions_repository.dart';
 
-@LazySingleton()
+@lazySingleton
 class GetGovernatesSuggestions
     extends UseCase<List<RefGovernate>, GetGovernatesSuggestionsParams> implements GetRefAddressParams{
   final AddressSuggestionsRepository _repository;

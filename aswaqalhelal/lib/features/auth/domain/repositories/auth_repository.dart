@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:root_package/root_package.dart'hide User;
+import 'package:root_package/root_package.dart';
 
 import '../../../../core/params/auth/link_email_and_password_params.dart';
 import '../../../../core/params/auth/phone_exists_params.dart';

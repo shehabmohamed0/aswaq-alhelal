@@ -6,15 +6,13 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/url_launcher.dart';
-import 'package:root_package/routes/routes.dart';
 import 'package:root_package/widgets/ensure_visible_when_focused.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../../l10n/l10n.dart';
-import '../../bloc/sign_in/phone_sign_in_form/phone_sign_in_form_cubit.dart';
+import '../../bloc/sign_in/phone_sign_in_form_cubit.dart';
 import '../verifiy_phone/widgets/otp_widget.dart';
-import 'sign_in_page.dart';
 
 class LoginPage extends HookWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -36,10 +34,10 @@ class LoginPage extends HookWidget {
                 listeners: [
                   BlocListener<PhoneSignInFormCubit, PhoneSignInFormState>(
                     listenWhen: (previous, current) =>
-                        previous.verificationSuccess !=
-                        current.verificationSuccess,
+                        previous.verificationCompleted !=
+                        current.verificationCompleted,
                     listener: (context, state) {
-                      if (state.verificationSuccess) {
+                      if (state.verificationCompleted) {
                         textController.text = state.otp.value;
                       }
                     },
@@ -57,20 +55,7 @@ class LoginPage extends HookWidget {
                         case FormzStatus.submissionSuccess:
                           break;
                         case FormzStatus.submissionCanceled:
-                          showDialog(
-                            context: context,
-                            builder: (context) => DialogH(
-                              btnOkOnPressed: () {
-                                Navigator.pop(context);
-                                Navigator.pushNamed(context, Routes.signup,
-                                    arguments: phoneConrtoller.text);
-                              },
-                              btnCancelOnPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          );
-
+                          // Todo:
                           break;
                         default:
                       }

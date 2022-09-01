@@ -5,9 +5,9 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../../../core/extensions/to_user.dart';
 
 import '../../../../../core/exceptions/google_sign_in_exceptions.dart';
+import '../../../../../core/extensions/to_user.dart';
 import '../../models/user/user_model.dart';
 
 abstract class AuthApiService {
@@ -17,7 +17,7 @@ abstract class AuthApiService {
       required String phoneNumber});
   Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> signInWithPhoneCredential(
-      PhoneAuthCredential phoneAuthCredential);
+      String phoneNumber, PhoneAuthCredential phoneAuthCredential);
 
   Future<void> signInWithGoogle();
   Future<void> linkEmailAndPassword(String email, String password);
@@ -153,8 +153,20 @@ class AuthApiServiceImpl implements AuthApiService {
 
   @override
   Future<void> signInWithPhoneCredential(
-      PhoneAuthCredential phoneAuthCredential) async {
-    await firebaseAuth.signInWithCredential(phoneAuthCredential);
+      String phoneNumber, PhoneAuthCredential phoneAuthCredential) async {
+    final userCredential =
+        await firebaseAuth.signInWithCredential(phoneAuthCredential);
+
+    if (userCredential.additionalUserInfo!.isNewUser) {
+      final token = await userCredential.user!.getIdToken();
+      final userDoc =
+          firestore.doc(FirestorePath.user(userCredential.user!.uid));
+
+      await Future.wait([
+        userDoc.set({'phoneNumber': phoneNumber}),
+        userDoc.collection('tokens').doc(token).set({'token': token})
+      ]);
+    }
   }
 
   @override

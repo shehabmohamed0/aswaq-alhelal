@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
-@JsonSerializable()
 class GeoPoint extends Equatable{
   @JsonKey()
   final double lat;

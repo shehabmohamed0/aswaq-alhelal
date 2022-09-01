@@ -89,6 +89,7 @@ class AddFirstAddressPage extends StatelessWidget {
                           .deleteAddressDetails();
                     },
                   ),
+                  const SizedBox(height: 8),
                   LocationWidget(onGeoPointSelected: (geoPoint) {
                     context
                         .read<AddFirstAddressCubit>()

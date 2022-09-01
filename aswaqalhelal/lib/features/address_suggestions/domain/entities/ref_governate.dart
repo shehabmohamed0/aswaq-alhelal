@@ -6,7 +6,7 @@ class RefGovernate extends RefAddress {
   @JsonKey()
   final String country;
 
-  RefGovernate({
+  const RefGovernate({
     required String id,
     required this.country,
     required String name,

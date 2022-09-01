@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:root_package/core/failures/failures.dart';
 import 'package:root_package/locator/locator.dart';
 

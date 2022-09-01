@@ -31,13 +31,15 @@ class ImageUtils {
       ],
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: ColorManager.primary,
-            toolbarWidgetColor: ColorManager.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+          toolbarTitle: 'Cropper',
+          toolbarColor: ColorManager.primary,
+          toolbarWidgetColor: ColorManager.white,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: true,
+        ),
         IOSUiSettings(
           title: 'Cropper',
+          aspectRatioLockEnabled: true,
         ),
       ],
     );

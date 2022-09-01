@@ -27,7 +27,7 @@ class OTPWidget extends StatelessWidget {
         fontSize: 22,
         color: const Color.fromRGBO(30, 60, 87, 1),
       ),
-    decoration: BoxDecoration(
+      decoration: BoxDecoration(
         color: fillColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.transparent),

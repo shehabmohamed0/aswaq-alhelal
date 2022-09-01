@@ -1,7 +1,7 @@
+import 'package:aswaqalhelal/features/institution_receipts/domain/entities/receipt_item.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 
-import '../../../instutution_items/domain/entities/cart_item.dart';
 
 class Receipt extends Equatable {
   @JsonKey(defaultValue: '')
@@ -11,7 +11,7 @@ class Receipt extends Equatable {
   @JsonKey()
   final String? to;
   @JsonKey()
-  final List<CartItem> items;
+  final List<ReceiptItem> items;
   @JsonKey()
   final double totalPrice;
   @JsonKey()

@@ -19,8 +19,4 @@ class AddNewCity extends UseCase<RefCity, AddNewCityParams>
     return _repository.addNewCity(params);
   }
 
-  @override
-  Future<Either<Failure, RefCity>> execute({required AddNewCityParams params}) {
-    return call(params: params);
-  }
 }

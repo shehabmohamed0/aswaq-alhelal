@@ -15,19 +15,14 @@ import 'l10n/l10n.dart';
 import 'locator/locator.dart';
 import 'router.dart';
 
-Future<void> main() {
-  return BlocOverrides.runZoned(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await Firebase.initializeApp();
-      await RootPackageLocator.configureDependencies();
-      configureDependencies(locator);
-      // UsersPresentation.configureDependencies(locator);
-      // GeoPresentation.configureDependencies(locator);
-      runApp(const App());
-    },
-    blocObserver: AppBlocObserver(),
-  );
+Future<void> main() async {
+  Bloc.observer = AppBlocObserver();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await RootPackageLocator.configureDependencies();
+  configureDependencies(locator);
+  runApp(const App());
 }
 
 class App extends StatelessWidget {

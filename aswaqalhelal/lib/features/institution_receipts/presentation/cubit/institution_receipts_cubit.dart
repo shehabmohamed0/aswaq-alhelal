@@ -1,17 +1,15 @@
-import 'dart:developer';
-
-import 'package:aswaqalhelal/features/institution_receipts/domain/entities/receipt_item.dart';
+import 'package:aswaqalhelal/core/params/institution_receipts/add_institution_receipts_params.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/form_inputs/required_object.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
+import 'package:root_package/root_package.dart' hide Unit;
 
 import '../../../../core/params/add_item/params.dart';
-import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
-import '../../../instutution_items/domain/entities/cart_item.dart';
+import '../../../../core/request_state.dart';
 import '../../../instutution_items/domain/entities/institution_item.dart';
 import '../../../instutution_items/domain/entities/unit.dart';
 import '../../../instutution_items/domain/usecases/get_institution_items.dart';
+import '../../domain/entities/receipt_item.dart';
 import '../../domain/usecases/add_institution_receipts.dart';
 import '../../domain/usecases/get_institution_receipts.dart';
 
@@ -24,76 +22,80 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
     this._getInstitutionItems,
     this._getInstitutionReceipts,
     this._addInstitutionReceipt,
-  ) : super(const InstitutionReceiptsState.initial());
+  ) : super(const InstitutionReceiptsState());
 
   final GetInstitutionItems _getInstitutionItems;
   final GetInstitutionReceipts _getInstitutionReceipts;
   final AddInstitutionReceipt _addInstitutionReceipt;
 
   void getInstitutionItems(String institutionId) async {
-    emit(const InstitutionReceiptsState.loading());
+    emit(state.copyWith(itemsState: RequestState.loading));
     final either = await _getInstitutionItems(
         params: GetInstitutionItemsParams(institutionId));
 
     either.fold(
       (failure) {
-        emit(const InstitutionReceiptsState.error());
+        emit(state.copyWith(itemsState: RequestState.error));
       },
       (items) {
-        emit(InstitutionReceiptsState.itemsLoaded(items: items));
+        emit(state.copyWith(
+            items: items,
+            itemsState: RequestState.loaded,
+            filteredItems: items));
       },
     );
   }
 
   void itemSelected(InstitutionItem item) {
-    state.mapOrNull(
-      itemsLoaded: (state) => emit(state.copyWith(
-          selectedItem: RequiredObject.dirty(item),
-          status: InstitutionReceiptStatus.itemSelected)),
-    );
+    emit(state.copyWith(
+        selectedItem: some(item),
+        status: InstitutionReceiptStatus.itemSelected));
   }
 
   void itemUnselected() {
-    state.mapOrNull(itemsLoaded: (state) {
-      emit(state.copyWith(
-          selectedItem: const RequiredObject.pure(),
-          selectedUnit: const RequiredObject.pure(),
-          quantity: 0,
-          unitPrice: 0,
-          status: InstitutionReceiptStatus.itemUnselected));
-    });
+    emit(state.copyWith(
+        selectedItem: none(),
+        selectedUnit: none(),
+        quantity: 0,
+        unitPrice: 0,
+        status: InstitutionReceiptStatus.itemUnselected));
   }
 
   void unitSelected(Unit unit) {
-    state.mapOrNull(
-      itemsLoaded: (state) => emit(state.copyWith(
-          selectedUnit: RequiredObject.dirty(unit),
-          unitPrice: unit.price,
-          status: InstitutionReceiptStatus.unitSelected)),
-    );
+    emit(state.copyWith(
+        selectedUnit: some(unit),
+        unitPrice: unit.price,
+        status: InstitutionReceiptStatus.unitSelected));
   }
 
   void unitUnselected() {
-    state.mapOrNull(itemsLoaded: (state) {
-      emit(state.copyWith(
-          selectedUnit: const RequiredObject.pure(),
-          quantity: 0,
-          unitPrice: 0,
-          status: InstitutionReceiptStatus.unitUnselected));
-    });
+    emit(state.copyWith(
+        selectedUnit: none(),
+        quantity: 0,
+        unitPrice: 0,
+        status: InstitutionReceiptStatus.unitUnselected));
+  }
+
+  void searchItem(String itemName) {
+    if (itemName.isEmpty) {
+      emit(state.copyWith(filteredItems: state.items));
+      return;
+    }
+    final items = state.items
+        .where((item) =>
+            item.name.toLowerCase().startsWith(itemName.toLowerCase()))
+        .toList();
+
+    emit(state.copyWith(filteredItems: items));
   }
 
   void unitPriceChanged(String unitPrice) {
     final price = double.tryParse(unitPrice);
 
     if (price != null) {
-      state.mapOrNull(
-        itemsLoaded: (state) => emit(state.copyWith(unitPrice: price)),
-      );
+      emit(state.copyWith(unitPrice: price));
     } else {
-      state.mapOrNull(
-        itemsLoaded: (state) => emit(state.copyWith(unitPrice: 0)),
-      );
+      emit(state.copyWith(unitPrice: 0));
     }
   }
 
@@ -101,41 +103,40 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
     final quantity = int.tryParse(quantitySelected);
 
     if (quantity != null) {
-      state.mapOrNull(
-        itemsLoaded: (state) => emit(state.copyWith(quantity: quantity)),
-      );
+      emit(state.copyWith(quantity: quantity));
     } else {
-      state.mapOrNull(
-        itemsLoaded: (state) => emit(state.copyWith(quantity: 0)),
-      );
+      emit(state.copyWith(quantity: 0));
     }
   }
 
   Future<void> submit() async {
-    state.mapOrNull(
-      itemsLoaded: (state) {
-        if (state.status == InstitutionReceiptStatus.loading) return;
-        if (_inValidReceipt(state)) return;
-        final receiptItem = ReceiptItem(
-            item: state.selectedItem.value!,
-            selectedUnit: state.selectedUnit.value!,
-            quantity: state.quantity,
-            selectedPrice: state.unitPrice);
+    if (state.status == InstitutionReceiptStatus.loading) return;
+    if (_inValidReceipt()) return;
+    final receiptItem = ReceiptItem(
+        item: state.selectedItem.toNullable()!,
+        unit: state.selectedUnit.toNullable()!,
+        quantity: state.quantity,
+        price: state.unitPrice);
 
-        emit(state.copyWith(
-            receiptItems: List.of(state.receiptItems)..add(receiptItem)));
-      },
-    );
+    emit(state.copyWith(
+      receiptItems: List.of(state.receiptItems)..add(receiptItem),
+      totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
+      selectedItem: none(),
+      selectedUnit: none(),
+      unitPrice: 0,
+      quantity: 0,
+      status: InstitutionReceiptStatus.receiptItemAdded
+    ));
   }
 
-  bool _inValidReceipt(ItemsLoaded state) {
+  bool _inValidReceipt() {
     emit(state.copyWith(status: InstitutionReceiptStatus.initial));
-    if (state.selectedItem.value == null) {
+    if (state.selectedItem.isNone()) {
       emit(state.copyWith(status: InstitutionReceiptStatus.invalidItem));
       return true;
     }
 
-    if (state.selectedUnit.value == null) {
+    if (state.selectedUnit.isNone()) {
       emit(state.copyWith(status: InstitutionReceiptStatus.invalidUnit));
       return true;
     }
@@ -151,21 +152,35 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
   }
 
   void removeReceiptItem(int index) {
-    state.mapOrNull(
-      itemsLoaded: (state) {
-        emit(state.copyWith(
-            receiptItems: List.of(state.receiptItems)..removeAt(index)));
-      },
+    final toRemove = state.receiptItems[index];
+    emit(state.copyWith(
+        receiptItems: List.of(state.receiptItems)..removeAt(index),
+        totalPrice: state.totalPrice - (toRemove.price * toRemove.quantity)));
+  }
+
+  Future<void> saveReceipt(String institutionId) async {
+    if (state.status == InstitutionReceiptStatus.loading) return;
+    emit(state.copyWith(status: InstitutionReceiptStatus.loading));
+
+    final either = await _addInstitutionReceipt(
+      params: AddInstitutionReceiptParams(
+        from: institutionId,
+        receiptItems: state.receiptItems,
+        to: null,
+        totalPrice: state.totalPrice,
+      ),
+    );
+
+    either.fold(
+      (failure) => emit(state.copyWith(
+          errorMessage: (failure as ServerFailure).message,
+          status: InstitutionReceiptStatus.failure)),
+      (receipt) => emit(
+        state.copyWith(
+          receiptSaved: true,
+          status: InstitutionReceiptStatus.success,
+        ),
+      ),
     );
   }
 }
- // emit(state.copyWith(status: InstitutionReceiptStatus.loading));
-
-        // final either =
-        //     await _addInstitutionReceipt(params: AddInstitutionReceiptParams());
-
-        // either.fold(
-        //     (failure) =>
-        //         emit(state.copyWith(status: InstitutionReceiptStatus.failure)),
-        //     (receipt) =>
-        //         emit(state.copyWith(status: InstitutionReceiptStatus.success)));

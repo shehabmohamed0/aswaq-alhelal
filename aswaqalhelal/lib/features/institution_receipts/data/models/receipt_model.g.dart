@@ -11,7 +11,7 @@ ReceiptModel _$ReceiptModelFromJson(Map<String, dynamic> json) => ReceiptModel(
       from: json['from'] as String,
       to: json['to'] as String?,
       itemsModels: (json['items'] as List<dynamic>)
-          .map((e) => CartItemModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => ReceiptItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       totalPrice: (json['totalPrice'] as num).toDouble(),
       creationTime: const TimestampConverter()

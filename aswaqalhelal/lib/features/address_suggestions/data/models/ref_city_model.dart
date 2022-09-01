@@ -7,7 +7,7 @@ part 'ref_city_model.g.dart';
 
 @JsonSerializable()
 class RefCityModel extends RefCity {
-   RefCityModel(
+   const RefCityModel(
       {required String id,
       required String country,
       required String governate,

@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 enum AutoSuggestionState {
   loading,
   loaded,
+  loadedButCanAdd,
   error,
   emptyText,
   emptyShowNoSuggestions
@@ -115,6 +116,34 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
                 child: CircularProgressIndicator(),
               ),
             );
+      case AutoSuggestionState.loadedButCanAdd:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: widget.suggestions
+              .map<Widget>(
+                (T suggestion) => InkWell(
+                  onTap: () {
+                    widget.onSuggestionSelected(suggestion);
+                  },
+                  child: widget.suggestionBuilder(context, suggestion),
+                ),
+              )
+              .toList()
+            ..add(
+              GestureDetector(
+                onTap: widget.onEmptyWidgetClicked,
+                child: widget.emptyWidget ??
+                    ListTile(
+                      leading: const Icon(
+                        Icons.add,
+                        color: Colors.green,
+                      ),
+                      title: Text(widget.controller.text),
+                    ),
+              ),
+            ),
+        );
+
       case AutoSuggestionState.loaded:
         if (widget.suggestions.isEmpty) {
           return GestureDetector(
@@ -149,7 +178,7 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
       case AutoSuggestionState.emptyText:
         return const SizedBox.shrink();
       case AutoSuggestionState.emptyShowNoSuggestions:
-        return ListTile(
+        return const ListTile(
           title: Text('No Suggestions'),
         );
     }

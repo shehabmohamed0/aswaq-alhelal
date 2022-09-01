@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
 
 import 'ref_address.dart';
 
@@ -9,7 +8,7 @@ class RefCity extends RefAddress {
   @JsonKey()
   final String governate;
 
-  RefCity({
+ const RefCity({
     required String id,
     required this.country,
     required this.governate,

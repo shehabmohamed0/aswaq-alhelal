@@ -44,6 +44,7 @@ dependencies:
   dropdown_search: ^3.0.1
   pdf: ^3.8.3
   open_file: ^3.2.1
+  flutter_typeahead: ^4.0.0
 
   
 
@@ -72,15 +73,15 @@ dependencies:
   #   path: ../geo_logic
   # geo_presentation:
   #   path: ../geo_presentation 
-  flutter_typeahead: ^3.2.7
 dev_dependencies:
 
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
   retrofit_generator: ^4.0.1
-  build_runner: ^2.1.7
-  injectable_generator: 
+  build_runner: ^2.2.0
+  injectable_generator: ^1.5.4
+
   flutter_launcher_icons: ^0.9.2
   freezed: ^2.0.4
 

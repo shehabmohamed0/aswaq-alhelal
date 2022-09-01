@@ -144,8 +144,8 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure.internetConnection());
     }
     try {
-      await authApiService
-          .signInWithPhoneCredential(params.phoneAuthCredential);
+      await authApiService.signInWithPhoneCredential(
+          params.phoneNumber, params.phoneAuthCredential);
       return const Right(null);
     } on FirebaseAuthException catch (e) {
       log(e.code);

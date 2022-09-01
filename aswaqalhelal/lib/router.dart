@@ -11,10 +11,7 @@ import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
 import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
 import 'features/address/presentation/pages/addresses/addresses_page.dart';
 import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
-import 'features/auth/presentation/bloc/sign_up/complete_form/complete_form_cubit.dart';
-import 'features/auth/presentation/bloc/sign_up/sign_up_form/sign_up_form_cubit.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
-import 'features/auth/presentation/pages/signup/sign_up_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
@@ -65,22 +62,6 @@ class AppRouter {
             homePage: HomePage(),
           ),
         );
-      case Routes.signup:
-        return _getPageRoute(
-          arguments: settings.arguments,
-          routeName: settings.name,
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider<SignUpFormCubit>(
-                create: (_) => locator(),
-              ),
-              BlocProvider<CompleteFormCubit>(
-                create: (_) => locator(),
-              ),
-            ],
-            child: const SignUpPage(),
-          ),
-        );
 
       case Routes.settings:
         return _getPageRoute(
@@ -126,7 +107,7 @@ class AppRouter {
             child: const UpdateEmailPage(),
           ),
         );
-     
+
       case Routes.addresses:
         return _getPageRoute(
           arguments: settings.arguments,

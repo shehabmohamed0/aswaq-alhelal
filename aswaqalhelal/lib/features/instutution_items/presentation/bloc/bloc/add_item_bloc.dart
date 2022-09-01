@@ -70,10 +70,17 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       either.fold(
         (failure) =>
             emit(state.copyWith(suggestionState: AutoSuggestionState.error)),
-        (items) => emit(state.copyWith(
-          suggestions: items,
-          suggestionState: AutoSuggestionState.loaded,
-        )),
+        (items) {
+          final index =
+              items.indexWhere((element) => element.name == event.value);
+
+          emit(state.copyWith(
+            suggestions: items,
+            suggestionState: index == -1
+                ? AutoSuggestionState.loadedButCanAdd
+                : AutoSuggestionState.loaded,
+          ));
+        },
       );
     } else {
       emit(state.copyWith(suggestionState: AutoSuggestionState.emptyText));
@@ -107,7 +114,15 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
 
   FutureOr<void> _onAddUnitEvent(
       AddUnitEvent event, Emitter<AddItemState> emit) {
-    emit(state.copyWith(units: List.of(state.units)..add(event.unit)));
+    emit(state.copyWith(unitStatus: UnitStatus.initial));
+
+    final exists = state.units.indexWhere((element) =>
+            element.name.trim().toLowerCase() ==
+            event.unit.name.trim().toLowerCase()) !=
+        -1;
+    exists
+        ? emit(state.copyWith(unitStatus: UnitStatus.exsists))
+        : emit(state.copyWith(units: List.of(state.units)..add(event.unit)));
   }
 
   FutureOr<void> _onRemoveUnitEvent(
@@ -120,19 +135,13 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     if (state.status.isSubmissionInProgress) {
       return;
     }
-    log('1');
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    log('2');
 
     if (!state.isEdit) {
-      log('3');
-
       final index =
           event.currentItems.indexWhere((e) => e.name == state.itemName.value);
 
       if (index != -1) {
-        log('4');
-
         emit(state.copyWith(
             status: FormzStatus.submissionFailure,
             errorMessage: 'Item name already exists.'));
@@ -140,8 +149,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       }
     }
     if (state.isEdit) {
-      log('5');
-
       final either = await _updateInstitutionItem(
         params: UpdateInstitutionItemParams(
           oldItem: state.oldItem!,
@@ -153,7 +160,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
 
       either.fold(
         (failure) {
-          log('6');
           if (failure is ServerFailure) {
             emit(
               state.copyWith(
@@ -171,7 +177,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           }
         },
         (item) {
-          log('7');
           emit(
             state.copyWith(
               status: FormzStatus.submissionSuccess,
@@ -253,7 +258,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       selectedItem: const RequiredObject.pure(),
       itemName: const RequiredString.pure(),
       itemFromReference: false,
-      imageUrl: RequiredObject.pure(),
+      imageUrl: const RequiredObject.pure(),
       addingNewItem: false,
       suggestionState: AutoSuggestionState.emptyText,
     ));

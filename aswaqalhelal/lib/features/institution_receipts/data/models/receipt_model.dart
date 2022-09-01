@@ -1,15 +1,17 @@
+import 'package:aswaqalhelal/features/institution_receipts/data/models/receipt_item_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 
 import '../../../instutution_items/data/models/cart_item_model.dart';
 import '../../domain/entities/receipt.dart';
+
 part 'receipt_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, converters: [TimestampConverter()])
 class ReceiptModel extends Receipt {
   @JsonKey(name: 'items')
-  final List<CartItemModel> itemsModels;
+  final List<ReceiptItemModel> itemsModels;
   const ReceiptModel({
     required String id,
     required String from,

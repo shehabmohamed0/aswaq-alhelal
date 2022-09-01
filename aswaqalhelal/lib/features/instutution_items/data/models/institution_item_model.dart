@@ -7,7 +7,7 @@ import 'unit_model.dart';
 
 part 'institution_item_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class InstitutionItemModel extends InstitutionItem {
   @JsonKey(name: 'units')
   final List<UnitModel> unitModels;

@@ -14,7 +14,7 @@ class AddressesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Addresses'),
+        title:const Text('Addresses'),
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [

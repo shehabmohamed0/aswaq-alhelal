@@ -7,7 +7,7 @@ part 'ref_governate_model.g.dart';
 
 @JsonSerializable()
 class RefGovernateModel extends RefGovernate {
-  RefGovernateModel(
+  const RefGovernateModel(
       {required String id, required String country, required String name})
       : super(
           id: id,

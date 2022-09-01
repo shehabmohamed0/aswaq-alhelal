@@ -30,5 +30,5 @@ Map<String, dynamic> _$InstitutionItemModelToJson(
       'creationTime': const TimestampConverter().toJson(instance.creationTime),
       'id': instance.id,
       'referenceId': instance.referenceId,
-      'units': instance.unitModels,
+      'units': instance.unitModels.map((e) => e.toJson()).toList(),
     };

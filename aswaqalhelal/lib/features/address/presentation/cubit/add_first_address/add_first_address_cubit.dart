@@ -15,7 +15,7 @@ part 'add_first_address_state.dart';
 
 @lazySingleton
 class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
-  AddFirstAddressCubit(this._addFirstAddress) : super(AddFirstAddressState());
+  AddFirstAddressCubit(this._addFirstAddress) : super(const AddFirstAddressState());
   final AddFirstAddress _addFirstAddress;
 
   void addressDetailsChanged(RefAddressDetails refAddressDetails) {
@@ -24,7 +24,7 @@ class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
   }
 
   void deleteAddressDetails() {
-    emit(state.copyWith(refAddressDetails: RequiredObject.dirty(null)));
+    emit(state.copyWith(refAddressDetails: const RequiredObject.dirty(null)));
   }
 
   void descriptionchanged(String val) {

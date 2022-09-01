@@ -10,25 +10,26 @@ enum InstitutionReceiptStatus {
   invalidUnit,
   invalidPrice,
   invalidQuantity,
+  receiptItemAdded,
+  loading,
   success,
-  failure,
-  loading
+  failure
 }
 
 @freezed
 class InstitutionReceiptsState with _$InstitutionReceiptsState {
-  const factory InstitutionReceiptsState.initial() = ReceiptsInitial;
-  const factory InstitutionReceiptsState.loading() = ReceiptsLoading;
-  const factory InstitutionReceiptsState.error() = ItemsError;
-  const factory InstitutionReceiptsState.itemsLoaded({
-    required List<InstitutionItem> items,
-    @Default(RequiredObject.pure())
-        RequiredObject<InstitutionItem> selectedItem,
-    @Default(RequiredObject<Unit>.pure()) RequiredObject<Unit> selectedUnit,
+  const factory InstitutionReceiptsState({
+    @Default([]) List<InstitutionItem> items,
+    @Default([]) List<InstitutionItem> filteredItems,
+    @Default(RequestState.loading) RequestState itemsState,
+    @Default(None()) Option<InstitutionItem> selectedItem,
+    @Default(None()) Option<Unit> selectedUnit,
     @Default(0) double unitPrice,
     @Default(1) int quantity,
+    @Default(0) double totalPrice,
     @Default(InstitutionReceiptStatus.initial) InstitutionReceiptStatus status,
+    @Default(false) receiptSaved,
     @Default([]) List<ReceiptItem> receiptItems,
     String? errorMessage,
-  }) = ItemsLoaded;
+  }) = _InstitutionReceiptsState;
 }
