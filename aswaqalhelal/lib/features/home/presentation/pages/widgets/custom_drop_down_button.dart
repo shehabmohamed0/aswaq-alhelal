@@ -23,7 +23,7 @@ class CustDropDown<T> extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CustDropDownState<T> createState() => _CustDropDownState<T>();
+  State<CustDropDown<T>> createState() => _CustDropDownState<T>();
 }
 
 class _CustDropDownState<T> extends State<CustDropDown<T>>
@@ -37,7 +37,7 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         setState(() {
           dropDownOffset = getOffset();
@@ -55,7 +55,7 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
         }
       }
     });
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
@@ -81,7 +81,7 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
 
   @override
   dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -256,7 +256,11 @@ class CustDropdownMenuItem<T> extends StatelessWidget {
   final T value;
   final Widget child;
 
-  const CustDropdownMenuItem({required this.value, required this.child});
+  const CustDropdownMenuItem({
+    Key? key,
+    required this.value,
+    required this.child,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

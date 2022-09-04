@@ -150,7 +150,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on FirebaseAuthException catch (e) {
       log(e.code);
       return Left(PhoneCredentialFailure.fromCode(e.code));
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(PhoneCredentialFailure());
     }
   }
@@ -158,17 +159,17 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> verifyPhone(VerifyPhoneParams params) async {
     if (!await networkInfo.isConnected) {
-      log('message');
-
       return Left(ServerFailure.internetConnection());
     }
+
     try {
       await authApiService.verifyPhone(
-          phoneNumber: params.phoneNumber,
-          verificationCompleted: params.verificationCompleted,
-          verificationFailed: params.verificationFailed,
-          codeSent: params.codeSent,
-          codeAutoRetrievalTimeout: params.codeAutoRetrievalTimeout);
+        phoneNumber: params.phoneNumber,
+        verificationCompleted: params.verificationCompleted,
+        verificationFailed: params.verificationFailed,
+        codeSent: params.codeSent,
+        codeAutoRetrievalTimeout: params.codeAutoRetrievalTimeout,
+      );
 
       return const Right(null);
     } on FirebaseAuthException catch (e) {

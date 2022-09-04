@@ -50,7 +50,6 @@ class LoginPage extends HookWidget {
                         case FormzStatus.submissionFailure:
                           showErrorSnackBar(context,
                               state.errorMessage ?? intl.authenticationFailure);
-
                           break;
                         case FormzStatus.submissionSuccess:
                           break;

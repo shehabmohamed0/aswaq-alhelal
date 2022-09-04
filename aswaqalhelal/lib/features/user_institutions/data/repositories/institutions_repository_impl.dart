@@ -16,9 +16,9 @@ class UserInstitutionsRepositoryImpl extends UserInstitutionsRepository {
 
   @override
   Future<Either<Failure, List<Institution>>> getInstitutions() async {
-    if (!await _networkInfo.isConnected) {
-      return Left(ServerFailure.internetConnection());
-    }
+    // if (!await _networkInfo.isConnected) {
+    //   return Left(ServerFailure.internetConnection());
+    // }
     try {
       final institutions = await _serviceApi.getInstitutions();
       return Right(institutions);

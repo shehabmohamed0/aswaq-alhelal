@@ -15,7 +15,6 @@ part 'phone_sign_in_form_state.dart';
 
 @injectable
 class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
-
   PhoneSignInFormCubit(
     this._verifyPhoneNumber,
     this._signInWithPhone,
@@ -46,7 +45,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
 
   Future<void> verifiy() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
-
+    log('here');
     final either = await _verifyPhoneNumber(
       params: VerifyPhoneParams(
         phoneNumber: state.phoneNumber.value,
@@ -58,8 +57,11 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
           ));
           log(code.token.toString());
         },
-        codeAutoRetrievalTimeout: (timeOut) {},
+        codeAutoRetrievalTimeout: (timeOut) {
+          log('time out');
+        },
         codeSent: (verificationId, forceSent) {
+          log('code sent');
           emit(state.copyWith(
             verificationId: verificationId,
             status: FormzStatus.valid,
@@ -67,7 +69,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
           ));
         },
         verificationFailed: (authException) {
-          // print(authException.code);
+          log(authException.code);
           final failure = PhoneCredentialFailure.fromCode(authException.code);
           emit(
             state.copyWith(
@@ -79,6 +81,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
       ),
     );
     either.fold((failure) {
+      log('failure message');
       if (failure is ServerFailure) {
         emit(
           state.copyWith(
@@ -87,7 +90,9 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
           ),
         );
       }
-    }, (_) {});
+    }, (_) {
+      log('Success');
+    });
   }
 
   Future<void> signInWithPhoneNumber() async {

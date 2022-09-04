@@ -65,12 +65,12 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
   void initState() {
     super.initState();
     widget.focusNode.addListener(_ensureVisible);
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     widget.focusNode.removeListener(_ensureVisible);
     super.dispose();
   }
@@ -96,7 +96,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
   ///
   /// This method was suggested by Peter Yuen (see discussion).
   ///
-  Future<Null> _keyboardToggled() async {
+  Future<void> _keyboardToggled() async {
     if (mounted) {
       EdgeInsets edgeInsets = MediaQuery.of(context).viewInsets;
       while (mounted && MediaQuery.of(context).viewInsets == edgeInsets) {

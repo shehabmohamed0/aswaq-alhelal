@@ -47,6 +47,6 @@ class PhoneSignInFormState extends Equatable {
         errorMessage,
         codeSent,
         verificationCompleted
-      
+        
       ];
 }

@@ -32,13 +32,17 @@ class AddInstitutionReceiptParams {
                     imageUrl: receiptItem.item.imageUrl,
                     unitModels: receiptItem.item.units
                         .map((unit) => UnitModel(
-                            name: unit.name, quantity: unit.quantity, price: unit.price))
+                            referenceId: unit.referenceId,
+                            name: unit.name,
+                            quantity: unit.quantity,
+                            price: unit.price))
                         .toList(),
                     creationTime: receiptItem.item.creationTime,
                   ),
                   price: receiptItem.price,
                   quantity: receiptItem.quantity,
                   unitModel: UnitModel(
+                    referenceId: receiptItem.unit.referenceId,
                     name: receiptItem.unit.name,
                     price: receiptItem.unit.price,
                     quantity: receiptItem.unit.quantity,

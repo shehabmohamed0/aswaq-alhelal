@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-
 abstract class ProfileApiService {
   Future<void> updateProfile(
       {String? name, DateTime? birthDate, String? gender});
@@ -14,6 +13,7 @@ abstract class ProfileApiService {
   Future<void> updateEmail(
       String newEmail, String currentEmail, String currentPassword);
 }
+
 class FirestorePath {
   static String user(String uid) => 'users/$uid';
   FirestorePath._();

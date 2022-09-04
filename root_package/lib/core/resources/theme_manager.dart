@@ -19,10 +19,8 @@ ThemeData getApplicationTheme() {
     // ripple effect color
     // cardview theme
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: ColorManager.primary,
-      selectionHandleColor: ColorManager.primary
-
-    ),
+        cursorColor: ColorManager.primary,
+        selectionHandleColor: ColorManager.primary),
     cardTheme: CardTheme(
         color: ColorManager.white,
         shadowColor: ColorManager.grey,
@@ -39,7 +37,7 @@ ThemeData getApplicationTheme() {
     ),
     // button theme
     buttonTheme: ButtonThemeData(
-      shape: const StadiumBorder(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       disabledColor: ColorManager.grey1,
       buttonColor: ColorManager.primary,
     ),
@@ -49,11 +47,11 @@ ThemeData getApplicationTheme() {
       style: ElevatedButton.styleFrom(
         textStyle:
             getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s16),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         primary: ColorManager.primary,
         onPrimary: ColorManager.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s100),
+          borderRadius: BorderRadius.circular(AppSize.s8),
         ),
       ),
     ),
@@ -65,7 +63,7 @@ ThemeData getApplicationTheme() {
 
     // input decoration theme (text form field)
     inputDecorationTheme: InputDecorationTheme(
-      // content padding
+      // content padding>
       contentPadding: const EdgeInsets.all(AppPadding.p8),
       // hint styles
       iconColor: ColorManager.primary,
@@ -74,39 +72,20 @@ ThemeData getApplicationTheme() {
       labelStyle:
           getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
       errorStyle: getRegularStyle(color: ColorManager.error),
-
-      // enabled border style
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.s120),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          width: AppSize.s1_5,
         ),
       ),
-      disabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)),
-      // focused border style
+
+      focusColor: ColorManager.primary,
       focusedBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.s120),
+        borderSide: BorderSide(
+          color: ColorManager.primary,
+          width: AppSize.s1_5,
         ),
       ),
-
-      // error border style
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.s120),
-        ),
-      ),
-      // focused border style
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.s120),
-        ),
-      ),
+      // enabled border style
     ),
     // label style
   );

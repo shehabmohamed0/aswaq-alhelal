@@ -132,7 +132,7 @@ class AuthApiServiceImpl implements AuthApiService {
     required void Function(String p1, int? p2) codeSent,
     required void Function(String p1) codeAutoRetrievalTimeout,
   }) async {
-    return firebaseAuth.verifyPhoneNumber(
+    return await firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,

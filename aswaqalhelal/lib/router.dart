@@ -17,7 +17,7 @@ import 'features/distribution_areas/presentation/pages/distribution_areas_page.d
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/institution_receipts/presentation/cubit/institution_receipts_cubit.dart';
 import 'features/institution_receipts/presentation/pages/receipt_page.dart';
-import 'features/instutution_items/presentation/bloc/bloc/add_item_bloc.dart';
+import 'features/instutution_items/presentation/bloc/add_item/add_item_bloc.dart';
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';

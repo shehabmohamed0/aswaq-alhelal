@@ -1,10 +1,9 @@
 import 'package:path/path.dart';
-import 'package:root_package/core/exceptions/file_upload_exception.dart';
+import 'package:root_package/core/utils/upload_file_method.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
-import 'package:root_package/packages/firebase_storage.dart';
 import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/core/utils/upload_file_method.dart';
+
 import '../../../../core/params/add_item/params.dart';
 import '../../domain/entities/institution_item.dart';
 import '../models/institution_item_model.dart';
@@ -42,7 +41,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
 
     final snapshot = await collection
         .where('name', isGreaterThanOrEqualTo: val)
-        .where('name', isLessThanOrEqualTo: val + "~")
+        .where('name', isLessThanOrEqualTo: val + "\uf8ff")
         .orderBy('name')
         .get();
     final items = snapshot.docs.map(ReferenceItemModel.fromFirestore).toList();
@@ -57,6 +56,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
 
     final units = params.units
         .map((e) => {
+              'referenceId': e.referenceId,
               'name': e.name,
               'quantity': e.quantity,
               'price': e.price,
@@ -80,7 +80,6 @@ class ItemsApiServiceImpl implements ItemsApiService {
         referenceId: params.referenceId,
         unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
       );
-      ;
     }
     final either = await Utils.uploadFile(params.imageFile!, 'items/${ref.id}');
     return either.fold<Future<InstitutionItemModel>>(
@@ -123,6 +122,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       final batch = _firestore.batch();
       final units = params.units
           .map((e) => {
+                'referenceId': e.referenceId,
                 'name': e.name,
                 'quantity': e.quantity,
                 'price': e.price,
@@ -181,6 +181,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
     final itemRef = _firestore.doc(FirestorePath.item(params.oldItem.id));
     final units = params.units
         .map((e) => {
+              'referenceId': e.referenceId,
               'name': e.name,
               'quantity': e.quantity,
               'price': e.price,

@@ -21,20 +21,21 @@ class Name extends FormzInput<String, NameValidationError> {
 
   @override
   NameValidationError? validator(String? value) {
-    value ??= '';
-    return value.isNotEmpty ? null : NameValidationError.invalid;
+    return null;
+    // value ??= '';
+    // return value.isNotEmpty ? null : NameValidationError.invalid;
   }
 }
 
 extension NameValidationMessage on Name {
   String? validationMessage() {
-    final intl = locator<RootPackageLocalizations>();
+    // final intl = locator<RootPackageLocalizations>();
 
-    if (invalid) {
-      if (error == NameValidationError.invalid) {
-        return intl.invalidName;
-      }
-    }
+    // if (invalid) {
+    //   if (error == NameValidationError.invalid) {
+    //     return intl.invalidName;
+    //   }
+    // }
     return null;
   }
 }

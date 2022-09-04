@@ -297,6 +297,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
 
   FutureOr<void> _onDeleteImageUrl(
       DeleteImageUrl event, Emitter<AddItemState> emit) {
-    emit(state.copyWith(imageUrl: RequiredObject.pure()));
+    emit(state.copyWith(imageUrl: const RequiredObject.pure()));
   }
 }

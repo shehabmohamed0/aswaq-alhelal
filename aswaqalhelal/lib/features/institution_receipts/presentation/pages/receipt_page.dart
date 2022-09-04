@@ -137,27 +137,26 @@ class InstitutionReceiptPage extends HookWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 DropdownSearch<Unit>(
-                                  mode: Mode.MENU,
-                                  showClearButton: true,
-                                  dropdownSearchDecoration:
-                                      const InputDecoration(
-                                    isDense: false,
-                                    border: OutlineInputBorder(),
+                                  popupProps: PopupProps.menu(
+                                    constraints: BoxConstraints(
+                                        maxHeight:
+                                            MediaQuery.of(context).size.height *
+                                                .3),
                                   ),
-                                  maxHeight: state.selectedItem.fold(
-                                      () => null,
-                                      (item) => item.units.length == 2
-                                          ? 112
-                                          : item.units.length == 3
-                                              ? 168
-                                              : 224),
-                                  popupBarrierDismissible: true,
+
+                                  // maxHeight: state.selectedItem.fold(
+                                  //     () => null,
+                                  //     (item) => item.units.length == 2
+                                  //         ? 112
+                                  //         : item.units.length == 3
+                                  //             ? 168
+                                  //             : 224),
                                   enabled: state.selectedItem.isSome(),
                                   selectedItem: state.selectedUnit.toNullable(),
                                   items: state.selectedItem.isSome()
                                       ? state.selectedItem.toNullable()!.units
                                       : [],
-                                  itemAsString: (unit) => unit!.name,
+                                  itemAsString: (unit) => unit.name,
                                   onChanged: (unit) {
                                     if (unit != null) {
                                       cubit.unitSelected(unit);

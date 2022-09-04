@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -66,6 +68,12 @@ class ItemsWidget extends StatelessWidget {
 
     return BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
         builder: (context, state) {
+
+          if(state.items.first.units.first.referenceId == null){
+            log('asdasdasd');
+          }
+      print(state.items.first.units.first.referenceId);
+
       return _LoadedWidget(
         state: state,
         onItemPressed: onItemPressed,

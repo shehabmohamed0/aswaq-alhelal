@@ -31,7 +31,6 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.business_rounded),
             title: const Text('My institutions'),
           ),
-         
           ListTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.settings);

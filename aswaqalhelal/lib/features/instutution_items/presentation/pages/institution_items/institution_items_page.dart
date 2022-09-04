@@ -15,7 +15,7 @@ import '../../../../user_institutions/domain/entities/institution.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../../domain/entities/cart_item.dart';
 import '../../../domain/entities/institution_item.dart';
-import '../../bloc/bloc/add_item_bloc.dart';
+import '../../bloc/add_item/add_item_bloc.dart';
 import '../../cubit/institution_cart/institution_cart_cubit.dart';
 import '../../cubit/institution_items/instutution_items_cubit.dart';
 import '../add_item/add_items_page.dart';
@@ -100,11 +100,12 @@ class _InstitutionsLoadedWidgetState extends State<_InstitutionsLoadedWidget> {
             ? null
             : [
                 TextButton(
-                  style: TextButton.styleFrom(primary: Colors.black),
+                  child: const Text('Add'),
+
+                  style: TextButton.styleFrom(foregroundColor: Colors.black),
                   onPressed: () {
                     _navigateToAddItem(context);
                   },
-                  child: const Text('Add'),
                 )
               ],
       ),
@@ -200,7 +201,7 @@ class _InstitutionsLoadedWidgetState extends State<_InstitutionsLoadedWidget> {
                               child: FittedBox(
                                 child: Text(
                                   state.cartItems[index].item.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
                                   ),

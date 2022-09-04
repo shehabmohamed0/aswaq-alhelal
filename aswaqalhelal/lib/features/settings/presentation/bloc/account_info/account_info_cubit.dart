@@ -48,7 +48,7 @@ class AccountInfoCubit extends Cubit<AccountInfoState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     final either = await _updateProfile(
         params: UpdateProfileParams(
-      name: state.name.value,
+      name: state.name.value.isEmpty ? null : state.name.value,
       birthDate: state.birthDate,
       gender: state.gender,
     ));

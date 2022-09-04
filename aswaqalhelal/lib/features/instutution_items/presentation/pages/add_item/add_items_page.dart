@@ -13,9 +13,9 @@ import 'package:root_package/widgets/snack_bar.dart';
 import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
-import '../../bloc/bloc/add_item_bloc.dart';
+import '../../bloc/add_item/add_item_bloc.dart';
 import '../../cubit/institution_items/instutution_items_cubit.dart';
-import 'add_unit_bottom_sheet.dart';
+import 'add_unit_dialog.dart';
 import 'widgets/auto_suggest_text_field.dart';
 import 'widgets/image_bottom_sheet_widget.dart';
 import 'widgets/unit_widget.dart';
@@ -301,15 +301,19 @@ class AddItemPage extends HookWidget {
                             onPressed: () async {
                               final unit = await showModalBottomSheet<Unit>(
                                 context: context,
-                                isScrollControlled: true,
                                 shape: const RoundedRectangleBorder(
+                                  side: BorderSide(),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(8),
                                     topRight: Radius.circular(8),
                                   ),
                                 ),
+                                isScrollControlled: true,
                                 builder: (context) => Padding(
-                                  padding: MediaQuery.of(context).viewInsets,
+                                  padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom),
                                   child: const AddUnitBottomSheet(),
                                 ),
                               );

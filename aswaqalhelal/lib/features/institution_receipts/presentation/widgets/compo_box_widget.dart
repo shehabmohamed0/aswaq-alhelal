@@ -132,9 +132,9 @@ class _ComboBoxWidgetState<T> extends State<ComboBoxWidget<T>> {
 
     if (oldWidget.enabled != widget.enabled) return;
     if (oldWidget.suggestions != widget.suggestions) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         hideOverlay();
-        SchedulerBinding.instance?.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
           showOverlay();
         });
       });

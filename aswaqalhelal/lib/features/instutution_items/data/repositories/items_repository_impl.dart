@@ -70,13 +70,14 @@ class ItemsRepositoryImpl extends ItemsRepository {
   @override
   Future<Either<Failure, List<InstitutionItem>>> getInstitutionItems(
       GetInstitutionItemsParams params) async {
-    if (!await _networkInfo.isConnected) {
-      return Left(ServerFailure.internetConnection());
-    }
+    // if (!await _networkInfo.isConnected) {
+    //   return Left(ServerFailure.internetConnection());
+    // }
     try {
       final items = await _itemsApiService.getInstitutionItems(params);
       return Right(items);
     } catch (e) {
+      print(e.toString());
       log(e.toString());
       return Left(ServerFailure.general());
     }

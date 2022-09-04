@@ -31,6 +31,8 @@ class AutoSuggestTextField<T> extends StatefulWidget {
     required this.onRemoveSelection,
     this.enabled = true,
     this.showRemoveButton = true,
+    this.validator,
+    this.autovalidateMode,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -49,6 +51,8 @@ class AutoSuggestTextField<T> extends StatefulWidget {
   final VoidCallback onRemoveSelection;
   final bool showRemoveButton;
   final bool enabled;
+  final String? Function(String?)? validator;
+  final AutovalidateMode? autovalidateMode;
   @override
   State<AutoSuggestTextField<T>> createState() =>
       _AutoSuggestTextFieldState<T>();
@@ -204,9 +208,9 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
     if (oldWidget.enabled != widget.enabled) return;
     if (oldWidget.suggestionState != widget.suggestionState ||
         oldWidget.suggestions != widget.suggestions) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         hideOverlay();
-        SchedulerBinding.instance?.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
           showOverlay();
         });
       });
@@ -226,10 +230,12 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
         children: [
           AbsorbPointer(
             absorbing: !widget.enabled,
-            child: TextField(
+            child: TextFormField(
               focusNode: widget.focusNode,
               controller: widget.controller,
               onChanged: widget.onChanged,
+              autovalidateMode: widget.autovalidateMode,
+              validator: widget.validator,
               decoration: InputDecoration(
                 labelText: widget.labelText,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
