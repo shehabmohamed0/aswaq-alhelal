@@ -47,45 +47,46 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
     final user = context.read<AppBloc>().state.user;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Institutions'),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  Routes.addInstitution,
-                ).then((institution) {
-                  if (institution != null) {
-                    context
-                        .read<UserInstitutionsCubit>()
-                        .addInstitution(institution as Institution);
-                  }
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                alignment: Alignment.center,
-                child: const Text(
-                  'Add',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
+      appBar: AppBar(
+        title: const Text('Institutions'),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                Routes.addInstitution,
+              ).then((institution) {
+                if (institution != null) {
+                  context
+                      .read<UserInstitutionsCubit>()
+                      .addInstitution(institution as Institution);
+                }
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              alignment: Alignment.center,
+              child: const Text(
+                'Add',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: Colors.black87,
                 ),
               ),
-            )
-          ],
-        ),
-        body: InstitutionsGridView(
-          institutions: state.institutions,
-          userId: user.id,
-          onPressed: (institution) {
-            Navigator.pushNamed(context, Routes.ownerInstitution,
-                arguments: institution);
-          },
-        ));
+            ),
+          )
+        ],
+      ),
+      body: InstitutionsGridView(
+        institutions: state.institutions,
+        userId: user.id,
+        onPressed: (institution) {
+          Navigator.pushNamed(context, Routes.ownerInstitution,
+              arguments: institution);
+        },
+      ),
+    );
   }
 }
 

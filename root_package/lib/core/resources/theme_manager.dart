@@ -13,7 +13,7 @@ ThemeData getApplicationTheme() {
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
     scaffoldBackgroundColor: ColorManager.white,
-
+    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: ColorManager.primary),
     progressIndicatorTheme:
         ProgressIndicatorThemeData(color: ColorManager.primary),
     // ripple effect color

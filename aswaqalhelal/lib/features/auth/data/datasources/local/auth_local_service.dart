@@ -10,6 +10,8 @@ abstract class AuthLocalService {
   UserModel currentUser();
   void saveCurrentUser(UserModel userModel);
   void removeUser(UserModel userModel);
+  
+
 }
 
 @LazySingleton(as: AuthLocalService)

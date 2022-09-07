@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/locator/locator.dart';
+import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import 'features/address/domain/entities/address.dart';
@@ -11,6 +11,7 @@ import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
 import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
 import 'features/address/presentation/pages/addresses/addresses_page.dart';
 import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
+import 'features/auth/domain/entities/user.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
@@ -21,6 +22,12 @@ import 'features/instutution_items/presentation/bloc/add_item/add_item_bloc.dart
 import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
 import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
+import 'features/jobs_offers/presentation/cubit/jobs_offers_cubit.dart';
+import 'features/jobs_offers/presentation/pages/jobs_offers_page.dart';
+import 'features/recruitment/presentation/cubit/employees/employees_cubit.dart';
+import 'features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart';
+import 'features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart';
+import 'features/recruitment/presentation/pages/recruitment/recruitment_page.dart';
 import 'features/settings/presentation/bloc/add_email/add_email_cubit.dart';
 import 'features/settings/presentation/bloc/cubit/update_email_cubit.dart';
 import 'features/settings/presentation/pages/account_info/account_info_page.dart';
@@ -36,8 +43,8 @@ import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
-import 'features/user_institutions/presentation/pages/institution/owner_institution.dart';
-import 'features/user_institutions/presentation/pages/institutions/institutions_page.dart';
+import 'features/user_institutions/presentation/pages/institution/user_institution_page.dart';
+import 'features/user_institutions/presentation/pages/user_institutions/user_institutions_page.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -163,7 +170,7 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => const OwnerInstitution(),
+          builder: (context) => const UserInstitutionPage(),
         );
       case Routes.addInstitution:
         return _getPageRoute(
@@ -219,6 +226,35 @@ class AppRouter {
               ..getInstitutionItems((settings.arguments as Institution).id),
             child: const InstitutionReceiptPage(),
           ),
+        );
+      case Routes.recruitment:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            final institution = settings.arguments as Institution;
+            return MultiBlocProvider(providers: [
+              BlocProvider<EmployeesCubit>(
+                  create: (context) => locator()..getEmployees(institution.id)),
+              BlocProvider<InstitutionJobsOffersCubit>(
+                  create: (context) =>
+                      locator()..getSentOffers(institution.id)),
+              BlocProvider<RecruitmentCubit>(create: (context) => locator()),
+            ], child: const RecruitmentPage());
+          },
+        );
+      case Routes.jobsOffers:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            final user = settings.arguments as User;
+
+            return BlocProvider<JobsOffersCubit>(
+              create: (context) => locator()..getJobOffers(user.id),
+              child: const JobsOffersPage(),
+            );
+          },
         );
 
       default:

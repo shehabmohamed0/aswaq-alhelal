@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart';
 
@@ -23,6 +25,7 @@ class UserInstitutionsRepositoryImpl extends UserInstitutionsRepository {
       final institutions = await _serviceApi.getInstitutions();
       return Right(institutions);
     } catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }

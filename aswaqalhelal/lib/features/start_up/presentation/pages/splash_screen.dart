@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
-import '../cubit/cubit/start_up_cubit.dart';
+import '../cubit/start_up/start_up_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -21,4 +21,9 @@ class StartUpRepositoryImpl extends StartUpRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> registerFcmDeviceToken() {
+    throw UnimplementedError();
+  }
 }

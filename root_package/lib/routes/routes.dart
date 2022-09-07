@@ -41,5 +41,9 @@ class Routes {
   static const addDistributionArea = '/addDistributionArea';
 
 
+  static const recruitment = '/recruitment';
+
+  static const jobsOffers = '/jobsOffers';
+
 
 }

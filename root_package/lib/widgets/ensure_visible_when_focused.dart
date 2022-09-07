@@ -110,7 +110,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
   Future<void> _ensureVisible() async {
     // Wait for the keyboard to come into view
     await Future.any([
-      new Future.delayed(const Duration(milliseconds: 300)),
+      Future.delayed(const Duration(milliseconds: 300)),
       _keyboardToggled()
     ]);
 
@@ -118,7 +118,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
     if (!widget.focusNode.hasFocus) {
       return;
     }
-
+    if (!mounted) return;
     // Find the object which has the focus
     final RenderObject object = context.findRenderObject()!;
     final RenderAbstractViewport? viewport = RenderAbstractViewport.of(object);

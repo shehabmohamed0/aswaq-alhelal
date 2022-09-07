@@ -3,4 +3,6 @@ import 'package:root_package/packages/dartz.dart';
 
 abstract class StartUpRepository {
   Future<Either<Failure, bool>> isSeenBefore();
+  Future<Either<Failure,void>> registerFcmDeviceToken();
+
 }

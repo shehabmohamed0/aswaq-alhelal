@@ -4,8 +4,8 @@ import 'package:root_package/routes/routes.dart';
 
 import '../../../domain/entities/institution.dart';
 
-class OwnerInstitution extends StatelessWidget {
-  const OwnerInstitution({Key? key}) : super(key: key);
+class UserInstitutionPage extends StatelessWidget {
+  const UserInstitutionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class OwnerInstitution extends StatelessWidget {
               iconData: Icons.category_rounded,
               title: 'Items',
               onTap: () {
-                 Navigator.pushNamed(context, Routes.institutionItems,
+                Navigator.pushNamed(context, Routes.institutionItems,
                     arguments: institution);
               },
             ),
@@ -40,7 +40,7 @@ class OwnerInstitution extends StatelessWidget {
             ),
             GridTile(
               backgroundColor: Colors.orangeAccent,
-              iconData: Icons.local_shipping,
+              iconData: Icons.local_shipping_rounded,
               title: 'Distribution ',
               onTap: () {
                 Navigator.pushNamed(context, Routes.distributionAreas,
@@ -49,10 +49,19 @@ class OwnerInstitution extends StatelessWidget {
             ),
             GridTile(
               backgroundColor: Colors.lightGreen,
-              iconData: FontAwesomeIcons.moneyBillTransfer,
+              iconData: FontAwesomeIcons.receipt,
               title: 'Receipts',
               onTap: () {
                 Navigator.pushNamed(context, Routes.institutionReceipts,
+                    arguments: institution);
+              },
+            ),
+            GridTile(
+              backgroundColor: Colors.redAccent.shade400,
+              iconData: Icons.people,
+              title: 'Recruitment',
+              onTap: () {
+                Navigator.pushNamed(context, Routes.recruitment,
                     arguments: institution);
               },
             ),

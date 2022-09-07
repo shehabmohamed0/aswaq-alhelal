@@ -11,7 +11,8 @@ class InternationalPhoneTextField extends StatefulWidget {
       this.countries,
       this.suffixIcon,
       required this.onInputChanged,
-      this.isEnabled})
+      this.isEnabled,
+      this.validator})
       : super(key: key);
   final TextEditingController? controller;
   final String? hintText;
@@ -21,7 +22,7 @@ class InternationalPhoneTextField extends StatefulWidget {
   final bool? isEnabled;
   final void Function(PhoneNumber)? onInputChanged;
   final Widget? suffixIcon;
-
+  final String? Function(String?)? validator;
   @override
   State<InternationalPhoneTextField> createState() =>
       _InternationalPhoneTextFieldState();
@@ -67,6 +68,7 @@ class _InternationalPhoneTextFieldState
                   selectorTextStyle: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 16),
                   countries: widget.countries,
+                  validator: widget.validator,
                 );
               } else {
                 return Container();
@@ -81,6 +83,7 @@ class _InternationalPhoneTextFieldState
               errorText: widget.errorText?.call(),
               suffixIcon: widget.suffixIcon,
             ),
+            validator: widget.validator,
             onInputChanged: widget.onInputChanged,
             keyboardType: TextInputType.number,
             spaceBetweenSelectorAndTextField: 8,

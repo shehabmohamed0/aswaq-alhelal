@@ -12,7 +12,6 @@ class StartUpCubit extends Cubit<StartUpState> {
   StartUpCubit(this._checkIfSeenBefore) : super(StartUpInitial());
 
   final CheckIfSeenBefore _checkIfSeenBefore;
-
   Future<void> handleStartUp() async {
     final startUpDelay = Future.delayed(const Duration(milliseconds: 2500));
     final seenBeforeOrFailure =

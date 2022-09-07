@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:root_package/packages/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../../core/exceptions/google_sign_in_exceptions.dart';
@@ -44,12 +46,17 @@ class AuthApiServiceImpl implements AuthApiService {
   FacebookAuth facebookAuth;
   FirebaseFirestore firestore;
   FirebaseFunctions cloudFunctions;
-  AuthApiServiceImpl(
-      {required this.firebaseAuth,
-      required this.googleSignIn,
-      required this.facebookAuth,
-      required this.firestore,
-      required this.cloudFunctions});
+  FirebaseMessaging firebaseMessaging;
+  SharedPreferences sharedPreferences;
+  AuthApiServiceImpl({
+    required this.firebaseAuth,
+    required this.googleSignIn,
+    required this.facebookAuth,
+    required this.firestore,
+    required this.cloudFunctions,
+    required this.firebaseMessaging,
+    required this.sharedPreferences,
+  });
 
   @override
   Future<void> phoneSignUp({
@@ -60,7 +67,11 @@ class AuthApiServiceImpl implements AuthApiService {
     final userCredential =
         await firebaseAuth.signInWithCredential(phoneCredential);
     final userDoc = firestore.doc(FirestorePath.user(userCredential.user!.uid));
-    await userDoc.set({'name': name, 'phoneNumber': phoneNumber});
+    final token = await firebaseMessaging.getToken();
+    await Future.wait([
+      userDoc.set({'name': name, 'phoneNumber': phoneNumber}),
+      userDoc.collection('tokens').doc(token).set({'token': token})
+    ]);
   }
 
   @override
@@ -156,16 +167,30 @@ class AuthApiServiceImpl implements AuthApiService {
       String phoneNumber, PhoneAuthCredential phoneAuthCredential) async {
     final userCredential =
         await firebaseAuth.signInWithCredential(phoneAuthCredential);
-
+    final token = (await firebaseMessaging.getToken())!;
+    final userDoc = firestore.doc(FirestorePath.user(userCredential.user!.uid));
+    final userTokens = userDoc.collection('tokens');
     if (userCredential.additionalUserInfo!.isNewUser) {
-      final token = await userCredential.user!.getIdToken();
-      final userDoc =
-          firestore.doc(FirestorePath.user(userCredential.user!.uid));
-
       await Future.wait([
         userDoc.set({'phoneNumber': phoneNumber}),
-        userDoc.collection('tokens').doc(token).set({'token': token})
+        userTokens.doc(token).set({'token': token}),
+        sharedPreferences.setString('device_fcm_token', token)
       ]);
+    } else {
+      final localToken = sharedPreferences.getString('device_fcm_token');
+      if (localToken == null) {
+        await Future.wait([
+          sharedPreferences.setString('device_fcm_token', token),
+          userTokens.doc(token).set({'token': token})
+        ]);
+      } else {
+        if (localToken == token) return;
+        await Future.wait([
+          sharedPreferences.setString('device_fcm_token', token),
+          userTokens.doc(token).set({'token': token}),
+          userTokens.doc(localToken).delete()
+        ]);
+      }
     }
   }
 
