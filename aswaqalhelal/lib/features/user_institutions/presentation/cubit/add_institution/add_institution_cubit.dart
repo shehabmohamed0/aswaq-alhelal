@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/user.dart';
 import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:aswaqalhelal/features/user_institutions/domain/usecases/add_institution.dart';
 import 'package:bloc/bloc.dart';
@@ -121,7 +122,27 @@ class AddInstitutionCubit extends Cubit<AddInstitutionState> {
         phoneNumbers: List.of(state.phoneNumbers)..add(phoneNumber)));
   }
 
+  void removeEmail(Email email) {
+    emit(state.copyWith(
+        emails: List.of(state.emails)
+          ..removeWhere(
+            (element) => element.value == email.value,
+          )));
+  }
+
+  void removePhoneNumber(PhoneNumber phoneNumber) {
+    emit(state.copyWith(
+        phoneNumbers: List.of(state.phoneNumbers)
+          ..removeWhere(
+            (element) => element.value == phoneNumber.value,
+          )));
+  }
+
   void addressChanged(FullAddressDetails? addressDetails) {
     emit(state.copyWith(address: RequiredObject.dirty(addressDetails)));
+  }
+
+  void initailPhoneNumber(User user) {
+    emit(state.copyWith(phoneNumbers: [PhoneNumber.dirty(user.phoneNumber)]));
   }
 }

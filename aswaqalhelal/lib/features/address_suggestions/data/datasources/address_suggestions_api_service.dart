@@ -37,9 +37,9 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
     log(params.searchText);
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
-        .where('name', isGreaterThanOrEqualTo: params.searchText)
-        .where('name', isLessThanOrEqualTo: params.searchText + "\uf8ff")
-        .orderBy('name')
+        .where('searchText', isGreaterThanOrEqualTo: params.searchText)
+        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .orderBy('searchText')
         .get();
 
     final suggestions =
@@ -54,9 +54,9 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
         .where('governate', isEqualTo: params.governate)
-        .where('name', isGreaterThanOrEqualTo: params.searchText)
-        .where('name', isLessThanOrEqualTo: params.searchText + "\uf8ff")
-        .orderBy('name')
+        .where('searchText', isGreaterThanOrEqualTo: params.searchText)
+        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .orderBy('searchText')
         .get();
 
     final suggestions = snapshot.docs.map(RefCityModel.fromFirestore).toList();
@@ -71,9 +71,9 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
         .where('country', isEqualTo: params.country)
         .where('governate', isEqualTo: params.governate)
         .where('city', isEqualTo: params.city)
-        .where('name', isGreaterThanOrEqualTo: params.searchText)
-        .where('name', isLessThanOrEqualTo: params.searchText + "\uf8ff")
-        .orderBy('name')
+        .where('searchText', isGreaterThanOrEqualTo: params.searchText)
+        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .orderBy('searchText')
         .get();
 
     final suggestions =
@@ -88,7 +88,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
 
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
-        .where('governate', isEqualTo: params.governate)
+        .where('searchText', isEqualTo: params.searchText)
         .limit(1)
         .get();
 
@@ -100,6 +100,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
       final mapData = {
         'country': params.country,
         'name': params.governate,
+        'searchText': params.searchText,
       };
       await doc.set(mapData);
       return RefGovernateModel.fromJson(
@@ -114,7 +115,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
         .where('governate', isEqualTo: params.refGovernate.name)
-        .where('name', isEqualTo: params.city)
+        .where('searchText', isEqualTo: params.searchText)
         .limit(1)
         .get();
 
@@ -126,7 +127,8 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
       final mapData = {
         'country': params.country,
         'governate': params.refGovernate.name,
-        'name': params.city
+        'name': params.city,
+        'searchText': params.searchText,
       };
       await doc.set(mapData);
       return RefCityModel.fromJson(mapData..putIfAbsent('id', () => doc.id));
@@ -142,7 +144,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
         .where('country', isEqualTo: params.country)
         .where('governate', isEqualTo: params.refGovernate.name)
         .where('city', isEqualTo: params.refCity.name)
-        .where('name', isEqualTo: params.neighborhood)
+        .where('searchText', isEqualTo: params.searchText)
         .limit(1)
         .get();
 
@@ -155,7 +157,8 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
         'country': params.country,
         'governate': params.refGovernate.name,
         'city': params.refCity.name,
-        'name': params.neighborhood
+        'name': params.neighborhood,
+        'searchText': params.searchText,
       };
       await doc.set(mapData);
       return RefNeighborhoodModel.fromJson(

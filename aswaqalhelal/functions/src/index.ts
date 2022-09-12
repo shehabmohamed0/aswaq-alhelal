@@ -114,7 +114,7 @@ export const onJobOfferUpdate = functions.firestore.document('jobs_offers/{jobOf
     functions.logger.log(ownerId);
     const state = data.state;
     if (state == 'accepted') {
-        firestore.collection('employees').doc(data['userId']).set({
+        firestore.collection('employees').add({
             'userId': data.userId,
             institutionId: data.institutionId,
             'name': name,

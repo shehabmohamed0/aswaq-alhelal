@@ -52,15 +52,14 @@ class AddressSuggestionsRepositoryImpl implements AddressSuggestionsRepository {
 
   @override
   Future<Either<Failure, RefGovernate>> addNewGovenate(
-      AddNewGovernateParams params) async{
-  try {
+      AddNewGovernateParams params) async {
+    try {
       final refGovernate = await _apiService.addNewGovernate(params);
       return Right(refGovernate);
     } catch (e) {
       print(e);
       return Left(ServerFailure.general());
     }
-
   }
 
   @override
@@ -76,8 +75,8 @@ class AddressSuggestionsRepositoryImpl implements AddressSuggestionsRepository {
 
   @override
   Future<Either<Failure, RefNeighborhood>> addNewNeighborhood(
-      AddNewNeighborhoodParams params) async{
-         try {
+      AddNewNeighborhoodParams params) async {
+    try {
       final refNeighborhood = await _apiService.addNewNeighborhood(params);
       return Right(refNeighborhood);
     } catch (e) {

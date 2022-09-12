@@ -1,4 +1,3 @@
-
 import 'package:aswaqalhelal/features/address/data/models/address_model.dart';
 import 'package:aswaqalhelal/features/address/data/models/geo_point_model.dart';
 import 'package:aswaqalhelal/features/address/domain/entities/entities.dart';

@@ -44,6 +44,8 @@ class Routes {
   static const recruitment = '/recruitment';
 
   static const jobsOffers = '/jobsOffers';
+  static const workInstitutions = '/workInstitutions';
+  static const insPage = '/insPage';
 
 
 }

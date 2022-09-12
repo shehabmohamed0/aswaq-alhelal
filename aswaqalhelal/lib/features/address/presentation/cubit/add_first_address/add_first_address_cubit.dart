@@ -1,9 +1,11 @@
+import 'package:aswaqalhelal/core/params/addresses/add_first_address_params.dart';
 import 'package:aswaqalhelal/features/address/domain/entities/entities.dart';
 import 'package:aswaqalhelal/features/address/domain/usecases/add_first_address.dart';
 import 'package:aswaqalhelal/features/address_suggestions/presentation/DTOs/ref_address_details.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
+import 'package:root_package/core/form_inputs/name.dart';
 import 'package:root_package/core/form_inputs/required_object.dart';
 import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/formz.dart';
@@ -15,7 +17,8 @@ part 'add_first_address_state.dart';
 
 @lazySingleton
 class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
-  AddFirstAddressCubit(this._addFirstAddress) : super(const AddFirstAddressState());
+  AddFirstAddressCubit(this._addFirstAddress)
+      : super(const AddFirstAddressState());
   final AddFirstAddress _addFirstAddress;
 
   void addressDetailsChanged(RefAddressDetails refAddressDetails) {
@@ -43,17 +46,19 @@ class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
     final geoPoint = state.geoPoint.value!;
     final description = state.description.value;
     final either = await _addFirstAddress(
-        params: AddAddressParams(
-      country: 'egypt',
-      governateId: addressDetails.refGovernate.id,
-      governate: addressDetails.refGovernate.name,
-      cityId: addressDetails.refCity.id,
-      city: addressDetails.refCity.name,
-      neighborhoodId: addressDetails.refNeighborhood.id,
-      neighborhood: addressDetails.refNeighborhood.name,
-      description: description,
-      geoPoint: geoPoint,
-    ));
+        params: AddFirstAddressParams(
+            name: state.name.value,
+            addressParams: AddAddressParams(
+              country: 'egypt',
+              governateId: addressDetails.refGovernate.id,
+              governate: addressDetails.refGovernate.name,
+              cityId: addressDetails.refCity.id,
+              city: addressDetails.refCity.name,
+              neighborhoodId: addressDetails.refNeighborhood.id,
+              neighborhood: addressDetails.refNeighborhood.name,
+              description: description,
+              geoPoint: geoPoint,
+            )));
 
     either.fold(
         (failure) => emit(
@@ -63,5 +68,9 @@ class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
             ),
         (address) =>
             emit(state.copyWith(status: FormzStatus.submissionSuccess)));
+  }
+
+  void nameChanged(String value) {
+    emit(state.copyWith(name: Name.dirty(value)));
   }
 }

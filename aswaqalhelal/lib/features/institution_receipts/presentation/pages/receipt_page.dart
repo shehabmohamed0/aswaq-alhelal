@@ -1,7 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
@@ -17,6 +17,7 @@ import 'package:root_package/widgets/snack_bar.dart';
 import '../../../../core/request_state.dart';
 import '../../../instutution_items/domain/entities/institution_item.dart';
 import '../../../instutution_items/domain/entities/unit.dart';
+import '../../../user_institutions/domain/entities/institution.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../domain/entities/receipt_item.dart';
 import '../cubit/institution_receipts_cubit.dart';
@@ -58,6 +59,7 @@ class InstitutionReceiptPage extends HookWidget {
         buildWhen: (previous, current) =>
             previous.itemsState != current.itemsState,
         builder: (context, state) {
+          log(state.receiptSaved.toString());
           switch (state.itemsState) {
             case RequestState.loading:
               return const Center(child: CircularProgressIndicator());
@@ -99,7 +101,8 @@ class InstitutionReceiptPage extends HookWidget {
                               previous.selectedItem != current.selectedItem ||
                               previous.selectedUnit != current.selectedUnit ||
                               previous.quantity != current.quantity ||
-                              previous.unitPrice != current.unitPrice,
+                              previous.unitPrice != current.unitPrice ||
+                              previous.receiptSaved != current.receiptSaved,
                           builder: (context, state) {
                             return Column(
                               mainAxisSize: MainAxisSize.min,
@@ -109,8 +112,9 @@ class InstitutionReceiptPage extends HookWidget {
                                   child: Text(
                                     'Item',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -125,7 +129,8 @@ class InstitutionReceiptPage extends HookWidget {
                                   onRemoveSelection: state.selectedItem.isSome()
                                       ? cubit.itemUnselected
                                       : null,
-                                  enabled: state.selectedItem.isNone(),
+                                  enabled: state.selectedItem.isNone() &&
+                                      !state.receiptSaved,
                                 ),
                                 const SizedBox(height: 8),
                                 const Align(
@@ -139,19 +144,19 @@ class InstitutionReceiptPage extends HookWidget {
                                 DropdownSearch<Unit>(
                                   popupProps: PopupProps.menu(
                                     constraints: BoxConstraints(
-                                        maxHeight:
-                                            MediaQuery.of(context).size.height *
-                                                .3),
+                                      maxHeight: state.selectedItem.fold(
+                                          () => 0,
+                                          (item) => item.units.length == 1
+                                              ? 56
+                                              : item.units.length == 2
+                                                  ? 112
+                                                  : item.units.length == 4
+                                                      ? 168
+                                                      : 224),
+                                    ),
                                   ),
-
-                                  // maxHeight: state.selectedItem.fold(
-                                  //     () => null,
-                                  //     (item) => item.units.length == 2
-                                  //         ? 112
-                                  //         : item.units.length == 3
-                                  //             ? 168
-                                  //             : 224),
-                                  enabled: state.selectedItem.isSome(),
+                                  enabled: state.selectedItem.isSome() &&
+                                      !state.receiptSaved,
                                   selectedItem: state.selectedUnit.toNullable(),
                                   items: state.selectedItem.isSome()
                                       ? state.selectedItem.toNullable()!.units
@@ -186,6 +191,7 @@ class InstitutionReceiptPage extends HookWidget {
                                           TextField(
                                             controller: quantityController,
                                             focusNode: quantityFocusNode,
+                                            enabled: !state.receiptSaved,
                                             onChanged: cubit.quantityChanged,
                                             onSubmitted: (string) {
                                               priceFocusNode.requestFocus();
@@ -200,7 +206,7 @@ class InstitutionReceiptPage extends HookWidget {
                                       ),
                                     ),
                                     const SizedBox(
-                                      width: 20.0,
+                                      width: 14.0,
                                     ),
                                     Flexible(
                                       child: Column(
@@ -218,6 +224,7 @@ class InstitutionReceiptPage extends HookWidget {
                                           TextField(
                                             controller: priceController,
                                             focusNode: priceFocusNode,
+                                            enabled: !state.receiptSaved,
                                             onChanged: cubit.unitPriceChanged,
                                             decoration: const InputDecoration(
                                                 contentPadding:
@@ -243,7 +250,9 @@ class InstitutionReceiptPage extends HookWidget {
                                 SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                        onPressed: cubit.submit,
+                                        onPressed: state.receiptSaved
+                                            ? null
+                                            : cubit.submit,
                                         child: const Text('Add'))),
                               ],
                             );
@@ -275,12 +284,14 @@ class InstitutionReceiptPage extends HookWidget {
                                         ),
                                       ),
                                       ElevatedButton(
-                                          onPressed: () async {
-                                            savePdfFile(
-                                                'fileName',
-                                                await createPdf(
-                                                    state.receiptItems));
-                                          },
+                                          onPressed: !state.receiptSaved
+                                              ? null
+                                              : () async {
+                                                  savePdfFile(
+                                                      'fileName',
+                                                      await createPdf(
+                                                          state.receiptItems));
+                                                },
                                           child: Icon(Icons.print)),
                                       SizedBox(width: 4),
                                       ElevatedButton(
@@ -364,14 +375,18 @@ class InstitutionReceiptPage extends HookWidget {
         break;
       case InstitutionReceiptStatus.itemSelected:
         itemController.text = state.selectedItem.toNullable()!.name;
-        itemFocusNode.unfocus();
+        quantityController.text = state.quantity.toString();
+        priceController.text = state.unitPrice.toString();
+        quantityFocusNode.requestFocus();
+        quantityController.selection = TextSelection(
+            baseOffset: 0, extentOffset: quantityController.text.length);
 
         break;
       case InstitutionReceiptStatus.itemUnselected:
         itemController.clear();
         quantityController.clear();
         priceController.clear();
-        FocusScope.of(context).unfocus();
+        itemFocusNode.requestFocus();
         break;
       case InstitutionReceiptStatus.unitSelected:
         priceController.text =
@@ -382,7 +397,9 @@ class InstitutionReceiptPage extends HookWidget {
       case InstitutionReceiptStatus.unitUnselected:
         quantityController.clear();
         priceController.clear();
-        FocusScope.of(context).unfocus();
+        quantityFocusNode.requestFocus();
+        quantityController.selection = TextSelection(
+            baseOffset: 0, extentOffset: quantityController.text.length);
         break;
       case InstitutionReceiptStatus.invalidItem:
         showDialog(
@@ -442,7 +459,7 @@ class InstitutionReceiptPage extends HookWidget {
         itemController.clear();
         quantityController.clear();
         priceController.clear();
-        FocusScope.of(context).unfocus();
+        itemFocusNode.requestFocus();
 
         break;
       case InstitutionReceiptStatus.loading:

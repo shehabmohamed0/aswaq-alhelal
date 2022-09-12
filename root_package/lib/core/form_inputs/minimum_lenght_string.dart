@@ -28,7 +28,7 @@ class MinimumLengthString
   @override
   MinimumLengthStringValidationError? validator(String? value) {
     value ??= '';
-    return value.length < minimumLength
+    return value.trim().length < minimumLength
         ? MinimumLengthStringValidationError.invalid
         : null;
   }

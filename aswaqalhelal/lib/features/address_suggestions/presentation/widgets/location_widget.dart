@@ -31,68 +31,86 @@ class LocationWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
+                const Text(
                   'Location',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
-                Spacer(),
+                const Spacer(),
                 if (state.status == LocationWidgetStatus.loading)
-                  SizedBox.square(
+                  const SizedBox.square(
                       dimension: 16, child: CircularProgressIndicator())
                 else if (state.status == LocationWidgetStatus.loaded)
-                  Icon(
+                  const Icon(
                     Icons.check,
                     color: Colors.green,
                   )
               ],
             ),
-            SizedBox(height: 8),
-            OutlinedButton.icon(
-              style: OutlinedButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.all(10),
-              ),
-              onPressed: () {
-                context.read<LocationWidgetCubit>().getCurrentLocation();
-              },
-              label: Text(
-                'Current location',
-                style: TextStyle(fontSize: 16),
-              ),
-              icon: const Icon(
-                Icons.my_location,
-                size: 28,
-              ),
-            ),
             const SizedBox(height: 8),
-            OutlinedButton.icon(
-              style: OutlinedButton.styleFrom(
-                primary: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.all(10),
-              ),
-              label: Text('Select location', style: TextStyle(fontSize: 16)),
-              icon: const Icon(
-                Icons.location_on_outlined,
-                size: 28,
-              ),
-              onPressed: () async {
-                Navigator.of(context)
-                    .pushNamed(Routes.selectLocationMap,
-                        arguments: state.geoPointOrNull.toNullable())
-                    .then((geoPoint) {
-                  if (geoPoint != null) {
-                    context
-                        .read<LocationWidgetCubit>()
-                        .geoPointChanged(geoPoint as GeoPoint);
-                  }
-                });
-              },
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: FittedBox(
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                      ),
+                      onPressed: () {
+                        context
+                            .read<LocationWidgetCubit>()
+                            .getCurrentLocation();
+                      },
+                      label: const Text(
+                        'Current location',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      icon: const Icon(
+                        Icons.my_location,
+                        size: 28,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  flex: 1,
+                  child: FittedBox(
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                      ),
+                      label: const Text('Select location ',
+                          style: TextStyle(fontSize: 16)),
+                      icon: const Icon(
+                        Icons.location_on_outlined,
+                        size: 28,
+                      ),
+                      onPressed: () async {
+                        Navigator.of(context)
+                            .pushNamed(Routes.selectLocationMap,
+                                arguments: state.geoPointOrNull.toNullable())
+                            .then((geoPoint) {
+                          if (geoPoint != null) {
+                            context
+                                .read<LocationWidgetCubit>()
+                                .geoPointChanged(geoPoint as GeoPoint);
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         );
       },

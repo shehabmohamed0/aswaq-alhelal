@@ -124,8 +124,10 @@ class AddressStepWidget extends HookWidget {
                           AddressSuggestionsEvent.selectGovernate(governate));
                     },
                     onEmptyWidgetClicked: () {
+                      if (governateController.text.trim().isEmpty) return;
                       bloc.add(AddressSuggestionsEvent.addNewGovernate(
-                          governateController.text));
+                        governateController.text.trim(),
+                      ));
                     },
                     enabled: state.governateOrNull.isNone(),
                     showRemoveButton: state.governateOrNull.isSome(),
@@ -167,8 +169,10 @@ class AddressStepWidget extends HookWidget {
                       bloc.add(AddressSuggestionsEvent.selectCity(city));
                     },
                     onEmptyWidgetClicked: () {
+                      if (cityController.text.trim().isEmpty) return;
+
                       bloc.add(AddressSuggestionsEvent.addNewCity(
-                          cityController.text));
+                          cityController.text.trim()));
                     },
                     enabled: state.governateOrNull.isSome() &&
                         state.cityOrNull.isNone(),
@@ -213,8 +217,10 @@ class AddressStepWidget extends HookWidget {
                           neighborhood));
                     },
                     onEmptyWidgetClicked: () {
+                      if (neighborhoodController.text.trim().isEmpty) return;
+
                       bloc.add(AddressSuggestionsEvent.addNewNeighborhood(
-                          neighborhoodController.text));
+                          neighborhoodController.text.trim()));
                     },
                     enabled: state.cityOrNull.isSome() &&
                         state.neighborhoodOrNull.isNone(),

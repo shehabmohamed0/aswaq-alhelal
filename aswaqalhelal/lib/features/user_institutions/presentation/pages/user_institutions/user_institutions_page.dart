@@ -55,6 +55,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 Routes.addInstitution,
+                arguments: user
               ).then((institution) {
                 if (institution != null) {
                   context

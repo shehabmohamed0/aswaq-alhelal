@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/services/network_info.dart';
@@ -7,6 +9,7 @@ import 'package:root_package/packages/injectable.dart';
 import '../../../../core/exceptions/address/location_exceptions.dart';
 import '../../../../core/failures/address/location_failure.dart';
 import '../../../../core/params/addresses/add_address_params.dart';
+import '../../../../core/params/addresses/add_first_address_params.dart';
 import '../../../../core/params/addresses/delete_address_params.dart';
 import '../../../../core/params/addresses/update_address_params.dart';
 import '../../domain/entities/address.dart';
@@ -35,7 +38,8 @@ class AddressesRepositoryImpl extends AddressesRepository {
     try {
       final address = await _addressesServiceApi.addAddress(params);
       return Right(address);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }
@@ -49,7 +53,9 @@ class AddressesRepositoryImpl extends AddressesRepository {
     try {
       final addresses = await _addressesServiceApi.getAddresses();
       return Right(addresses);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
+
       return Left(ServerFailure.general());
     }
   }
@@ -63,7 +69,8 @@ class AddressesRepositoryImpl extends AddressesRepository {
     try {
       final id = await _addressesServiceApi.removeAddress(params);
       return Right(id);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }
@@ -78,7 +85,8 @@ class AddressesRepositoryImpl extends AddressesRepository {
     try {
       final address = await _addressesServiceApi.updateAddress(params);
       return Right(address);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }
@@ -93,14 +101,15 @@ class AddressesRepositoryImpl extends AddressesRepository {
     } on LocationDeniedForeverException {
       return Left(LocationDeniedForeverFailure(
           'Denied For ever, please go to settings'));
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }
 
   @override
   Future<Either<Failure, Address>> addFirstAddress(
-      AddAddressParams params) async {
+      AddFirstAddressParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
     }
@@ -108,7 +117,8 @@ class AddressesRepositoryImpl extends AddressesRepository {
     try {
       final address = await _addressesServiceApi.addFirstAddress(params);
       return Right(address);
-    } on Exception {
+    } on Exception catch (e) {
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }

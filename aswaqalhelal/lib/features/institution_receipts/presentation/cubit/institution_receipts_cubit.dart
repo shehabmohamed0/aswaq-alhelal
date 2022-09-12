@@ -48,8 +48,12 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
   void itemSelected(InstitutionItem item) {
     emit(state.copyWith(
-        selectedItem: some(item),
-        status: InstitutionReceiptStatus.itemSelected));
+      selectedItem: some(item),
+      status: InstitutionReceiptStatus.itemSelected,
+      selectedUnit: some(item.units.first),
+      quantity: 1,
+      unitPrice: item.units.first.price,
+    ));
   }
 
   void itemUnselected() {
@@ -119,14 +123,13 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
         price: state.unitPrice);
 
     emit(state.copyWith(
-      receiptItems: List.of(state.receiptItems)..add(receiptItem),
-      totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
-      selectedItem: none(),
-      selectedUnit: none(),
-      unitPrice: 0,
-      quantity: 0,
-      status: InstitutionReceiptStatus.receiptItemAdded
-    ));
+        receiptItems: List.of(state.receiptItems)..add(receiptItem),
+        totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
+        selectedItem: none(),
+        selectedUnit: none(),
+        unitPrice: 0,
+        quantity: 0,
+        status: InstitutionReceiptStatus.receiptItemAdded));
   }
 
   bool _inValidReceipt() {

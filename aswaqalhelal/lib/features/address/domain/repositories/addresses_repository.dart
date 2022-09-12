@@ -2,6 +2,7 @@ import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/packages/dartz.dart';
 
 import '../../../../core/params/addresses/add_address_params.dart';
+import '../../../../core/params/addresses/add_first_address_params.dart';
 import '../../../../core/params/addresses/delete_address_params.dart';
 import '../../../../core/params/addresses/update_address_params.dart';
 import '../entities/address.dart';
@@ -16,5 +17,5 @@ abstract class AddressesRepository {
 
   Future<Either<Failure, GeoPoint>> getCurrentLocation();
 
-  Future<Either<Failure, Address>> addFirstAddress(AddAddressParams params);
+  Future<Either<Failure, Address>> addFirstAddress(AddFirstAddressParams params);
 }

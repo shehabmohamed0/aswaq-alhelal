@@ -44,14 +44,13 @@ class VerifiyPhonePage<T extends VerifiyPhoneCubit> extends HookWidget {
                       alignment: Alignment.topCenter,
                       child: Image.asset(
                         'assets/images/otp.png',
-                        package: 'users_presentation',
                       ),
                     ),
                     const SizedBox(height: 32),
                     Text(
                       intl.verificationCode,
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 26, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
                     Text(

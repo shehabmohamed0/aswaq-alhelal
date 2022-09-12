@@ -1,21 +1,24 @@
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/form_inputs.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 
+import '../../../../../user_institutions/domain/entities/institution.dart';
 import '../../../cubit/job_offers/send_job_offers_cubit.dart';
 
-class JobOfferBottomSheet extends HookWidget {
-  const JobOfferBottomSheet({Key? key}) : super(key: key);
-
+class JobOfferBottomSheet extends StatelessWidget {
+  const JobOfferBottomSheet({
+    Key? key,
+    required this.phoneController,
+    required this.focusNode,
+  }) : super(key: key);
+  final TextEditingController phoneController;
+  final FocusNode focusNode;
   @override
   Widget build(BuildContext context) {
     final institution =
         ModalRoute.of(context)!.settings.arguments as Institution;
     final formKey = GlobalKey<FormState>();
-    final phoneController = useTextEditingController();
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Form(
@@ -33,6 +36,7 @@ class JobOfferBottomSheet extends HookWidget {
             ),
             const SizedBox(height: 8),
             InternationalPhoneTextField(
+              focusNode: focusNode,
               onInputChanged: (phoneNumber) {
                 phoneController.text = phoneNumber.phoneNumber ?? '';
               },
@@ -58,7 +62,7 @@ class JobOfferBottomSheet extends HookWidget {
             ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    FocusScope.of(context).unfocus();
+                    focusNode.unfocus();
                     context.read<InstitutionJobsOffersCubit>().sendOffer(
                         institution, phoneController.text, 'Cachier');
                   }

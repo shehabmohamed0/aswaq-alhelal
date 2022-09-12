@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:aswaqalhelal/core/services/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/packages/dartz.dart';
@@ -210,9 +211,9 @@ class DistributionAreasBloc
 
     final either = await _addNewGovernate(
       params: AddNewGovernateParams(
-        country: 'egypt',
-        governate: event.governate,
-      ),
+          country: 'egypt',
+          governate: event.governate.trim(),
+          searchText: event.governate.prepareForSearch()),
     );
     either.fold(
       (failure) {},
@@ -228,10 +229,10 @@ class DistributionAreasBloc
     emit(state.copyWith(addressStatus: AddressSuggestionsStatus.loading));
     final either = await _addNewCity(
       params: AddNewCityParams(
-        country: 'egypt',
-        refGovernate: state.governateOrNull.toNullable()!,
-        city: event.city,
-      ),
+          country: 'egypt',
+          refGovernate: state.governateOrNull.toNullable()!,
+          city: event.city.trim(),
+          searchText: event.city.prepareForSearch()),
     );
     either.fold(
       (failure) {},
@@ -248,11 +249,11 @@ class DistributionAreasBloc
 
     final either = await _addNewNeighborhood(
       params: AddNewNeighborhoodParams(
-        country: 'egypt',
-        refGovernate: state.governateOrNull.toNullable()!,
-        refCity: state.cityOrNull.toNullable()!,
-        neighborhood: event.neighborhood,
-      ),
+          country: 'egypt',
+          refGovernate: state.governateOrNull.toNullable()!,
+          refCity: state.cityOrNull.toNullable()!,
+          neighborhood: event.neighborhood,
+          searchText: event.neighborhood.prepareForSearch()),
     );
     either.fold(
       (failure) {},
@@ -265,14 +266,14 @@ class DistributionAreasBloc
 
   FutureOr<void> _onSearchGovernate(
       SearchGovernate event, Emitter<DistributionAreasState> emit) async {
-    if (event.searchText.length > 2) {
+    if (event.searchText.trim().length > 2) {
       emit(state.copyWith(
         governatesSuggestionState: AutoSuggestionState.loading,
       ));
       final failureOrGovernates = await _getGovernatesSuggestions(
           params: GetGovernatesSuggestionsParams(
         country: 'egypt',
-        searchText: event.searchText,
+        searchText: event.searchText.prepareForSearch(),
       ));
 
       failureOrGovernates.fold(
@@ -321,7 +322,7 @@ class DistributionAreasBloc
 
   FutureOr<void> _onSearchCity(
       SearchCity event, Emitter<DistributionAreasState> emit) async {
-    if (event.searchText.length > 2) {
+    if (event.searchText.trim().length > 2) {
       emit(state.copyWith(
         citiesSuggestionState: AutoSuggestionState.loading,
       ));
@@ -329,7 +330,7 @@ class DistributionAreasBloc
           params: GetCitiesSuggestionsParams(
         country: 'egypt',
         governate: state.governateOrNull.toNullable()!.name,
-        searchText: event.searchText,
+        searchText: event.searchText.prepareForSearch(),
       ));
 
       failureOrGovernates.fold(
@@ -375,17 +376,16 @@ class DistributionAreasBloc
 
   FutureOr<void> _onSearchNeighborhood(
       SearchNeighborhood event, Emitter<DistributionAreasState> emit) async {
-    if (event.searchText.length > 2) {
+    if (event.searchText.trim().length > 2) {
       emit(state.copyWith(
         neighborhoodsSuggestionState: AutoSuggestionState.loading,
       ));
       final failureOrGovernates = await _getNeighborhoodsSuggestions(
           params: GetNeighborhoodsSuggestionsParams(
-        country: 'egypt',
-        governate: state.governateOrNull.toNullable()!.name,
-        city: state.cityOrNull.toNullable()!.name,
-        searchText: event.searchText,
-      ));
+              country: 'egypt',
+              governate: state.governateOrNull.toNullable()!.name,
+              city: state.cityOrNull.toNullable()!.name,
+              searchText: event.searchText.prepareForSearch()));
 
       failureOrGovernates.fold(
         (failure) => emit(state.copyWith(

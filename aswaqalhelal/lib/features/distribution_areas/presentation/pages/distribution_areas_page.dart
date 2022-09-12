@@ -195,8 +195,9 @@ class DistributionAreasPage extends HookWidget {
                                     governate));
                               },
                               onEmptyWidgetClicked: () {
+                                if (governateController.text.trim().isEmpty) return;
                                 bloc.add(DistributionAreasEvent.addNewGovernate(
-                                    governateController.text));
+                                    governateController.text.trim()));
                               },
                               enabled: state.governateOrNull.isNone(),
                               showRemoveButton: state.governateOrNull.isSome(),
@@ -242,8 +243,10 @@ class DistributionAreasPage extends HookWidget {
                                     DistributionAreasEvent.selectCity(city));
                               },
                               onEmptyWidgetClicked: () {
+                                if (cityController.text.trim().isEmpty) return;
                                 bloc.add(DistributionAreasEvent.addNewCity(
-                                    cityController.text));
+                                  cityController.text.trim(),
+                                ));
                               },
                               enabled: state.governateOrNull.isSome() &&
                                   state.cityOrNull.isNone(),
@@ -289,16 +292,18 @@ class DistributionAreasPage extends HookWidget {
                                 title: Text(neighborhood.name),
                               ),
                               onSuggestionSelected: (neighborhood) {
-                                neighborhoodController.text =
-                                    neighborhood.name;
+                                neighborhoodController.text = neighborhood.name;
                                 bloc.add(
                                     DistributionAreasEvent.selectNeighborhood(
                                         neighborhood));
                               },
                               onEmptyWidgetClicked: () {
+                                if (neighborhoodController.text.trim().isEmpty)
+                                  return;
+
                                 bloc.add(
                                     DistributionAreasEvent.addNewNeighborhood(
-                                        neighborhoodController.text));
+                                        neighborhoodController.text.trim()));
                               },
                               enabled: state.cityOrNull.isSome() &&
                                   state.neighborhoodOrNull.isNone(),

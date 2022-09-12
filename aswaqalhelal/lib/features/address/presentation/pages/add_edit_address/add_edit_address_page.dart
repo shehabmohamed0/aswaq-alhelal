@@ -70,6 +70,14 @@ class AddEditAddressPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(children: [
+                LocationWidget(
+                    geoPoint: address?.geoPoint,
+                    onGeoPointSelected: (geoPoint) {
+                      context
+                          .read<AddEditAddressCubit>()
+                          .geoPointChanged(geoPoint);
+                    }),
+                const SizedBox(height: 16),
                 AddressDetailsWidget(
                   fullRefAddress: address?.toRefAddressDetails(),
                   onfullRefAddress: (refAddressDetails) {
@@ -112,14 +120,6 @@ class AddEditAddressPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 18),
-                LocationWidget(
-                    geoPoint: address?.geoPoint,
-                    onGeoPointSelected: (geoPoint) {
-                      context
-                          .read<AddEditAddressCubit>()
-                          .geoPointChanged(geoPoint);
-                    }),
-                const SizedBox(height: 16),
                 SizedBox(
                     width: double.infinity,
                     child:

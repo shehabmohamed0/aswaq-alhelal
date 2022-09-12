@@ -28,7 +28,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(
       event.user.isEmpty
           ? const AppState.unauthenticated()
-          : event.user.address != null
+          : (event.user.address != null && event.user.name != null)
               ? AppState.authenticated(event.user)
               : AppState.authenticatedWithoutAddress(event.user),
     );

@@ -1,6 +1,7 @@
 part of 'add_first_address_cubit.dart';
 
 class AddFirstAddressState extends Equatable {
+  final Name name;
   final RequiredObject<RefAddressDetails> refAddressDetails;
   final RequiredObject<GeoPoint> geoPoint;
   final MinimumLengthString description;
@@ -8,6 +9,7 @@ class AddFirstAddressState extends Equatable {
   final String? errorMessage;
 
   const AddFirstAddressState({
+    this.name = const Name.pure(),
     this.refAddressDetails = const RequiredObject.pure(),
     this.geoPoint = const RequiredObject.pure(),
     this.description = const MinimumLengthString.pure(10),
@@ -16,6 +18,7 @@ class AddFirstAddressState extends Equatable {
   });
 
   AddFirstAddressState copyWith({
+    Name? name,
     RequiredObject<RefAddressDetails>? refAddressDetails,
     RequiredObject<GeoPoint>? geoPoint,
     MinimumLengthString? description,
@@ -23,6 +26,7 @@ class AddFirstAddressState extends Equatable {
     String? errorMessage,
   }) {
     return AddFirstAddressState(
+      name: name ?? this.name,
       refAddressDetails: refAddressDetails ?? this.refAddressDetails,
       geoPoint: geoPoint ?? this.geoPoint,
       description: description ?? this.description,
@@ -33,5 +37,5 @@ class AddFirstAddressState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [refAddressDetails, geoPoint, description, status, errorMessage];
+      [name, refAddressDetails, geoPoint, description, status, errorMessage];
 }

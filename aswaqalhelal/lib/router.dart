@@ -1,3 +1,6 @@
+import 'package:aswaqalhelal/features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
+import 'package:aswaqalhelal/features/work_institutions/presentation/pages/ins_page.dart';
+import 'package:aswaqalhelal/features/work_institutions/presentation/pages/work_institution_page.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -173,10 +176,12 @@ class AppRouter {
           builder: (context) => const UserInstitutionPage(),
         );
       case Routes.addInstitution:
+        final user = settings.arguments as User;
+
         return _getPageRoute(
           routeName: settings.name,
           builder: (context) => BlocProvider<AddInstitutionCubit>(
-            create: (context) => locator(),
+            create: (context) => locator()..initailPhoneNumber(user),
             child: const AddInstitutionPage(),
           ),
         );
@@ -254,6 +259,27 @@ class AppRouter {
               create: (context) => locator()..getJobOffers(user.id),
               child: const JobsOffersPage(),
             );
+          },
+        );
+      case Routes.workInstitutions:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            final user = settings.arguments as User;
+
+            return BlocProvider<WorkInstitutionsCubit>(
+              create: (context) => locator()..getInstitutions(user.id),
+              child: const WorkInstitutionsPage(),
+            );
+          },
+        );
+      case Routes.insPage:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            return const InsPage();
           },
         );
 

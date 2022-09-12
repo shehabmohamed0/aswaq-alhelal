@@ -2,6 +2,7 @@ import 'package:aswaqalhelal/features/address/presentation/cubit/add_first_addre
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
+import 'package:root_package/core/form_inputs/name.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
@@ -18,6 +19,7 @@ class AddFirstAddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AddFirstAddressCubit>();
     return MultiBlocProvider(
       providers: [
         BlocProvider<AddFirstAddressCubit>(
@@ -66,17 +68,43 @@ class AddFirstAddressPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(),
                   const Text(
-                    'Delivery address',
+                    'User name',
                     style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: Colors.black),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 8),
+                  BlocBuilder<AddFirstAddressCubit, AddFirstAddressState>(
+                    buildWhen: (previous, current) =>
+                        previous.name != current.name,
+                    builder: (context, state) {
+                      return TextField(
+                        onChanged: cubit.nameChanged,
+                        decoration: InputDecoration(
+                          errorText: state.name.validationMessage(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 18),
+                  const Text(
+                    'Delivery address',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                  const SizedBox(height: 8),
+                  LocationWidget(onGeoPointSelected: (geoPoint) {
+                    context
+                        .read<AddFirstAddressCubit>()
+                        .geoPointChanged(geoPoint);
+                  }),
+                  const SizedBox(height: 8),
                   AddressDetailsWidget(
                     onfullRefAddress: (refAddressDetails) {
                       context
@@ -90,41 +118,23 @@ class AddFirstAddressPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 8),
-                  LocationWidget(onGeoPointSelected: (geoPoint) {
-                    context
-                        .read<AddFirstAddressCubit>()
-                        .geoPointChanged(geoPoint);
-                  }),
-                  const SizedBox(height: 16),
-                  Theme(
-                    data: ThemeData(
-                      primaryColor: Theme.of(context).primaryColor,
-                      colorScheme: Theme.of(context)
-                          .colorScheme
-                          .copyWith(primary: Theme.of(context).primaryColor),
-                      inputDecorationTheme: const InputDecorationTheme(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    child:
-                        BlocBuilder<AddFirstAddressCubit, AddFirstAddressState>(
-                      buildWhen: (previous, current) =>
-                          previous.description != current.description,
-                      builder: (context, state) {
-                        return TextFormField(
-                          maxLines: null,
-                          keyboardType: TextInputType.multiline,
-                          onChanged: context
-                              .read<AddFirstAddressCubit>()
-                              .descriptionchanged,
-                          decoration: InputDecoration(
-                            labelText: 'Description',
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            errorText: state.description.validationMessage,
-                          ),
-                        );
-                      },
-                    ),
+                  BlocBuilder<AddFirstAddressCubit, AddFirstAddressState>(
+                    buildWhen: (previous, current) =>
+                        previous.description != current.description,
+                    builder: (context, state) {
+                      return TextFormField(
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        onChanged: context
+                            .read<AddFirstAddressCubit>()
+                            .descriptionchanged,
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          errorText: state.description.validationMessage,
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
@@ -138,7 +148,8 @@ class AddFirstAddressPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8))),
                           onPressed: state.refAddressDetails.valid &&
                                   state.description.valid &&
-                                  state.geoPoint.valid
+                                  state.geoPoint.valid &&
+                                  state.name.valid
                               ? () {
                                   context.read<AddFirstAddressCubit>().submit();
                                 }

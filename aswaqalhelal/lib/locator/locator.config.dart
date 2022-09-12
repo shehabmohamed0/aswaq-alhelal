@@ -6,12 +6,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:cloud_firestore/cloud_firestore.dart' as _i54;
-import 'package:cloud_functions/cloud_functions.dart' as _i96;
+import 'package:cloud_functions/cloud_functions.dart' as _i97;
 import 'package:firebase_auth/firebase_auth.dart' as _i53;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i23;
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i95;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i96;
 import 'package:get_it/get_it.dart' as _i1;
-import 'package:google_sign_in/google_sign_in.dart' as _i94;
+import 'package:google_sign_in/google_sign_in.dart' as _i95;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:root_package/core/services/cache_client.dart' as _i13;
 import 'package:root_package/core/services/network_info.dart' as _i21;
@@ -29,24 +29,24 @@ import '../features/address/data/datasources/address_local_data_source.dart'
 import '../features/address/data/datasources/addresses_service_api.dart'
     as _i10;
 import '../features/address/data/repositories/addresses_repository_impl.dart'
-    as _i92;
+    as _i93;
 import '../features/address/domain/repositories/addresses_repository.dart'
-    as _i91;
-import '../features/address/domain/usecases/add_address.dart' as _i135;
-import '../features/address/domain/usecases/add_first_address.dart' as _i137;
-import '../features/address/domain/usecases/get_addresses.dart' as _i103;
-import '../features/address/domain/usecases/get_current_location.dart' as _i104;
-import '../features/address/domain/usecases/remove_address.dart' as _i124;
-import '../features/address/domain/usecases/update_address.dart' as _i131;
+    as _i92;
+import '../features/address/domain/usecases/add_address.dart' as _i138;
+import '../features/address/domain/usecases/add_first_address.dart' as _i140;
+import '../features/address/domain/usecases/get_addresses.dart' as _i104;
+import '../features/address/domain/usecases/get_current_location.dart' as _i105;
+import '../features/address/domain/usecases/remove_address.dart' as _i125;
+import '../features/address/domain/usecases/update_address.dart' as _i132;
 import '../features/address/domain/usecases/usecases.dart' as _i4;
 import '../features/address/presentation/bloc/select_location_map/select_location_map_bloc.dart'
-    as _i125;
+    as _i126;
 import '../features/address/presentation/cubit/add_edit_address/add_edit_address_cubit.dart'
     as _i3;
 import '../features/address/presentation/cubit/add_first_address/add_first_address_cubit.dart'
-    as _i138;
+    as _i141;
 import '../features/address/presentation/cubit/addresses/addresses_cubit.dart'
-    as _i143;
+    as _i146;
 import '../features/address_suggestions/data/datasources/address_suggestions_api_service.dart'
     as _i5;
 import '../features/address_suggestions/data/repositories/address_suggestions_repository_impl.dart'
@@ -54,11 +54,11 @@ import '../features/address_suggestions/data/repositories/address_suggestions_re
 import '../features/address_suggestions/domain/repositories/address_suggestions_repository.dart'
     as _i7;
 import '../features/address_suggestions/domain/usecases/add_new_city.dart'
-    as _i85;
-import '../features/address_suggestions/domain/usecases/add_new_governate.dart'
     as _i86;
-import '../features/address_suggestions/domain/usecases/add_new_neighborhood.dart'
+import '../features/address_suggestions/domain/usecases/add_new_governate.dart'
     as _i87;
+import '../features/address_suggestions/domain/usecases/add_new_neighborhood.dart'
+    as _i88;
 import '../features/address_suggestions/domain/usecases/get_cities_suggetsions.dart'
     as _i24;
 import '../features/address_suggestions/domain/usecases/get_districts_suggestions.dart'
@@ -69,26 +69,26 @@ import '../features/address_suggestions/domain/usecases/usecases.dart' as _i15;
 import '../features/address_suggestions/presentation/bloc/address_suggestions2_bloc.dart'
     as _i14;
 import '../features/address_suggestions/presentation/bloc/address_suggestions_bloc.dart'
-    as _i90;
+    as _i91;
 import '../features/address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart'
-    as _i120;
+    as _i121;
 import '../features/auth/data/datasources/local/auth_local_service.dart'
     as _i12;
-import '../features/auth/data/datasources/remote/auth_api_service.dart' as _i93;
-import '../features/auth/data/repositories/auth_repository_impl.dart' as _i98;
-import '../features/auth/domain/repositories/auth_repository.dart' as _i97;
-import '../features/auth/domain/usecases/is_phone_exists_usecase.dart' as _i116;
-import '../features/auth/domain/usecases/link_email_and_password.dart' as _i119;
-import '../features/auth/domain/usecases/log_out.dart' as _i121;
-import '../features/auth/domain/usecases/phone_sign_up.dart' as _i122;
+import '../features/auth/data/datasources/remote/auth_api_service.dart' as _i94;
+import '../features/auth/data/repositories/auth_repository_impl.dart' as _i99;
+import '../features/auth/domain/repositories/auth_repository.dart' as _i98;
+import '../features/auth/domain/usecases/is_phone_exists_usecase.dart' as _i117;
+import '../features/auth/domain/usecases/link_email_and_password.dart' as _i120;
+import '../features/auth/domain/usecases/log_out.dart' as _i122;
+import '../features/auth/domain/usecases/phone_sign_up.dart' as _i123;
 import '../features/auth/domain/usecases/sign_in_with_email_and_password.dart'
-    as _i126;
-import '../features/auth/domain/usecases/sign_in_with_facebook.dart' as _i127;
-import '../features/auth/domain/usecases/sign_in_with_google.dart' as _i128;
-import '../features/auth/domain/usecases/sign_in_with_phone.dart' as _i129;
+    as _i127;
+import '../features/auth/domain/usecases/sign_in_with_facebook.dart' as _i128;
+import '../features/auth/domain/usecases/sign_in_with_google.dart' as _i129;
+import '../features/auth/domain/usecases/sign_in_with_phone.dart' as _i130;
 import '../features/auth/domain/usecases/usecases.dart' as _i51;
-import '../features/auth/domain/usecases/verify_phone_number.dart' as _i134;
-import '../features/auth/presentation/bloc/app_status/app_bloc.dart' as _i144;
+import '../features/auth/domain/usecases/verify_phone_number.dart' as _i135;
+import '../features/auth/presentation/bloc/app_status/app_bloc.dart' as _i147;
 import '../features/auth/presentation/bloc/sign_in/phone_sign_in_form_cubit.dart'
     as _i50;
 import '../features/distribution_areas/data/datasources/distribution_area_api_service.dart'
@@ -98,9 +98,9 @@ import '../features/distribution_areas/data/repositories/distribution_areas_repo
 import '../features/distribution_areas/domain/repositories/distribution_area_repository.dart'
     as _i19;
 import '../features/distribution_areas/domain/usecases/add_distribution_area.dart'
-    as _i82;
+    as _i83;
 import '../features/distribution_areas/domain/usecases/delete_distribution_area.dart'
-    as _i101;
+    as _i102;
 import '../features/distribution_areas/domain/usecases/get_distribution_areas.dart'
     as _i25;
 import '../features/distribution_areas/domain/usecases/update_distribution_area.dart'
@@ -111,8 +111,8 @@ import '../features/distribution_areas/presentation/bloc/distribution_areas_bloc
 import '../features/home/data/datasources/items_api_servic.dart' as _i39;
 import '../features/home/data/repositories/items_repository_impl.dart' as _i43;
 import '../features/home/domain/repositories/items_repository.dart' as _i42;
-import '../features/home/domain/usecases/get_items.dart' as _i108;
-import '../features/home/presentation/cubit/items/items_cubit.dart' as _i117;
+import '../features/home/domain/usecases/get_items.dart' as _i109;
+import '../features/home/presentation/cubit/items/items_cubit.dart' as _i118;
 import '../features/home/presentation/cubit/items_widget/items_widget_cubit.dart'
     as _i44;
 import '../features/institution_receipts/data/datasources/institution_receipts_api_service.dart'
@@ -122,11 +122,11 @@ import '../features/institution_receipts/data/repositories/institution_receipts_
 import '../features/institution_receipts/domain/repositories/institution_receipts_repository.dart'
     as _i31;
 import '../features/institution_receipts/domain/usecases/add_institution_receipts.dart'
-    as _i84;
+    as _i85;
 import '../features/institution_receipts/domain/usecases/get_institution_receipts.dart'
-    as _i107;
+    as _i108;
 import '../features/institution_receipts/presentation/cubit/institution_receipts_cubit.dart'
-    as _i114;
+    as _i115;
 import '../features/institutions/data/datasources/institutions_api_service.dart'
     as _i33;
 import '../features/institutions/data/repositories/institutions_repository_impl.dart'
@@ -134,9 +134,9 @@ import '../features/institutions/data/repositories/institutions_repository_impl.
 import '../features/institutions/domain/repositories/institutions_repository.dart'
     as _i34;
 import '../features/institutions/domain/usecases/get_institutions.dart'
-    as _i102;
+    as _i103;
 import '../features/institutions/presentation/cubit/institutions_cubit.dart'
-    as _i115;
+    as _i116;
 import '../features/instutution_items/data/datasources/items_api_service.dart'
     as _i38;
 import '../features/instutution_items/data/datasources/units_api_service.dart'
@@ -150,26 +150,26 @@ import '../features/instutution_items/domain/repositories/items_repository.dart'
 import '../features/instutution_items/domain/repositories/units_repository.dart'
     as _i70;
 import '../features/instutution_items/domain/usecases/add_instition_item.dart'
-    as _i83;
+    as _i84;
 import '../features/instutution_items/domain/usecases/add_ref_and_institution_item.dart'
-    as _i88;
-import '../features/instutution_items/domain/usecases/add_unit_to_reference.dart'
     as _i89;
+import '../features/instutution_items/domain/usecases/add_unit_to_reference.dart'
+    as _i90;
 import '../features/instutution_items/domain/usecases/get_institution_items.dart'
-    as _i106;
+    as _i107;
 import '../features/instutution_items/domain/usecases/get_unit_suggestions.dart'
-    as _i111;
+    as _i112;
 import '../features/instutution_items/domain/usecases/search_item.dart' as _i64;
 import '../features/instutution_items/domain/usecases/update_institution_item.dart'
     as _i75;
 import '../features/instutution_items/presentation/bloc/add_item/add_item_bloc.dart'
-    as _i141;
+    as _i144;
 import '../features/instutution_items/presentation/bloc/add_unit/add_unit_bloc.dart'
-    as _i142;
+    as _i145;
 import '../features/instutution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart'
     as _i29;
 import '../features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart'
-    as _i112;
+    as _i113;
 import '../features/instutution_items/presentation/cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart'
     as _i37;
 import '../features/jobs_offers/data/datasources/jobs_offers_api_service.dart'
@@ -178,28 +178,28 @@ import '../features/jobs_offers/data/repositories/jobs_offers_repository_impl.da
     as _i47;
 import '../features/jobs_offers/domain/repositories/jobs_offers_repository.dart'
     as _i46;
-import '../features/jobs_offers/domain/usecases/accept_job_offer.dart' as _i80;
+import '../features/jobs_offers/domain/usecases/accept_job_offer.dart' as _i81;
 import '../features/jobs_offers/domain/usecases/decline_job_offer.dart'
-    as _i100;
-import '../features/jobs_offers/domain/usecases/get_jobs_offers.dart' as _i109;
+    as _i101;
+import '../features/jobs_offers/domain/usecases/get_jobs_offers.dart' as _i110;
 import '../features/jobs_offers/presentation/cubit/jobs_offers_cubit.dart'
-    as _i118;
+    as _i119;
 import '../features/recruitment/data/datasources/recruitment_api_service.dart'
     as _i57;
 import '../features/recruitment/data/repositories/recruitment_repository_impl.dart'
     as _i61;
 import '../features/recruitment/domain/repositories/recruitment_repository.dart'
     as _i60;
-import '../features/recruitment/domain/usecases/get_employees.dart' as _i105;
+import '../features/recruitment/domain/usecases/get_employees.dart' as _i106;
 import '../features/recruitment/domain/usecases/get_sent_job_offers.dart'
-    as _i110;
+    as _i111;
 import '../features/recruitment/domain/usecases/remove_employee.dart' as _i62;
 import '../features/recruitment/domain/usecases/remove_job_offer.dart' as _i63;
 import '../features/recruitment/domain/usecases/send_job_offer.dart' as _i65;
 import '../features/recruitment/presentation/cubit/employees/employees_cubit.dart'
-    as _i145;
+    as _i148;
 import '../features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart'
-    as _i113;
+    as _i114;
 import '../features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart'
     as _i59;
 import '../features/settings/data/datasources/profile_api_service.dart' as _i52;
@@ -211,13 +211,13 @@ import '../features/settings/domain/usecases/update_email.dart' as _i73;
 import '../features/settings/domain/usecases/update_phone_number.dart' as _i76;
 import '../features/settings/domain/usecases/update_profile.dart' as _i78;
 import '../features/settings/presentation/bloc/account_info/account_info_cubit.dart'
-    as _i81;
+    as _i82;
 import '../features/settings/presentation/bloc/add_email/add_email_cubit.dart'
-    as _i147;
+    as _i151;
 import '../features/settings/presentation/bloc/add_email/add_email_verification_cubit.dart'
-    as _i136;
+    as _i139;
 import '../features/settings/presentation/bloc/change_phone/update_phone_cubit.dart'
-    as _i149;
+    as _i153;
 import '../features/settings/presentation/bloc/change_phone/update_phone_verification_cubit.dart'
     as _i77;
 import '../features/settings/presentation/bloc/cubit/update_email_cubit.dart'
@@ -227,28 +227,39 @@ import '../features/start_up/data/repositories/start_up_repository_impl.dart'
     as _i68;
 import '../features/start_up/domain/repositories/start_up_repository.dart'
     as _i67;
-import '../features/start_up/domain/usecases/check_if_seen_before.dart' as _i99;
+import '../features/start_up/domain/usecases/check_if_seen_before.dart'
+    as _i100;
 import '../features/start_up/domain/usecases/register_fcm_device_token.dart'
-    as _i123;
+    as _i124;
 import '../features/start_up/presentation/cubit/start_up/start_up_cubit.dart'
-    as _i130;
+    as _i131;
 import '../features/user_institutions/data/datasources/user_institutions_service_api.dart'
     as _i79;
 import '../features/user_institutions/data/repositories/institutions_repository_impl.dart'
-    as _i133;
+    as _i134;
 import '../features/user_institutions/domain/repositories/institutions_repository.dart'
-    as _i132;
+    as _i133;
 import '../features/user_institutions/domain/usecases/add_institution.dart'
-    as _i139;
+    as _i142;
 import '../features/user_institutions/domain/usecases/get_user_institutions.dart'
-    as _i146;
+    as _i149;
 import '../features/user_institutions/domain/usecases/update_institution.dart'
-    as _i148;
+    as _i152;
 import '../features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart'
-    as _i140;
+    as _i143;
 import '../features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart'
+    as _i154;
+import '../features/work_institutions/data/datasources/work_institution_api_service.dart'
+    as _i80;
+import '../features/work_institutions/data/repositories/work_institution_repository_impl.dart'
+    as _i137;
+import '../features/work_institutions/domain/usecases/get_work_institutions.dart'
     as _i150;
-import 'register_module.dart' as _i151; // ignore_for_file: unnecessary_lambdas
+import '../features/work_institutions/domain/work_institution_repository.dart'
+    as _i136;
+import '../features/work_institutions/presentation/cubit/work_institutions_cubit.dart'
+    as _i155;
+import 'register_module.dart' as _i156; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -380,162 +391,171 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i79.UserInstitutionsServiceApi>(() =>
       _i79.UserInstitutionsServiceApiImpl(
           get<_i11.FirebaseAuth>(), get<_i6.FirebaseFirestore>()));
-  gh.lazySingleton<_i80.AcceptJobOffer>(
-      () => _i80.AcceptJobOffer(get<_i46.JobsOffersRepository>()));
-  gh.factory<_i81.AccountInfoCubit>(
-      () => _i81.AccountInfoCubit(get<_i78.UpdateProfile>()));
-  gh.lazySingleton<_i82.AddDistributionArea>(
-      () => _i82.AddDistributionArea(get<_i19.DistributionAreasRepository>()));
-  gh.lazySingleton<_i83.AddInstitutionItem>(
-      () => _i83.AddInstitutionItem(get<_i40.ItemsRepository>()));
-  gh.lazySingleton<_i84.AddInstitutionReceipt>(() =>
-      _i84.AddInstitutionReceipt(get<_i31.InstitutionReceiptsRepository>()));
-  gh.lazySingleton<_i85.AddNewCity>(
-      () => _i85.AddNewCity(get<_i7.AddressSuggestionsRepository>()));
-  gh.lazySingleton<_i86.AddNewGovernate>(
-      () => _i86.AddNewGovernate(get<_i7.AddressSuggestionsRepository>()));
-  gh.lazySingleton<_i87.AddNewNeighborhood>(
-      () => _i87.AddNewNeighborhood(get<_i7.AddressSuggestionsRepository>()));
-  gh.lazySingleton<_i88.AddRefAndInstitutionItem>(
-      () => _i88.AddRefAndInstitutionItem(get<_i40.ItemsRepository>()));
-  gh.lazySingleton<_i89.AddUnitToReference>(
-      () => _i89.AddUnitToReference(get<_i70.UnitsRepository>()));
-  gh.factory<_i90.AddressSuggestionsBloc>(() => _i90.AddressSuggestionsBloc(
+  gh.lazySingleton<_i80.WorkIstitutionsApiService>(
+      () => _i80.WorkIstitutionsApiServiceImpl(get<_i6.FirebaseFirestore>()));
+  gh.lazySingleton<_i81.AcceptJobOffer>(
+      () => _i81.AcceptJobOffer(get<_i46.JobsOffersRepository>()));
+  gh.factory<_i82.AccountInfoCubit>(
+      () => _i82.AccountInfoCubit(get<_i78.UpdateProfile>()));
+  gh.lazySingleton<_i83.AddDistributionArea>(
+      () => _i83.AddDistributionArea(get<_i19.DistributionAreasRepository>()));
+  gh.lazySingleton<_i84.AddInstitutionItem>(
+      () => _i84.AddInstitutionItem(get<_i40.ItemsRepository>()));
+  gh.lazySingleton<_i85.AddInstitutionReceipt>(() =>
+      _i85.AddInstitutionReceipt(get<_i31.InstitutionReceiptsRepository>()));
+  gh.lazySingleton<_i86.AddNewCity>(
+      () => _i86.AddNewCity(get<_i7.AddressSuggestionsRepository>()));
+  gh.lazySingleton<_i87.AddNewGovernate>(
+      () => _i87.AddNewGovernate(get<_i7.AddressSuggestionsRepository>()));
+  gh.lazySingleton<_i88.AddNewNeighborhood>(
+      () => _i88.AddNewNeighborhood(get<_i7.AddressSuggestionsRepository>()));
+  gh.lazySingleton<_i89.AddRefAndInstitutionItem>(
+      () => _i89.AddRefAndInstitutionItem(get<_i40.ItemsRepository>()));
+  gh.lazySingleton<_i90.AddUnitToReference>(
+      () => _i90.AddUnitToReference(get<_i70.UnitsRepository>()));
+  gh.factory<_i91.AddressSuggestionsBloc>(() => _i91.AddressSuggestionsBloc(
       get<_i26.GetGovernatesSuggestions>(),
       get<_i24.GetCitiesSuggestions>(),
       get<_i27.GetNeighborhoodsSuggestions>(),
-      get<_i86.AddNewGovernate>(),
-      get<_i85.AddNewCity>(),
-      get<_i87.AddNewNeighborhood>()));
-  gh.lazySingleton<_i91.AddressesRepository>(() => _i92.AddressesRepositoryImpl(
+      get<_i87.AddNewGovernate>(),
+      get<_i86.AddNewCity>(),
+      get<_i88.AddNewNeighborhood>()));
+  gh.lazySingleton<_i92.AddressesRepository>(() => _i93.AddressesRepositoryImpl(
       get<_i10.AddressesServiceApi>(),
       get<_i21.NetworkInfo>(),
       get<_i9.AddressesLocalDataSource>()));
-  gh.lazySingleton<_i93.AuthApiService>(() => _i93.AuthApiServiceImpl(
+  gh.lazySingleton<_i94.AuthApiService>(() => _i94.AuthApiServiceImpl(
       firebaseAuth: get<_i53.FirebaseAuth>(),
-      googleSignIn: get<_i94.GoogleSignIn>(),
-      facebookAuth: get<_i95.FacebookAuth>(),
+      googleSignIn: get<_i95.GoogleSignIn>(),
+      facebookAuth: get<_i96.FacebookAuth>(),
       firestore: get<_i54.FirebaseFirestore>(),
-      cloudFunctions: get<_i96.FirebaseFunctions>(),
+      cloudFunctions: get<_i97.FirebaseFunctions>(),
       firebaseMessaging: get<_i23.FirebaseMessaging>(),
       sharedPreferences: get<_i49.SharedPreferences>()));
-  gh.lazySingleton<_i97.AuthRepository>(() => _i98.AuthRepositoryImpl(
-      authApiService: get<_i93.AuthApiService>(),
+  gh.lazySingleton<_i98.AuthRepository>(() => _i99.AuthRepositoryImpl(
+      authApiService: get<_i94.AuthApiService>(),
       authLocalService: get<_i12.AuthLocalService>(),
       networkInfo: get<_i36.NetworkInfo>()));
-  gh.lazySingleton<_i99.CheckIfSeenBefore>(
-      () => _i99.CheckIfSeenBefore(get<_i67.StartUpRepository>()));
-  gh.lazySingleton<_i100.DeclineJobOffer>(
-      () => _i100.DeclineJobOffer(get<_i46.JobsOffersRepository>()));
-  gh.lazySingleton<_i101.DeleteDistributionArea>(() =>
-      _i101.DeleteDistributionArea(get<_i19.DistributionAreasRepository>()));
-  gh.lazySingleton<_i102.GetAddressInstitutions>(
-      () => _i102.GetAddressInstitutions(get<_i34.InstitutionsRepository>()));
-  gh.lazySingleton<_i103.GetAddresses>(
-      () => _i103.GetAddresses(get<_i91.AddressesRepository>()));
-  gh.lazySingleton<_i104.GetCurrentLocation>(
-      () => _i104.GetCurrentLocation(get<_i91.AddressesRepository>()));
-  gh.lazySingleton<_i105.GetEmployees>(
-      () => _i105.GetEmployees(get<_i60.RecruitmentRepository>()));
-  gh.lazySingleton<_i106.GetInstitutionItems>(
-      () => _i106.GetInstitutionItems(get<_i40.ItemsRepository>()));
-  gh.lazySingleton<_i107.GetInstitutionReceipts>(() =>
-      _i107.GetInstitutionReceipts(get<_i31.InstitutionReceiptsRepository>()));
-  gh.lazySingleton<_i108.GetItems>(
-      () => _i108.GetItems(get<_i42.ItemsRepository>()));
-  gh.lazySingleton<_i109.GetJobsOffers>(
-      () => _i109.GetJobsOffers(get<_i46.JobsOffersRepository>()));
-  gh.lazySingleton<_i110.GetSentJobOffers>(
-      () => _i110.GetSentJobOffers(get<_i60.RecruitmentRepository>()));
-  gh.lazySingleton<_i111.GetUnitSuggestions>(
-      () => _i111.GetUnitSuggestions(get<_i70.UnitsRepository>()));
-  gh.factory<_i112.InstitutionItemsCubit>(
-      () => _i112.InstitutionItemsCubit(get<_i106.GetInstitutionItems>()));
-  gh.factory<_i113.InstitutionJobsOffersCubit>(() =>
-      _i113.InstitutionJobsOffersCubit(get<_i110.GetSentJobOffers>(),
+  gh.lazySingleton<_i100.CheckIfSeenBefore>(
+      () => _i100.CheckIfSeenBefore(get<_i67.StartUpRepository>()));
+  gh.lazySingleton<_i101.DeclineJobOffer>(
+      () => _i101.DeclineJobOffer(get<_i46.JobsOffersRepository>()));
+  gh.lazySingleton<_i102.DeleteDistributionArea>(() =>
+      _i102.DeleteDistributionArea(get<_i19.DistributionAreasRepository>()));
+  gh.lazySingleton<_i103.GetAddressInstitutions>(
+      () => _i103.GetAddressInstitutions(get<_i34.InstitutionsRepository>()));
+  gh.lazySingleton<_i104.GetAddresses>(
+      () => _i104.GetAddresses(get<_i92.AddressesRepository>()));
+  gh.lazySingleton<_i105.GetCurrentLocation>(
+      () => _i105.GetCurrentLocation(get<_i92.AddressesRepository>()));
+  gh.lazySingleton<_i106.GetEmployees>(
+      () => _i106.GetEmployees(get<_i60.RecruitmentRepository>()));
+  gh.lazySingleton<_i107.GetInstitutionItems>(
+      () => _i107.GetInstitutionItems(get<_i40.ItemsRepository>()));
+  gh.lazySingleton<_i108.GetInstitutionReceipts>(() =>
+      _i108.GetInstitutionReceipts(get<_i31.InstitutionReceiptsRepository>()));
+  gh.lazySingleton<_i109.GetItems>(
+      () => _i109.GetItems(get<_i42.ItemsRepository>()));
+  gh.lazySingleton<_i110.GetJobsOffers>(
+      () => _i110.GetJobsOffers(get<_i46.JobsOffersRepository>()));
+  gh.lazySingleton<_i111.GetSentJobOffers>(
+      () => _i111.GetSentJobOffers(get<_i60.RecruitmentRepository>()));
+  gh.lazySingleton<_i112.GetUnitSuggestions>(
+      () => _i112.GetUnitSuggestions(get<_i70.UnitsRepository>()));
+  gh.factory<_i113.InstitutionItemsCubit>(
+      () => _i113.InstitutionItemsCubit(get<_i107.GetInstitutionItems>()));
+  gh.factory<_i114.InstitutionJobsOffersCubit>(() =>
+      _i114.InstitutionJobsOffersCubit(get<_i111.GetSentJobOffers>(),
           get<_i65.SendJobOffer>(), get<_i63.RemoveJobOffer>()));
-  gh.factory<_i114.InstitutionReceiptsCubit>(() =>
-      _i114.InstitutionReceiptsCubit(
-          get<_i106.GetInstitutionItems>(),
-          get<_i107.GetInstitutionReceipts>(),
-          get<_i84.AddInstitutionReceipt>()));
-  gh.factory<_i115.InstitutionsCubit>(
-      () => _i115.InstitutionsCubit(get<_i102.GetAddressInstitutions>()));
-  gh.factory<_i116.IsPhoneExistsUsecase>(
-      () => _i116.IsPhoneExistsUsecase(get<_i97.AuthRepository>()));
-  gh.factory<_i117.ItemsCubit>(() => _i117.ItemsCubit(get<_i108.GetItems>()));
-  gh.factory<_i118.JobsOffersCubit>(() => _i118.JobsOffersCubit(
-      get<_i109.GetJobsOffers>(),
-      get<_i80.AcceptJobOffer>(),
-      get<_i100.DeclineJobOffer>()));
-  gh.lazySingleton<_i119.LinkEmailAndPassword>(
-      () => _i119.LinkEmailAndPassword(get<_i97.AuthRepository>()));
-  gh.factory<_i120.LocationWidgetCubit>(
-      () => _i120.LocationWidgetCubit(get<_i104.GetCurrentLocation>()));
-  gh.lazySingleton<_i121.LogOut>(
-      () => _i121.LogOut(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i122.PhoneSignUp>(
-      () => _i122.PhoneSignUp(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i123.RegisterFcmDeviceToken>(
-      () => _i123.RegisterFcmDeviceToken(get<_i67.StartUpRepository>()));
-  gh.lazySingleton<_i124.RemoveAddress>(
-      () => _i124.RemoveAddress(get<_i91.AddressesRepository>()));
-  gh.factory<_i125.SelectLocationMapBloc>(
-      () => _i125.SelectLocationMapBloc(get<_i104.GetCurrentLocation>()));
-  gh.lazySingleton<_i126.SignInWithEmailAndPassword>(
-      () => _i126.SignInWithEmailAndPassword(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i127.SignInWithFacebook>(
-      () => _i127.SignInWithFacebook(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i128.SignInWithGoogle>(
-      () => _i128.SignInWithGoogle(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i129.SignInWithPhone>(
-      () => _i129.SignInWithPhone(get<_i97.AuthRepository>()));
-  gh.factory<_i130.StartUpCubit>(
-      () => _i130.StartUpCubit(get<_i99.CheckIfSeenBefore>()));
-  gh.lazySingleton<_i131.UpdateAddress>(
-      () => _i131.UpdateAddress(get<_i91.AddressesRepository>()));
-  gh.lazySingleton<_i132.UserInstitutionsRepository>(() =>
-      _i133.UserInstitutionsRepositoryImpl(
+  gh.factory<_i115.InstitutionReceiptsCubit>(() =>
+      _i115.InstitutionReceiptsCubit(
+          get<_i107.GetInstitutionItems>(),
+          get<_i108.GetInstitutionReceipts>(),
+          get<_i85.AddInstitutionReceipt>()));
+  gh.factory<_i116.InstitutionsCubit>(
+      () => _i116.InstitutionsCubit(get<_i103.GetAddressInstitutions>()));
+  gh.factory<_i117.IsPhoneExistsUsecase>(
+      () => _i117.IsPhoneExistsUsecase(get<_i98.AuthRepository>()));
+  gh.factory<_i118.ItemsCubit>(() => _i118.ItemsCubit(get<_i109.GetItems>()));
+  gh.factory<_i119.JobsOffersCubit>(() => _i119.JobsOffersCubit(
+      get<_i110.GetJobsOffers>(),
+      get<_i81.AcceptJobOffer>(),
+      get<_i101.DeclineJobOffer>()));
+  gh.lazySingleton<_i120.LinkEmailAndPassword>(
+      () => _i120.LinkEmailAndPassword(get<_i98.AuthRepository>()));
+  gh.factory<_i121.LocationWidgetCubit>(
+      () => _i121.LocationWidgetCubit(get<_i105.GetCurrentLocation>()));
+  gh.lazySingleton<_i122.LogOut>(
+      () => _i122.LogOut(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i123.PhoneSignUp>(
+      () => _i123.PhoneSignUp(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i124.RegisterFcmDeviceToken>(
+      () => _i124.RegisterFcmDeviceToken(get<_i67.StartUpRepository>()));
+  gh.lazySingleton<_i125.RemoveAddress>(
+      () => _i125.RemoveAddress(get<_i92.AddressesRepository>()));
+  gh.factory<_i126.SelectLocationMapBloc>(
+      () => _i126.SelectLocationMapBloc(get<_i105.GetCurrentLocation>()));
+  gh.lazySingleton<_i127.SignInWithEmailAndPassword>(
+      () => _i127.SignInWithEmailAndPassword(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i128.SignInWithFacebook>(
+      () => _i128.SignInWithFacebook(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i129.SignInWithGoogle>(
+      () => _i129.SignInWithGoogle(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i130.SignInWithPhone>(
+      () => _i130.SignInWithPhone(get<_i98.AuthRepository>()));
+  gh.factory<_i131.StartUpCubit>(
+      () => _i131.StartUpCubit(get<_i100.CheckIfSeenBefore>()));
+  gh.lazySingleton<_i132.UpdateAddress>(
+      () => _i132.UpdateAddress(get<_i92.AddressesRepository>()));
+  gh.lazySingleton<_i133.UserInstitutionsRepository>(() =>
+      _i134.UserInstitutionsRepositoryImpl(
           get<_i79.UserInstitutionsServiceApi>(), get<_i36.NetworkInfo>()));
-  gh.lazySingleton<_i134.VerifyPhoneNumber>(
-      () => _i134.VerifyPhoneNumber(get<_i97.AuthRepository>()));
-  gh.lazySingleton<_i135.AddAddress>(
-      () => _i135.AddAddress(get<_i91.AddressesRepository>()));
-  gh.factory<_i136.AddEmailVerificationCubit>(() =>
-      _i136.AddEmailVerificationCubit(
-          get<_i119.LinkEmailAndPassword>(), get<_i66.SmsAutoFill>()));
-  gh.lazySingleton<_i137.AddFirstAddress>(
-      () => _i137.AddFirstAddress(get<_i91.AddressesRepository>()));
-  gh.lazySingleton<_i138.AddFirstAddressCubit>(
-      () => _i138.AddFirstAddressCubit(get<_i137.AddFirstAddress>()));
-  gh.lazySingleton<_i139.AddInstitution>(
-      () => _i139.AddInstitution(get<_i132.UserInstitutionsRepository>()));
-  gh.factory<_i140.AddInstitutionCubit>(
-      () => _i140.AddInstitutionCubit(get<_i139.AddInstitution>()));
-  gh.factory<_i141.AddItemBloc>(() => _i141.AddItemBloc(
+  gh.lazySingleton<_i135.VerifyPhoneNumber>(
+      () => _i135.VerifyPhoneNumber(get<_i98.AuthRepository>()));
+  gh.lazySingleton<_i136.WorkInstitutionRepository>(() =>
+      _i137.WorkInstitutionRepositoryImpl(
+          get<_i80.WorkIstitutionsApiService>(), get<_i21.NetworkInfo>()));
+  gh.lazySingleton<_i138.AddAddress>(
+      () => _i138.AddAddress(get<_i92.AddressesRepository>()));
+  gh.factory<_i139.AddEmailVerificationCubit>(() =>
+      _i139.AddEmailVerificationCubit(
+          get<_i120.LinkEmailAndPassword>(), get<_i66.SmsAutoFill>()));
+  gh.lazySingleton<_i140.AddFirstAddress>(
+      () => _i140.AddFirstAddress(get<_i92.AddressesRepository>()));
+  gh.lazySingleton<_i141.AddFirstAddressCubit>(
+      () => _i141.AddFirstAddressCubit(get<_i140.AddFirstAddress>()));
+  gh.lazySingleton<_i142.AddInstitution>(
+      () => _i142.AddInstitution(get<_i133.UserInstitutionsRepository>()));
+  gh.factory<_i143.AddInstitutionCubit>(
+      () => _i143.AddInstitutionCubit(get<_i142.AddInstitution>()));
+  gh.factory<_i144.AddItemBloc>(() => _i144.AddItemBloc(
       get<_i64.SearchItem>(),
-      get<_i83.AddInstitutionItem>(),
-      get<_i88.AddRefAndInstitutionItem>(),
+      get<_i84.AddInstitutionItem>(),
+      get<_i89.AddRefAndInstitutionItem>(),
       get<_i75.UpdateInstitutionItem>()));
-  gh.factory<_i142.AddUnitBloc>(() => _i142.AddUnitBloc(
-      get<_i111.GetUnitSuggestions>(), get<_i89.AddUnitToReference>()));
-  gh.factory<_i143.AddressesCubit>(
-      () => _i143.AddressesCubit(get<_i103.GetAddresses>()));
-  gh.factory<_i144.AppBloc>(
-      () => _i144.AppBloc(authRepository: get<_i97.AuthRepository>()));
-  gh.factory<_i145.EmployeesCubit>(() => _i145.EmployeesCubit(
-      get<_i105.GetEmployees>(), get<_i62.RemoveEmployee>()));
-  gh.lazySingleton<_i146.GetUserInstitutions>(
-      () => _i146.GetUserInstitutions(get<_i132.UserInstitutionsRepository>()));
-  gh.factory<_i147.LinkEmailAndPasswordCubit>(
-      () => _i147.LinkEmailAndPasswordCubit(get<_i134.VerifyPhoneNumber>()));
-  gh.lazySingleton<_i148.UpdateInstitution>(
-      () => _i148.UpdateInstitution(get<_i132.UserInstitutionsRepository>()));
-  gh.factory<_i149.UpdatePhoneCubit>(
-      () => _i149.UpdatePhoneCubit(get<_i134.VerifyPhoneNumber>()));
-  gh.factory<_i150.UserInstitutionsCubit>(
-      () => _i150.UserInstitutionsCubit(get<_i146.GetUserInstitutions>()));
+  gh.factory<_i145.AddUnitBloc>(() => _i145.AddUnitBloc(
+      get<_i112.GetUnitSuggestions>(), get<_i90.AddUnitToReference>()));
+  gh.factory<_i146.AddressesCubit>(
+      () => _i146.AddressesCubit(get<_i104.GetAddresses>()));
+  gh.factory<_i147.AppBloc>(
+      () => _i147.AppBloc(authRepository: get<_i98.AuthRepository>()));
+  gh.factory<_i148.EmployeesCubit>(() => _i148.EmployeesCubit(
+      get<_i106.GetEmployees>(), get<_i62.RemoveEmployee>()));
+  gh.lazySingleton<_i149.GetUserInstitutions>(
+      () => _i149.GetUserInstitutions(get<_i133.UserInstitutionsRepository>()));
+  gh.lazySingleton<_i150.GetWorkInstitutions>(
+      () => _i150.GetWorkInstitutions(get<_i136.WorkInstitutionRepository>()));
+  gh.factory<_i151.LinkEmailAndPasswordCubit>(
+      () => _i151.LinkEmailAndPasswordCubit(get<_i135.VerifyPhoneNumber>()));
+  gh.lazySingleton<_i152.UpdateInstitution>(
+      () => _i152.UpdateInstitution(get<_i133.UserInstitutionsRepository>()));
+  gh.factory<_i153.UpdatePhoneCubit>(
+      () => _i153.UpdatePhoneCubit(get<_i135.VerifyPhoneNumber>()));
+  gh.factory<_i154.UserInstitutionsCubit>(
+      () => _i154.UserInstitutionsCubit(get<_i149.GetUserInstitutions>()));
+  gh.factory<_i155.WorkInstitutionsCubit>(
+      () => _i155.WorkInstitutionsCubit(get<_i150.GetWorkInstitutions>()));
   return get;
 }
 
-class _$RegisterModule extends _i151.RegisterModule {}
+class _$RegisterModule extends _i156.RegisterModule {}

@@ -45,25 +45,33 @@ class UserJobOfferListTile extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RichText(
-                  text: TextSpan(
-                      text: 'From ',
-                      style: Theme.of(context).textTheme.bodySmall,
-                      children: [
-                        TextSpan(
+                Flexible(
+                  child: RichText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    softWrap: true,
+                    text: TextSpan(
+                        text: 'From ',
+                        style: Theme.of(context).textTheme.bodySmall,
+                        children: [
+                          TextSpan(
                             text: jobOffer.institutionName,
-                            style: Theme.of(context).textTheme.labelLarge)
-                      ]),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          )
+                        ]),
+                  ),
                 ),
-                const Spacer(),
                 if (jobOffer.state != OfferState.pending)
-                  Text(
-                    jobOffer.state.message,
-                    style: TextStyle(
-                        color: jobOffer.state == OfferState.accepted
-                            ? Colors.green
-                            : Colors.red),
+                  Align(
+                    child: Text(
+                      jobOffer.state.message,
+                      style: TextStyle(
+                          color: jobOffer.state == OfferState.accepted
+                              ? Colors.green
+                              : Colors.red),
+                    ),
                   )
                 else
                   Row(

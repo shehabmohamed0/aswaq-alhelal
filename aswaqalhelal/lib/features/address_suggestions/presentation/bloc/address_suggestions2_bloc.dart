@@ -65,7 +65,7 @@ abstract class AddressSuggestions2Bloc<
   FutureOr<void> _onSearchRefAddress(
       SearchRefAddress<T, SearchParams, AddParams> event,
       Emitter<AddressSuggestions2State<T>> emit) async {
-    if (event.searchText.length > 2) {
+    if (event.searchText.trim().length > 2) {
       emit(state.copyWith(
         suggestionState: AutoSuggestionState.loading,
       ));

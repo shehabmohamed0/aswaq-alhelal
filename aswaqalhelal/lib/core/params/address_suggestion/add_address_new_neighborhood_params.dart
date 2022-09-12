@@ -6,11 +6,13 @@ class AddNewNeighborhoodParams implements AddRefAddressParams {
   final RefGovernate refGovernate;
   final RefCity refCity;
   final String neighborhood;
+  final String searchText;
 
   AddNewNeighborhoodParams({
     required this.country,
     required this.refGovernate,
     required this.refCity,
     required this.neighborhood,
+    required this.searchText,
   });
 }

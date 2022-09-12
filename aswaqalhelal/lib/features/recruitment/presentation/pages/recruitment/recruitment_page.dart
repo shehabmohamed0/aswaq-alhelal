@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
+import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
@@ -15,7 +17,7 @@ import 'widgets/employees_tab_view.dart';
 import 'widgets/job_offer_bottom_sheet.dart';
 import 'widgets/offers_tab_view.dart';
 
-class RecruitmentPage extends StatelessWidget {
+class RecruitmentPage extends HookWidget {
   const RecruitmentPage({Key? key}) : super(key: key);
 
   @override
@@ -24,15 +26,17 @@ class RecruitmentPage extends StatelessWidget {
     final List<String> tabs = <String>['Employees', 'Offers'];
     final institution =
         ModalRoute.of(context)!.settings.arguments as Institution;
+
+    final phoneController = useTextEditingController();
+    final focusNode = useFocusNode();
     return DefaultTabController(
       length: tabs.length, // This is the number of tabs.
       child: Scaffold(
-        key: key,
-        resizeToAvoidBottomInset: false,
         floatingActionButton: BlocConsumer<RecruitmentCubit, RecruitmentState>(
           listenWhen: (previous, current) =>
               previous.bottomSheetOpened != current.bottomSheetOpened,
           listener: (context, state) {
+            log('message');
             if (!state.bottomSheetOpened) {
               controller?.close();
             }
@@ -49,11 +53,13 @@ class RecruitmentPage extends StatelessWidget {
                 controller = showBottomSheet(
                   context: context,
                   builder: (context) => Padding(
-                      padding: MediaQuery.of(context).viewInsets,
-                      child: const Material(
+                      padding: EdgeInsets.zero,
+                      child: Material(
                         elevation: 18,
                         color: Colors.white,
-                        child: JobOfferBottomSheet(),
+                        child: JobOfferBottomSheet(
+                            phoneController: phoneController,
+                            focusNode: focusNode),
                       )),
                   enableDrag: true,
                   shape: const RoundedRectangleBorder(
@@ -64,13 +70,15 @@ class RecruitmentPage extends StatelessWidget {
                 );
 
                 controller?.closed.then((_) {
+                  log('then');
                   context.read<RecruitmentCubit>().onClosed();
                 });
               },
             );
           },
         ),
-        body: BlocListener<InstitutionJobsOffersCubit, InstitutionJobsOffersState>(
+        body: BlocListener<InstitutionJobsOffersCubit,
+            InstitutionJobsOffersState>(
           listenWhen: (previous, current) =>
               previous.addJobOfferState != current.addJobOfferState,
           listener: (context, state) {
@@ -94,13 +102,14 @@ class RecruitmentPage extends StatelessWidget {
                 showSuccessSnackBar(context, 'Send successfuly');
                 break;
               case RequestState.error:
+                // controller?.close();
+
                 showErrorSnackBar(context, state.errorMessage!);
                 EasyLoading.dismiss();
                 break;
             }
           },
           child: RefreshIndicator(
-            
             notificationPredicate: (notification) {
               if (notification is OverscrollNotification || Platform.isIOS) {
                 return notification.depth == 2;
@@ -110,7 +119,9 @@ class RecruitmentPage extends StatelessWidget {
             onRefresh: () {
               return Future.wait([
                 context.read<EmployeesCubit>().getEmployees(institution.id),
-                context.read<InstitutionJobsOffersCubit>().getSentOffers(institution.id),
+                context
+                    .read<InstitutionJobsOffersCubit>()
+                    .getSentOffers(institution.id),
               ]);
             },
             child: NestedScrollView(

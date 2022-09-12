@@ -5,6 +5,7 @@ class InternationalPhoneTextField extends StatefulWidget {
   const InternationalPhoneTextField(
       {Key? key,
       this.controller,
+      this.focusNode,
       this.hintText,
       this.initialNumber,
       this.errorText,
@@ -15,6 +16,7 @@ class InternationalPhoneTextField extends StatefulWidget {
       this.validator})
       : super(key: key);
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? hintText;
   final String? initialNumber;
   final String? Function()? errorText;
@@ -48,6 +50,7 @@ class _InternationalPhoneTextFieldState
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return InternationalPhoneNumberInput(
+                  focusNode: widget.focusNode,
                   locale: Localizations.localeOf(context).scriptCode,
                   initialValue: snapshot.data,
                   textFieldController: widget.controller,
@@ -76,6 +79,7 @@ class _InternationalPhoneTextFieldState
             },
           )
         : InternationalPhoneNumberInput(
+          focusNode: widget.focusNode,
             locale: Localizations.localeOf(context).languageCode,
             textFieldController: widget.controller,
             hintText: widget.hintText,

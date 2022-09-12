@@ -22,7 +22,7 @@ class RequiredString extends FormzInput<String, RequiredStringValidationError> {
   @override
   RequiredStringValidationError? validator(String? value) {
     value ??= '';
-    return value.isNotEmpty ? null : RequiredStringValidationError.invalid;
+    return value.trim().isNotEmpty ? null : RequiredStringValidationError.invalid;
   }
 }
 

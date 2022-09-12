@@ -1,23 +1,104 @@
 part of '../add_institution_page.dart';
 
-class _ContactsStepWidget extends StatelessWidget {
+class _ContactsStepWidget extends HookWidget {
   const _ContactsStepWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = useTextEditingController();
+    final TextEditingController phoneController = useTextEditingController();
+    bool emailSelected = true;
+    PhoneNumber phoneNumber = const PhoneNumber.pure();
+    Email email = const Email.pure();
     return Column(children: [
-      Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: IconButton(
-            visualDensity: VisualDensity.compact,
-            splashRadius: 18,
-            onPressed: () {
-              _showContactsDialog(context);
-            },
-            icon: const Icon(Icons.add)),
+      StatefulBuilder(
+        builder: (context, setState) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: emailSelected
+                          ? null
+                          : () {
+                              setState(() {
+                                emailSelected = true;
+                              });
+                            },
+                      child: Icon(Icons.email)),
+                  const SizedBox(width: 4),
+                  ElevatedButton(
+                      onPressed: emailSelected
+                          ? () {
+                              setState(() {
+                                emailSelected = false;
+                              });
+                            }
+                          : null,
+                      child: const Icon(Icons.phone)),
+                ],
+              ),
+              const SizedBox(height: 8),
+              if (emailSelected)
+                TextField(
+                  controller: emailController,
+                  onChanged: (v) {
+                    setState(() {
+                      email = Email.dirty(v);
+                    });
+                  },
+                  decoration:
+                      InputDecoration(errorText: email.validationMessage),
+                )
+              else
+                InternationalPhoneTextField(
+                  controller: phoneController,
+                  onInputChanged: (phone) {
+                    setState(() {
+                      phoneNumber = PhoneNumber.dirty(phone.phoneNumber ?? '');
+                    });
+                  },
+                  errorText: phoneNumber.validationMessage,
+                  countries: ['EG'],
+                ),
+              const SizedBox(height: 8),
+              SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: emailSelected
+                          ? email.valid
+                              ? () {
+                                  context
+                                      .read<AddInstitutionCubit>()
+                                      .addEmail(email);
+                                }
+                              : null
+                          : phoneNumber.valid
+                              ? () {
+                                  context
+                                      .read<AddInstitutionCubit>()
+                                      .addPhoneNumber(phoneNumber);
+                                }
+                              : null,
+                      child: const Text('Add')))
+            ],
+          );
+        },
       ),
+      // Align(
+      //   alignment: AlignmentDirectional.topEnd,
+      //   child: IconButton(
+      //       visualDensity: VisualDensity.compact,
+      //       splashRadius: 18,
+      //       onPressed: () {
+      //         _showContactsDialog(context);
+      //       },
+      //       icon: const Icon(Icons.add)),
+      // ),
       Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -34,14 +115,20 @@ class _ContactsStepWidget extends StatelessWidget {
                   (email) => _ContactRowWidget(
                     contactString: email.value,
                     iconData: Icons.email,
-                    onDelete: () {},
+                    onDelete: () {
+                      context.read<AddInstitutionCubit>().removeEmail(email);
+                    },
                   ),
                 ),
                 ...state.phoneNumbers.map(
                   (phoneNumber) => _ContactRowWidget(
                     contactString: phoneNumber.value,
                     iconData: Icons.phone,
-                    onDelete: () {},
+                    onDelete: () {
+                      context
+                          .read<AddInstitutionCubit>()
+                          .removePhoneNumber(phoneNumber);
+                    },
                   ),
                 ),
                 if (state.emails.isEmpty && state.phoneNumbers.isEmpty)
