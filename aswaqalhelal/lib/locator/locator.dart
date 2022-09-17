@@ -11,8 +11,7 @@ import 'locator.config.dart';
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-void configureDependencies(GetIt locator) {
+Future<void> configureDependencies(GetIt locator) async{
   locator.registerLazySingleton(() => AppLocalizations());
-  $initGetIt(locator);
-
+ await $initGetIt(locator);
 }

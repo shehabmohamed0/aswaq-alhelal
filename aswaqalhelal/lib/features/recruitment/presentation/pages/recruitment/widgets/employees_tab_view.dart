@@ -7,6 +7,7 @@ import '../../../../../widgets/check_internet_connection_widget.dart';
 import '../../../../../widgets/constants.dart';
 import '../../../../../widgets/loading_widget.dart';
 import '../../../cubit/employees/employees_cubit.dart';
+import '../DTOs/recruitment_page_arguments.dart';
 import 'employee_list_tile.dart';
 
 class EmployeesTabView extends StatelessWidget {
@@ -14,8 +15,7 @@ class EmployeesTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
 
     return SafeArea(
       top: false,
@@ -24,13 +24,13 @@ class EmployeesTabView extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           switch (state.employeesState) {
-            case RequestState.idle:
+            case RequestState.initial:
               return kEmptyWidget;
             case RequestState.loading:
               return const LoadingWidget();
             case RequestState.error:
               return CheckInternetConnection(onPressed: () {
-                context.read<EmployeesCubit>().getEmployees(institution.id);
+                context.read<EmployeesCubit>().getEmployees(arguments.institutionId);
               });
             case RequestState.loaded:
               if (state.employees.isEmpty) {

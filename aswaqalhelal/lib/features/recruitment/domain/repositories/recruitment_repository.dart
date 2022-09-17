@@ -37,7 +37,6 @@ class GetSentJobOffersParams {
 class SendJobOfferParams {
   final String ownerId;
   final String institutionId;
-  final String institutionName;
   final String phoneNumber;
   final String role;
   final OfferState state;
@@ -45,7 +44,6 @@ class SendJobOfferParams {
   SendJobOfferParams({
     required this.ownerId,
     required this.institutionId,
-    required this.institutionName,
     required this.phoneNumber,
     required this.role,
     required this.state,
@@ -55,7 +53,6 @@ class SendJobOfferParams {
         id: id,
         ownerId: ownerId,
         institutionId: institutionId,
-        institutionName: institutionName,
         phoneNumber: phoneNumber,
         role: role,
         state: state,

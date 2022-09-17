@@ -48,4 +48,8 @@ class Routes {
   static const insPage = '/insPage';
 
 
+  static const notifications = '/notifications';
+  static const clientInstitution = '/clientInstitution';
+
+
 }

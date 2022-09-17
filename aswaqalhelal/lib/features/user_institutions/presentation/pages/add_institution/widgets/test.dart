@@ -14,7 +14,7 @@ import '../../../../../address/presentation/DTOs/full_address_details.dart';
 import '../../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../../address_suggestions/presentation/widgets/location_widget.dart';
-import '../../../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 
 class AddUpdateAddressWidget extends HookWidget {
   const AddUpdateAddressWidget({

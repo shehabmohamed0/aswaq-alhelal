@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/user_institutions/presentation/pages/add_institution/widgets/test.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/form_inputs.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
@@ -15,8 +14,9 @@ import '../../../../address_suggestions/presentation/DTOs/ref_address_details.da
 import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
-import '../../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
+import 'widgets/test.dart';
 
 part 'widgets/address_step_widget.dart';
 part 'widgets/contacts_dialog.dart';

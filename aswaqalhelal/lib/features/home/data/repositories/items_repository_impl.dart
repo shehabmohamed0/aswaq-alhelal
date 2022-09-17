@@ -2,7 +2,7 @@
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart';
 
-import '../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../domain/repositories/items_repository.dart';
 import '../datasources/items_api_servic.dart';
 

@@ -81,7 +81,15 @@ class RecruitmentRepositoryImpl extends RecruitmentRepository {
         return Left(
             AlreadySendOfferFailure('Already sent an offer to this user.'));
       }
-      return Left(ServerFailure.general());
+      if (e.code == 'failed-precondition') {
+        return Left(AlreadySendOfferFailure(
+            'This user is currently working for the institution.'));
+      }
+      if (e.code == 'internal') {
+        return Left(AlreadySendOfferFailure('Server error.'));
+      } else {
+        return Left(ServerFailure.general());
+      }
     } on Exception {
       return Left(ServerFailure.general());
     }

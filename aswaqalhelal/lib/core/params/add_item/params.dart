@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import '../../../features/instutution_items/domain/entities/institution_item.dart';
-import '../../../features/instutution_items/domain/entities/unit.dart';
+import '../../../features/institution_items/domain/entities/institution_item.dart';
+import '../../../features/institution_items/domain/entities/unit.dart';
 
 class AddRefAndInstitutionItemParams {
   final String itemName;

@@ -4,7 +4,7 @@ import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
 import '../../../domain/usecases/get_items.dart';
 
 part 'items_state.dart';

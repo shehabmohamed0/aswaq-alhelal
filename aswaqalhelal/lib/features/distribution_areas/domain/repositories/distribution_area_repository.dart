@@ -38,6 +38,8 @@ class AddDistributionAreaParams {
 
   String _getParentId() {
     if (refNeighborhood != null) {
+      return refNeighborhood!.id;
+    } else if (refCity != null) {
       return refCity!.id;
     }
     return refGovernate.id;

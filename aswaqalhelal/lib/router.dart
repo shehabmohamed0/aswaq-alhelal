@@ -1,6 +1,6 @@
-import 'package:aswaqalhelal/features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
-import 'package:aswaqalhelal/features/work_institutions/presentation/pages/ins_page.dart';
-import 'package:aswaqalhelal/features/work_institutions/presentation/pages/work_institution_page.dart';
+import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institutions_cubit.dart';
+import 'package:aswaqalhelal/features/client_institutions/presentation/pages/client_institution_page.dart';
+import 'package:aswaqalhelal/features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -19,17 +19,19 @@ import 'features/auth/presentation/pages/landing/landing_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
+import 'features/institution_items/presentation/bloc/add_item/add_item_bloc.dart';
+import 'features/institution_items/presentation/cubit/institution_items/institution_items_cubit.dart';
+import 'features/institution_items/presentation/pages/add_item/add_items_page.dart';
+import 'features/institution_items/presentation/pages/institution_items/institution_items_page.dart';
 import 'features/institution_receipts/presentation/cubit/institution_receipts_cubit.dart';
 import 'features/institution_receipts/presentation/pages/receipt_page.dart';
-import 'features/instutution_items/presentation/bloc/add_item/add_item_bloc.dart';
-import 'features/instutution_items/presentation/cubit/institution_items/instutution_items_cubit.dart';
-import 'features/instutution_items/presentation/pages/add_item/add_items_page.dart';
-import 'features/instutution_items/presentation/pages/institution_items/institution_items_page.dart';
 import 'features/jobs_offers/presentation/cubit/jobs_offers_cubit.dart';
 import 'features/jobs_offers/presentation/pages/jobs_offers_page.dart';
+import 'features/notifications/presentation/pages/notifications_page.dart';
 import 'features/recruitment/presentation/cubit/employees/employees_cubit.dart';
 import 'features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart';
 import 'features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart';
+import 'features/recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 import 'features/recruitment/presentation/pages/recruitment/recruitment_page.dart';
 import 'features/settings/presentation/bloc/add_email/add_email_cubit.dart';
 import 'features/settings/presentation/bloc/cubit/update_email_cubit.dart';
@@ -48,6 +50,9 @@ import 'features/user_institutions/presentation/cubit/institutions_cubit/institu
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
 import 'features/user_institutions/presentation/pages/institution/user_institution_page.dart';
 import 'features/user_institutions/presentation/pages/user_institutions/user_institutions_page.dart';
+import 'features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
+import 'features/work_institutions/presentation/pages/ins_page.dart';
+import 'features/work_institutions/presentation/pages/work_institution_page.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -237,13 +242,14 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
-            final institution = settings.arguments as Institution;
+            final arguments = settings.arguments as RecruitmentPageArguments;
             return MultiBlocProvider(providers: [
               BlocProvider<EmployeesCubit>(
-                  create: (context) => locator()..getEmployees(institution.id)),
+                  create: (context) =>
+                      locator()..getEmployees(arguments.institutionId)),
               BlocProvider<InstitutionJobsOffersCubit>(
                   create: (context) =>
-                      locator()..getSentOffers(institution.id)),
+                      locator()..getSentOffers(arguments.institutionId)),
               BlocProvider<RecruitmentCubit>(create: (context) => locator()),
             ], child: const RecruitmentPage());
           },
@@ -253,10 +259,10 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
-            final user = settings.arguments as User;
+            final userId = settings.arguments as String;
 
             return BlocProvider<JobsOffersCubit>(
-              create: (context) => locator()..getJobOffers(user.id),
+              create: (context) => locator()..getJobOffers(userId),
               child: const JobsOffersPage(),
             );
           },
@@ -280,6 +286,33 @@ class AppRouter {
           routeName: settings.name,
           builder: (context) {
             return const InsPage();
+          },
+        );
+      case Routes.notifications:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            return const NotificationsPage();
+          },
+        );
+      case Routes.clientInstitution:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            final institution = settings.arguments as Institution;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<ClientInstitutionsCubit>(
+                  create: (context) => locator()..getItems(institution),
+                ),
+                BlocProvider<InstitutionCartCubit>(
+                  create: (context) => locator(),
+                ),
+              ],
+              child: const ClientInstitutionPage(),
+            );
           },
         );
 

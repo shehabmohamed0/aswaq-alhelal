@@ -9,10 +9,10 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../../core/request_state.dart';
-import '../../../../user_institutions/domain/entities/institution.dart';
 import '../../cubit/employees/employees_cubit.dart';
 import '../../cubit/job_offers/send_job_offers_cubit.dart';
 import '../../cubit/recruitment/recruitment_cubit.dart';
+import 'DTOs/recruitment_page_arguments.dart';
 import 'widgets/employees_tab_view.dart';
 import 'widgets/job_offer_bottom_sheet.dart';
 import 'widgets/offers_tab_view.dart';
@@ -24,8 +24,7 @@ class RecruitmentPage extends HookWidget {
   Widget build(BuildContext context) {
     PersistentBottomSheetController? controller;
     final List<String> tabs = <String>['Employees', 'Offers'];
-    final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
 
     final phoneController = useTextEditingController();
     final focusNode = useFocusNode();
@@ -83,7 +82,7 @@ class RecruitmentPage extends HookWidget {
               previous.addJobOfferState != current.addJobOfferState,
           listener: (context, state) {
             switch (state.addJobOfferState) {
-              case RequestState.idle:
+              case RequestState.initial:
                 break;
               case RequestState.loading:
                 EasyLoading.show(
@@ -118,10 +117,10 @@ class RecruitmentPage extends HookWidget {
             },
             onRefresh: () {
               return Future.wait([
-                context.read<EmployeesCubit>().getEmployees(institution.id),
+                context.read<EmployeesCubit>().getEmployees(arguments.institutionId),
                 context
                     .read<InstitutionJobsOffersCubit>()
-                    .getSentOffers(institution.id),
+                    .getSentOffers(arguments.institutionId),
               ]);
             },
             child: NestedScrollView(

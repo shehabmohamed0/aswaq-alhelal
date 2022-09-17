@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
@@ -62,7 +63,9 @@ class UserInstitutionPage extends StatelessWidget {
               title: 'Recruitment',
               onTap: () {
                 Navigator.pushNamed(context, Routes.recruitment,
-                    arguments: institution);
+                    arguments: RecruitmentPageArguments(
+                        ownerId: institution.userId,
+                        institutionId: institution.id));
               },
             ),
             GridTile(

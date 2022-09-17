@@ -58,7 +58,6 @@ class RecruitmentApiServiceImpl extends RecruitmentApiService {
         await _functions.httpsCallable('jobOffer').call<Map<String, dynamic>>({
       'ownerId': params.ownerId,
       'institutionId': params.institutionId,
-      'institutionName': params.institutionName,
       'phoneNumber': params.phoneNumber,
       'role': params.role,
       'state': params.state.message

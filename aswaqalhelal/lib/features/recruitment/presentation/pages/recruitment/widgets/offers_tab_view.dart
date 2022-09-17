@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -16,22 +17,24 @@ class OffersTabView extends StatelessWidget {
   const OffersTabView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
 
     return SafeArea(
       top: false,
       bottom: false,
-      child: BlocBuilder<InstitutionJobsOffersCubit, InstitutionJobsOffersState>(
+      child:
+          BlocBuilder<InstitutionJobsOffersCubit, InstitutionJobsOffersState>(
         builder: (context, state) {
           switch (state.jobsOffersState) {
-            case RequestState.idle:
+            case RequestState.initial:
               return kEmptyWidget;
             case RequestState.loading:
               return const LoadingWidget();
             case RequestState.error:
               return CheckInternetConnection(onPressed: () {
-                context.read<InstitutionJobsOffersCubit>().getSentOffers(institution.id);
+                context
+                    .read<InstitutionJobsOffersCubit>()
+                    .getSentOffers(arguments.institutionId);
               });
             case RequestState.loaded:
               if (state.jobsOffers.isEmpty) {

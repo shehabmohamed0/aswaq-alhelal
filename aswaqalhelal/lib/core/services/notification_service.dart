@@ -1,9 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 
-import 'fstore_notification_item.dart';
-import 'platform.dart';
-
+import '../../features/notifications/domain/entities/fstore_notification_item.dart';
+import '../utils/platform.dart';
 
 abstract class NotificationService {
   bool _isInitialized = false;

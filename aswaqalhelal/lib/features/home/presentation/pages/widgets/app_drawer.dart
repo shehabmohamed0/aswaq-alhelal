@@ -42,7 +42,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Navigator.pushNamed(context, Routes.jobsOffers, arguments: user);
+              Navigator.pushNamed(context, Routes.jobsOffers, arguments: user.id);
             },
             leading: const Icon(FontAwesomeIcons.userTag),
             title: const Text('Job offers'),

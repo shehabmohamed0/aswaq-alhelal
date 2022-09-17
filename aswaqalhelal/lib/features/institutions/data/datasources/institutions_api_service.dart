@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
@@ -35,6 +36,9 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
       collection.where('parentId', isEqualTo: address.neighborhoodId).get()
     ]);
 
+    log(address.governateId);
+    log(address.cityId);
+    log(address.neighborhoodId);
     final instCollection = _firestore.collection('institutions');
 
     final institutionIds =

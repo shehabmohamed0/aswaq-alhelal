@@ -20,7 +20,7 @@ class WorkInstitutionsPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         switch (state.institutionsState) {
-          case RequestState.idle:
+          case RequestState.initial:
             return kEmptyWidget;
           case RequestState.loading:
             return const LoadingWidget();

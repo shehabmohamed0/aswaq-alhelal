@@ -13,7 +13,8 @@ ThemeData getApplicationTheme() {
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
     scaffoldBackgroundColor: ColorManager.white,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: ColorManager.primary),
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: ColorManager.primary),
     progressIndicatorTheme:
         ProgressIndicatorThemeData(color: ColorManager.primary),
     // ripple effect color
@@ -72,7 +73,7 @@ ThemeData getApplicationTheme() {
       labelStyle:
           getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
       errorStyle: getRegularStyle(color: ColorManager.error),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderSide: BorderSide(
           width: AppSize.s1_5,
         ),

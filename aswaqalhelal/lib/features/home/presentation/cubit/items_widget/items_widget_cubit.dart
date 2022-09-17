@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
 
 part 'items_widget_cubit.freezed.dart';
 part 'items_widget_state.dart';

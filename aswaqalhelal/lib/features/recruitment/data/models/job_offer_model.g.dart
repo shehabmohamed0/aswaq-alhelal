@@ -11,7 +11,7 @@ JobOfferModel _$JobOfferModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       ownerId: json['ownerId'] as String,
       institutionId: json['institutionId'] as String,
-      institutionName: json['institutionName'] as String,
+      institutionName: json['institutionName'] as String?,
       phoneNumber: json['phoneNumber'] as String,
       role: json['role'] as String,
       state: $enumDecode(_$OfferStateEnumMap, json['state']),

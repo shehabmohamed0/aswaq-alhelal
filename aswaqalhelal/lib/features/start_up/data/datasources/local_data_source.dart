@@ -1,15 +1,15 @@
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/shared_preferences.dart';
 
-abstract class LocalDataSource {
+abstract class NotificationsLocalApi {
   Future<bool> seenBefore();
 }
 
-@LazySingleton(as: LocalDataSource)
-class LocalDataSourceImpl extends LocalDataSource {
+@LazySingleton(as: NotificationsLocalApi)
+class NotificationsLocalApiImpl extends NotificationsLocalApi {
   final SharedPreferences _sharedPreferences;
 
-  LocalDataSourceImpl(this._sharedPreferences);
+  NotificationsLocalApiImpl(this._sharedPreferences);
   @override
   Future<bool> seenBefore() async {
     final seenBefore =

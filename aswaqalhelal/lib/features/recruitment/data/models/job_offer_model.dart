@@ -12,7 +12,7 @@ class JobOfferModel extends JobOffer {
     required String id,
     required String ownerId,
     required String institutionId,
-    required String institutionName,
+     String? institutionName,
     required String phoneNumber,
     required String role,
     required OfferState state,

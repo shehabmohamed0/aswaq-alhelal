@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aswaqalhelal/core/services/prepare_for_search.dart';
+import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
@@ -9,7 +9,7 @@ import 'package:root_package/packages/stream_transform.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
 import '../../../address/domain/entities/geo_point.dart';
-import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_city.dart';
 import '../../domain/entities/ref_neighborhood.dart';
 import '../../domain/entities/ref_governate.dart';

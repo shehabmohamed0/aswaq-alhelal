@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
 import 'item_grid_widget.dart';
 
 class ItemsSliverGridView extends StatelessWidget {

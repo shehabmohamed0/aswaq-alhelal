@@ -1,5 +1,5 @@
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/institution_item.dart';
-import 'package:aswaqalhelal/features/instutution_items/domain/entities/unit.dart';
+import 'package:aswaqalhelal/features/institution_items/domain/entities/institution_item.dart';
+import 'package:aswaqalhelal/features/institution_items/domain/entities/unit.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 

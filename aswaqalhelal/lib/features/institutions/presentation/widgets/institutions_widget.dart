@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:root_package/routes/routes.dart';
 
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../user_institutions/presentation/widgets/institution_widget.dart';
@@ -63,7 +64,9 @@ class InstitutionsSliverWidget extends StatelessWidget {
                             isUserInstitution:
                                 user.id == state.institutions[index].id,
                             onPressed: () {
-                              //TODO:
+                              Navigator.pushNamed(
+                                  context, Routes.clientInstitution,
+                                  arguments: state.institutions[index]);
                             },
                           ),
                       childCount: state.institutions.length),

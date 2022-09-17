@@ -8,8 +8,8 @@ class InstitutionJobsOffersState extends Equatable {
   final String? errorMessage;
   const InstitutionJobsOffersState({
     this.jobsOffers = const [],
-    this.jobsOffersState = RequestState.idle,
-    this.addJobOfferState = RequestState.idle,
+    this.jobsOffersState = RequestState.initial,
+    this.addJobOfferState = RequestState.initial,
     this.errorMessage,
   });
 

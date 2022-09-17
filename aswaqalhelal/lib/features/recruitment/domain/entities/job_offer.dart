@@ -6,7 +6,7 @@ class JobOffer {
 
   final String ownerId;
   final String institutionId;
-  final String institutionName;
+  final String? institutionName;
   final String phoneNumber;
   final String role;
   final OfferState state;

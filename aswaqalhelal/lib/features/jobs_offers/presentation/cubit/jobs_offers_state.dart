@@ -3,8 +3,8 @@ part of 'jobs_offers_cubit.dart';
 class JobsOffersState extends Equatable {
   const JobsOffersState({
     this.jobsOffers = const [],
-    this.jobsOffersState = RequestState.idle,
-    this.updateOfferState = RequestState.idle,
+    this.jobsOffersState = RequestState.initial,
+    this.updateOfferState = RequestState.initial,
     this.errorMessage,
   });
 

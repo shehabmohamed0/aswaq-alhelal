@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:aswaqalhelal/core/services/prepare_for_search.dart';
+import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/packages/dartz.dart';
@@ -12,7 +12,7 @@ import 'package:root_package/packages/stream_transform.dart';
 import '../../../../core/params/address_suggestion/params.dart';
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../../address_suggestions/domain/usecases/usecases.dart';
-import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/distribution_area.dart';
 import '../../domain/repositories/distribution_area_repository.dart';
 import '../../domain/usecases/usecases.dart';

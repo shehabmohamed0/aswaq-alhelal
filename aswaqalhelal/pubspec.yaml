@@ -75,6 +75,9 @@ dependencies:
   logger: ^1.1.0
   notification_permissions: ^0.6.1
   universal_platform: ^1.0.0+1
+  localstorage: ^4.0.0+1
+  badges: ^2.0.3
+
   # geo_logic:
   #   path: ../geo_logic
   # geo_presentation:

@@ -11,7 +11,7 @@ import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/stream_transform.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
-import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_address.dart';
 import '../../domain/entities/ref_city.dart';
 import '../../domain/entities/ref_neighborhood.dart';

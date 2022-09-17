@@ -2,7 +2,7 @@
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../instutution_items/data/models/institution_item_model.dart';
+import '../../../institution_items/data/models/institution_item_model.dart';
 
 abstract class ItemsApiService2 {
   Future<List<InstitutionItemModel>> getItems();

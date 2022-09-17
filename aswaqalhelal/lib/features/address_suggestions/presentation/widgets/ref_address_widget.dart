@@ -5,7 +5,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
-import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_address.dart';
 import '../bloc/address_suggestions2_bloc.dart';
 

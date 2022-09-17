@@ -6,9 +6,9 @@ import 'package:root_package/root_package.dart' hide Unit;
 
 import '../../../../core/params/add_item/params.dart';
 import '../../../../core/request_state.dart';
-import '../../../instutution_items/domain/entities/institution_item.dart';
-import '../../../instutution_items/domain/entities/unit.dart';
-import '../../../instutution_items/domain/usecases/get_institution_items.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
+import '../../../institution_items/domain/entities/unit.dart';
+import '../../../institution_items/domain/usecases/get_institution_items.dart';
 import '../../domain/entities/receipt_item.dart';
 import '../../domain/usecases/add_institution_receipts.dart';
 import '../../domain/usecases/get_institution_receipts.dart';
@@ -121,9 +121,26 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
         unit: state.selectedUnit.toNullable()!,
         quantity: state.quantity,
         price: state.unitPrice);
+    final index = state.receiptItems.indexWhere((element) =>
+        element.item.id == receiptItem.item.id &&
+        element.unit == receiptItem.unit &&
+        element.price == receiptItem.price);
 
+    final newList = List.of(state.receiptItems);
+    if (index != -1) {
+      final newItem = ReceiptItem(
+        item: state.selectedItem.toNullable()!,
+        unit: state.selectedUnit.toNullable()!,
+        quantity: receiptItem.quantity + state.receiptItems[index].quantity,
+        price: receiptItem.price,
+      );
+
+      newList[index] = newItem;
+    } else {
+      newList.add(receiptItem);
+    }
     emit(state.copyWith(
-        receiptItems: List.of(state.receiptItems)..add(receiptItem),
+        receiptItems: newList,
         totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
         selectedItem: none(),
         selectedUnit: none(),

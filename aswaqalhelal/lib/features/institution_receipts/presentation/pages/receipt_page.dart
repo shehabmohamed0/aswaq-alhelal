@@ -15,8 +15,8 @@ import 'package:root_package/packages/path_provider.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/request_state.dart';
-import '../../../instutution_items/domain/entities/institution_item.dart';
-import '../../../instutution_items/domain/entities/unit.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
+import '../../../institution_items/domain/entities/unit.dart';
 import '../../../user_institutions/domain/entities/institution.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../domain/entities/receipt_item.dart';
@@ -41,323 +41,273 @@ class InstitutionReceiptPage extends HookWidget {
     final priceController = useTextEditingController();
     final priceFocusNode = useFocusNode();
 
-    return Theme(
-      data: ThemeData(
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            foregroundColor: Colors.black54,
-          ),
-          scaffoldBackgroundColor: Colors.white,
-          primaryColor: Theme.of(context).primaryColor,
-          colorScheme: Theme.of(context)
-              .colorScheme
-              .copyWith(primary: Theme.of(context).primaryColor),
-          inputDecorationTheme:
-              const InputDecorationTheme(border: OutlineInputBorder())),
-      child: BlocBuilder<InstitutionReceiptsCubit, InstitutionReceiptsState>(
-        buildWhen: (previous, current) =>
-            previous.itemsState != current.itemsState,
-        builder: (context, state) {
-          log(state.receiptSaved.toString());
-          switch (state.itemsState) {
-            case RequestState.loading:
-              return const Center(child: CircularProgressIndicator());
-            case RequestState.error:
-              return CheckInternetConnection(onPressed: () {});
-            default:
-              return Scaffold(
-                appBar: AppBar(title: const Text('Receipt')),
-                body: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
+    return BlocBuilder<InstitutionReceiptsCubit, InstitutionReceiptsState>(
+      buildWhen: (previous, current) =>
+          previous.itemsState != current.itemsState,
+      builder: (context, state) {
+        log(state.receiptSaved.toString());
+        switch (state.itemsState) {
+          case RequestState.loading:
+            return const Center(child: CircularProgressIndicator());
+          case RequestState.error:
+            return CheckInternetConnection(onPressed: () {});
+          default:
+            return Scaffold(
+              appBar: AppBar(title: const Text('Receipt'),elevation: 0,),
+              body: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: BlocListener<InstitutionReceiptsCubit,
+                    InstitutionReceiptsState>(
+                  listenWhen: (previous, current) {
+                    return previous.status != current.status ||
+                        previous.selectedItem != current.selectedItem ||
+                        previous.selectedUnit != current.selectedUnit;
                   },
-                  child: BlocListener<InstitutionReceiptsCubit,
-                      InstitutionReceiptsState>(
-                    listenWhen: (previous, current) {
-                      return previous.status != current.status ||
-                          previous.selectedItem != current.selectedItem ||
-                          previous.selectedUnit != current.selectedUnit;
-                    },
-                    listener: (context, state) {
-                      _onListener(
-                          state,
-                          itemController,
-                          itemFocusNode,
-                          quantityController,
-                          priceController,
-                          context,
-                          quantityFocusNode,
-                          priceFocusNode);
-                    },
-                    child: ListView(
-                      padding: const EdgeInsets.all(8),
-                      children: [
-                        BlocBuilder<InstitutionReceiptsCubit,
-                            InstitutionReceiptsState>(
-                          buildWhen: (previous, current) =>
-                              previous.filteredItems != current.filteredItems ||
-                              previous.selectedItem != current.selectedItem ||
-                              previous.selectedUnit != current.selectedUnit ||
-                              previous.quantity != current.quantity ||
-                              previous.unitPrice != current.unitPrice ||
-                              previous.receiptSaved != current.receiptSaved,
-                          builder: (context, state) {
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Align(
-                                  alignment: AlignmentDirectional.topStart,
-                                  child: Text(
-                                    'Item',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
+                  listener: (context, state) {
+                    _onListener(
+                        state,
+                        itemController,
+                        itemFocusNode,
+                        quantityController,
+                        priceController,
+                        context,
+                        quantityFocusNode,
+                        priceFocusNode);
+                  },
+                  child: ListView(
+                    padding: const EdgeInsets.all(8),
+                    children: [
+                      BlocBuilder<InstitutionReceiptsCubit,
+                          InstitutionReceiptsState>(
+                        buildWhen: (previous, current) =>
+                            previous.filteredItems != current.filteredItems ||
+                            previous.selectedItem != current.selectedItem ||
+                            previous.selectedUnit != current.selectedUnit ||
+                            previous.quantity != current.quantity ||
+                            previous.unitPrice != current.unitPrice ||
+                            previous.receiptSaved != current.receiptSaved,
+                        builder: (context, state) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 4),
+                              ComboBoxWidget<InstitutionItem>(
+                                controller: itemController,
+                                focusNode: itemFocusNode,
+                                labelText: 'Item',
+                                suggestions: state.filteredItems,
+                                suggestionBuilder: (context, item) =>
+                                    ListTile(title: Text(item.name)),
+                                onSuggestionSelected: cubit.itemSelected,
+                                onChanged: cubit.searchItem,
+                                onRemoveSelection: state.selectedItem.isSome()
+                                    ? cubit.itemUnselected
+                                    : null,
+                                enabled: state.selectedItem.isNone() &&
+                                    !state.receiptSaved,
+                              ),
+                              const SizedBox(height: 8),
+                              const SizedBox(height: 4),
+                              DropdownSearch<Unit>(
+                                dropdownDecoratorProps:
+                                    const DropDownDecoratorProps(
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                                labelText: 'Unit',
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior
+                                                        .always)),
+                                popupProps: PopupProps.menu(
+                                  constraints: BoxConstraints(
+                                    maxHeight: state.selectedItem.fold(
+                                        () => 0,
+                                        (item) => item.units.length == 1
+                                            ? 56
+                                            : item.units.length == 2
+                                                ? 112
+                                                : item.units.length == 4
+                                                    ? 168
+                                                    : 224),
                                   ),
                                 ),
-                                const SizedBox(height: 4),
-                                ComboBoxWidget<InstitutionItem>(
-                                  controller: itemController,
-                                  focusNode: itemFocusNode,
-                                  suggestions: state.filteredItems,
-                                  suggestionBuilder: (context, item) =>
-                                      ListTile(title: Text(item.name)),
-                                  onSuggestionSelected: cubit.itemSelected,
-                                  onChanged: cubit.searchItem,
-                                  onRemoveSelection: state.selectedItem.isSome()
-                                      ? cubit.itemUnselected
-                                      : null,
-                                  enabled: state.selectedItem.isNone() &&
-                                      !state.receiptSaved,
-                                ),
-                                const SizedBox(height: 8),
-                                const Align(
-                                  alignment: AlignmentDirectional.topStart,
-                                  child: Text('Unit',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18)),
-                                ),
-                                const SizedBox(height: 4),
-                                DropdownSearch<Unit>(
-                                  popupProps: PopupProps.menu(
-                                    constraints: BoxConstraints(
-                                      maxHeight: state.selectedItem.fold(
-                                          () => 0,
-                                          (item) => item.units.length == 1
-                                              ? 56
-                                              : item.units.length == 2
-                                                  ? 112
-                                                  : item.units.length == 4
-                                                      ? 168
-                                                      : 224),
+                                enabled: state.selectedItem.isSome() &&
+                                    !state.receiptSaved,
+                                selectedItem: state.selectedUnit.toNullable(),
+                                items: state.selectedItem.isSome()
+                                    ? state.selectedItem.toNullable()!.units
+                                    : [],
+                                itemAsString: (unit) => unit.name,
+                                onChanged: (unit) {
+                                  if (unit != null) {
+                                    cubit.unitSelected(unit);
+                                  } else {
+                                    cubit.unitUnselected();
+                                  }
+                                },
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: TextField(
+                                      controller: quantityController,
+                                      focusNode: quantityFocusNode,
+                                      enabled: !state.receiptSaved,
+                                      onChanged: cubit.quantityChanged,
+                                      onSubmitted: (string) {
+                                        priceFocusNode.requestFocus();
+                                      },
+                                      decoration: const InputDecoration(
+                                        labelText: 'Quantity',
+                                        floatingLabelBehavior:
+                                            FloatingLabelBehavior.always,
+                                      ),
+                                      keyboardType: TextInputType.number,
                                     ),
                                   ),
-                                  enabled: state.selectedItem.isSome() &&
-                                      !state.receiptSaved,
-                                  selectedItem: state.selectedUnit.toNullable(),
-                                  items: state.selectedItem.isSome()
-                                      ? state.selectedItem.toNullable()!.units
-                                      : [],
-                                  itemAsString: (unit) => unit.name,
-                                  onChanged: (unit) {
-                                    if (unit != null) {
-                                      cubit.unitSelected(unit);
-                                    } else {
-                                      cubit.unitUnselected();
-                                    }
-                                  },
-                                ),
-                                const SizedBox(height: 12),
+                                  const SizedBox(
+                                    width: 14.0,
+                                  ),
+                                  Flexible(
+                                      child: SizedBox(
+                                    child: TextField(
+                                      controller: priceController,
+                                      focusNode: priceFocusNode,
+                                      enabled: !state.receiptSaved,
+                                      onChanged: cubit.unitPriceChanged,
+                                      decoration: const InputDecoration(
+                                          labelText: 'Price',
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.always,
+                                          suffix: Text(
+                                            'EGP',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      keyboardType:
+                                          const TextInputType.numberWithOptions(
+                                        signed: false,
+                                        decimal: true,
+                                      ),
+                                    ),
+                                  )),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                      onPressed: state.receiptSaved
+                                          ? null
+                                          : cubit.submit,
+                                      child: const Text('Add'))),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      BlocBuilder<InstitutionReceiptsCubit,
+                          InstitutionReceiptsState>(
+                        buildWhen: (previous, current) =>
+                            previous.totalPrice != current.totalPrice ||
+                            previous.receiptSaved != current.receiptSaved ||
+                            previous.receiptItems != current.receiptItems,
+                        builder: (context, state) {
+                          return Column(
+                            children: [
+                              if (state.receiptItems.isNotEmpty)
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
                                     Flexible(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            'quantity',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          TextField(
-                                            controller: quantityController,
-                                            focusNode: quantityFocusNode,
-                                            enabled: !state.receiptSaved,
-                                            onChanged: cubit.quantityChanged,
-                                            onSubmitted: (string) {
-                                              priceFocusNode.requestFocus();
-                                            },
-                                            decoration: const InputDecoration(
-                                              contentPadding:
-                                                  EdgeInsets.all(10),
-                                            ),
-                                            keyboardType: TextInputType.number,
-                                          ),
-                                        ],
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional.topStart,
+                                        child: Text(
+                                          'Total price\n${state.totalPrice} EGP',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 14.0,
-                                    ),
-                                    Flexible(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            'Price',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          TextField(
-                                            controller: priceController,
-                                            focusNode: priceFocusNode,
-                                            enabled: !state.receiptSaved,
-                                            onChanged: cubit.unitPriceChanged,
-                                            decoration: const InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
-                                                suffix: Text(
-                                                  'EGP',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                            keyboardType: const TextInputType
-                                                .numberWithOptions(
-                                              signed: false,
-                                              decimal: true,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
+                                    ElevatedButton(
+                                        onPressed: !state.receiptSaved
+                                            ? null
+                                            : () async {
+                                                savePdfFile(
+                                                    'fileName',
+                                                    await createPdf(
+                                                        state.receiptItems));
+                                              },
+                                        child: Icon(Icons.print)),
+                                    SizedBox(width: 4),
+                                    ElevatedButton(
                                         onPressed: state.receiptSaved
                                             ? null
-                                            : cubit.submit,
-                                        child: const Text('Add'))),
-                              ],
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        BlocBuilder<InstitutionReceiptsCubit,
-                            InstitutionReceiptsState>(
-                          buildWhen: (previous, current) =>
-                              previous.totalPrice != current.totalPrice ||
-                              previous.receiptSaved != current.receiptSaved ||
-                              previous.receiptItems != current.receiptItems,
-                          builder: (context, state) {
-                            return Column(
-                              children: [
-                                if (state.receiptItems.isNotEmpty)
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                            : () => cubit
+                                                .saveReceipt(institution.id),
+                                        child: Icon(Icons.save))
+                                  ],
+                                ),
+                              if (state.receiptItems.isNotEmpty)
+                                Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Flexible(
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional.topStart,
-                                          child: Text(
-                                            'Total price\n${state.totalPrice} EGP',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ),
+                                      const ReceiptItemWidget(
+                                        item: 'Item',
+                                        unit: 'Unit',
+                                        quantity: 'Quantity',
+                                        price: 'Price',
                                       ),
-                                      ElevatedButton(
-                                          onPressed: !state.receiptSaved
-                                              ? null
-                                              : () async {
-                                                  savePdfFile(
-                                                      'fileName',
-                                                      await createPdf(
-                                                          state.receiptItems));
+                                      ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: state.receiptItems.length,
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, index) =>
+                                              ReceiptItemWidget(
+                                                item: state.receiptItems[index]
+                                                    .item.name,
+                                                unit: state.receiptItems[index]
+                                                    .unit.name,
+                                                quantity: state
+                                                    .receiptItems[index]
+                                                    .quantity
+                                                    .toString(),
+                                                price: state
+                                                    .receiptItems[index].price
+                                                    .toString(),
+                                                onRemove: () {
+                                                  cubit
+                                                      .removeReceiptItem(index);
                                                 },
-                                          child: Icon(Icons.print)),
-                                      SizedBox(width: 4),
-                                      ElevatedButton(
-                                          onPressed: state.receiptSaved
-                                              ? null
-                                              : () => cubit
-                                                  .saveReceipt(institution.id),
-                                          child: Icon(Icons.save))
+                                              )),
                                     ],
                                   ),
-                                if (state.receiptItems.isNotEmpty)
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const ReceiptItemWidget(
-                                          item: 'Item',
-                                          unit: 'Unit',
-                                          quantity: 'Quantity',
-                                          price: 'Price',
-                                        ),
-                                        ListView.builder(
-                                            itemCount:
-                                                state.receiptItems.length,
-                                            shrinkWrap: true,
-                                            itemBuilder: (context, index) =>
-                                                ReceiptItemWidget(
-                                                  item: state
-                                                      .receiptItems[index]
-                                                      .item
-                                                      .name,
-                                                  unit: state
-                                                      .receiptItems[index]
-                                                      .unit
-                                                      .name,
-                                                  quantity: state
-                                                      .receiptItems[index]
-                                                      .quantity
-                                                      .toString(),
-                                                  price: state
-                                                      .receiptItems[index].price
-                                                      .toString(),
-                                                  onRemove: () {
-                                                    cubit.removeReceiptItem(
-                                                        index);
-                                                  },
-                                                )),
-                                      ],
-                                    ),
-                                  ),
-                              ],
-                            );
-                          },
-                        )
-                      ],
-                    ),
+                                ),
+                            ],
+                          );
+                        },
+                      )
+                    ],
                   ),
                 ),
-              );
-          }
-        },
-      ),
+              ),
+            );
+        }
+      },
     );
   }
 

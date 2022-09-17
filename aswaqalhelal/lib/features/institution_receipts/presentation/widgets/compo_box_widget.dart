@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class ComboBoxWidget<T> extends StatefulWidget {
-  const ComboBoxWidget({
-    Key? key,
-    required this.controller,
-    required this.focusNode,
-    required this.suggestions,
-    required this.suggestionBuilder,
-    required this.onSuggestionSelected,
-    required this.onChanged,
-    required this.onRemoveSelection,
-    required this.enabled,
-  }) : super(key: key);
+  const ComboBoxWidget(
+      {Key? key,
+      required this.controller,
+      required this.focusNode,
+      required this.suggestions,
+      required this.suggestionBuilder,
+      required this.onSuggestionSelected,
+      required this.onChanged,
+      required this.onRemoveSelection,
+      required this.enabled,
+      this.labelText})
+      : super(key: key);
 
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -24,6 +25,7 @@ class ComboBoxWidget<T> extends StatefulWidget {
   final void Function(String value) onChanged;
   final void Function()? onRemoveSelection;
   final bool enabled;
+  final String? labelText;
 
   @override
   State<ComboBoxWidget<T>> createState() => _ComboBoxWidgetState<T>();
@@ -159,6 +161,7 @@ class _ComboBoxWidgetState<T> extends State<ComboBoxWidget<T>> {
               controller: widget.controller,
               onChanged: widget.onChanged,
               decoration: InputDecoration(
+                labelText: widget.labelText,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 filled: !widget.enabled,
                 fillColor: widget.enabled ? null : Colors.grey.shade200,

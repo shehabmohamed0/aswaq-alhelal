@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/core/services/prepare_for_search.dart';
+import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';

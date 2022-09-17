@@ -1,6 +1,6 @@
 import 'package:aswaqalhelal/features/institution_receipts/data/models/receipt_item_model.dart';
-import 'package:aswaqalhelal/features/instutution_items/data/models/institution_item_model.dart';
-import 'package:aswaqalhelal/features/instutution_items/data/models/unit_model.dart';
+import 'package:aswaqalhelal/features/institution_items/data/models/institution_item_model.dart';
+import 'package:aswaqalhelal/features/institution_items/data/models/unit_model.dart';
 
 import '../../../features/institution_receipts/data/models/receipt_model.dart';
 import '../../../features/institution_receipts/domain/entities/receipt_item.dart';

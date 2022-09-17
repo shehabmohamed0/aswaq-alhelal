@@ -29,7 +29,7 @@ class JobsOffersPage extends StatelessWidget {
             previous.updateOfferState != current.updateOfferState,
         listener: (context, state) {
           switch (state.updateOfferState) {
-            case RequestState.idle:
+            case RequestState.initial:
               break;
             case RequestState.loading:
               EasyLoading.show(
@@ -55,7 +55,7 @@ class JobsOffersPage extends StatelessWidget {
             previous.jobsOffersState != current.jobsOffersState,
         builder: (context, state) {
           switch (state.jobsOffersState) {
-            case RequestState.idle:
+            case RequestState.initial:
               return kEmptyWidget;
             case RequestState.loading:
               return const LoadingWidget();

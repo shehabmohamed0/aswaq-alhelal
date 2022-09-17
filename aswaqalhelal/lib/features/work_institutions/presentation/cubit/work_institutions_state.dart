@@ -6,7 +6,7 @@ class WorkInstitutionsState extends Equatable {
 
   const WorkInstitutionsState({
     this.institutions = const [],
-    this.institutionsState = RequestState.idle,
+    this.institutionsState = RequestState.initial,
   });
 
   WorkInstitutionsState copyWith({

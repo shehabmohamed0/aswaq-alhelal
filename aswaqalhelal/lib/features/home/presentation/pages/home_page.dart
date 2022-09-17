@@ -6,6 +6,7 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import '../../../../l10n/l10n.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../institutions/presentation/widgets/institutions_widget.dart';
+import '../../../notifications/presentation/widgets/notifications_bell.dart';
 import '../cubit/items/items_cubit.dart';
 import 'widgets/app_drawer.dart';
 
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
               title: Text(AppLocalizations.of(context).aswaqLhelal),
               elevation: 0,
+              actions: const [NotificationsBell()],
             ),
             body: CustomScrollView(
               physics: const ClampingScrollPhysics(),

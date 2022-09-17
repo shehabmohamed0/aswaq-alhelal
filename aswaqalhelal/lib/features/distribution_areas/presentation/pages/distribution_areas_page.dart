@@ -6,7 +6,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../address_suggestions/domain/entities/entities.dart';
-import '../../../instutution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../../user_institutions/domain/entities/institution.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../bloc/distribution_areas_bloc.dart';

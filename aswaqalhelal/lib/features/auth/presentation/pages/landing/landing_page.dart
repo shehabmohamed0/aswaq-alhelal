@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/notifications/presentation/bloc/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/locator/locator.dart';
@@ -29,7 +30,13 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
+    return BlocConsumer<AppBloc, AppState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if (state.status == AppStatus.authenticated) {
+          context.read<NotificationsBloc>().add(InitNotifications());
+        }
+      },
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         EasyLoading.dismiss();

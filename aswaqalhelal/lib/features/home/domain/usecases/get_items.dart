@@ -1,4 +1,4 @@
-import '../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
 import '../repositories/items_repository.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:dartz/dartz.dart';

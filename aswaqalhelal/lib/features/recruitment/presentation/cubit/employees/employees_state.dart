@@ -6,7 +6,7 @@ class EmployeesState extends Equatable {
 
   const EmployeesState({
     this.employees = const [],
-    this.employeesState = RequestState.idle,
+    this.employeesState = RequestState.initial,
   });
 
   EmployeesState copyWith({

@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:root_package/packages/injectable.dart';
 
-import 'fstore_notification_item.dart';
-import 'logs.dart';
+import '../../features/notifications/domain/entities/fstore_notification_item.dart';
+import '../utils/logs.dart';
 import 'notification_service.dart';
-import 'platform.dart';
+import '../utils/platform.dart';
 
+@LazySingleton(as: NotificationService)
 class FirebaseNotificationService extends NotificationService {
   final _instance = FirebaseMessaging.instance;
 
@@ -47,11 +49,11 @@ class FirebaseNotificationService extends NotificationService {
     final initMessage = await _instance.getInitialMessage();
     if (initMessage != null) {
       delegate.onMessageOpenedApp(FStoreNotificationItem(
-        id: initMessage.messageId ?? '',
+        id: initMessage.data['id'] ?? '',
         title: initMessage.notification?.title ?? '',
         body: initMessage.notification?.body ?? '',
-        additionalData: initMessage.data,
-        date: DateTime.now(),
+        data: initMessage.data,
+        creationTime: DateTime.now(),
       ));
     }
 
@@ -79,11 +81,11 @@ class FirebaseNotificationService extends NotificationService {
         }
 
         delegate.onMessage(FStoreNotificationItem(
-          id: message.messageId ?? '',
+          id: message.data['id'] ?? '',
           title: message.notification?.title ?? '',
           body: message.notification?.body ?? '',
-          additionalData: message.data,
-          date: DateTime.now(),
+          data: message.data,
+          creationTime: DateTime.now(),
         ));
       },
     );
@@ -91,11 +93,11 @@ class FirebaseNotificationService extends NotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       // printLog('Notification OpenedApp triggered');
       delegate.onMessageOpenedApp(FStoreNotificationItem(
-        id: message.messageId ?? '',
+        id: message.data['id'] ?? '',
         title: message.notification?.title ?? '',
         body: message.notification?.body ?? '',
-        additionalData: message.data,
-        date: DateTime.now(),
+        data: message.data,
+        creationTime: DateTime.now(),
       ));
     });
   }

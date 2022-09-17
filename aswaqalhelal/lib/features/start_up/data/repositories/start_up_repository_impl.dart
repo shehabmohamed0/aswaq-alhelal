@@ -8,7 +8,7 @@ import 'package:root_package/packages/injectable.dart';
 
 @LazySingleton(as: StartUpRepository)
 class StartUpRepositoryImpl extends StartUpRepository {
-  final LocalDataSource _localDataSource;
+  final NotificationsLocalApi _localDataSource;
 
   StartUpRepositoryImpl(this._localDataSource);
   @override

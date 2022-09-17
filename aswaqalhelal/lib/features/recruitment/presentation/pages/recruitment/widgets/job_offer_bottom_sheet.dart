@@ -3,8 +3,8 @@ import 'package:root_package/core/form_inputs/form_inputs.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 
-import '../../../../../user_institutions/domain/entities/institution.dart';
 import '../../../cubit/job_offers/send_job_offers_cubit.dart';
+import '../DTOs/recruitment_page_arguments.dart';
 
 class JobOfferBottomSheet extends StatelessWidget {
   const JobOfferBottomSheet({
@@ -16,8 +16,9 @@ class JobOfferBottomSheet extends StatelessWidget {
   final FocusNode focusNode;
   @override
   Widget build(BuildContext context) {
-    final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
+
     final formKey = GlobalKey<FormState>();
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -64,10 +65,13 @@ class JobOfferBottomSheet extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     focusNode.unfocus();
                     context.read<InstitutionJobsOffersCubit>().sendOffer(
-                        institution, phoneController.text, 'Cachier');
+                        arguments.institutionId,
+                        arguments.ownerId,
+                        phoneController.text,
+                        'Cachier');
                   }
                 },
-                child: Text('Send'))
+                child: const Text('Send'))
           ],
         ),
       ),

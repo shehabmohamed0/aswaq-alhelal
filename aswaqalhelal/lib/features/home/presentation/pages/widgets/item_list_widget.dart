@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({

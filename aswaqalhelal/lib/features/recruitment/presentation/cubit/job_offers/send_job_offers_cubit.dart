@@ -39,14 +39,13 @@ class InstitutionJobsOffersCubit extends Cubit<InstitutionJobsOffersState> {
     );
   }
 
-  Future<void> sendOffer(
-      Institution institution, String phoneNumber, String role) async {
+  Future<void> sendOffer(String institutionId, String ownerId,
+      String phoneNumber, String role) async {
     emit(state.copyWith(addJobOfferState: RequestState.loading));
     final either = await _sendJobOffer(
         params: SendJobOfferParams(
-      ownerId: institution.userId,
-      institutionId: institution.id,
-      institutionName: institution.officialName,
+      ownerId: ownerId,
+      institutionId: institutionId,
       phoneNumber: phoneNumber,
       role: role,
       state: OfferState.pending,

@@ -6,7 +6,7 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 
 import '../../../../address/presentation/widgets/normal_text_field.dart';
-import '../../../../instutution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
 import '../../cubit/items_widget/items_widget_cubit.dart';
 import 'items_sliver_grid_view.dart';
 import 'items_sliver_list_view.dart';
@@ -32,7 +32,7 @@ class ItemsWidget extends StatelessWidget {
   }) =>
       ItemsWidget._(
         items: items,
-        hasItsOwnProvider: false,
+        hasItsOwnProvider: true,
         onItemPressed: onItemPressed,
         onItemLongPressed: onItemLongPressed,
       );
