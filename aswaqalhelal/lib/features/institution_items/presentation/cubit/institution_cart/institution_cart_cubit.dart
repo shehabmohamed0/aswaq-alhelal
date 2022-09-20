@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
@@ -50,9 +51,46 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
     }
   }
 
-  void add(cartItem) {
-    emit(state.copyWith(cartItems: List.of(state.cartItems)));
+  void add(CartItem cartItem) {
+    final newList = List.of(state.cartItems.map((element) {
+      if (element.item.id == cartItem.item.id) {
+        return cartItem.copyWith(quantity: cartItem.quantity + 1);
+      }
+      return element;
+    }));
+    emit(state.copyWith(
+        cartItems: newList,
+        totalPrice: state.totalPrice + cartItem.selectedUnit.price));
   }
 
-  void reduce(cartItem) {}
+  void reduce(CartItem cartItem) {
+    final newQuantity = cartItem.quantity - 1;
+    late List<CartItem> newList;
+    if (newQuantity == 0) {
+      final index = state.cartItems
+          .indexWhere((element) => element.item.id == cartItem.item.id);
+      newList = List.of(state.cartItems..removeAt(index));
+    } else {
+      newList = List.of(state.cartItems.map((element) {
+        if (element.item.id == cartItem.item.id) {
+          return cartItem.copyWith(quantity: newQuantity);
+        }
+        return element;
+      }));
+    }
+
+    emit(state.copyWith(
+        cartItems: newList,
+        totalPrice: state.totalPrice - cartItem.selectedUnit.price));
+  }
+
+  void remove(CartItem cartItem) {
+    final newList = List.of(state.cartItems
+        .where((element) => element.item.id != cartItem.item.id));
+
+    emit(state.copyWith(
+        cartItems: newList,
+        totalPrice: state.totalPrice -
+            (cartItem.selectedUnit.price * cartItem.quantity)));
+  }
 }

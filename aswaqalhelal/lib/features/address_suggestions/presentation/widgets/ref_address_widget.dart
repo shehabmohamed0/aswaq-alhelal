@@ -7,13 +7,13 @@ import 'package:root_package/widgets/snack_bar.dart';
 import '../../../../core/params/address_suggestion/params.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../domain/entities/ref_address.dart';
-import '../bloc/address_suggestions2_bloc.dart';
+import '../bloc/address_suggestions_bloc.dart';
 
 class RefAddressWidget<
     T extends RefAddress,
     SP extends GetRefAddressParams,
     AP extends AddRefAddressParams,
-    B extends AddressSuggestions2Bloc<T, SP, AP>> extends StatelessWidget {
+    B extends AddressSuggestionsBloc<T, SP, AP>> extends StatelessWidget {
   const RefAddressWidget({
     Key? key,
     required this.controller,
@@ -34,7 +34,7 @@ class RefAddressWidget<
   final VoidCallback onAddressUnSelected;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<B, AddressSuggestions2State<T>>(
+    return BlocConsumer<B, AddressSuggestionsState<T>>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         switch (state.status) {
@@ -100,7 +100,7 @@ class RefAddressWidget<
             title: Text(governate.name),
           ),
           onSuggestionSelected: (refAddress) {
-            bloc.add(AddressSuggestions2Event<T, SP, AP>.selectRefAddress(
+            bloc.add(AddressSuggestionsEvent<T, SP, AP>.selectRefAddress(
                 refAddress));
           },
           onEmptyWidgetClicked: () {
@@ -109,7 +109,7 @@ class RefAddressWidget<
           enabled: state.addressOrNull.isNone() && state.enabled,
           showRemoveButton: state.addressOrNull.isSome(),
           onRemoveSelection: () {
-            bloc.add(AddressSuggestions2Event<T, SP, AP>.unSelectRefAddress());
+            bloc.add(AddressSuggestionsEvent<T, SP, AP>.unSelectRefAddress());
           },
         );
       },

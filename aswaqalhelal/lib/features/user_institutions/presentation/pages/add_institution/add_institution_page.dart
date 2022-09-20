@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/form_inputs.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
@@ -9,16 +8,9 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../address_suggestions/domain/entities/entities.dart';
-import '../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
-import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
-import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
-import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
-import '../../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
-import 'widgets/test.dart';
+import 'widgets/address_step.dart';
 
-part 'widgets/address_step_widget.dart';
 part 'widgets/contacts_dialog.dart';
 part 'widgets/contacts_step_widget.dart';
 part 'widgets/name_step_widget.dart';
@@ -34,11 +26,6 @@ class AddInstitutionPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Add Institution'),
-      ),
-      bottomSheet: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(16),
-        child: const StepperButtons(),
       ),
       body: BlocConsumer<AddInstitutionCubit, AddInstitutionState>(
         listenWhen: (previous, current) => previous.status != current.status,
@@ -113,6 +100,11 @@ class AddInstitutionPage extends StatelessWidget {
                             ),
                       ]),
                 ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(16),
+                child: const StepperButtons(),
               ),
             ],
           );

@@ -2,7 +2,6 @@ import 'package:aswaqalhelal/features/institution_receipts/domain/entities/recei
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 
-
 class Receipt extends Equatable {
   @JsonKey(defaultValue: '')
   final String id;
@@ -16,6 +15,8 @@ class Receipt extends Equatable {
   final double totalPrice;
   @JsonKey()
   final DateTime creationTime;
+  @JsonKey()
+  final String employeeId;
 
   const Receipt({
     required this.id,
@@ -23,9 +24,11 @@ class Receipt extends Equatable {
     required this.to,
     required this.items,
     required this.totalPrice,
+    required this.employeeId,
     required this.creationTime,
   });
 
   @override
-  List<Object?> get props => [id, from, to, items, totalPrice, creationTime];
+  List<Object?> get props =>
+      [id, from, to, items, totalPrice, employeeId, creationTime];
 }

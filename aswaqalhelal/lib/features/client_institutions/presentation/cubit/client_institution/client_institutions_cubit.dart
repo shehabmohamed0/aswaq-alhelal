@@ -1,11 +1,11 @@
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../core/request_state.dart';
-import '../../../institution_items/domain/entities/institution_item.dart';
-import '../../domain/usecases/get_client_institution_item.dart';
+import '../../../../../core/request_state.dart';
+import '../../../../institution_items/domain/entities/institution_item.dart';
+import '../../../../user_institutions/domain/entities/institution.dart';
+import '../../../domain/usecases/get_client_institution_item.dart';
 
 part 'client_institutions_state.dart';
 

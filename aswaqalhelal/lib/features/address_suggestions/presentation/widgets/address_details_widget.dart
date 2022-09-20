@@ -6,7 +6,7 @@ import 'package:root_package/packages/flutter_hooks.dart';
 import '../../../../core/params/address_suggestion/params.dart';
 import '../../domain/entities/entities.dart';
 import '../DTOs/ref_address_details.dart';
-import '../bloc/address_suggestions2_bloc.dart';
+import '../bloc/address_suggestions_bloc.dart';
 import 'ref_address_widget.dart';
 
 class AddressDetailsWidget extends HookWidget {
@@ -33,10 +33,10 @@ class AddressDetailsWidget extends HookWidget {
 
     if (fullRefAddress != null) {
       governateBloc
-          .add(AddressSuggestions2Event.initEdit(fullRefAddress!.refGovernate));
-      cityBloc.add(AddressSuggestions2Event.initEdit(fullRefAddress!.refCity));
+          .add(AddressSuggestionsEvent.initEdit(fullRefAddress!.refGovernate));
+      cityBloc.add(AddressSuggestionsEvent.initEdit(fullRefAddress!.refCity));
       neighborhoodBloc.add(
-          AddressSuggestions2Event.initEdit(fullRefAddress!.refNeighborhood));
+          AddressSuggestionsEvent.initEdit(fullRefAddress!.refNeighborhood));
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ class AddressDetailsWidget extends HookWidget {
             focusNode: governateFocusNode,
             label: 'Governate',
             searchAddress: (bloc) {
-              bloc.add(AddressSuggestions2Event.searchRefAddress(
+              bloc.add(AddressSuggestionsEvent.searchRefAddress(
                 governateController.text,
                 GetGovernatesSuggestionsParams(
                   country: 'egypt',
@@ -60,7 +60,7 @@ class AddressDetailsWidget extends HookWidget {
             addNewAddress: (bloc) {
               if (governateController.text.trim().isEmpty) return;
 
-              bloc.add(AddressSuggestions2Event.addRefAddress(
+              bloc.add(AddressSuggestionsEvent.addRefAddress(
                 AddNewGovernateParams(
                     country: 'egypt',
                     governate: governateController.text.trim(),
@@ -68,13 +68,13 @@ class AddressDetailsWidget extends HookWidget {
               ));
             },
             onAddressSelected: () {
-              cityBloc.add(const AddressSuggestions2Event.enabel());
+              cityBloc.add(const AddressSuggestionsEvent.enabel());
             },
             onAddressUnSelected: () {
-              cityBloc.add(const AddressSuggestions2Event.unSelectRefAddress(
+              cityBloc.add(const AddressSuggestionsEvent.unSelectRefAddress(
                   enabled: false));
               neighborhoodBloc.add(
-                  const AddressSuggestions2Event.unSelectRefAddress(
+                  const AddressSuggestionsEvent.unSelectRefAddress(
                       enabled: false));
             },
           ),
@@ -86,7 +86,7 @@ class AddressDetailsWidget extends HookWidget {
           focusNode: cityFocusNode,
           label: 'City',
           searchAddress: (bloc) {
-            bloc.add(AddressSuggestions2Event.searchRefAddress(
+            bloc.add(AddressSuggestionsEvent.searchRefAddress(
               cityController.text,
               GetCitiesSuggestionsParams(
                   country: 'egypt',
@@ -98,7 +98,7 @@ class AddressDetailsWidget extends HookWidget {
           addNewAddress: (bloc) {
             if (cityController.text.trim().isEmpty) return;
             bloc.add(
-              AddressSuggestions2Event.addRefAddress(
+              AddressSuggestionsEvent.addRefAddress(
                 AddNewCityParams(
                     country: 'egypt',
                     refGovernate:
@@ -109,11 +109,11 @@ class AddressDetailsWidget extends HookWidget {
             );
           },
           onAddressSelected: () {
-            neighborhoodBloc.add(const AddressSuggestions2Event.enabel());
+            neighborhoodBloc.add(const AddressSuggestionsEvent.enabel());
           },
           onAddressUnSelected: () {
             neighborhoodBloc.add(
-                const AddressSuggestions2Event.unSelectRefAddress(
+                const AddressSuggestionsEvent.unSelectRefAddress(
                     enabled: false));
           },
         ),
@@ -124,7 +124,7 @@ class AddressDetailsWidget extends HookWidget {
           focusNode: neighborhoodFocusNode,
           label: 'Neighborhood',
           searchAddress: (bloc) {
-            bloc.add(AddressSuggestions2Event.searchRefAddress(
+            bloc.add(AddressSuggestionsEvent.searchRefAddress(
               neighborhoodController.text,
               GetNeighborhoodsSuggestionsParams(
                   country: 'egypt',
@@ -136,7 +136,7 @@ class AddressDetailsWidget extends HookWidget {
           },
           addNewAddress: (bloc) {
             if (neighborhoodController.text.trim().isEmpty) return;
-            bloc.add(AddressSuggestions2Event.addRefAddress(
+            bloc.add(AddressSuggestionsEvent.addRefAddress(
               AddNewNeighborhoodParams(
                 country: 'egypt',
                 refGovernate: governateBloc.state.addressOrNull.toNullable()!,

@@ -18,6 +18,7 @@ class ReceiptModel extends Receipt {
     required String? to,
     required this.itemsModels,
     required double totalPrice,
+    required String employeeId,
     required DateTime creationTime,
   }) : super(
           id: id,
@@ -25,6 +26,7 @@ class ReceiptModel extends Receipt {
           to: to,
           items: itemsModels,
           totalPrice: totalPrice,
+          employeeId: employeeId,
           creationTime: creationTime,
         );
 
@@ -40,6 +42,7 @@ class ReceiptModel extends Receipt {
         itemsModels: itemsModels,
         to: to,
         totalPrice: totalPrice,
+        employeeId: employeeId,
         creationTime: creationTime,
       );
   factory ReceiptModel.fromJson(Map<String, dynamic> json) =>

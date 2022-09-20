@@ -119,11 +119,116 @@ class AddItemPage extends HookWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Name',
-                  style: Theme.of(context).textTheme.titleLarge,
+                const SizedBox(height: 8),
+                Center(
+                  child: SizedBox.square(
+                    dimension: MediaQuery.of(context).size.width / 2,
+                    child: Material(
+                      color: Colors.grey.shade200,
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => ImageBottomSheetWidget(
+                                    onCameraPressed: () {
+                                      bloc.add(
+                                        SelectImagePressed(
+                                          ImageSource.camera,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
+                                    onGalleryPressed: () {
+                                      bloc.add(
+                                        SelectImagePressed(
+                                          ImageSource.gallery,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
+                                  ));
+                        },
+                        child: BlocBuilder<AddItemBloc, AddItemState>(
+                          buildWhen: ((p, c) =>
+                              p.imageFile != c.imageFile ||
+                              p.imageUrl != c.imageUrl),
+                          builder: (context, state) {
+                            if (state.imageFile.value != null) {
+                              return Stack(children: [
+                                Positioned.fill(
+                                  child: Image.file(
+                                    state.imageFile.value!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 4,
+                                  right: 4,
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          bloc.add(DeleteImageFile());
+                                        },
+                                        child: const Icon(Icons.close,
+                                            size: 18, color: Colors.red)),
+                                  ),
+                                ),
+                              ]);
+                            } else if (state.imageFile.value == null &&
+                                state.imageUrl.value != null) {
+                              return Stack(children: [
+                                Positioned.fill(
+                                  child: CachedNetworkImage(
+                                    imageUrl: state.imageUrl.value!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 4,
+                                    right: 4,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey.shade200,
+                                      ),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            bloc.add(DeleteImageUrl());
+                                          },
+                                          child: const Icon(Icons.close,
+                                              color: Colors.red)),
+                                    ))
+                              ]);
+                            } else {
+                              return const Padding(
+                                padding: EdgeInsets.all(4),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    'Tap to\nSelect item image.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 16),
+                Text('Name', style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 2),
                 BlocBuilder<AddItemBloc, AddItemState>(
                   buildWhen: (previous, current) =>
                       previous.suggestionState != current.suggestionState ||
@@ -172,113 +277,6 @@ class AddItemPage extends HookWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  'Image',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                Center(
-                  child: SizedBox.square(
-                    dimension: MediaQuery.of(context).size.width / 2,
-                    child: Material(
-                      color: Colors.grey.shade200,
-                      child: InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) => ImageBottomSheetWidget(
-                                    onCameraPressed: () {
-                                      bloc.add(
-                                        SelectImagePressed(
-                                          ImageSource.camera,
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    },
-                                    onGalleryPressed: () {
-                                      bloc.add(
-                                        SelectImagePressed(
-                                          ImageSource.gallery,
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    },
-                                  ));
-                        },
-                        child: BlocBuilder<AddItemBloc, AddItemState>(
-                          buildWhen: ((p, c) =>
-                              p.imageFile != c.imageFile ||
-                              p.imageUrl != c.imageUrl),
-                          builder: (context, state) {
-                            if (state.imageFile.value != null) {
-                              return Stack(children: [
-                                Image.file(
-                                  state.imageFile.value!,
-                                  fit: BoxFit.cover,
-                                ),
-                                Positioned(
-                                  top: 4,
-                                  right: 4,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          bloc.add(DeleteImageFile());
-                                        },
-                                        child: const Icon(Icons.close,
-                                            color: Colors.red)),
-                                  ),
-                                ),
-                              ]);
-                            } else if (state.imageFile.value == null &&
-                                state.imageUrl.value != null) {
-                              return Stack(children: [
-                                CachedNetworkImage(
-                                  imageUrl: state.imageUrl.value!,
-                                  fit: BoxFit.cover,
-                                ),
-                                Positioned(
-                                    top: 4,
-                                    right: 4,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey.shade200,
-                                      ),
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            bloc.add(DeleteImageUrl());
-                                          },
-                                          child: const Icon(Icons.close,
-                                              color: Colors.red)),
-                                    ))
-                              ]);
-                            } else {
-                              return const Padding(
-                                padding: EdgeInsets.all(4),
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    'Tap to\nSelect item image.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black45,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 BlocBuilder<AddItemBloc, AddItemState>(
                   buildWhen: (previous, current) =>
                       previous.selectedItem != current.selectedItem ||
@@ -289,41 +287,42 @@ class AddItemPage extends HookWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(children: [
-                          Text(
-                            'Measure units',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            visualDensity: VisualDensity.compact,
-                            icon: const Icon(Icons.add),
-                            onPressed: () async {
-                              final unit = await showModalBottomSheet<Unit>(
-                                context: context,
-                                shape: const RoundedRectangleBorder(
-                                  side: BorderSide(),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                  ),
-                                ),
-                                isScrollControlled: true,
-                                builder: (context) => Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom),
-                                  child: const AddUnitBottomSheet(),
-                                ),
-                              );
-                              if (unit != null) {
-                                bloc.add(AddUnitEvent(unit));
-                              }
-                            },
-                          )
-                        ]),
-                        const SizedBox(height: 8),
+                        Row(
+                            children: [
+                              Text(
+                                'Units',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
+                                icon: const Icon(Icons.add),
+                                splashRadius: 16,
+                                onPressed: () async {
+                                  final unit = await showModalBottomSheet<Unit>(
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                      side: BorderSide(),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(8),
+                                        topRight: Radius.circular(8),
+                                      ),
+                                    ),
+                                    isScrollControlled: true,
+                                    builder: (context) => Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: const AddUnitBottomSheet(),
+                                    ),
+                                  );
+                                  if (unit != null) {
+                                    bloc.add(AddUnitEvent(unit));
+                                  }
+                                },
+                              )
+                            ]),
                         UnitWidget(
                           name: 'Name',
                           quantity: 'Quantity',

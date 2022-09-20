@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institutions_cubit.dart';
+import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import 'package:aswaqalhelal/features/client_institutions/presentation/pages/client_institution_page.dart';
 import 'package:aswaqalhelal/features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import 'package:flutter/material.dart';

@@ -1,50 +1,60 @@
 part of 'address_suggestions_bloc.dart';
 
-@freezed
-class AddressSuggestionsState with _$AddressSuggestionsState {
-  const factory AddressSuggestionsState(
-      {@Default('')
-          String governateSearch,
-      @Default([])
-          List<RefGovernate> governatesSuggestions,
-      @Default(AutoSuggestionState.emptyText)
-          AutoSuggestionState governatesSuggestionState,
-      @Default('')
-          String citySearch,
-      @Default([])
-          List<RefCity> citiesSuggestions,
-      @Default(AutoSuggestionState.emptyText)
-          AutoSuggestionState citiesSuggestionState,
-      @Default('')
-          String neighborhoodSearch,
-      @Default([])
-          List<RefNeighborhood> neighborhoodsSuggestions,
-      @Default(AutoSuggestionState.emptyText)
-          AutoSuggestionState neighborhoodsSuggestionState,
-      @Default(None<RefGovernate>())
-          Option<RefGovernate> governateOrNull,
-      @Default(None<RefCity>())
-          Option<RefCity> cityOrNull,
-      @Default(None<RefNeighborhood>())
-          Option<RefNeighborhood> neighborhoodOrNull,
-      @Default(None<GeoPoint>())
-          Option<GeoPoint> geoPointOrNull,
-      @Default(AddressSuggestionsStatus.initial)
-          AddressSuggestionsStatus status}) = _AddressSuggestionsState;
+class AddressSuggestionsState<T extends RefAddress> extends Equatable {
+  final String addressSearch;
+  final List<T> suggestions;
+  final AutoSuggestionState suggestionState;
+  final Option<T> addressOrNull;
+  final AddressSuggestionsStatus status;
+  final bool enabled;
+  final String? errorMessage;
+
+  const AddressSuggestionsState({
+    this.addressSearch = '',
+    required this.suggestions,
+    this.suggestionState = AutoSuggestionState.emptyText,
+    required this.addressOrNull,
+    this.status = AddressSuggestionsStatus.initial,
+    this.enabled = false,
+    this.errorMessage,
+  });
+
+  AddressSuggestionsState<T> copyWith({
+    String? addressSearch,
+    List<T>? suggestions,
+    AutoSuggestionState? suggestionState,
+    Option<T>? addressOrNull,
+    AddressSuggestionsStatus? status,
+    bool? enabled,
+    String? errorMessage,
+  }) =>
+      AddressSuggestionsState(
+          addressSearch: addressSearch ?? this.addressSearch,
+          suggestions: suggestions ?? this.suggestions,
+          suggestionState: suggestionState ?? this.suggestionState,
+          addressOrNull: addressOrNull ?? this.addressOrNull,
+          status: status ?? this.status,
+          enabled: enabled ?? this.enabled,
+          errorMessage: errorMessage ?? this.errorMessage);
+
+  @override
+  List<Object?> get props => [
+        addressSearch,
+        suggestions,
+        suggestionState,
+        addressOrNull,
+        status,
+        enabled,
+        errorMessage
+      ];
 }
 
 enum AddressSuggestionsStatus {
   initial,
-  governateSelected,
-  citySelected,
-  neighborhoodSelected,
-
-  governateUnSelected,
-  cityUnSelected,
-  neighborhoodUnSelected,
-
+  initEdit,
+  addressSelected,
+  addressUnSelected,
   loading,
-  addingGovernateSucess,
-  addingCitySuccess,
-  addingNeighborhoodSuccess,
+  addingAddressSucess,
+  failure
 }

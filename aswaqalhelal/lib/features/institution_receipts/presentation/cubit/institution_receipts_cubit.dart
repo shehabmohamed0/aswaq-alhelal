@@ -178,17 +178,17 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
         totalPrice: state.totalPrice - (toRemove.price * toRemove.quantity)));
   }
 
-  Future<void> saveReceipt(String institutionId) async {
+  Future<void> saveReceipt(String institutionId, String employeeId) async {
     if (state.status == InstitutionReceiptStatus.loading) return;
     emit(state.copyWith(status: InstitutionReceiptStatus.loading));
 
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
-        from: institutionId,
-        receiptItems: state.receiptItems,
-        to: null,
-        totalPrice: state.totalPrice,
-      ),
+          from: institutionId,
+          receiptItems: state.receiptItems,
+          to: null,
+          totalPrice: state.totalPrice,
+          employeeId: employeeId),
     );
 
     either.fold(

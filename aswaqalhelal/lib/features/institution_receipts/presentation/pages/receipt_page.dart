@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:aswaqalhelal/features/auth/presentation/bloc/app_status/app_bloc.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
@@ -30,7 +31,7 @@ class InstitutionReceiptPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionReceiptsCubit>();
-
+    final userId = context.select((AppBloc element) => element.state.user.id);
     final institution =
         ModalRoute.of(context)!.settings.arguments as Institution;
     final itemController = useTextEditingController();
@@ -53,7 +54,10 @@ class InstitutionReceiptPage extends HookWidget {
             return CheckInternetConnection(onPressed: () {});
           default:
             return Scaffold(
-              appBar: AppBar(title: const Text('Receipt'),elevation: 0,),
+              appBar: AppBar(
+                title: const Text('Receipt'),
+                elevation: 0,
+              ),
               body: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
@@ -249,8 +253,8 @@ class InstitutionReceiptPage extends HookWidget {
                                     ElevatedButton(
                                         onPressed: state.receiptSaved
                                             ? null
-                                            : () => cubit
-                                                .saveReceipt(institution.id),
+                                            : () => cubit.saveReceipt(
+                                                institution.id, userId),
                                         child: Icon(Icons.save))
                                   ],
                                 ),

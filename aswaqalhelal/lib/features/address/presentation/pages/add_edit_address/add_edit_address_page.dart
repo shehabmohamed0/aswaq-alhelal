@@ -6,7 +6,7 @@ import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../address_suggestions/presentation/bloc/address_suggestions2_bloc.dart';
+import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
 import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
@@ -24,7 +24,7 @@ class AddEditAddressPage extends StatelessWidget {
       providers: [
         BlocProvider<GovernatesSuggestionsBloc>(
           create: (context) =>
-              locator()..add(const AddressSuggestions2Event.enabel()),
+              locator()..add(const AddressSuggestionsEvent.enabel()),
         ),
         BlocProvider<CitiesSuggestionsBloc>(
           create: (context) => locator(),

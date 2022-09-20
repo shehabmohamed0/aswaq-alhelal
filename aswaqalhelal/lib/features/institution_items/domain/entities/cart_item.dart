@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 
@@ -21,6 +24,20 @@ class CartItem extends Equatable {
     required this.quantity,
   });
 
+  CartItem copyWith({
+    String? id,
+    InstitutionItem? item,
+    Unit? selectedUnit,
+    int? quantity,
+  }) {
+    return CartItem(
+      id: id ?? this.id,
+      item: item ?? this.item,
+      selectedUnit: selectedUnit ?? this.selectedUnit,
+      quantity: quantity ?? this.quantity,
+    );
+  }
+
   @override
-  List<Object?> get props => [id, item, selectedUnit, quantity];
+  List<Object> get props => [id, item, selectedUnit, quantity];
 }

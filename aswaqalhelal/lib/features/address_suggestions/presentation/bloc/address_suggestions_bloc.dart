@@ -1,24 +1,22 @@
 import 'dart:async';
 
-import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
+import 'package:root_package/core/failures/server_failure.dart';
+import 'package:root_package/core/usecase/usecase.dart';
 import 'package:root_package/packages/dartz.dart';
+import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/stream_transform.dart';
 
+import '../../../../core/extensions/prepare_for_search.dart';
 import '../../../../core/params/address_suggestion/params.dart';
-import '../../../address/domain/entities/geo_point.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
+import '../../domain/entities/ref_address.dart';
 import '../../domain/entities/ref_city.dart';
-import '../../domain/entities/ref_neighborhood.dart';
 import '../../domain/entities/ref_governate.dart';
-import '../../domain/usecases/add_new_city.dart';
-import '../../domain/usecases/add_new_governate.dart';
-import '../../domain/usecases/add_new_neighborhood.dart';
-import '../../domain/usecases/get_cities_suggetsions.dart';
-import '../../domain/usecases/get_districts_suggestions.dart';
-import '../../domain/usecases/get_governates_suggestions.dart';
+import '../../domain/entities/ref_neighborhood.dart';
+import '../../domain/usecases/usecases.dart';
 
 part 'address_suggestions_bloc.freezed.dart';
 part 'address_suggestions_event.dart';
@@ -30,233 +28,146 @@ EventTransformer<E> debounce<E>() {
   };
 }
 
-@injectable
-class AddressSuggestionsBloc
-    extends Bloc<AddressSuggestionsEvent, AddressSuggestionsState> {
-  final GetGovernatesSuggestions _getGovernatesSuggestions;
-  final GetCitiesSuggestions _getCitiesSuggestions;
-  final GetNeighborhoodsSuggestions _getNeighborhoodsSuggestions;
-  final AddNewGovernate _addNewGovernate;
-  final AddNewCity _addNewCity;
-  final AddNewNeighborhood _addNewNeighborhood;
+abstract class AddressSuggestionsBloc<
+        T extends RefAddress,
+        SearchParams extends GetRefAddressParams,
+        AddParams extends AddRefAddressParams>
+    extends Bloc<AddressSuggestionsEvent<T, SearchParams, AddParams>,
+        AddressSuggestionsState<T>> {
+  final UseCase<List<T>, SearchParams> _searchUsecase;
+  final UseCase<T, AddParams> _addRefAddressUsecase;
 
-  AddressSuggestionsBloc(
-      this._getGovernatesSuggestions,
-      this._getCitiesSuggestions,
-      this._getNeighborhoodsSuggestions,
-      this._addNewGovernate,
-      this._addNewCity,
-      this._addNewNeighborhood)
-      : super(const AddressSuggestionsState()) {
-    on<AddressSuggestionsEvent>(_onNormalAddressSuggestionsEvent);
+  AddressSuggestionsBloc(this._searchUsecase, this._addRefAddressUsecase)
+      : super(AddressSuggestionsState(
+            addressOrNull: None<T>(), suggestions: const [])) {
+    on<InitEdit<T, SearchParams, AddParams>>(_onInitEdit);
 
-    on<SearchGovernate>(_onSearchGovernate, transformer: debounce());
-    on<SearchCity>(_onSearchCity, transformer: debounce());
-    on<SearchNeighborhood>(_onSearchNeighborhood, transformer: debounce());
+    on<SearchRefAddress<T, SearchParams, AddParams>>(_onSearchRefAddress,
+        transformer: debounce());
+    on<SelectRefAddress<T, SearchParams, AddParams>>(_onSelectRefAddress);
+    on<AddRefAddress<T, SearchParams, AddParams>>(_onAddRefAddress);
+    on<UnSelectRefAddress<T, SearchParams, AddParams>>(_onUnSelectRefAddress);
+    on<EnableAddressSuggestions<T, SearchParams, AddParams>>(
+        _onEnabelAddressSuggestions);
+    on<DisableAddressSuggestions<T, SearchParams, AddParams>>(
+        _onDisabelAddressSuggestions);
   }
 
-  FutureOr<void> _onNormalAddressSuggestionsEvent(AddressSuggestionsEvent event,
-      Emitter<AddressSuggestionsState> emit) async {
-    await event.mapOrNull(
-      selectGovernate: (event) async {
-        emit(state.copyWith(
-          governateOrNull: some(event.governate),
-          status: AddressSuggestionsStatus.governateSelected,
-        ));
-      },
-      selectCity: (event) async {
-        emit(state.copyWith(
-          cityOrNull: some(event.city),
-          status: AddressSuggestionsStatus.citySelected,
-        ));
-      },
-      selectNeighborhood: (event) async {
-        emit(state.copyWith(
-          neighborhoodOrNull: some(event.neighborhood),
-          status: AddressSuggestionsStatus.neighborhoodSelected,
-        ));
-      },
-      addNewGovernate: (event) async {
-        await _onAddNewGovernate(event, emit);
-      },
-      addNewCity: (event) async {
-        await _onAddNewCity(event, emit);
-      },
-      addNewNeighborhood: (event) async {
-        await _onAddNewNeighborhood(event, emit);
-      },
-      unSelectGovernate: (event) async {
-        emit(state.copyWith(
-          governateOrNull: none(),
-          cityOrNull: none(),
-          neighborhoodOrNull: none(),
-          governatesSuggestionState: AutoSuggestionState.emptyText,
-          citiesSuggestionState: AutoSuggestionState.emptyText,
-          neighborhoodsSuggestionState: AutoSuggestionState.emptyText,
-          status: AddressSuggestionsStatus.governateUnSelected,
-        ));
-      },
-      unSelectCity: (event) async {
-        emit(state.copyWith(
-          cityOrNull: none(),
-          neighborhoodOrNull: none(),
-          citiesSuggestionState: AutoSuggestionState.emptyText,
-          neighborhoodsSuggestionState: AutoSuggestionState.emptyText,
-          status: AddressSuggestionsStatus.cityUnSelected,
-        ));
-      },
-      unSelectNeighborhood: (event) async {
-        emit(state.copyWith(
-          neighborhoodOrNull: none(),
-          neighborhoodsSuggestionState: AutoSuggestionState.emptyText,
-          status: AddressSuggestionsStatus.neighborhoodUnSelected,
-        ));
-      },
-    );
+  FutureOr<void> _onInitEdit(InitEdit<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) {
+    emit(state.copyWith(
+      addressOrNull: some(event.refAddress),
+      status: AddressSuggestionsStatus.initEdit,
+      addressSearch: event.refAddress.name,
+    ));
   }
 
-  Future<void> _onAddNewGovernate(
-      AddNewGovernateEvent event, Emitter<AddressSuggestionsState> emit) async {
+  FutureOr<void> _onSearchRefAddress(
+      SearchRefAddress<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) async {
+    if (event.searchText.trim().length > 2) {
+      emit(state.copyWith(
+        suggestionState: AutoSuggestionState.loading,
+      ));
+      final failureOrSuggestions = await _searchUsecase(params: event.params);
+
+      failureOrSuggestions.fold(
+        (failure) => emit(state.copyWith(
+          suggestionState: AutoSuggestionState.error,
+        )),
+        (suggestions) {
+          final index = suggestions.indexWhere((element) =>
+              element.name.prepareForSearch() ==
+              event.searchText.prepareForSearch());
+
+          emit(state.copyWith(
+            suggestions: List.of(suggestions),
+            suggestionState: index != -1
+                ? AutoSuggestionState.loaded
+                : AutoSuggestionState.loadedButCanAdd,
+          ));
+        },
+      );
+    } else {
+      emit(state.copyWith(suggestionState: AutoSuggestionState.emptyText));
+    }
+  }
+
+  FutureOr<void> _onSelectRefAddress(
+      SelectRefAddress<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) {
+    emit(state.copyWith(
+      addressOrNull: some(event.params),
+      status: AddressSuggestionsStatus.addressSelected,
+    ));
+  }
+
+  FutureOr<void> _onAddRefAddress(
+      AddRefAddress<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) async {
     emit(state.copyWith(status: AddressSuggestionsStatus.loading));
 
-    final either = await _addNewGovernate(
-      params: AddNewGovernateParams(
-          country: 'egypt',
-          governate: event.governate.trim(),
-          searchText: event.governate.prepareForSearch()),
-    );
+    final either = await _addRefAddressUsecase(params: event.params);
     either.fold(
       (failure) {
-        //TODO:
+        emit(state.copyWith(
+            status: AddressSuggestionsStatus.failure,
+            errorMessage: (failure as ServerFailure).message));
       },
       (refGovernate) => emit(state.copyWith(
-        governateOrNull: some(refGovernate),
-        status: AddressSuggestionsStatus.addingGovernateSucess,
+        addressOrNull: Some<T>(refGovernate),
+        status: AddressSuggestionsStatus.addingAddressSucess,
       )),
     );
   }
 
-  Future<void> _onAddNewCity(
-      AddNewCityEvent event, Emitter<AddressSuggestionsState> emit) async {
-    emit(state.copyWith(status: AddressSuggestionsStatus.loading));
-    final either = await _addNewCity(
-      params: AddNewCityParams(
-          country: 'egypt',
-          refGovernate: state.governateOrNull.toNullable()!,
-          city: event.city.trim(),
-          searchText: event.city.prepareForSearch()),
-    );
-    either.fold(
-      (failure) {},
-      (refCity) => emit(state.copyWith(
-        cityOrNull: some(refCity),
-        status: AddressSuggestionsStatus.addingCitySuccess,
-      )),
-    );
+  FutureOr<void> _onUnSelectRefAddress(
+      UnSelectRefAddress<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) {
+    emit(state.copyWith(
+      addressOrNull: none(),
+      status: AddressSuggestionsStatus.addressUnSelected,
+      suggestionState: AutoSuggestionState.emptyText,
+      suggestions: [],
+      enabled: event.enabled,
+    ));
   }
 
-  Future<void> _onAddNewNeighborhood(AddNewNeighborhoodEvent event,
-      Emitter<AddressSuggestionsState> emit) async {
-    emit(state.copyWith(status: AddressSuggestionsStatus.loading));
-
-    final either = await _addNewNeighborhood(
-      params: AddNewNeighborhoodParams(
-          country: 'egypt',
-          refGovernate: state.governateOrNull.fold(() => null, (a) => a)!,
-          refCity: state.cityOrNull.fold(() => null, (a) => a)!,
-          neighborhood: event.neighborhood.trim(),
-          searchText: event.neighborhood.prepareForSearch()),
-    );
-    either.fold(
-      (failure) {},
-      (refNeighborhood) => emit(state.copyWith(
-        neighborhoodOrNull: some(refNeighborhood),
-        status: AddressSuggestionsStatus.addingNeighborhoodSuccess,
-      )),
-    );
+  FutureOr<void> _onEnabelAddressSuggestions(
+      EnableAddressSuggestions<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) {
+    emit(state.copyWith(enabled: true));
   }
 
-  FutureOr<void> _onSearchGovernate(
-      SearchGovernate event, Emitter<AddressSuggestionsState> emit) async {
-    if (event.searchText.trim().length > 2) {
-      emit(state.copyWith(
-        governatesSuggestionState: AutoSuggestionState.loading,
-      ));
-      final failureOrGovernates = await _getGovernatesSuggestions(
-          params: GetGovernatesSuggestionsParams(
-        country: 'egypt',
-        searchText: event.searchText.prepareForSearch(),
-      ));
-
-      failureOrGovernates.fold(
-        (failure) => emit(state.copyWith(
-          governatesSuggestionState: AutoSuggestionState.error,
-        )),
-        (governates) => emit(state.copyWith(
-          governatesSuggestions: governates,
-          governatesSuggestionState: AutoSuggestionState.loaded,
-        )),
-      );
-    } else {
-      emit(state.copyWith(
-          governatesSuggestionState: AutoSuggestionState.emptyText));
-    }
+  FutureOr<void> _onDisabelAddressSuggestions(
+      DisableAddressSuggestions<T, SearchParams, AddParams> event,
+      Emitter<AddressSuggestionsState<T>> emit) {
+    emit(state.copyWith(enabled: false));
   }
+}
 
-  FutureOr<void> _onSearchCity(
-      SearchCity event, Emitter<AddressSuggestionsState> emit) async {
-    if (event.searchText.trim().length > 2) {
-      emit(state.copyWith(
-        citiesSuggestionState: AutoSuggestionState.loading,
-      ));
-      final failureOrGovernates = await _getCitiesSuggestions(
-          params: GetCitiesSuggestionsParams(
-        country: 'egypt',
-        governate: state.governateOrNull.toNullable()!.name,
-        searchText: event.searchText.prepareForSearch(),
-      ));
+@injectable
+class GovernatesSuggestionsBloc extends AddressSuggestionsBloc<RefGovernate,
+    GetGovernatesSuggestionsParams, AddNewGovernateParams> {
+  GovernatesSuggestionsBloc(GetGovernatesSuggestions searchUsecase,
+      AddNewGovernate addRefAddressUsecase)
+      : super(searchUsecase, addRefAddressUsecase);
+}
 
-      failureOrGovernates.fold(
-        (failure) => emit(state.copyWith(
-          citiesSuggestionState: AutoSuggestionState.error,
-        )),
-        (cities) => emit(state.copyWith(
-          citiesSuggestions: cities,
-          citiesSuggestionState: AutoSuggestionState.loaded,
-        )),
-      );
-    } else {
-      emit(
-          state.copyWith(citiesSuggestionState: AutoSuggestionState.emptyText));
-    }
-  }
+@injectable
+class CitiesSuggestionsBloc extends AddressSuggestionsBloc<RefCity,
+    GetCitiesSuggestionsParams, AddNewCityParams> {
+  CitiesSuggestionsBloc(
+      GetCitiesSuggestions searchUsecase, AddNewCity addRefAddressUsecase)
+      : super(searchUsecase, addRefAddressUsecase);
+}
 
-  FutureOr<void> _onSearchNeighborhood(
-      SearchNeighborhood event, Emitter<AddressSuggestionsState> emit) async {
-    if (event.searchText.length > 2) {
-      emit(state.copyWith(
-        neighborhoodsSuggestionState: AutoSuggestionState.loading,
-      ));
-      final failureOrGovernates = await _getNeighborhoodsSuggestions(
-          params: GetNeighborhoodsSuggestionsParams(
-        country: 'egypt',
-        governate: state.governateOrNull.toNullable()!.name,
-        city: state.cityOrNull.toNullable()!.name,
-        searchText: event.searchText.prepareForSearch(),
-      ));
-
-      failureOrGovernates.fold(
-        (failure) => emit(state.copyWith(
-          neighborhoodsSuggestionState: AutoSuggestionState.error,
-        )),
-        (neighborhoods) => emit(state.copyWith(
-          neighborhoodsSuggestions: neighborhoods,
-          neighborhoodsSuggestionState: AutoSuggestionState.loaded,
-        )),
-      );
-    } else {
-      emit(state.copyWith(
-          neighborhoodsSuggestionState: AutoSuggestionState.emptyText));
-    }
-  }
+@injectable
+class NeighborhoodsSuggestionsBloc extends AddressSuggestionsBloc<
+    RefNeighborhood,
+    GetNeighborhoodsSuggestionsParams,
+    AddNewNeighborhoodParams> {
+  NeighborhoodsSuggestionsBloc(GetNeighborhoodsSuggestions searchUsecase,
+      AddNewNeighborhood addRefAddressUsecase)
+      : super(searchUsecase, addRefAddressUsecase);
 }

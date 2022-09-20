@@ -14,6 +14,7 @@ ReceiptModel _$ReceiptModelFromJson(Map<String, dynamic> json) => ReceiptModel(
           .map((e) => ReceiptItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       totalPrice: (json['totalPrice'] as num).toDouble(),
+      employeeId: json['employeeId'] as String,
       creationTime: const TimestampConverter()
           .fromJson(json['creationTime'] as Timestamp),
     );
@@ -25,5 +26,6 @@ Map<String, dynamic> _$ReceiptModelToJson(ReceiptModel instance) =>
       'to': instance.to,
       'totalPrice': instance.totalPrice,
       'creationTime': const TimestampConverter().toJson(instance.creationTime),
+      'employeeId': instance.employeeId,
       'items': instance.itemsModels.map((e) => e.toJson()).toList(),
     };

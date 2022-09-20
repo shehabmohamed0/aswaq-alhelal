@@ -19,7 +19,7 @@ import '../../bloc/add_item/add_item_bloc.dart';
 import '../../cubit/institution_cart/institution_cart_cubit.dart';
 import '../../cubit/institution_items/institution_items_cubit.dart';
 import '../add_item/add_items_page.dart';
-import 'widgets/item_add_to_cart_dialog.dart';
+import '../../../../client_institutions/presentation/widgets/item_add_to_cart_dialog.dart';
 
 class InstitutionItemsPage extends StatelessWidget {
   const InstitutionItemsPage({Key? key}) : super(key: key);

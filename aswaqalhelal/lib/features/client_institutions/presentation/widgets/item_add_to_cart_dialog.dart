@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
-import '../../../../../home/presentation/pages/widgets/custom_drop_down_button.dart';
-import '../../../../domain/entities/cart_item.dart';
-import '../../../../domain/entities/institution_item.dart';
-import '../../../../domain/entities/unit.dart';
-import '../../../cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart';
+import '../../../home/presentation/pages/widgets/custom_drop_down_button.dart';
+import '../../../institution_items/domain/entities/cart_item.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
+import '../../../institution_items/domain/entities/unit.dart';
+import '../cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart';
 
 class ItemAddToCartDialog extends StatelessWidget {
   const ItemAddToCartDialog({Key? key, required this.item}) : super(key: key);
@@ -55,9 +55,9 @@ class ItemAddToCartDialog extends StatelessWidget {
                   CustDropDown<Unit>(
                     defaultSelectedIndex: 0,
                     items: item.units
-                        .map((e) => CustDropdownMenuItem<Unit>(
-                              child: Text(e.name),
+                        .map((e) => CustomDropdownMenuItem<Unit>(
                               value: e,
+                              child: Text(e.name),
                             ))
                         .toList(),
                     hintText: "Select measure unit",
@@ -92,7 +92,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                         onPressed: () {
                           cubit.addItem();
                         },
-                        icon: Icon(Icons.add),
+                        icon: const Icon(Icons.add),
                         splashRadius: 22,
                       ),
                       Flexible(
@@ -104,10 +104,12 @@ class ItemAddToCartDialog extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {
-                          cubit.removeItem();
-                        },
-                        icon: Icon(Icons.remove),
+                        onPressed: state.quantity > 0 ? cubit.removeItem : null,
+                        icon: Icon(
+                          Icons.remove,
+                          color:
+                              state.quantity > 0 ? Colors.black : Colors.grey,
+                        ),
                         splashRadius: 22,
                       ),
                     ],
@@ -115,10 +117,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text(
-                        'Total price ',
-                        style: theme.textTheme.titleLarge,
-                      ),
+                      Text('Total price ', style: theme.textTheme.titleLarge),
                       Flexible(
                         child: Align(
                           alignment: Alignment.bottomRight,

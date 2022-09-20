@@ -1,8 +1,8 @@
+import 'package:aswaqalhelal/features/institution_items/domain/entities/unit.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../domain/entities/unit.dart';
 
 part 'item_add_to_cart_dialog_cubit.freezed.dart';
 part 'item_add_to_cart_dialog_state.dart';

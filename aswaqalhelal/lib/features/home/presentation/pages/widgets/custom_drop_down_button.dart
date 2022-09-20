@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustDropDown<T> extends StatefulWidget {
-  final List<CustDropdownMenuItem<T>> items;
+  final List<CustomDropdownMenuItem<T>> items;
   final void Function(T t) onChanged;
   final String hintText;
   final double borderRadius;
@@ -252,11 +252,11 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
   }
 }
 
-class CustDropdownMenuItem<T> extends StatelessWidget {
+class CustomDropdownMenuItem<T> extends StatelessWidget {
   final T value;
   final Widget child;
 
-  const CustDropdownMenuItem({
+  const CustomDropdownMenuItem({
     Key? key,
     required this.value,
     required this.child,

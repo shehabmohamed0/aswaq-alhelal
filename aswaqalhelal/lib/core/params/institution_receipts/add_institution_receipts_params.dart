@@ -10,12 +10,13 @@ class AddInstitutionReceiptParams {
   final double totalPrice;
   final String from;
   final String? to;
-
+  final String employeeId;
   AddInstitutionReceiptParams({
     required this.receiptItems,
     required this.totalPrice,
     required this.from,
     required this.to,
+    required this.employeeId,
   });
 
   ReceiptModel toModel(String id) => ReceiptModel(
@@ -51,6 +52,7 @@ class AddInstitutionReceiptParams {
             .toList(),
         to: to,
         totalPrice: totalPrice,
+        employeeId: employeeId,
         creationTime: DateTime.now(),
       );
 }
