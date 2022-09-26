@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,14 +10,14 @@ import 'package:root_package/widgets/international_phone_text_field.dart';
 import '../../../../../l10n/l10n.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 
-
 class PhoneInfoPage extends HookWidget {
   const PhoneInfoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final intl = locator<AppLocalizations>();
-    final user = context.select((AppBloc bloc) => bloc.state.user);
+    final user =
+        context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -88,7 +89,7 @@ class SettingsTextFormField extends StatelessWidget {
     Key? key,
     this.controller,
     required this.labelText,
-     this.errorText,
+    this.errorText,
     this.onChanged,
     this.initialValue,
     this.suffixIcon,

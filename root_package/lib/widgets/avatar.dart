@@ -19,7 +19,7 @@ class Avatar extends StatelessWidget {
         image: (photo == null
             ?  const AssetImage(ImageAssets.profile)
             : NetworkImage(photo)) as ImageProvider,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         width: 100,
         height: 100,
         child: InkWell(

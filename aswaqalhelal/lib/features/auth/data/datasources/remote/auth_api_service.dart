@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:aswaqalhelal/core/utils/logs.dart';
+import 'package:aswaqalhelal/features/auth/data/models/user/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
@@ -8,23 +12,14 @@ import 'package:injectable/injectable.dart';
 import 'package:root_package/packages/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../../core/exceptions/google_sign_in_exceptions.dart';
-import '../../../../../core/extensions/to_user.dart';
-import '../../models/user/user_model.dart';
+import '../../../domain/entities/base_profile.dart';
+import '../../models/user/user_profile_model.dart';
 
 abstract class AuthApiService {
-  Future<void> phoneSignUp(
-      {required String name,
-      required AuthCredential phoneCredential,
-      required String phoneNumber});
-  Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> signInWithPhoneCredential(
       String phoneNumber, PhoneAuthCredential phoneAuthCredential);
 
-  Future<void> signInWithGoogle();
   Future<void> linkEmailAndPassword(String email, String password);
-  Future<void> signInWithFacebook();
-  Future<bool> isPhoneNumberExists(String phoneNumber);
   Future<void> verifyPhone({
     required String phoneNumber,
     required void Function(PhoneAuthCredential) verificationCompleted,
@@ -33,8 +28,6 @@ abstract class AuthApiService {
     required void Function(String) codeAutoRetrievalTimeout,
   });
   Stream<UserModel> get user;
-
-  UserModel get currentUser;
 
   Future<void> signOut();
 }
@@ -59,58 +52,19 @@ class AuthApiServiceImpl implements AuthApiService {
   });
 
   @override
-  Future<void> phoneSignUp({
-    required String name,
-    required AuthCredential phoneCredential,
-    required String phoneNumber,
-  }) async {
-    final userCredential =
-        await firebaseAuth.signInWithCredential(phoneCredential);
-    final userDoc = firestore.doc(FirestorePath.user(userCredential.user!.uid));
-    final token = await firebaseMessaging.getToken();
-    await Future.wait([
-      userDoc.set({'name': name, 'phoneNumber': phoneNumber}),
-      userDoc.collection('tokens').doc(token).set({'token': token})
-    ]);
-  }
-
-  @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    await firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-  }
-
-  @override
-  Future<void> signInWithGoogle() async {
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) {
-      throw GoogleSignInCanceledException();
-    }
-    final googleAuth = await googleUser.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    await firebaseAuth.signInWithCredential(credential);
-  }
-
-  @override
   Stream<UserModel> get user {
     return firebaseAuth.userChanges().switchMap((user) async* {
       if (user != null) {
-        yield* firestore
-            .doc(FirestorePath.user(user.uid))
-            .snapshots()
-            .map((doc) => UserModel.fromFireStore(doc));
+        final snapshots =
+            firestore.doc(FirestorePath.user(user.uid)).snapshots();
+        yield* snapshots.map((e) {
+          log(e.data().toString());
+          return UserModel.fromFirestore(e);
+        });
       } else {
         yield UserModel.empty;
       }
     });
-  }
-
-  @override
-  UserModel get currentUser {
-    return firebaseAuth.currentUser.toUserModel();
   }
 
   @override
@@ -120,17 +74,6 @@ class AuthApiServiceImpl implements AuthApiService {
       // googleSignIn.signOut(),
       // facebookAuth.logOut()
     ]);
-  }
-
-  @override
-  Future<void> signInWithFacebook() async {
-    final LoginResult response = await facebookAuth.login();
-    if (response.status == LoginStatus.success) {
-      // you are logged
-      final AccessToken accessToken = response.accessToken!;
-      final credential = FacebookAuthProvider.credential(accessToken.token);
-      await firebaseAuth.signInWithCredential(credential);
-    }
   }
 
   @override
@@ -158,8 +101,8 @@ class AuthApiServiceImpl implements AuthApiService {
         EmailAuthProvider.credential(email: email, password: password);
     final user = firebaseAuth.currentUser!;
     await user.linkWithCredential(credential);
-    final userDoc = firestore.doc(FirestorePath.user(user.uid));
-    await userDoc.update({'email': email});
+    final userProfileDoc = firestore.doc(FirestorePath.profile(user.uid));
+    await userProfileDoc.update({'email': email});
   }
 
   @override
@@ -169,10 +112,24 @@ class AuthApiServiceImpl implements AuthApiService {
         await firebaseAuth.signInWithCredential(phoneAuthCredential);
     final token = (await firebaseMessaging.getToken())!;
     final userDoc = firestore.doc(FirestorePath.user(userCredential.user!.uid));
+    final profileDoc =
+        firestore.doc(FirestorePath.profile(userCredential.user!.uid));
     final userTokens = userDoc.collection('tokens');
     if (userCredential.additionalUserInfo!.isNewUser) {
+      final data = {
+        'id': profileDoc.id,
+        'userId': profileDoc.id,
+        'name': '',
+        'phoneNumber': phoneNumber,
+        'type': ProfileType.user.toString(),
+        'address': null
+      };
+      printLog('Create new user');
       await Future.wait([
-        userDoc.set({'phoneNumber': phoneNumber}),
+        userDoc.set({
+          'profiles': {userDoc.id: data}
+        }),
+        profileDoc.set(data),
         userTokens.doc(token).set({'token': token}),
         sharedPreferences.setString('device_fcm_token', token)
       ]);
@@ -193,17 +150,10 @@ class AuthApiServiceImpl implements AuthApiService {
       }
     }
   }
-
-  @override
-  Future<bool> isPhoneNumberExists(String phoneNumber) async {
-    final phoneExists = await cloudFunctions
-        .httpsCallable('isPhoneExist')
-        .call<bool>({'phoneNumber': phoneNumber});
-    return phoneExists.data;
-  }
 }
 
 class FirestorePath {
-  static String user(String uid) => 'users/$uid';
   FirestorePath._();
+  static String user(String uid) => 'users/$uid';
+  static String profile(String uid) => 'profiles/$uid';
 }

@@ -11,6 +11,7 @@ import '../../../../../../core/failures/auth/phone_credential_failure.dart';
 import '../../../../../../core/params/auth/phone_sign_in_params.dart';
 import '../../../../../../core/params/auth/verify_phone_params.dart';
 import '../../../domain/usecases/usecases.dart';
+
 part 'phone_sign_in_form_state.dart';
 
 @injectable
@@ -121,7 +122,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
         );
       }
     }, (success) {
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+     // emit(state.copyWith(status: FormzStatus.submissionSuccess));
     });
   }
 }

@@ -1,21 +1,21 @@
-import 'package:aswaqalhelal/features/auth/domain/entities/user.dart';
-import 'package:aswaqalhelal/features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../auth/domain/entities/user_profile.dart';
 import '../../../user_institutions/presentation/widgets/institutions_grid_view.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
 import '../../../widgets/loading_widget.dart';
+import '../cubit/work_institutions_cubit.dart';
 
 class WorkInstitutionsPage extends StatelessWidget {
   const WorkInstitutionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = ModalRoute.of(context)!.settings.arguments as User;
+    final user = ModalRoute.of(context)!.settings.arguments as UserProfile;
     return BlocConsumer<WorkInstitutionsCubit, WorkInstitutionsState>(
       listener: (context, state) {},
       builder: (context, state) {

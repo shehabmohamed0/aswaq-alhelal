@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -27,33 +26,33 @@ class HomePage extends StatelessWidget {
               elevation: 0,
               actions: const [NotificationsBell()],
             ),
-            body: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
+            body: const CustomScrollView(
+              physics: ClampingScrollPhysics(),
               slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: CarouselSlider(
-                      items: const [
-                        OfferWidget(
-                          color: Colors.red,
-                        ),
-                        OfferWidget(
-                          color: Colors.green,
-                        ),
-                        OfferWidget(
-                          color: Colors.yellow,
-                        ),
-                      ],
-                      options: CarouselOptions(
-                          aspectRatio: 19 / 9,
-                          autoPlay: true,
-                          enlargeCenterPage: true),
-                    ),
-                  ),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 16)),
-                const SliverPadding(
+                // SliverToBoxAdapter(
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(vertical: 8),
+                //     child: CarouselSlider(
+                //       items: const [
+                //         OfferWidget(
+                //           color: Colors.red,
+                //         ),
+                //         OfferWidget(
+                //           color: Colors.green,
+                //         ),
+                //         OfferWidget(
+                //           color: Colors.yellow,
+                //         ),
+                //       ],
+                //       options: CarouselOptions(
+                //           aspectRatio: 19 / 9,
+                //           autoPlay: true,
+                //           enlargeCenterPage: true),
+                //     ),
+                //   ),
+                // ),
+                // const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   sliver: SliverToBoxAdapter(
                     child: Text(

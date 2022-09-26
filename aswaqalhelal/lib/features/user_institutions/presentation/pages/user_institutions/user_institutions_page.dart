@@ -44,7 +44,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
+    final user = context.read<AppBloc>().state.profile;
 
     return Scaffold(
       appBar: AppBar(

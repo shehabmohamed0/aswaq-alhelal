@@ -1,42 +1,47 @@
-import '../../models/user/user_model.dart';
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/services/cache_client.dart';
 import 'package:root_package/core/exceptions/exceptions.dart';
+import 'package:root_package/packages/shared_preferences.dart';
+
+import '../../../domain/entities/base_profile.dart';
 
 abstract class AuthLocalService {
   ///get Current signin user
   ///
   ///throw [CacheException] if there is no user
-  UserModel currentUser();
-  void saveCurrentUser(UserModel userModel);
-  void removeUser(UserModel userModel);
-  
-
+  BaseProfile lastSelectedProfile();
+  Future<void> saveCurrentProfile(BaseProfile baseProfile);
+  Future<void> removeProfile(BaseProfile baseProfile);
 }
 
 @LazySingleton(as: AuthLocalService)
 class AuthLocalServiceImpl implements AuthLocalService {
-  final CacheClient _cacheClient;
-  AuthLocalServiceImpl(this._cacheClient);
+  final SharedPreferences _sharedPreferences;
+
+  AuthLocalServiceImpl(this._sharedPreferences);
 
   @override
-  UserModel currentUser() {
-    final userModel = _cacheClient.read<UserModel>(key: 'user');
-    if (userModel == null) {
-      throw CacheException();
-    }
-    return userModel;
+  BaseProfile lastSelectedProfile() {
+    final string = _sharedPreferences.getString(LocalKeys.lastSelectedProfile);
+    if (string == null) throw CacheException();
+    final json = jsonDecode(string) as Map<String, dynamic>;
+    return BaseProfile.fromJson(json);
   }
 
   @override
-  void saveCurrentUser(UserModel userModel) {
-    _cacheClient.write<UserModel>(key: LocalKeys.currentUser, value: userModel);
+  Future<void> saveCurrentProfile(BaseProfile baseProfile) async {
+    await _sharedPreferences.setString(
+        LocalKeys.lastSelectedProfile, jsonEncode(baseProfile.toJson()));
   }
 
   @override
-  void removeUser(UserModel userModel) {}
+  Future<void> removeProfile(BaseProfile baseProfile) async {
+    await _sharedPreferences.remove(LocalKeys.lastSelectedProfile);
+  }
 }
+
 class LocalKeys {
-  static const currentUser = 'currentUser';
+  static const lastSelectedProfile = 'lastSelectedProfile';
   LocalKeys._();
 }

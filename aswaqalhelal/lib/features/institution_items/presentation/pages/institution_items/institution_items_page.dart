@@ -27,7 +27,7 @@ class InstitutionItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionItemsCubit>();
-    final user = context.read<AppBloc>().state.user;
+    final user = context.read<AppBloc>().state.profile;
 
     final institution =
         (ModalRoute.of(context)!.settings.arguments as Institution);

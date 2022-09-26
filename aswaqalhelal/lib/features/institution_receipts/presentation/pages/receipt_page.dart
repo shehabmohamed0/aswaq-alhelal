@@ -31,7 +31,7 @@ class InstitutionReceiptPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionReceiptsCubit>();
-    final userId = context.select((AppBloc element) => element.state.user.id);
+    final userId = context.select((AppBloc element) => element.state.profile.id);
     final institution =
         ModalRoute.of(context)!.settings.arguments as Institution;
     final itemController = useTextEditingController();

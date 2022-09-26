@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -21,7 +22,8 @@ class AccountInfoPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final intl = locator<AppLocalizations>();
-    final user = context.select((AppBloc bloc) => bloc.state.user);
+    final user =
+        context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
     final controller = useTextEditingController(
       text: user.birthDate != null
           ? DateFormat.yMd().format(user.birthDate!).toString()

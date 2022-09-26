@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -18,7 +19,7 @@ class UpdateEmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final intl = locator<AppLocalizations>();
 
-    final user = context.select((AppBloc bloc) => bloc.state.user);
+    final user = context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
     return Scaffold(
       appBar: AppBar(
         title: Text(intl.updateEmail),

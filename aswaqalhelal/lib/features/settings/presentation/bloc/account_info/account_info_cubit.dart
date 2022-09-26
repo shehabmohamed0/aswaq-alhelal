@@ -8,7 +8,7 @@ import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/name.dart';
 
 import '../../../../../core/params/settings/update_profile_params.dart';
-import '../../../../auth/domain/entities/user.dart';
+import '../../../../auth/domain/entities/user_profile.dart';
 import '../../../domain/usecases/update_profile.dart';
 
 part 'account_info_state.dart';
@@ -18,10 +18,10 @@ class AccountInfoCubit extends Cubit<AccountInfoState> {
   AccountInfoCubit(this._updateProfile) : super(const AccountInfoState());
   final UpdateProfile _updateProfile;
 
-  void initialize(User user) {
+  void initialize(UserProfile user) {
     emit(
       state.copyWith(
-          name: Name.dirty(user.name ?? ''),
+          name: Name.dirty(user.name),
           birthDate: user.birthDate,
           gender: user.gender),
     );

@@ -45,7 +45,6 @@ dependencies:
   pdf: ^3.8.3
   open_file: ^3.2.1
   flutter_typeahead: ^4.0.0
-
   
   timeago: ^3.3.0
 

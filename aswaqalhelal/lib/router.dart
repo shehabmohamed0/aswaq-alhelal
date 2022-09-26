@@ -1,6 +1,5 @@
-import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
-import 'package:aswaqalhelal/features/client_institutions/presentation/pages/client_institution_page.dart';
-import 'package:aswaqalhelal/features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
+import 'package:aswaqalhelal/features/auth/domain/entities/base_profile.dart';
+import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -14,12 +13,14 @@ import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
 import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
 import 'features/address/presentation/pages/addresses/addresses_page.dart';
 import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
-import 'features/auth/domain/entities/user.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
+import 'features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
+import 'features/client_institutions/presentation/pages/client_institution_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/institution_items/presentation/bloc/add_item/add_item_bloc.dart';
+import 'features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import 'features/institution_items/presentation/cubit/institution_items/institution_items_cubit.dart';
 import 'features/institution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/institution_items/presentation/pages/institution_items/institution_items_page.dart';
@@ -181,7 +182,7 @@ class AppRouter {
           builder: (context) => const UserInstitutionPage(),
         );
       case Routes.addInstitution:
-        final user = settings.arguments as User;
+        final user = settings.arguments as UserProfile;
 
         return _getPageRoute(
           routeName: settings.name,
@@ -272,7 +273,7 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
-            final user = settings.arguments as User;
+            final user = settings.arguments as BaseProfile;
 
             return BlocProvider<WorkInstitutionsCubit>(
               create: (context) => locator()..getInstitutions(user.id),

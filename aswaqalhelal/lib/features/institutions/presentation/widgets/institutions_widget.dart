@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -15,9 +16,12 @@ class InstitutionsSliverWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
+    final user = context.read<AppBloc>().state.profile as UserProfile;
     return BlocProvider<InstitutionsCubit>(
-      create: (context) => locator()..getInstitutions(user.address!),
+      //TODO: user main institution query
+      create: (context) => locator()
+      // ..getInstitutions(user.address!)
+      ,
       child: BlocBuilder<InstitutionsCubit, InstitutionsState>(
         builder: (context, state) {
           return state.map(

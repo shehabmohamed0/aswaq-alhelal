@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aswaqalhelal/core/params/addresses/add_first_address_params.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
@@ -73,6 +75,8 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   Future<AddressModel> addFirstAddress(AddFirstAddressParams params) async {
     final user = _firebaseAuth.currentUser!;
     final userRef = _firestore.doc('users/${user.uid}');
+    log(user.uid);
+    log(user.uid);
     final addressesCollection =
         _firestore.collection(FirebasePath.userAddresses(user.uid));
     final ref = addressesCollection.doc();
@@ -81,7 +85,13 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
     final modelJson = model.toJson();
     modelJson['saveTime'] = FieldValue.serverTimestamp();
     batch.set(ref, modelJson);
-    batch.update(userRef, {'address': modelJson, 'name': params.name});
+    batch.update(
+      userRef,
+      {
+        'profiles.${user.uid}.address': modelJson,
+        'profiles.${user.uid}.name': params.name,
+      },
+    );
 
     await batch.commit();
     return model;

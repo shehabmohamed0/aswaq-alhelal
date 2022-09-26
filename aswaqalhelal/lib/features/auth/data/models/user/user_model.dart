@@ -1,54 +1,34 @@
-import 'package:aswaqalhelal/features/address/data/models/address_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:aswaqalhelal/features/auth/domain/entities/base_profile.dart';
+import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:root_package/packages/freezed_annotation.dart';
 
 import '../../../domain/entities/user.dart';
-
 part 'user_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserModel extends User {
-  @JsonKey(name: 'address')
-  final AddressModel? addressModel;
   const UserModel({
-    required String id,
-    required String phoneNumber,
-    required String? name,
-    String? email,
-    String? photoURL,
-    DateTime? birthDate,
-    String? gender,
-    required this.addressModel,
-  }) : super(
-          id: id,
-          name: name,
-          phoneNumber: phoneNumber,
-          photoURL: photoURL,
-          email: email,
-          birthDate: birthDate,
-          gender: gender,
-          address: addressModel,
-        );
+    required super.id,
+    required super.profiles,
+  });
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    final id = json['id'] as String? ?? '';
+    final List<BaseProfile> profiles = json['profiles'] == null
+        ? []
+        : (json['profiles'] as Map<String, dynamic>)
+            .entries
+            .map((entry) => BaseProfile.fromJson(entry.value))
+            .toList();
 
-  static const empty =
-      UserModel(id: '', name: '', phoneNumber: '', addressModel: null);
-
-  UserModel copyWithId(String id) => UserModel(
-        id: id,
-        name: name,
-        phoneNumber: phoneNumber,
-        birthDate: birthDate,
-        email: email,
-        gender: gender,
-        photoURL: photoURL,
-        addressModel: addressModel,
-      );
-
-  factory UserModel.fromFireStore(
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
-    return _$UserModelFromJson(documentSnapshot.data()!)
-        .copyWithId(documentSnapshot.id);
+    return UserModel(id: id, profiles: profiles);
   }
+  factory UserModel.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final userModel = UserModel.fromJson(document.data()!);
+    return userModel._copyWithId(document.id);
+  }
+
+  UserModel _copyWithId(String id) => UserModel(id: id, profiles: profiles);
+  static const UserModel empty = UserModel(id: '', profiles: []);
 }

@@ -18,7 +18,7 @@ class JobsOffersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<JobsOffersCubit>();
-    final userId = context.select((AppBloc e) => e.state.user.id);
+    final userId = context.select((AppBloc e) => e.state.profile.id);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Jobs Offers'),
