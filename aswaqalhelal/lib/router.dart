@@ -1,5 +1,3 @@
-import 'package:aswaqalhelal/features/auth/domain/entities/base_profile.dart';
-import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -13,6 +11,9 @@ import 'features/address/presentation/cubit/addresses/addresses_cubit.dart';
 import 'features/address/presentation/pages/add_edit_address/add_edit_address_page.dart';
 import 'features/address/presentation/pages/addresses/addresses_page.dart';
 import 'features/address/presentation/pages/select_location_map/select_location_map_page.dart';
+import 'features/auth/domain/entities/base_profile.dart';
+import 'features/auth/domain/entities/institution_profile.dart';
+import 'features/auth/domain/entities/user_profile.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
 import 'features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import 'features/client_institutions/presentation/pages/client_institution_page.dart';
@@ -29,6 +30,8 @@ import 'features/institution_receipts/presentation/pages/receipt_page.dart';
 import 'features/jobs_offers/presentation/cubit/jobs_offers_cubit.dart';
 import 'features/jobs_offers/presentation/pages/jobs_offers_page.dart';
 import 'features/notifications/presentation/pages/notifications_page.dart';
+import 'features/orders/presentation/cubit/cubit/institution_orders_cubit.dart';
+import 'features/orders/presentation/pages/institution_orders_page.dart';
 import 'features/recruitment/presentation/cubit/employees/employees_cubit.dart';
 import 'features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart';
 import 'features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart';
@@ -45,7 +48,6 @@ import 'features/settings/presentation/pages/settings/settings_page.dart';
 import 'features/settings/presentation/pages/update_email/update_email_page.dart';
 import 'features/start_up/presentation/pages/onboarding_page.dart';
 import 'features/start_up/presentation/pages/splash_screen.dart';
-import 'features/user_institutions/domain/entities/institution.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
@@ -201,7 +203,7 @@ class AppRouter {
               BlocProvider<InstitutionItemsCubit>(
                 create: (context) => locator()
                   ..getInstitutionsItems(
-                      (settings.arguments as Institution).id),
+                      (settings.arguments as InstitutionProfile).id),
               ),
             ],
             child: const InstitutionItemsPage(),
@@ -223,7 +225,8 @@ class AppRouter {
           builder: (context) => BlocProvider<DistributionAreasBloc>(
             create: (context) => locator()
               ..add(
-                LoadDistributionAreas((settings.arguments as Institution).id),
+                LoadDistributionAreas(
+                    (settings.arguments as InstitutionProfile).id),
               ),
             child: const DistributionAreasPage(),
           ),
@@ -234,7 +237,8 @@ class AppRouter {
           routeName: settings.name,
           builder: (context) => BlocProvider<InstitutionReceiptsCubit>(
             create: (context) => locator()
-              ..getInstitutionItems((settings.arguments as Institution).id),
+              ..getInstitutionItems(
+                  (settings.arguments as InstitutionProfile).id),
             child: const InstitutionReceiptPage(),
           ),
         );
@@ -302,7 +306,7 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
-            final institution = settings.arguments as Institution;
+            final institution = settings.arguments as InstitutionProfile;
             return MultiBlocProvider(
               providers: [
                 BlocProvider<ClientInstitutionsCubit>(
@@ -313,6 +317,21 @@ class AppRouter {
                 ),
               ],
               child: const ClientInstitutionPage(),
+            );
+          },
+        );
+      case Routes.institutionOrders:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<InstitutionOrdersCubit>(
+                  create: (context) => locator(),
+                ),
+              ],
+              child: const InstitutionOrdersPage(),
             );
           },
         );

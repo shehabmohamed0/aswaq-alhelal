@@ -1,14 +1,13 @@
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
+import 'package:dartz/dartz.dart' hide Order;
 import 'package:root_package/core/failures/failures.dart';
 import 'package:root_package/core/services/network_info.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/params/institution_receipts/get_institution_receipts_params.dart';
-import '../../domain/entities/receipt.dart';
+import '../../../orders/domain/entities/order.dart';
 import '../../domain/repositories/institution_receipts_repository.dart';
 import '../datasources/institution_receipts_api_service.dart';
 
@@ -19,7 +18,7 @@ class InstitutionReceiptsRepositoryImpl extends InstitutionReceiptsRepository {
   InstitutionReceiptsRepositoryImpl(this._apiService, this._networkInfo);
 
   @override
-  Future<Either<Failure, Receipt>> addInstitutionReceipts(
+  Future<Either<Failure, Order>> addInstitutionReceipts(
       AddInstitutionReceiptParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
@@ -36,7 +35,7 @@ class InstitutionReceiptsRepositoryImpl extends InstitutionReceiptsRepository {
   }
 
   @override
-  Future<Either<Failure, List<Receipt>>> getInstitutionReceipts(
+  Future<Either<Failure, List<Order>>> getInstitutionReceipts(
       GetInstitutionReceiptsParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());

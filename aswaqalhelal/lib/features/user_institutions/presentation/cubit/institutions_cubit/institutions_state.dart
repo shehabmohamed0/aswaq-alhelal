@@ -14,14 +14,14 @@ class InstitutionsLoading extends UserInstitutionsState {}
 class InstitutionsEmpty extends UserInstitutionsState {}
 
 class InstitutionsLoaded extends UserInstitutionsState {
-  final List<Institution> institutions;
+  final List<InstitutionProfile> institutions;
 
   const InstitutionsLoaded({
     required this.institutions,
   });
 
   InstitutionsLoaded copyWith({
-    List<Institution>? institutions,
+    List<InstitutionProfile>? institutions,
   }) {
     return InstitutionsLoaded(
       institutions: institutions ?? this.institutions,

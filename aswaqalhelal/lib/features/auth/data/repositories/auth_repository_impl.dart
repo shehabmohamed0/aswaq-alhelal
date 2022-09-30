@@ -109,16 +109,17 @@ class AuthRepositoryImpl implements AuthRepository {
       await authLocalService.saveCurrentProfile(baseProfile);
       return const Right(null);
     } catch (e) {
-      return Left(CacheFailure());
+      return Future.value(Left(CacheFailure()));
     }
   }
 
   @override
-  Future<Either<Failure, BaseProfile>> getLastProfile() {
+  Future<Either<Failure, String>> getLastProfile() {
     try {
       final profile = authLocalService.lastSelectedProfile();
       return Future.value(Right(profile));
     } catch (e) {
+      log(e.toString());
       return Future.value(Left(CacheFailure()));
     }
   }

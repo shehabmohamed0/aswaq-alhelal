@@ -1,8 +1,8 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
-import '../../../user_institutions/domain/entities/institution.dart';
 
 class InsPage extends StatelessWidget {
   const InsPage({Key? key}) : super(key: key);
@@ -10,10 +10,10 @@ class InsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+        ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     return Scaffold(
       appBar: AppBar(
-        title: Text(institution.officialName),
+        title: Text(institution.name),
         elevation: 0,
       ),
       body: Padding(

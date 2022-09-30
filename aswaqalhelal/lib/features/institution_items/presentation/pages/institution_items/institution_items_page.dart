@@ -8,18 +8,18 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../auth/domain/entities/institution_profile.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
+import '../../../../client_institutions/presentation/widgets/item_add_to_cart_dialog.dart';
 import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
 import '../../../../home/presentation/pages/widgets/items_widget.dart';
-import '../../../../user_institutions/domain/entities/institution.dart';
+import '../../../../orders/domain/entities/order_item.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
-import '../../../domain/entities/cart_item.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
 import '../../cubit/institution_cart/institution_cart_cubit.dart';
 import '../../cubit/institution_items/institution_items_cubit.dart';
 import '../add_item/add_items_page.dart';
-import '../../../../client_institutions/presentation/widgets/item_add_to_cart_dialog.dart';
 
 class InstitutionItemsPage extends StatelessWidget {
   const InstitutionItemsPage({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class InstitutionItemsPage extends StatelessWidget {
     final user = context.read<AppBloc>().state.profile;
 
     final institution =
-        (ModalRoute.of(context)!.settings.arguments as Institution);
+        (ModalRoute.of(context)!.settings.arguments as InstitutionProfile);
     return BlocBuilder<InstitutionItemsCubit, InstitutionItemsState>(
       builder: (context, state) {
         if (state is InstitutionsItemsLoading) {
@@ -53,7 +53,7 @@ class InstitutionItemsPage extends StatelessWidget {
               create: (context) => locator()..initialized([]),
               child: _InstitutionItemsEmptyWidget(
                 institution: institution,
-                userId: user.id,
+                userId: user.userId,
               ));
         } else if (state is InstitutionsItemsError) {
           return CheckInternetConnection(
@@ -71,7 +71,7 @@ class InstitutionItemsPage extends StatelessWidget {
 
 class _InstitutionsLoadedWidget extends StatefulWidget {
   final InstitutionItemsLoaded state;
-  final Institution institution;
+  final InstitutionProfile institution;
   final String userId;
   const _InstitutionsLoadedWidget({
     Key? key,
@@ -117,7 +117,7 @@ class _InstitutionsLoadedWidgetState extends State<_InstitutionsLoadedWidget> {
             onItemPressed: (item) async {
               if (widget.userId == widget.institution.userId) {
               } else {
-                final cartItem = await showDialog<CartItem>(
+                final cartItem = await showDialog<OrderItem>(
                   context: context,
                   builder: (context) {
                     return ItemAddToCartDialog(
@@ -210,7 +210,7 @@ class _InstitutionsLoadedWidgetState extends State<_InstitutionsLoadedWidget> {
                             Flexible(
                                 child: FittedBox(
                               child: Text(
-                                state.cartItems[index].selectedUnit.name,
+                                state.cartItems[index].unit.name,
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -220,7 +220,7 @@ class _InstitutionsLoadedWidgetState extends State<_InstitutionsLoadedWidget> {
                             Flexible(
                               child: FittedBox(
                                 child: Text(
-                                  '${state.cartItems[index].selectedUnit.price}'
+                                  '${state.cartItems[index].unit.price}'
                                   ' EGP',
                                   style: TextStyle(
                                       fontSize: 16,
@@ -311,7 +311,7 @@ class _InstitutionItemsEmptyWidget extends StatelessWidget {
     required this.institution,
     required this.userId,
   }) : super(key: key);
-  final Institution institution;
+  final InstitutionProfile institution;
   final String userId;
   @override
   Widget build(BuildContext context) {

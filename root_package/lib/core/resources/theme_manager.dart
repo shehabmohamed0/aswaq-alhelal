@@ -19,6 +19,8 @@ ThemeData getApplicationTheme() {
         ProgressIndicatorThemeData(color: ColorManager.primary),
     // ripple effect color
     // cardview theme
+    iconTheme: IconThemeData(color: ColorManager.primary),
+    colorScheme: ColorScheme.light().copyWith(primary: ColorManager.primary),
     textSelectionTheme: TextSelectionThemeData(
         cursorColor: ColorManager.primary,
         selectionHandleColor: ColorManager.primary),

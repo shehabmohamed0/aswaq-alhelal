@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/client_institutions/data/datasources/client_institution_items_api.dart';
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/services/network_info.dart';
@@ -6,8 +6,8 @@ import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../institution_items/domain/entities/institution_item.dart';
-import '../../../user_institutions/domain/entities/institution.dart';
 import '../../domain/repositories/client_institution_repository.dart';
+import '../datasources/client_institution_items_api.dart';
 
 @LazySingleton(as: ClientInstitutionRepository)
 class ClientInstitutionRepositoryImpl extends ClientInstitutionRepository {
@@ -17,7 +17,7 @@ class ClientInstitutionRepositoryImpl extends ClientInstitutionRepository {
   ClientInstitutionRepositoryImpl(this._api, this._networkInfo);
   @override
   Future<Either<Failure, List<InstitutionItem>>> getClientInstitutionItems(
-      Institution institution) async {
+      InstitutionProfile institution) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
     }

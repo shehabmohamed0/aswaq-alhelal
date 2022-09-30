@@ -1,11 +1,8 @@
-import 'dart:developer';
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../domain/entities/cart_item.dart';
+import '../../../../orders/domain/entities/order_item.dart';
 
 part 'institution_cart_cubit.freezed.dart';
 part 'institution_cart_state.dart';
@@ -14,7 +11,7 @@ part 'institution_cart_state.dart';
 class InstitutionCartCubit extends Cubit<InstitutionCartState> {
   InstitutionCartCubit() : super(InstitutionCartState());
 
-  void addCartItem(CartItem cartItem) {
+  void addCartItem(OrderItem cartItem) {
     final index = state.cartItems.indexWhere(
       (element) => element.item.id == cartItem.item.id,
     );
@@ -23,8 +20,8 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
       emit(
         state.copyWith(
             cartItems: List.of(state.cartItems)..add(cartItem),
-            totalPrice: state.totalPrice +
-                (cartItem.quantity * cartItem.selectedUnit.price)),
+            totalPrice:
+                state.totalPrice + (cartItem.quantity * cartItem.unit.price)),
       );
     } else {
       double totalPrice = 0;
@@ -33,14 +30,14 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
           (e) {
             if (e.item.id == cartItem.item.id) {
               final newQuantity = e.quantity + cartItem.quantity;
-              totalPrice += newQuantity * e.selectedUnit.price;
-              return CartItem(
-                  id: '',
+              totalPrice += newQuantity * e.unit.price;
+              return OrderItem(
                   item: e.item,
-                  selectedUnit: e.selectedUnit,
-                  quantity: newQuantity);
+                  unit: e.unit,
+                  quantity: newQuantity,
+                  price: e.unit.price);
             }
-            totalPrice += e.selectedUnit.price * e.quantity;
+            totalPrice += e.unit.price * e.quantity;
             return e;
           },
         ),
@@ -51,21 +48,21 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
     }
   }
 
-  void add(CartItem cartItem) {
+  void add(OrderItem orderItem) {
     final newList = List.of(state.cartItems.map((element) {
-      if (element.item.id == cartItem.item.id) {
-        return cartItem.copyWith(quantity: cartItem.quantity + 1);
+      if (element.item.id == orderItem.item.id) {
+        return orderItem.copyWith(quantity: orderItem.quantity + 1);
       }
       return element;
     }));
     emit(state.copyWith(
         cartItems: newList,
-        totalPrice: state.totalPrice + cartItem.selectedUnit.price));
+        totalPrice: state.totalPrice + orderItem.unit.price));
   }
 
-  void reduce(CartItem cartItem) {
+  void reduce(OrderItem cartItem) {
     final newQuantity = cartItem.quantity - 1;
-    late List<CartItem> newList;
+    late List<OrderItem> newList;
     if (newQuantity == 0) {
       final index = state.cartItems
           .indexWhere((element) => element.item.id == cartItem.item.id);
@@ -81,16 +78,16 @@ class InstitutionCartCubit extends Cubit<InstitutionCartState> {
 
     emit(state.copyWith(
         cartItems: newList,
-        totalPrice: state.totalPrice - cartItem.selectedUnit.price));
+        totalPrice: state.totalPrice - cartItem.unit.price));
   }
 
-  void remove(CartItem cartItem) {
+  void remove(OrderItem orderItem) {
     final newList = List.of(state.cartItems
-        .where((element) => element.item.id != cartItem.item.id));
+        .where((element) => element.item.id != orderItem.item.id));
 
     emit(state.copyWith(
         cartItems: newList,
-        totalPrice: state.totalPrice -
-            (cartItem.selectedUnit.price * cartItem.quantity)));
+        totalPrice:
+            state.totalPrice - (orderItem.unit.price * orderItem.quantity)));
   }
 }

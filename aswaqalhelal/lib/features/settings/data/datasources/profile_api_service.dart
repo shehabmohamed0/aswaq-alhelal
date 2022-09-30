@@ -1,6 +1,9 @@
+import 'package:aswaqalhelal/features/auth/data/datasources/datasources.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../core/firebase/firebase_path.dart';
 
 abstract class ProfileApiService {
   Future<void> updateProfile(
@@ -14,10 +17,6 @@ abstract class ProfileApiService {
       String newEmail, String currentEmail, String currentPassword);
 }
 
-class FirestorePath {
-  static String user(String uid) => 'users/$uid';
-  FirestorePath._();
-}
 
 @LazySingleton(as: ProfileApiService)
 class ProfileApiServiceImpl implements ProfileApiService {
@@ -29,7 +28,7 @@ class ProfileApiServiceImpl implements ProfileApiService {
   Future<void> updateProfile(
       {String? name, DateTime? birthDate, String? gender}) {
     final userId = firebaseAuth.currentUser!.uid;
-    final userDoc = firestore.doc(FirestorePath.user(userId));
+    final userDoc = firestore.doc(FirestorePath.profile(userId));
     return userDoc.update({
       'name': name,
       'birthDate': birthDate?.toIso8601String(),
@@ -46,7 +45,7 @@ class ProfileApiServiceImpl implements ProfileApiService {
       String phoneNumber, PhoneAuthCredential phoneCredential) async {
     final user = firebaseAuth.currentUser!;
     await user.updatePhoneNumber(phoneCredential);
-    final userDoc = firestore.doc(FirestorePath.user(user.uid));
+    final userDoc = firestore.doc(FirestorePath.profile(user.uid));
     await userDoc.update({
       'phoneNumber': phoneNumber,
     });
@@ -58,7 +57,7 @@ class ProfileApiServiceImpl implements ProfileApiService {
     final credential =
         EmailAuthProvider.credential(email: email, password: password);
     user.linkWithCredential(credential);
-    final userDoc = firestore.doc(FirestorePath.user(user.uid));
+    final userDoc = firestore.doc(FirestorePath.profile(user.uid));
     await userDoc.update({'email': email});
   }
 
@@ -72,7 +71,7 @@ class ProfileApiServiceImpl implements ProfileApiService {
 
     final user = authResult.user!;
     await user.updateEmail(newEmail);
-    final userDoc = firestore.doc(FirestorePath.user(user.uid));
+    final userDoc = firestore.doc(FirestorePath.profile(user.uid));
     await userDoc.update({'email': newEmail});
   }
 }

@@ -1,10 +1,10 @@
-import 'package:aswaqalhelal/features/user_institutions/data/models/institution_model.dart';
+import 'package:aswaqalhelal/features/auth/data/models/user/institution_profile_model.dart';
 import 'package:aswaqalhelal/features/work_institutions/domain/work_institution_repository.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
 abstract class WorkIstitutionsApiService {
-  Future<List<InstitutionModel>> getWorkInstitutions(
+  Future<List<InstitutionProfileModel>> getWorkInstitutions(
       GetWorkInstitutionsParams params);
 }
 
@@ -14,7 +14,7 @@ class WorkIstitutionsApiServiceImpl extends WorkIstitutionsApiService {
 
   WorkIstitutionsApiServiceImpl(this._firestore);
   @override
-  Future<List<InstitutionModel>> getWorkInstitutions(
+  Future<List<InstitutionProfileModel>> getWorkInstitutions(
       GetWorkInstitutionsParams params) async {
     final collection = _firestore.collection('employees');
     final snapshpt =
@@ -29,6 +29,6 @@ class WorkIstitutionsApiServiceImpl extends WorkIstitutionsApiService {
 
     final docs = await Future.wait(futures);
 
-    return docs.map(InstitutionModel.fromFirestore).toList();
+    return docs.map(InstitutionProfileModel.fromFirestore).toList();
   }
 }

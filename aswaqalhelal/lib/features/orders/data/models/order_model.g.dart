@@ -7,26 +7,35 @@ part of 'order_model.dart';
 // **************************************************************************
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
-      id: json['id'] as String,
-      cartItemModels: (json['cartItemModels'] as List<dynamic>)
-          .map((e) => CartItemModel.fromJson(e as Map<String, dynamic>))
+      id: json['id'] as String? ?? '',
+      from: json['from'] as String?,
+      to: json['to'] as String,
+      itemsModels: (json['items'] as List<dynamic>)
+          .map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      institutionId: json['institutionId'] as String,
-      userId: json['userId'] as String,
       totalPrice: (json['totalPrice'] as num).toDouble(),
+      editorId: json['editorId'] as String?,
+      sellerId: json['sellerId'] as String?,
+      distributorId: json['distributorId'] as String?,
+      collectorId: json['collectorId'] as String?,
       orderState: $enumDecode(_$OrderStateEnumMap, json['orderState']),
-      creationTime: DateTime.parse(json['creationTime'] as String),
+      creationTime: const TimestampConverter()
+          .fromJson(json['creationTime'] as Timestamp),
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'institutionId': instance.institutionId,
-      'userId': instance.userId,
+      'from': instance.from,
+      'to': instance.to,
       'totalPrice': instance.totalPrice,
+      'creationTime': const TimestampConverter().toJson(instance.creationTime),
+      'editorId': instance.editorId,
+      'sellerId': instance.sellerId,
+      'distributorId': instance.distributorId,
+      'collectorId': instance.collectorId,
       'orderState': _$OrderStateEnumMap[instance.orderState]!,
-      'creationTime': instance.creationTime.toIso8601String(),
-      'cartItemModels': instance.cartItemModels.map((e) => e.toJson()).toList(),
+      'items': instance.itemsModels.map((e) => e.toJson()).toList(),
     };
 
 const _$OrderStateEnumMap = {

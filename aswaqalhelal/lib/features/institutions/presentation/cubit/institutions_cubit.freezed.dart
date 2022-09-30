@@ -20,7 +20,7 @@ mixin _$InstitutionsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Institution> institutions) loaded,
+    required TResult Function(List<InstitutionProfile> institutions) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$InstitutionsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$InstitutionsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -126,7 +126,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Institution> institutions) loaded,
+    required TResult Function(List<InstitutionProfile> institutions) loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -137,7 +137,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
   }) {
     return initial?.call();
@@ -148,7 +148,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -241,7 +241,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Institution> institutions) loaded,
+    required TResult Function(List<InstitutionProfile> institutions) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -252,7 +252,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
   }) {
     return loading?.call();
@@ -263,7 +263,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -319,7 +319,7 @@ abstract class Loading implements InstitutionsState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Institution> institutions});
+  $Res call({List<InstitutionProfile> institutions});
 }
 
 /// @nodoc
@@ -339,7 +339,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$InstitutionsStateCopyWithImpl<$Res>
       institutions: institutions == freezed
           ? _value._institutions
           : institutions // ignore: cast_nullable_to_non_nullable
-              as List<Institution>,
+              as List<InstitutionProfile>,
     ));
   }
 }
@@ -347,12 +347,12 @@ class __$$LoadedCopyWithImpl<$Res> extends _$InstitutionsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded({required final List<Institution> institutions})
+  const _$Loaded({required final List<InstitutionProfile> institutions})
       : _institutions = institutions;
 
-  final List<Institution> _institutions;
+  final List<InstitutionProfile> _institutions;
   @override
-  List<Institution> get institutions {
+  List<InstitutionProfile> get institutions {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_institutions);
   }
@@ -385,7 +385,7 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Institution> institutions) loaded,
+    required TResult Function(List<InstitutionProfile> institutions) loaded,
     required TResult Function() error,
   }) {
     return loaded(institutions);
@@ -396,7 +396,7 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
   }) {
     return loaded?.call(institutions);
@@ -407,7 +407,7 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -456,10 +456,10 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements InstitutionsState {
-  const factory Loaded({required final List<Institution> institutions}) =
+  const factory Loaded({required final List<InstitutionProfile> institutions}) =
       _$Loaded;
 
-  List<Institution> get institutions;
+  List<InstitutionProfile> get institutions;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -505,7 +505,7 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Institution> institutions) loaded,
+    required TResult Function(List<InstitutionProfile> institutions) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -516,7 +516,7 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
   }) {
     return error?.call();
@@ -527,7 +527,7 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Institution> institutions)? loaded,
+    TResult Function(List<InstitutionProfile> institutions)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

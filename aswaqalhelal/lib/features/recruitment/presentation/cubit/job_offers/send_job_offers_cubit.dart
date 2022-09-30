@@ -5,7 +5,6 @@ import 'package:root_package/packages/injectable.dart';
 
 import '../../../../../core/failures/receuitment/failures.dart';
 import '../../../../../core/request_state.dart';
-import '../../../../user_institutions/domain/entities/institution.dart';
 import '../../../domain/entities/job_offer.dart';
 import '../../../domain/repositories/recruitment_repository.dart';
 import '../../../domain/usecases/get_sent_job_offers.dart';

@@ -58,4 +58,14 @@ class InstitutionItemModel extends InstitutionItem {
         creationTime,
         unitModels,
       ];
+
+  factory InstitutionItemModel.fromDomain(InstitutionItem item) =>
+      InstitutionItemModel(
+          id: item.id,
+          institutionId: item.institutionId,
+          referenceId: item.referenceId,
+          name: item.name,
+          imageUrl: item.imageUrl,
+          creationTime: item.creationTime,
+          unitModels: item.units.map(UnitModel.fromDomain).toList());
 }

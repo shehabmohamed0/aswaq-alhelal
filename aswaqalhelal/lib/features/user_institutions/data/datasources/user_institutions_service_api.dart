@@ -1,17 +1,20 @@
+import 'package:aswaqalhelal/features/home/data/datasources/items_api_servic.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../core/params/update_institution_params.dart';
-import '../models/institution_model.dart';
+import '../../../auth/data/models/user/institution_profile_model.dart';
 
 abstract class UserInstitutionsServiceApi {
-  Future<List<InstitutionModel>> getInstitutions();
+  Future<List<InstitutionProfileModel>> getInstitutions();
 
-  Future<InstitutionModel> addInstitution(AddInstitutionParams params);
+  Future<InstitutionProfileModel> addInstitution(AddInstitutionParams params);
 
-  Future<InstitutionModel> updateInstitution(UpdateInstitutionParams params);
+  Future<InstitutionProfileModel> updateInstitution(
+      UpdateInstitutionParams params);
 }
 
 @LazySingleton(as: UserInstitutionsServiceApi)
@@ -21,21 +24,23 @@ class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
 
   UserInstitutionsServiceApiImpl(this._auth, this._firestore);
   @override
-  Future<List<InstitutionModel>> getInstitutions() async {
+  Future<List<InstitutionProfileModel>> getInstitutions() async {
     final uid = _auth.currentUser!.uid;
     final collection = _firestore
-        .collection(FirestorePath.institutions())
-        .where('userId', isEqualTo: uid);
+        .collection(FirestorePath.profiles)
+        .where('userId', isEqualTo: uid)
+        .where('type', isEqualTo: 'institution');
     final querySnapshot = await collection.get();
     final institutions =
-        querySnapshot.docs.map(InstitutionModel.fromFirestore).toList();
+        querySnapshot.docs.map(InstitutionProfileModel.fromFirestore).toList();
     return institutions;
   }
 
   @override
-  Future<InstitutionModel> addInstitution(AddInstitutionParams params) async {
+  Future<InstitutionProfileModel> addInstitution(
+      AddInstitutionParams params) async {
     final uid = _auth.currentUser!.uid;
-    final collection = _firestore.collection(FirestorePath.institutions());
+    final collection = _firestore.collection(FirestorePath.profiles);
     final newDoc = collection.doc();
     final newModel = params.toModel(newDoc.id, uid);
     final data = newModel.toJson();
@@ -46,9 +51,7 @@ class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
 
   @override
   updateInstitution(UpdateInstitutionParams params) async {
-    final doc =
-        _firestore.doc(FirestorePath.institution(params.institution.id));
-    // TODO:
+    final doc = _firestore.doc(FirestorePath.profile(params.institution.id));
     throw UnimplementedError();
     //   await doc.update({
     //     'officialName': params.institution.officialName,
@@ -58,7 +61,7 @@ class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
     //     'emails': params.institution.emails,
     //     'phoneNumbers': params.institution.phoneNumbers,
     //   });
-    //   final institutionModel = InstitutionModel(
+    //   final institutionProfileModel = InstitutionProfileModel(
     //       id: params.institution.id,
     //       userId: params.institution.userId,
     //       officialName: params.institution.officialName,
@@ -67,13 +70,7 @@ class UserInstitutionsServiceApiImpl extends UserInstitutionsServiceApi {
     //       nickName: params.institution.nickName,
     //       emails: params.institution.emails,
     //       phoneNumbers: params.institution.phoneNumbers);
-    //   return institutionModel;
+    //   return institutionProfileModel;
     // }
   }
-}
-
-class FirestorePath {
-  static String institutions() => 'institutions';
-  static String institution(String institutionId) =>
-      'institutions/$institutionId';
 }

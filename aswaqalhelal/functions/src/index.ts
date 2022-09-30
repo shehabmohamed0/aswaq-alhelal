@@ -1,6 +1,5 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { firestore } from "firebase-admin";
 
 // const fcm = admin.messaging();
 admin.initializeApp();
@@ -31,11 +30,12 @@ export const onNotification = functions.firestore.document('notifications/{notif
             title: title,
             body: body,
             clickAction: 'FLUTTER_NOTIFICATION_CLICK'
+
         },
         data: data
     };
     await admin.firestore().doc('notifications_counter/' + userId).set({
-        'counter': firestore.FieldValue.increment(1)
+        'counter': admin.firestore.FieldValue.increment(1)
     });
     const docs = await admin.firestore().collection(`users/${userId}/tokens`).get();
     const tokens = docs.docs.map(e => String(e.id));
@@ -44,6 +44,25 @@ export const onNotification = functions.firestore.document('notifications/{notif
     return fcm.sendToDevice(tokens, payload);
 
 });
+export const onProfile = functions.firestore.document('profiles/{profile}').onWrite(async (snapshot, context) => {
+    const data = snapshot.after.data();
+
+    if (!snapshot.before.exists && snapshot.after.data()!.type == 'user') {
+        return;
+    }
+    const profileId = snapshot.after.id;
+    const userDoc = admin.firestore().doc('users/' + (data!.userId));
+    userDoc.set({
+        'profiles': {
+            [profileId]: data
+        }
+    }, {
+        merge: true
+    })
+
+
+});
+
 
 export const jobOffer = functions.https.onCall(async (data, context) => {
 
@@ -81,7 +100,7 @@ export const jobOffer = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('already-exists', 'You already send an offer to ' +
             'this user.');
     }
-    const institution = await firestore.doc(`institutions/${institutionId}`).get();
+    const institution = await firestore.doc(`profiles/${institutionId}`).get();
     functions.logger.log(institution.data());
 
     const institutionName = institution.data()!['nickName'];
@@ -143,7 +162,7 @@ export const onJobOfferUpdate = functions.firestore.document('jobs_offers/{jobOf
     const firestore = admin.firestore();
 
     const data = snapshot.after.data();
-    const user = await firestore.doc(`users/${data.userId}`).get();
+    const user = await firestore.doc(`profiles/${data.userId}`).get();
     functions.logger.log(user.data());
     const userData = user.data()!;
     const name = userData.name ?? null;

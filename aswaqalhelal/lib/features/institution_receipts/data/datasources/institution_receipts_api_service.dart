@@ -1,15 +1,16 @@
-import 'package:aswaqalhelal/features/institution_receipts/domain/entities/receipt.dart';
+import 'package:aswaqalhelal/core/firebase/firebase_path.dart';
+import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/params/institution_receipts/get_institution_receipts_params.dart';
-import '../models/receipt_model.dart';
+import '../../../orders/data/models/order_model.dart';
 
 abstract class InstitutionReceiptsApiService {
-  Future<List<ReceiptModel>> getInstitutionReceipts(
+  Future<List<OrderModel>> getInstitutionReceipts(
       GetInstitutionReceiptsParams params);
-  Future<ReceiptModel> addInstitutionReceipt(
+  Future<OrderModel> addInstitutionReceipt(
       AddInstitutionReceiptParams params);
 }
 
@@ -19,9 +20,9 @@ class InstitutionReceiptsApiServiceImpl extends InstitutionReceiptsApiService {
 
   InstitutionReceiptsApiServiceImpl(this._firestore);
   @override
-  Future<ReceiptModel> addInstitutionReceipt(
+  Future<OrderModel> addInstitutionReceipt(
       AddInstitutionReceiptParams params) async {
-    final collection = _firestore.collection('receipts');
+    final collection = _firestore.collection(FirestorePath.orders);
     final doc = collection.doc();
 
     final model = params.toModel(doc.id);
@@ -33,7 +34,7 @@ class InstitutionReceiptsApiServiceImpl extends InstitutionReceiptsApiService {
   }
 
   @override
-  Future<List<ReceiptModel>> getInstitutionReceipts(
+  Future<List<OrderModel>> getInstitutionReceipts(
       GetInstitutionReceiptsParams params) {
     throw UnimplementedError();
   }

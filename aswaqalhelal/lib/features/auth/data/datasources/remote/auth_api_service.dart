@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:aswaqalhelal/core/utils/logs.dart';
-import 'package:aswaqalhelal/features/auth/data/models/user/user_model.dart';
+import '../../../../../core/firebase/firebase_path.dart';
+import '../../../../../core/utils/logs.dart';
+import '../../models/user/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
@@ -150,10 +151,4 @@ class AuthApiServiceImpl implements AuthApiService {
       }
     }
   }
-}
-
-class FirestorePath {
-  FirestorePath._();
-  static String user(String uid) => 'users/$uid';
-  static String profile(String uid) => 'profiles/$uid';
 }

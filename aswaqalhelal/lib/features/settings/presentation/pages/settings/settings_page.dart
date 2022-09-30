@@ -30,12 +30,12 @@ class SettingsPage extends StatelessWidget {
               Navigator.of(context).pushNamed(Routes.accountInfo);
             },
           ),
-          SettingsListTile(
-            title: intl.contactInfo,
-            onTap: () {
-              Navigator.of(context).pushNamed(Routes.contactInfo);
-            },
-          ),
+          // SettingsListTile(
+          //   title: intl.contactInfo,
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed(Routes.contactInfo);
+          //   },
+          // ),
           SettingsListTile(
             title: intl.addresses,
             onTap: () {

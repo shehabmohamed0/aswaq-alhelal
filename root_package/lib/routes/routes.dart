@@ -19,27 +19,23 @@ class Routes {
   static const addEmail = '/addEmail';
   static const updateEmail = '/updateEmail';
   static const privacyPolicy = '/privacyPolicy';
-  
-  
+
   static const addresses = '/addresses';
   static const addAddresses = '/addAddress';
-  static const selectLocationMap= '/selectLocationMap';
+  static const selectLocationMap = '/selectLocationMap';
 
   static const institutions = '/institutions';
   static const addInstitution = '/addInstitution';
 
   static const ownerInstitution = '/ownerInstitution';
-  
-  
+
   static const institution = '/institution';
   static const institutionItems = '/institutionItems';
   static const addItem = '/addItem';
   static const institutionReceipts = '/institutionReceipts';
 
-
   static const distributionAreas = '/distributionAreas';
   static const addDistributionArea = '/addDistributionArea';
-
 
   static const recruitment = '/recruitment';
 
@@ -47,9 +43,8 @@ class Routes {
   static const workInstitutions = '/workInstitutions';
   static const insPage = '/insPage';
 
-
   static const notifications = '/notifications';
   static const clientInstitution = '/clientInstitution';
 
-
+  static const institutionOrders = '/institutionOrders';
 }

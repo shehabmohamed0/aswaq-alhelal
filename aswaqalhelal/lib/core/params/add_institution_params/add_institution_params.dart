@@ -1,7 +1,8 @@
 import '../../../features/address/data/models/address_model.dart';
 import '../../../features/address/data/models/geo_point_model.dart';
 import '../../../features/address_suggestions/domain/entities/entities.dart';
-import '../../../features/user_institutions/data/models/institution_model.dart';
+import '../../../features/auth/data/models/user/institution_profile_model.dart';
+import '../../../features/auth/domain/entities/base_profile.dart';
 
 class AddInstitutionParams {
   final String officialName;
@@ -18,17 +19,18 @@ class AddInstitutionParams {
     required this.addressDetails,
   });
 
-  InstitutionModel toModel(String id, String userId) {
+  InstitutionProfileModel toModel(String id, String userId) {
     final refAddressDetails = addressDetails.refAddressDetails;
     final geoPoint = addressDetails.geoPoint;
-    return InstitutionModel(
+    return InstitutionProfileModel(
       id: id,
       userId: userId,
-      officialName: officialName,
+      name: officialName,
       nickName: nickName,
       emails: emails,
       creationTime: DateTime.now(),
       phoneNumbers: phoneNumbers,
+      type: ProfileType.institution,
       addressModel: AddressModel(
         id: 'addressId',
         country: 'egypt',

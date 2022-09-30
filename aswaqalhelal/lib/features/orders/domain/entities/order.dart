@@ -1,31 +1,52 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/equatable.dart';
 
-import '../../../institution_items/domain/entities/cart_item.dart';
+import 'order_item.dart';
 
 class Order extends Equatable {
+  @JsonKey(defaultValue: '')
   final String id;
-  final List<CartItem> cartItems;
-  final String institutionId;
-  final String userId;
+  final String? from;
+  final String to;
+  final List<OrderItem> items;
   final double totalPrice;
-  final OrderState orderState;
   final DateTime creationTime;
+  // The person holding mobile
+  final String? editorId;
+  final String? sellerId;
+  final String? distributorId;
+  final String? collectorId;
+  final OrderState orderState;
   const Order({
     required this.id,
-    required this.cartItems,
-    required this.institutionId,
-    required this.userId,
+    required this.from,
+    required this.to,
+    required this.items,
     required this.totalPrice,
+    required this.editorId,
+    required this.sellerId,
+    required this.distributorId,
+    required this.collectorId,
     required this.orderState,
     required this.creationTime,
   });
 
   @override
-  List<Object?> get props =>
-      [id, cartItems, institutionId, userId, totalPrice, orderState, creationTime];
+  List<Object?> get props => [
+        id,
+        from,
+        to,
+        items,
+        totalPrice,
+        editorId,
+        sellerId,
+        distributorId,
+        collectorId,
+        orderState,
+        creationTime
+      ];
 }
 
-//كلية تكتولوجيا قسم رقابة جودة
 enum OrderState {
   pending,
   processing,
@@ -36,13 +57,13 @@ enum OrderState {
   String toString() {
     switch (this) {
       case OrderState.pending:
-        return 'Pending';
+        return 'pending';
       case OrderState.processing:
-        return 'Processing';
+        return 'processing';
       case OrderState.shipping:
-        return 'Shipping';
+        return 'shipping';
       case OrderState.completed:
-        return 'Completed';
+        return 'completed';
     }
   }
 }

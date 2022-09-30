@@ -29,7 +29,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   Future<AddressModel> addAddress(AddAddressParams params) async {
     final user = _firebaseAuth.currentUser!;
     final addressesCollection =
-        _firestore.collection(FirebasePath.userAddresses(user.uid));
+        _firestore.collection(FirestorePath.userAddresses(user.uid));
     final ref = addressesCollection.doc();
     final model = params.toModel(ref.id);
     final modelJson = model.toJson();
@@ -43,7 +43,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   Future<List<AddressModel>> getAddresses() async {
     final user = _firebaseAuth.currentUser!;
     final addressesCollection =
-        _firestore.collection(FirebasePath.userAddresses(user.uid));
+        _firestore.collection(FirestorePath.userAddresses(user.uid));
     final snapshot = await addressesCollection.orderBy('saveTime').get();
     final addresses = snapshot.docs.map(AddressModel.fromFirestore).toList();
     return addresses;
@@ -53,7 +53,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   Future<String> removeAddress(RemoveAddressParams params) async {
     final user = _firebaseAuth.currentUser!;
     final addressDoc =
-        _firestore.doc(FirebasePath.userAddress(user.uid, params.addressId));
+        _firestore.doc(FirestorePath.userAddress(user.uid, params.addressId));
 
     await addressDoc.delete();
     return params.addressId;
@@ -63,7 +63,7 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   Future<AddressModel> updateAddress(UpdateAddressParams params) async {
     final user = _firebaseAuth.currentUser!;
     final addressDoc =
-        _firestore.doc(FirebasePath.userAddress(user.uid, params.id));
+        _firestore.doc(FirestorePath.userAddress(user.uid, params.id));
 
     final model = params.toModel;
 
@@ -74,24 +74,24 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
   @override
   Future<AddressModel> addFirstAddress(AddFirstAddressParams params) async {
     final user = _firebaseAuth.currentUser!;
-    final userRef = _firestore.doc('users/${user.uid}');
-    log(user.uid);
-    log(user.uid);
+    // final userRef = _firestore.doc('users/${user.uid}');
+    final profileRef = _firestore.doc(FirestorePath.profile(user.uid));
     final addressesCollection =
-        _firestore.collection(FirebasePath.userAddresses(user.uid));
+        _firestore.collection(FirestorePath.userAddresses(user.uid));
     final ref = addressesCollection.doc();
     final batch = _firestore.batch();
     final model = params.addressParams.toModel(ref.id);
     final modelJson = model.toJson();
     modelJson['saveTime'] = FieldValue.serverTimestamp();
     batch.set(ref, modelJson);
-    batch.update(
-      userRef,
-      {
-        'profiles.${user.uid}.address': modelJson,
-        'profiles.${user.uid}.name': params.name,
-      },
-    );
+    batch.update(profileRef, {'address': modelJson, 'name': params.name});
+    // batch.update(
+    //   userRef,
+    //   {
+    //     'profiles.${user.uid}.address': modelJson,
+    //     'profiles.${user.uid}.name': params.name,
+    //   },
+    // );
 
     await batch.commit();
     return model;

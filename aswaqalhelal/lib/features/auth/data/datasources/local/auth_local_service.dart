@@ -10,7 +10,7 @@ abstract class AuthLocalService {
   ///get Current signin user
   ///
   ///throw [CacheException] if there is no user
-  BaseProfile lastSelectedProfile();
+  String lastSelectedProfile();
   Future<void> saveCurrentProfile(BaseProfile baseProfile);
   Future<void> removeProfile(BaseProfile baseProfile);
 }
@@ -22,26 +22,25 @@ class AuthLocalServiceImpl implements AuthLocalService {
   AuthLocalServiceImpl(this._sharedPreferences);
 
   @override
-  BaseProfile lastSelectedProfile() {
-    final string = _sharedPreferences.getString(LocalKeys.lastSelectedProfile);
-    if (string == null) throw CacheException();
-    final json = jsonDecode(string) as Map<String, dynamic>;
-    return BaseProfile.fromJson(json);
+  String lastSelectedProfile() {
+    final id = _sharedPreferences.getString(LocalKeys.selectedProfile);
+    if (id == null) throw CacheException();
+    return id;
   }
 
   @override
   Future<void> saveCurrentProfile(BaseProfile baseProfile) async {
     await _sharedPreferences.setString(
-        LocalKeys.lastSelectedProfile, jsonEncode(baseProfile.toJson()));
+        LocalKeys.selectedProfile, baseProfile.id);
   }
 
   @override
   Future<void> removeProfile(BaseProfile baseProfile) async {
-    await _sharedPreferences.remove(LocalKeys.lastSelectedProfile);
+    await _sharedPreferences.remove(LocalKeys.selectedProfile);
   }
 }
 
 class LocalKeys {
-  static const lastSelectedProfile = 'lastSelectedProfile';
+  static const selectedProfile = 'lastSelectedProfile';
   LocalKeys._();
 }

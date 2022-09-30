@@ -75,7 +75,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter: null
 flutter_intl:
-  enabled: false
+  enabled: true
   class_name: RootPackageLocalizations
   main_locale: en                               # Add this line
   arb_dir: lib/l10n           # Add this line

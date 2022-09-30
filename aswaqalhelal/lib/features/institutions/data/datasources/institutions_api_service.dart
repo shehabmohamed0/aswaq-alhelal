@@ -5,11 +5,11 @@ import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../address/domain/entities/address.dart';
+import '../../../auth/data/models/user/institution_profile_model.dart';
 import '../../../distribution_areas/data/models/distribution_area_model.dart';
-import '../../../user_institutions/data/models/institution_model.dart';
 
 abstract class InstitutionsApiService {
-  Future<List<InstitutionModel>> getInstitutions(Address address);
+  Future<List<InstitutionProfileModel>> getInstitutions(Address address);
 }
 
 @LazySingleton(as: InstitutionsApiService)
@@ -18,7 +18,7 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
 
   InstitutionsApiServiceImpl(this._firestore);
   @override
-  Future<List<InstitutionModel>> getInstitutions(Address address) async {
+  Future<List<InstitutionProfileModel>> getInstitutions(Address address) async {
     final collection = _firestore.collection('distributionAreas');
 
     final HashSet<String> seen = HashSet();
@@ -39,7 +39,7 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
     log(address.governateId);
     log(address.cityId);
     log(address.neighborhoodId);
-    final instCollection = _firestore.collection('institutions');
+    final instCollection = _firestore.collection('profiles');
 
     final institutionIds =
         results.fold<List<String>>([], (previousValue, element) {
@@ -59,7 +59,7 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
     final futures = institutionIds.map((e) => instCollection.doc(e).get());
     final docs = await Future.wait(futures);
 
-    final models = docs.map(InstitutionModel.fromFirestore).toList();
+    final models = docs.map(InstitutionProfileModel.fromFirestore).toList();
     return models;
   }
 }

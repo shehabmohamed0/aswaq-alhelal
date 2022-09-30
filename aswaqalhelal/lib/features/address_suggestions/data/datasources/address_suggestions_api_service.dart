@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/address_suggestion/params.dart';
 import '../models/models.dart';
 
@@ -165,10 +166,4 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
           mapData..putIfAbsent('id', () => doc.id));
     }
   }
-}
-
-class FirestorePath {
-  static String refGovernates = 'refGovernates';
-  static String refCities = 'refCities';
-  static String refNeighborhoods = 'refNeighborhoods';
 }

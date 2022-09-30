@@ -1,11 +1,12 @@
-import 'package:aswaqalhelal/features/client_institutions/domain/repositories/client_institution_repository.dart';
-import 'package:aswaqalhelal/features/institution_items/domain/entities/institution_item.dart';
-import 'package:root_package/core/failures/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/usecase/usecase.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../user_institutions/domain/entities/institution.dart';
+import '../../../auth/domain/entities/institution_profile.dart';
+import '../../../institution_items/domain/entities/institution_item.dart';
+import '../repositories/client_institution_repository.dart';
+
 @lazySingleton
 class GetClientInstitutionItems
     extends UseCase<List<InstitutionItem>, GetClientInstitutionItemsParams> {
@@ -21,7 +22,7 @@ class GetClientInstitutionItems
 }
 
 class GetClientInstitutionItemsParams {
-  final Institution institution;
+  final InstitutionProfile institution;
 
   GetClientInstitutionItemsParams(this.institution);
 }

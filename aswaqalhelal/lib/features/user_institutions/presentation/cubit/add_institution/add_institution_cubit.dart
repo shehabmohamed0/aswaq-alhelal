@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/failures/server_failure.dart';
@@ -11,7 +12,6 @@ import 'package:root_package/packages/injectable.dart';
 import '../../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../address_suggestions/domain/entities/entities.dart';
 import '../../../../auth/domain/entities/user_profile.dart';
-import '../../../domain/entities/institution.dart';
 import '../../../domain/usecases/add_institution.dart';
 
 part 'add_institution_state.dart';

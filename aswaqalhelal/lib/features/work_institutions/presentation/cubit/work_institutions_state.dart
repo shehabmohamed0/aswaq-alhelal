@@ -1,7 +1,7 @@
 part of 'work_institutions_cubit.dart';
 
 class WorkInstitutionsState extends Equatable {
-  final List<Institution> institutions;
+  final List<InstitutionProfile> institutions;
   final RequestState institutionsState;
 
   const WorkInstitutionsState({
@@ -10,7 +10,7 @@ class WorkInstitutionsState extends Equatable {
   });
 
   WorkInstitutionsState copyWith({
-    List<Institution>? institutions,
+    List<InstitutionProfile>? institutions,
     RequestState? institutionsState,
   }) {
     return WorkInstitutionsState(

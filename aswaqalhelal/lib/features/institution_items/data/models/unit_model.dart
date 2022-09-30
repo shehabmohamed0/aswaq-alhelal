@@ -36,4 +36,11 @@ class UnitModel extends Unit {
       _$UnitModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UnitModelToJson(this);
+
+  factory UnitModel.fromDomain(Unit unit) => UnitModel(
+        referenceId: unit.referenceId,
+        name: unit.name,
+        quantity: unit.quantity,
+        price: unit.price,
+      );
 }

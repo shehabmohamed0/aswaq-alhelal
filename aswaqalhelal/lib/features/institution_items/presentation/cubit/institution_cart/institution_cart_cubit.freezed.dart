@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$InstitutionCartState {
-  List<CartItem> get cartItems => throw _privateConstructorUsedError;
+  List<OrderItem> get cartItems => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +29,7 @@ abstract class $InstitutionCartStateCopyWith<$Res> {
   factory $InstitutionCartStateCopyWith(InstitutionCartState value,
           $Res Function(InstitutionCartState) then) =
       _$InstitutionCartStateCopyWithImpl<$Res>;
-  $Res call({List<CartItem> cartItems, double totalPrice});
+  $Res call({List<OrderItem> cartItems, double totalPrice});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$InstitutionCartStateCopyWithImpl<$Res>
       cartItems: cartItems == freezed
           ? _value.cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<OrderItem>,
       totalPrice: totalPrice == freezed
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
@@ -66,7 +66,7 @@ abstract class _$$_InstitutionCartStateCopyWith<$Res>
           $Res Function(_$_InstitutionCartState) then) =
       __$$_InstitutionCartStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<CartItem> cartItems, double totalPrice});
+  $Res call({List<OrderItem> cartItems, double totalPrice});
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class __$$_InstitutionCartStateCopyWithImpl<$Res>
       cartItems: cartItems == freezed
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
+              as List<OrderItem>,
       totalPrice: totalPrice == freezed
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
@@ -102,13 +102,13 @@ class __$$_InstitutionCartStateCopyWithImpl<$Res>
 
 class _$_InstitutionCartState implements _InstitutionCartState {
   _$_InstitutionCartState(
-      {final List<CartItem> cartItems = const [], this.totalPrice = 0})
+      {final List<OrderItem> cartItems = const [], this.totalPrice = 0})
       : _cartItems = cartItems;
 
-  final List<CartItem> _cartItems;
+  final List<OrderItem> _cartItems;
   @override
   @JsonKey()
-  List<CartItem> get cartItems {
+  List<OrderItem> get cartItems {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartItems);
   }
@@ -148,11 +148,11 @@ class _$_InstitutionCartState implements _InstitutionCartState {
 
 abstract class _InstitutionCartState implements InstitutionCartState {
   factory _InstitutionCartState(
-      {final List<CartItem> cartItems,
+      {final List<OrderItem> cartItems,
       final double totalPrice}) = _$_InstitutionCartState;
 
   @override
-  List<CartItem> get cartItems;
+  List<OrderItem> get cartItems;
   @override
   double get totalPrice;
   @override

@@ -24,16 +24,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   })  : _authRepository = authRepository,
         super(const AppState.loading()) {
     _userSubscription = _authRepository.user.listen((user) async {
-      log('emit user');
-      final profileOrFailure = await _authRepository.getLastProfile();
-      final profile = profileOrFailure.fold((failure) {
-        return null;
-      }, (profile) {
-        return profile;
-      });
-      log(user.profiles.toString());
+      final profileIdOrFailure = await _authRepository.getLastProfile();
+      final profileId =
+          profileIdOrFailure.fold((failure) => null, (profileId) => profileId);
 
-      add(AppUserChanged(user, profile));
+      add(AppUserChanged(user, profileId));
     });
 
     on<AppUserChanged>(_onUserChanged);
@@ -54,23 +49,24 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       return;
     }
 
-    if (event.profile == null) {
+    if (event.profileId == null) {
       emit(AppState.authenticated(event.user, event.user.profiles.first));
       return;
     }
     final profiles = event.user.profiles;
-    final profile =
-        profiles.firstWhere((element) => element.id == event.profile!.id);
-
+    final index =
+        profiles.indexWhere((element) => element.id == event.profileId);
+    final profile = index == -1 ? profiles.first : profiles[index];
     emit(AppState.authenticated(event.user, profile));
   }
 
   FutureOr<void> _onUserProfileChanged(
       ProfileChanged event, Emitter<AppState> emit) async {
-    await _userSubscription.cancel();
-    _userSubscription = _authRepository.user.listen((userProfile) {
-      add(AppUserChanged(userProfile));
-    });
+    emit(state.copyWith(profile: event.profile));
+
+    final either = await _authRepository.saveLastProfile(event.profile);
+    either.fold((l) => printLog('Profile has been saved'),
+        (r) => printLog('Profile has not been saved'));
   }
 
   void _onLogoutRequested(

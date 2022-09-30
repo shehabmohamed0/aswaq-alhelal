@@ -1,15 +1,15 @@
-import 'package:aswaqalhelal/core/params/institution_receipts/add_institution_receipts_params.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart' hide Unit;
 
 import '../../../../core/params/add_item/params.dart';
+import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/request_state.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
 import '../../../institution_items/domain/usecases/get_institution_items.dart';
-import '../../domain/entities/receipt_item.dart';
+import '../../../orders/domain/entities/order_item.dart';
 import '../../domain/usecases/add_institution_receipts.dart';
 import '../../domain/usecases/get_institution_receipts.dart';
 
@@ -116,7 +116,7 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
   Future<void> submit() async {
     if (state.status == InstitutionReceiptStatus.loading) return;
     if (_inValidReceipt()) return;
-    final receiptItem = ReceiptItem(
+    final receiptItem = OrderItem(
         item: state.selectedItem.toNullable()!,
         unit: state.selectedUnit.toNullable()!,
         quantity: state.quantity,
@@ -128,7 +128,7 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
     final newList = List.of(state.receiptItems);
     if (index != -1) {
-      final newItem = ReceiptItem(
+      final newItem = OrderItem(
         item: state.selectedItem.toNullable()!,
         unit: state.selectedUnit.toNullable()!,
         quantity: receiptItem.quantity + state.receiptItems[index].quantity,
@@ -184,11 +184,12 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
-          from: institutionId,
+          to: institutionId,
           receiptItems: state.receiptItems,
-          to: null,
+          from: null,
           totalPrice: state.totalPrice,
-          employeeId: employeeId),
+          editorId: employeeId,
+          sellerId: employeeId),
     );
 
     either.fold(

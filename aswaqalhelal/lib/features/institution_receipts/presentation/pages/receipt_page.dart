@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:aswaqalhelal/features/auth/presentation/bloc/app_status/app_bloc.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
@@ -16,11 +15,12 @@ import 'package:root_package/packages/path_provider.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../auth/domain/entities/institution_profile.dart';
+import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
-import '../../../user_institutions/domain/entities/institution.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
-import '../../domain/entities/receipt_item.dart';
+import '../../../orders/domain/entities/order_item.dart';
 import '../cubit/institution_receipts_cubit.dart';
 import '../widgets/compo_box_widget.dart';
 import '../widgets/receipt_item_widget.dart';
@@ -33,7 +33,7 @@ class InstitutionReceiptPage extends HookWidget {
     final cubit = context.read<InstitutionReceiptsCubit>();
     final userId = context.select((AppBloc element) => element.state.profile.id);
     final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+        ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     final itemController = useTextEditingController();
     final itemFocusNode = useFocusNode();
 
@@ -441,7 +441,7 @@ class InstitutionReceiptPage extends HookWidget {
   }
 }
 
-Future<Uint8List> createPdf(List<ReceiptItem> items) {
+Future<Uint8List> createPdf(List<OrderItem> items) {
   final totalPrice = items
       .map((e) => e.quantity * e.price)
       .reduce((value, element) => value + element);

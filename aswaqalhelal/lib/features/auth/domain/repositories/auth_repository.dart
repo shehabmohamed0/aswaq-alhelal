@@ -12,7 +12,7 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> linkeEmailAndPassword(
       LinkEmailAndPasswordParams params);
   Future<Either<Failure, void>> saveLastProfile(BaseProfile baseProfile);
-  Future<Either<Failure, BaseProfile>> getLastProfile();
+  Future<Either<Failure, String>> getLastProfile();
   Stream<User> get user;
   Future<Either<Failure, void>> signOut();
 }

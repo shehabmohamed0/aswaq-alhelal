@@ -1,16 +1,12 @@
-import 'package:aswaqalhelal/features/recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../../../core/request_state.dart';
 import '../../../../../widgets/check_internet_connection_widget.dart';
 import '../../../../../widgets/constants.dart';
 import '../../../../../widgets/loading_widget.dart';
 import '../../../cubit/job_offers/send_job_offers_cubit.dart';
+import '../DTOs/recruitment_page_arguments.dart';
 import 'job_offer_list_tile.dart';
 
 class OffersTabView extends StatelessWidget {

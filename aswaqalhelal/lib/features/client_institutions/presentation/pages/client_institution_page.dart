@@ -6,11 +6,11 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../home/presentation/pages/widgets/items_widget.dart';
-import '../../../institution_items/domain/entities/cart_item.dart';
 import '../../../institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
-import '../../../user_institutions/domain/entities/institution.dart';
+import '../../../orders/domain/entities/order_item.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
 import '../../../widgets/loading_widget.dart';
@@ -32,7 +32,7 @@ class _ClientInstitutionPageState extends State<ClientInstitutionPage> {
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionCartCubit>();
     final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+        ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     final user = context.select((AppBloc element) => element.state.user);
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +66,7 @@ class _ClientInstitutionPageState extends State<ClientInstitutionPage> {
                       if (user.id == institution.userId) {
                         log('message');
                       } else {
-                        final cartItem = await showDialog<CartItem>(
+                        final cartItem = await showDialog<OrderItem>(
                           context: context,
                           builder: (context) {
                             return ItemAddToCartDialog(

@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "acceptsIntegersOnly":
+            MessageLookupByLibrary.simpleMessage("يقبل الاعداد الصحيحة فقط"),
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
             "رجاءََ٫ تفقد اتصال الانترنت."),
         "failedToUploadTheFile":
@@ -38,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البريد الإلكترونى غير صحيح."),
         "invalidName":
             MessageLookupByLibrary.simpleMessage("اسم المستخدم غير صحيح."),
+        "invalidNumber": MessageLookupByLibrary.simpleMessage("رقم غير صحيح"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور يجب ان تكون على الاقل ٨ حروف"),
         "invalidPhoneNumber":
@@ -48,6 +51,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "required": MessageLookupByLibrary.simpleMessage("مطلوب"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("حدث خطأ ما."),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجدداََ")
+        "theNumberCanNotBeNegative": MessageLookupByLibrary.simpleMessage(
+            "لا يمكن ان يكون العدد سالباََ"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجدداََ"),
+        "zeroIsAnInvalidNumber":
+            MessageLookupByLibrary.simpleMessage("الصفر رقم غير صحيح")
       };
 }

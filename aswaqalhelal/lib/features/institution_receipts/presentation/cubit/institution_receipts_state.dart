@@ -29,7 +29,7 @@ class InstitutionReceiptsState with _$InstitutionReceiptsState {
     @Default(0) double totalPrice,
     @Default(InstitutionReceiptStatus.initial) InstitutionReceiptStatus status,
     @Default(false) receiptSaved,
-    @Default([]) List<ReceiptItem> receiptItems,
+    @Default([]) List<OrderItem> receiptItems,
     String? errorMessage,
   }) = _InstitutionReceiptsState;
 }

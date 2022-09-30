@@ -1,6 +1,6 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/institution.dart';
 import 'institution_widget.dart';
 
 class InstitutionsGridView extends StatelessWidget {
@@ -10,9 +10,9 @@ class InstitutionsGridView extends StatelessWidget {
       required this.userId,
       required this.onPressed})
       : super(key: key);
-  final List<Institution> institutions;
+  final List<InstitutionProfile> institutions;
   final String userId;
-  final void Function(Institution institution) onPressed;
+  final void Function(InstitutionProfile institution) onPressed;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(

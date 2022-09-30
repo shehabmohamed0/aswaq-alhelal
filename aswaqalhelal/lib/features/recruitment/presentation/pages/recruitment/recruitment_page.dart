@@ -24,7 +24,8 @@ class RecruitmentPage extends HookWidget {
   Widget build(BuildContext context) {
     PersistentBottomSheetController? controller;
     final List<String> tabs = <String>['Employees', 'Offers'];
-    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
 
     final phoneController = useTextEditingController();
     final focusNode = useFocusNode();
@@ -42,7 +43,10 @@ class RecruitmentPage extends HookWidget {
           },
           builder: (context, state) {
             return FloatingActionButton(
-              child: Icon(state.bottomSheetOpened ? Icons.close : Icons.add),
+              child: Icon(
+                state.bottomSheetOpened ? Icons.close : Icons.add,
+                color: Colors.white,
+              ),
               onPressed: () {
                 if (state.bottomSheetOpened) {
                   context.read<RecruitmentCubit>().onClosed();
@@ -117,7 +121,9 @@ class RecruitmentPage extends HookWidget {
             },
             onRefresh: () {
               return Future.wait([
-                context.read<EmployeesCubit>().getEmployees(arguments.institutionId),
+                context
+                    .read<EmployeesCubit>()
+                    .getEmployees(arguments.institutionId),
                 context
                     .read<InstitutionJobsOffersCubit>()
                     .getSentOffers(arguments.institutionId),

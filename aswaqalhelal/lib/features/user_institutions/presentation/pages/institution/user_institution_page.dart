@@ -1,9 +1,9 @@
-import 'package:aswaqalhelal/features/recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
-import '../../../domain/entities/institution.dart';
+import '../../../../auth/domain/entities/institution_profile.dart';
+import '../../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 
 class UserInstitutionPage extends StatelessWidget {
   const UserInstitutionPage({Key? key}) : super(key: key);
@@ -11,71 +11,88 @@ class UserInstitutionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final institution =
-        ModalRoute.of(context)!.settings.arguments as Institution;
+        ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     return Scaffold(
       appBar: AppBar(
-        title: Text(institution.officialName),
+        title: Text(institution.name),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          children: [
-            GridTile(
-              backgroundColor: Colors.lightBlueAccent,
-              iconData: Icons.category_rounded,
-              title: 'Items',
-              onTap: () {
-                Navigator.pushNamed(context, Routes.institutionItems,
-                    arguments: institution);
-              },
-            ),
-            GridTile(
-              backgroundColor: Colors.tealAccent.shade400,
-              iconData: Icons.list_alt_rounded,
-              title: 'Orders',
-              onTap: () {},
-            ),
-            GridTile(
-              backgroundColor: Colors.orangeAccent,
-              iconData: Icons.local_shipping_rounded,
-              title: 'Distribution ',
-              onTap: () {
-                Navigator.pushNamed(context, Routes.distributionAreas,
-                    arguments: institution);
-              },
-            ),
-            GridTile(
-              backgroundColor: Colors.lightGreen,
-              iconData: FontAwesomeIcons.receipt,
-              title: 'Receipts',
-              onTap: () {
-                Navigator.pushNamed(context, Routes.institutionReceipts,
-                    arguments: institution);
-              },
-            ),
-            GridTile(
-              backgroundColor: Colors.redAccent.shade400,
-              iconData: Icons.people,
-              title: 'Recruitment',
-              onTap: () {
-                Navigator.pushNamed(context, Routes.recruitment,
-                    arguments: RecruitmentPageArguments(
-                        ownerId: institution.userId,
-                        institutionId: institution.id));
-              },
-            ),
-            GridTile(
-              backgroundColor: Colors.deepPurpleAccent,
-              iconData: Icons.settings,
-              title: 'Settings',
-              onTap: () {},
-            ),
-          ],
-        ),
+      body: InstitutionPageBody(institution: institution),
+    );
+  }
+}
+
+class InstitutionPageBody extends StatelessWidget {
+  const InstitutionPageBody({
+    Key? key,
+    required this.institution,
+  }) : super(key: key);
+
+  final InstitutionProfile institution;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        children: [
+          GridTile(
+            backgroundColor: Colors.lightBlueAccent,
+            iconData: Icons.category_rounded,
+            title: 'Items',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.institutionItems,
+                  arguments: institution);
+            },
+          ),
+          GridTile(
+            backgroundColor: Colors.tealAccent.shade400,
+            iconData: Icons.list_alt_rounded,
+            title: 'Orders',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.institutionOrders,
+                  arguments: institution);
+            },
+          ),
+          GridTile(
+            backgroundColor: Colors.orangeAccent,
+            iconData: Icons.local_shipping_rounded,
+            title: 'Distribution ',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.distributionAreas,
+                  arguments: institution);
+            },
+          ),
+          GridTile(
+            backgroundColor: Colors.lightGreen,
+            iconData: FontAwesomeIcons.receipt,
+            title: 'Receipts',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.institutionReceipts,
+                  arguments: institution);
+            },
+          ),
+          GridTile(
+            backgroundColor: Colors.redAccent.shade400,
+            iconData: Icons.people,
+            title: 'Recruitment',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.recruitment,
+                  arguments: RecruitmentPageArguments(
+                      ownerId: institution.userId,
+                      institutionId: institution.id));
+            },
+          ),
+          GridTile(
+            backgroundColor: Colors.deepPurpleAccent,
+            iconData: Icons.settings,
+            title: 'Settings',
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }

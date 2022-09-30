@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 
 import '../../../../address/data/models/address_model.dart';
@@ -7,8 +8,9 @@ import '../../../domain/entities/institution_profile.dart';
 
 part 'institution_profile_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true,converters: [TimestampConverter()])
 class InstitutionProfileModel extends InstitutionProfile {
+ @JsonKey(name: 'address')
   final AddressModel addressModel;
   const InstitutionProfileModel({
     required super.id,

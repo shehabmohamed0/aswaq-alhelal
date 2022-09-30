@@ -1,30 +1,32 @@
-import 'package:aswaqalhelal/features/institution_receipts/data/models/receipt_item_model.dart';
-import 'package:aswaqalhelal/features/institution_items/data/models/institution_item_model.dart';
-import 'package:aswaqalhelal/features/institution_items/data/models/unit_model.dart';
-
-import '../../../features/institution_receipts/data/models/receipt_model.dart';
-import '../../../features/institution_receipts/domain/entities/receipt_item.dart';
+import '../../../features/institution_items/data/models/institution_item_model.dart';
+import '../../../features/institution_items/data/models/unit_model.dart';
+import '../../../features/orders/data/models/order_item_model.dart';
+import '../../../features/orders/data/models/order_model.dart';
+import '../../../features/orders/domain/entities/order.dart';
+import '../../../features/orders/domain/entities/order_item.dart';
 
 class AddInstitutionReceiptParams {
-  final List<ReceiptItem> receiptItems;
+  final List<OrderItem> receiptItems;
   final double totalPrice;
-  final String from;
-  final String? to;
-  final String employeeId;
-  AddInstitutionReceiptParams({
-    required this.receiptItems,
-    required this.totalPrice,
-    required this.from,
-    required this.to,
-    required this.employeeId,
-  });
+  final String? from;
+  final String to;
+  final String? editorId;
+  final String? sellerId;
+  AddInstitutionReceiptParams(
+      {required this.receiptItems,
+      required this.totalPrice,
+      required this.from,
+      required this.to,
+      required this.editorId,
+      required this.sellerId});
 
-  ReceiptModel toModel(String id) => ReceiptModel(
+  OrderModel toModel(String id) => OrderModel(
         id: id,
         from: from,
+        orderState: OrderState.shipping,
         itemsModels: receiptItems
             .map(
-              (receiptItem) => ReceiptItemModel(
+              (receiptItem) => OrderItemModel(
                   itemModel: InstitutionItemModel(
                     id: receiptItem.item.id,
                     name: receiptItem.item.name,
@@ -52,7 +54,8 @@ class AddInstitutionReceiptParams {
             .toList(),
         to: to,
         totalPrice: totalPrice,
-        employeeId: employeeId,
+        editorId: editorId,
+        sellerId: sellerId,
         creationTime: DateTime.now(),
       );
 }

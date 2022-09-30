@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/user_institutions/domain/entities/institution.dart';
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
@@ -60,7 +60,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
                 if (institution != null) {
                   context
                       .read<UserInstitutionsCubit>()
-                      .addInstitution(institution as Institution);
+                      .addInstitution(institution as InstitutionProfile);
                 }
               });
             },
@@ -115,7 +115,7 @@ class _InstitutionsEmptyWidget extends StatelessWidget {
               if ((institution) != null) {
                 context
                     .read<UserInstitutionsCubit>()
-                    .addInstitution(institution as Institution);
+                    .addInstitution(institution as InstitutionProfile);
               }
             });
           },

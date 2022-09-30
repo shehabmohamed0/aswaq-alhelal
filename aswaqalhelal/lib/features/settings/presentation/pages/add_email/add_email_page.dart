@@ -46,7 +46,7 @@ class LinkEmailAndPasswordPage extends StatelessWidget {
                         Navigator.popUntil(
                             context,
                             (route) =>
-                                route.settings.name == Routes.contactInfo);
+                                route.settings.name == Routes.accountInfo);
                         showSuccessSnackBar(
                             context, 'Email has been added successfully.');
                       },

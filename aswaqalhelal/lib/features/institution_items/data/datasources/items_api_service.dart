@@ -4,6 +4,7 @@ import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/add_item/params.dart';
 import '../../domain/entities/institution_item.dart';
 import '../models/institution_item_model.dart';
@@ -224,12 +225,4 @@ class ItemsApiServiceImpl implements ItemsApiService {
       );
     }
   }
-}
-
-class FirestorePath {
-  FirestorePath._();
-
-  static String get itemsReference => 'items_reference';
-  static String get items => 'items';
-  static String item(String itemId) => 'items/$itemId';
 }

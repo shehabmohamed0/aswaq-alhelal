@@ -16,7 +16,7 @@ class AddInstitutionState extends Equatable {
 
   final AddInstitutionStatus status;
   final String? errorMessage;
-  final Institution? addedInstitution;
+  final InstitutionProfile? addedInstitution;
   const AddInstitutionState({
     this.step = 0,
     this.stepFormStatus = const [
@@ -44,7 +44,7 @@ class AddInstitutionState extends Equatable {
       RequiredObject<FullAddressDetails>? address,
       AddInstitutionStatus? status,
       String? errorMessage,
-      Institution? addedInstitution}) {
+      InstitutionProfile? addedInstitution}) {
     return AddInstitutionState(
         step: step ?? this.step,
         stepFormStatus: stepFormStatus ?? this.stepFormStatus,

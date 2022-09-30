@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'receipt_item_model.dart';
+part of 'order_item_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReceiptItemModel _$ReceiptItemModelFromJson(Map<String, dynamic> json) =>
-    ReceiptItemModel(
+OrderItemModel _$OrderItemModelFromJson(Map<String, dynamic> json) =>
+    OrderItemModel(
       itemModel:
           InstitutionItemModel.fromJson(json['item'] as Map<String, dynamic>),
       unitModel: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
@@ -15,7 +15,7 @@ ReceiptItemModel _$ReceiptItemModelFromJson(Map<String, dynamic> json) =>
       price: (json['price'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$ReceiptItemModelToJson(ReceiptItemModel instance) =>
+Map<String, dynamic> _$OrderItemModelToJson(OrderItemModel instance) =>
     <String, dynamic>{
       'quantity': instance.quantity,
       'price': instance.price,

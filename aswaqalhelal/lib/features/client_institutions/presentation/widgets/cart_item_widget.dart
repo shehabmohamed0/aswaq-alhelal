@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
-import '../../../institution_items/domain/entities/cart_item.dart';
 import '../../../institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
+import '../../../orders/domain/entities/order_item.dart';
 
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
 
-  final CartItem cartItem;
+  final OrderItem cartItem;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionCartCubit>();
@@ -57,7 +57,7 @@ class CartItemWidget extends StatelessWidget {
                 Flexible(
                     child: FittedBox(
                   child: Text(
-                    cartItem.selectedUnit.name,
+                    cartItem.unit.name,
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class CartItemWidget extends StatelessWidget {
                 Flexible(
                   child: FittedBox(
                     child: Text(
-                      '${cartItem.selectedUnit.price}'
+                      '${cartItem.unit.price}'
                       ' EGP',
                       style: TextStyle(
                           fontSize: 16,

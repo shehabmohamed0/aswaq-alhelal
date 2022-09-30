@@ -69,6 +69,15 @@ abstract class BaseProfile extends Equatable {
         'photoURL': photoURL,
         'type': _$ProfileTypeEnumMap[type]
       };
+
+  T fold<T>(T Function(UserProfile user) onUser,
+      T Function(InstitutionProfile institution) onInstitution) {
+    if (this is UserProfile) {
+      return onUser(this as UserProfile);
+    } else {
+      return onInstitution(this as InstitutionProfile);
+    }
+  }
 }
 
 enum ProfileType {

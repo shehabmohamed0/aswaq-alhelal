@@ -15,6 +15,9 @@
   "failedToUploadTheImage": "فشل رفع الصورة",
   "failedToUploadTheFile": "فشل رفع الملف",
   "failedToUploadTheImages": "فشل رفع الصور",
-  "mustBeAtLeastNumberCharacter": "يجب ان تكون على الاقل {howMany, plural, one{حرف واحد} two{حرفين} other{{howMany} حروف}}"
-
+  "mustBeAtLeastNumberCharacter": "يجب ان تكون على الاقل {howMany, plural, one{حرف واحد} two{حرفين} other{{howMany} حروف}}",
+  "zeroIsAnInvalidNumber": "الصفر رقم غير صحيح",
+  "acceptsIntegersOnly": "يقبل الاعداد الصحيحة فقط",
+  "theNumberCanNotBeNegative": "لا يمكن ان يكون العدد سالباََ",
+  "invalidNumber": "رقم غير صحيح"
 }

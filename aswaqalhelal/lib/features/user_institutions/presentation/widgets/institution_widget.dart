@@ -1,7 +1,7 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 
-import '../../domain/entities/institution.dart';
 
 class InstitutionWidget extends StatelessWidget {
   const InstitutionWidget({
@@ -11,7 +11,7 @@ class InstitutionWidget extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final Institution institution;
+  final InstitutionProfile institution;
   final bool isUserInstitution;
   final VoidCallback onPressed;
   @override
@@ -52,7 +52,7 @@ class InstitutionWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      institution.officialName,
+                      institution.name,
                       style: Theme.of(context).textTheme.labelLarge,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

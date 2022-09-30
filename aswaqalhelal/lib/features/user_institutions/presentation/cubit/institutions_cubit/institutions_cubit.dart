@@ -1,9 +1,9 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:root_package/core/params/no_args_params.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../domain/entities/institution.dart';
 import '../../../domain/usecases/get_user_institutions.dart';
 
 part 'institutions_state.dart';
@@ -28,7 +28,7 @@ class UserInstitutionsCubit extends Cubit<UserInstitutionsState> {
     );
   }
 
-  void addInstitution(Institution institution) {
+  void addInstitution(InstitutionProfile institution) {
     if (state is InstitutionsEmpty) {
       emit(InstitutionsLoaded(institutions: [institution]));
     } else if (state is InstitutionsLoaded) {
@@ -38,7 +38,7 @@ class UserInstitutionsCubit extends Cubit<UserInstitutionsState> {
     }
   }
 
-  updateInstitution(Institution institution) {
+  updateInstitution(InstitutionProfile institution) {
     if (state is InstitutionsLoaded) {
       var currentState = (state as InstitutionsLoaded);
       final newList = List.of(currentState.institutions.map((element) {

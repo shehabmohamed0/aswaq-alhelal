@@ -1,8 +1,8 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/root_package.dart';
 
 import '../../../address/domain/entities/address.dart';
-import '../../../user_institutions/domain/entities/institution.dart';
 import '../../domain/repositories/institutions_repository.dart';
 import '../datasources/institutions_api_service.dart';
 
@@ -13,7 +13,7 @@ class InstitutionsRepositoryImpl extends InstitutionsRepository {
 
   InstitutionsRepositoryImpl(this._apiService, this._networkInfo);
   @override
-  Future<Either<Failure, List<Institution>>> getAddressInstitutions(
+  Future<Either<Failure, List<InstitutionProfile>>> getAddressInstitutions(
       Address address) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());

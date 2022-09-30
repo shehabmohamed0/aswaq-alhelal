@@ -4,9 +4,9 @@ import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import '../../../home/presentation/pages/widgets/custom_drop_down_button.dart';
-import '../../../institution_items/domain/entities/cart_item.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
+import '../../../orders/domain/entities/order_item.dart';
 import '../cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart';
 
 class ItemAddToCartDialog extends StatelessWidget {
@@ -24,11 +24,11 @@ class ItemAddToCartDialog extends StatelessWidget {
         child: BlocConsumer<ItemAddToCartDialogCubit, ItemAddToCartDialogState>(
           listener: (context, state) {
             if (state.cartSubmitted) {
-              Navigator.of(context).pop(CartItem(
-                  id: '',
+              Navigator.of(context).pop(OrderItem(
                   item: item,
-                  selectedUnit: state.selectedUnit!,
-                  quantity: state.quantity));
+                  unit: state.selectedUnit!,
+                  quantity: state.quantity,
+                  price: state.selectedUnit!.price));
             }
           },
           builder: (context, state) {

@@ -27,7 +27,7 @@ mixin _$InstitutionReceiptsState {
   double get totalPrice => throw _privateConstructorUsedError;
   InstitutionReceiptStatus get status => throw _privateConstructorUsedError;
   dynamic get receiptSaved => throw _privateConstructorUsedError;
-  List<ReceiptItem> get receiptItems => throw _privateConstructorUsedError;
+  List<OrderItem> get receiptItems => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $InstitutionReceiptsStateCopyWith<$Res> {
       double totalPrice,
       InstitutionReceiptStatus status,
       dynamic receiptSaved,
-      List<ReceiptItem> receiptItems,
+      List<OrderItem> receiptItems,
       String? errorMessage});
 }
 
@@ -123,7 +123,7 @@ class _$InstitutionReceiptsStateCopyWithImpl<$Res>
       receiptItems: receiptItems == freezed
           ? _value.receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
-              as List<ReceiptItem>,
+              as List<OrderItem>,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -151,7 +151,7 @@ abstract class _$$_InstitutionReceiptsStateCopyWith<$Res>
       double totalPrice,
       InstitutionReceiptStatus status,
       dynamic receiptSaved,
-      List<ReceiptItem> receiptItems,
+      List<OrderItem> receiptItems,
       String? errorMessage});
 }
 
@@ -224,7 +224,7 @@ class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
       receiptItems: receiptItems == freezed
           ? _value._receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
-              as List<ReceiptItem>,
+              as List<OrderItem>,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       this.totalPrice = 0,
       this.status = InstitutionReceiptStatus.initial,
       this.receiptSaved = false,
-      final List<ReceiptItem> receiptItems = const [],
+      final List<OrderItem> receiptItems = const [],
       this.errorMessage})
       : _items = items,
         _filteredItems = filteredItems,
@@ -293,10 +293,10 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
   @override
   @JsonKey()
   final dynamic receiptSaved;
-  final List<ReceiptItem> _receiptItems;
+  final List<OrderItem> _receiptItems;
   @override
   @JsonKey()
-  List<ReceiptItem> get receiptItems {
+  List<OrderItem> get receiptItems {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_receiptItems);
   }
@@ -371,7 +371,7 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
       final double totalPrice,
       final InstitutionReceiptStatus status,
       final dynamic receiptSaved,
-      final List<ReceiptItem> receiptItems,
+      final List<OrderItem> receiptItems,
       final String? errorMessage}) = _$_InstitutionReceiptsState;
 
   @override
@@ -395,7 +395,7 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
   @override
   dynamic get receiptSaved;
   @override
-  List<ReceiptItem> get receiptItems;
+  List<OrderItem> get receiptItems;
   @override
   String? get errorMessage;
   @override

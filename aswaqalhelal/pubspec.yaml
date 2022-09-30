@@ -76,6 +76,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   localstorage: ^4.0.0+1
   badges: ^2.0.3
+  animations: ^2.0.5
 
   # geo_logic:
   #   path: ../geo_logic

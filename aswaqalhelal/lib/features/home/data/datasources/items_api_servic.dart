@@ -2,6 +2,7 @@
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/firebase/firebase_path.dart';
 import '../../../institution_items/data/models/institution_item_model.dart';
 
 abstract class ItemsApiService2 {
@@ -23,8 +24,4 @@ class ItemsApiServiceImpl extends ItemsApiService2 {
         snapshot.docs.map(InstitutionItemModel.fromFirestore).toList();
     return items;
   }
-}
-
-class FirestorePath {
-  static const items = 'items';
 }

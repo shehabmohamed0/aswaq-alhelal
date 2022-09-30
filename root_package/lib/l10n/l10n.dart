@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../packages/multiple_localization.dart';
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -27,16 +26,17 @@ class RootPackageLocalizations {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<RootPackageLocalizations> load(Locale locale) {
-    return MultipleLocalizations.load(
-      initializeMessages,
-      locale,
-      (l) {
-        final instance = RootPackageLocalizations();
-        RootPackageLocalizations._current = instance;
-        return instance;
-      },
-      setDefaultLocale: true,
-    );
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
+    return initializeMessages(localeName).then((_) {
+      Intl.defaultLocale = localeName;
+      final instance = RootPackageLocalizations();
+      RootPackageLocalizations._current = instance;
+
+      return instance;
+    });
   }
 
   static RootPackageLocalizations of(BuildContext context) {
@@ -188,6 +188,46 @@ class RootPackageLocalizations {
       name: 'mustBeAtLeastNumberCharacter',
       desc: '',
       args: [howMany],
+    );
+  }
+
+  /// `Zero is an invalid number.`
+  String get zeroIsAnInvalidNumber {
+    return Intl.message(
+      'Zero is an invalid number.',
+      name: 'zeroIsAnInvalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepts Integers only.`
+  String get acceptsIntegersOnly {
+    return Intl.message(
+      'Accepts Integers only.',
+      name: 'acceptsIntegersOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The number can not be negative.`
+  String get theNumberCanNotBeNegative {
+    return Intl.message(
+      'The number can not be negative.',
+      name: 'theNumberCanNotBeNegative',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid number.`
+  String get invalidNumber {
+    return Intl.message(
+      'Invalid number.',
+      name: 'invalidNumber',
+      desc: '',
+      args: [],
     );
   }
 }

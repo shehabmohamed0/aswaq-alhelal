@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import '../../../../../../core/request_state.dart';
-import '../../../../../user_institutions/domain/entities/institution.dart';
 import '../../../../../widgets/check_internet_connection_widget.dart';
 import '../../../../../widgets/constants.dart';
 import '../../../../../widgets/loading_widget.dart';

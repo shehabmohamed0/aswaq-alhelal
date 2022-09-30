@@ -1,9 +1,9 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../address/domain/entities/address.dart';
-import '../../../user_institutions/domain/entities/institution.dart';
 import '../../domain/usecases/get_institutions.dart';
 
 part 'institutions_cubit.freezed.dart';
@@ -16,6 +16,7 @@ class InstitutionsCubit extends Cubit<InstitutionsState> {
   final GetAddressInstitutions _getInstitution;
 
   Future<void> getInstitutions(Address address) async {
+    emit(const InstitutionsState.loading());
     final either = await _getInstitution(params: address);
 
     either.fold((failure) {

@@ -19,9 +19,10 @@ InstitutionProfileModel _$InstitutionProfileModelFromJson(
       phoneNumbers: (json['phoneNumbers'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      creationTime: DateTime.parse(json['creationTime'] as String),
+      creationTime: const TimestampConverter()
+          .fromJson(json['creationTime'] as Timestamp),
       addressModel:
-          AddressModel.fromJson(json['addressModel'] as Map<String, dynamic>),
+          AddressModel.fromJson(json['address'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$InstitutionProfileModelToJson(
@@ -34,8 +35,8 @@ Map<String, dynamic> _$InstitutionProfileModelToJson(
       'nickName': instance.nickName,
       'emails': instance.emails,
       'phoneNumbers': instance.phoneNumbers,
-      'creationTime': instance.creationTime.toIso8601String(),
-      'addressModel': instance.addressModel.toJson(),
+      'creationTime': const TimestampConverter().toJson(instance.creationTime),
+      'address': instance.addressModel.toJson(),
     };
 
 const _$ProfileTypeEnumMap = {

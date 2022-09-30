@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/institutions/presentation/cubit/institutions_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import '../../../../l10n/l10n.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../institutions/presentation/widgets/institutions_widget.dart';
 import '../../../notifications/presentation/widgets/notifications_bell.dart';
+import '../../../user_institutions/presentation/pages/institution/user_institution_page.dart';
 import '../cubit/items/items_cubit.dart';
 import 'widgets/app_drawer.dart';
 
@@ -17,55 +19,43 @@ class HomePage extends StatelessWidget {
     return BlocProvider<ItemsCubit>(
       create: (context) => locator()..getItems(),
       child: BlocBuilder<AppBloc, AppState>(
+        buildWhen: (previous, current) => previous.profile != current.profile,
         builder: (context, state) {
-//          final authenticated = state.status == AppStatus.authenticated;
           return Scaffold(
-            drawer: const AppDrawer(),
-            appBar: AppBar(
-              title: Text(AppLocalizations.of(context).aswaqLhelal),
-              elevation: 0,
-              actions: const [NotificationsBell()],
-            ),
-            body: const CustomScrollView(
-              physics: ClampingScrollPhysics(),
-              slivers: [
-                // SliverToBoxAdapter(
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(vertical: 8),
-                //     child: CarouselSlider(
-                //       items: const [
-                //         OfferWidget(
-                //           color: Colors.red,
-                //         ),
-                //         OfferWidget(
-                //           color: Colors.green,
-                //         ),
-                //         OfferWidget(
-                //           color: Colors.yellow,
-                //         ),
-                //       ],
-                //       options: CarouselOptions(
-                //           aspectRatio: 19 / 9,
-                //           autoPlay: true,
-                //           enlargeCenterPage: true),
-                //     ),
-                //   ),
-                // ),
-                // const SliverToBoxAdapter(child: SizedBox(height: 16)),
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  sliver: SliverToBoxAdapter(
-                    child: Text(
-                      'Institutions',
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+              drawer: const AppDrawer(),
+              appBar: AppBar(
+                title: Text(AppLocalizations.of(context).aswaqLhelal),
+                elevation: 0,
+                actions: const [NotificationsBell()],
+              ),
+              body: state.profile.fold((user) {
+                final cubit = locator<InstitutionsCubit>()
+                  ..getInstitutions(user.address!);
+                return BlocProvider.value(
+                  value: cubit,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      cubit.getInstitutions(user.address!);
+                    },
+                    child: const CustomScrollView(
+                      physics: BouncingScrollPhysics(),
+                      slivers: [
+                        SliverPadding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          sliver: SliverToBoxAdapter(
+                            child: Text('Institutions',
+                                style: TextStyle(
+                                    fontSize: 26, fontWeight: FontWeight.w600)),
+                          ),
+                        ),
+                        InstitutionsSliverWidget()
+                      ],
                     ),
                   ),
-                ),
-                const InstitutionsSliverWidget()
-              ],
-            ),
-          );
+                );
+              },
+                  (institution) =>
+                      InstitutionPageBody(institution: institution)));
         },
       ),
     );

@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "acceptsIntegersOnly":
+            MessageLookupByLibrary.simpleMessage("Accepts Integers only."),
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
             "Please, check internet connection."),
         "failedToUploadTheFile":
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid email address."),
         "invalidName":
             MessageLookupByLibrary.simpleMessage("Invalid user name."),
+        "invalidNumber":
+            MessageLookupByLibrary.simpleMessage("Invalid number."),
         "invalidPassword": MessageLookupByLibrary.simpleMessage(
             "Password must be at least 8 character."),
         "invalidPhoneNumber":
@@ -48,6 +52,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "required": MessageLookupByLibrary.simpleMessage("Required"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong."),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("Try again")
+        "theNumberCanNotBeNegative": MessageLookupByLibrary.simpleMessage(
+            "The number can not be negative."),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
+        "zeroIsAnInvalidNumber":
+            MessageLookupByLibrary.simpleMessage("Zero is an invalid number.")
       };
 }

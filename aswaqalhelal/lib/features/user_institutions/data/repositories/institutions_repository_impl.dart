@@ -5,7 +5,7 @@ import 'package:root_package/root_package.dart';
 
 import '../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../core/params/update_institution_params.dart';
-import '../../domain/entities/institution.dart';
+import '../../../auth/domain/entities/institution_profile.dart';
 import '../../domain/repositories/institutions_repository.dart';
 import '../datasources/user_institutions_service_api.dart';
 
@@ -17,7 +17,7 @@ class UserInstitutionsRepositoryImpl extends UserInstitutionsRepository {
   UserInstitutionsRepositoryImpl(this._serviceApi, this._networkInfo);
 
   @override
-  Future<Either<Failure, List<Institution>>> getInstitutions() async {
+  Future<Either<Failure, List<InstitutionProfile>>> getInstitutions() async {
     // if (!await _networkInfo.isConnected) {
     //   return Left(ServerFailure.internetConnection());
     // }
@@ -31,7 +31,7 @@ class UserInstitutionsRepositoryImpl extends UserInstitutionsRepository {
   }
 
   @override
-  Future<Either<Failure, Institution>> addInstitution(
+  Future<Either<Failure, InstitutionProfile>> addInstitution(
       AddInstitutionParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
@@ -45,7 +45,7 @@ class UserInstitutionsRepositoryImpl extends UserInstitutionsRepository {
   }
 
   @override
-  Future<Either<Failure, Institution>> updateInstitution(
+  Future<Either<Failure, InstitutionProfile>> updateInstitution(
       UpdateInstitutionParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
