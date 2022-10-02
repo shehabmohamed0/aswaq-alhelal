@@ -1,20 +1,21 @@
+import 'package:aswaqalhelal/features/home/presentation/cubit/items_widget/item_grid_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../institution_items/domain/entities/institution_item.dart';
-import 'item_grid_widget.dart';
+import '../../pages/widgets/item_grid_widget.dart';
 
-class ItemsSliverGridView extends StatelessWidget {
-  const ItemsSliverGridView({
-    Key? key,
-    required this.onItemPressed,
-    required this.institutions,
-    required this.onItemLongPressed,
-  }) : super(key: key);
+class ItemsSliverGridView2<T> extends StatelessWidget {
+  const ItemsSliverGridView2(
+      {Key? key,
+      required this.onItemPressed,
+      required this.institutions,
+      required this.onItemLongPressed,
+      required this.widgetBuilder})
+      : super(key: key);
 
-  final Function(InstitutionItem institution)? onItemPressed;
-  final List<InstitutionItem> institutions;
-  final Function(InstitutionItem institution)? onItemLongPressed;
-
+  final Function(T institution)? onItemPressed;
+  final List<T> institutions;
+  final Function(T institution)? onItemLongPressed;
+  final Widget Function(T) widgetBuilder;
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
@@ -31,7 +32,7 @@ class ItemsSliverGridView extends StatelessWidget {
             onLongPress: () {
               onItemLongPressed?.call(institutions[index]);
             },
-            child: ItemGridWidget(item: institutions[index])),
+            child: widgetBuilder(institutions[index])),
         childCount: institutions.length,
       ),
     );

@@ -36,9 +36,6 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
       collection.where('parentId', isEqualTo: address.neighborhoodId).get()
     ]);
 
-    log(address.governateId);
-    log(address.cityId);
-    log(address.neighborhoodId);
     final instCollection = _firestore.collection('profiles');
 
     final institutionIds =
@@ -59,7 +56,9 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
     final futures = institutionIds.map((e) => instCollection.doc(e).get());
     final docs = await Future.wait(futures);
 
-    final models = docs.map(InstitutionProfileModel.fromFirestore).toList();
+    final models = docs.map((e) {
+     return InstitutionProfileModel.fromFirestore(e);
+    }).toList();
     return models;
   }
 }

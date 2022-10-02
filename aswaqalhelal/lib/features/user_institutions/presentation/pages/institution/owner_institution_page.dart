@@ -5,8 +5,8 @@ import 'package:root_package/routes/routes.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';
 import '../../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 
-class UserInstitutionPage extends StatelessWidget {
-  const UserInstitutionPage({Key? key}) : super(key: key);
+class OwnerInstitutionPage extends StatelessWidget {
+  const OwnerInstitutionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

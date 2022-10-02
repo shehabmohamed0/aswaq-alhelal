@@ -1,7 +1,3 @@
-import 'package:aswaqalhelal/core/params/addresses/add_first_address_params.dart';
-import 'package:aswaqalhelal/features/address/domain/entities/entities.dart';
-import 'package:aswaqalhelal/features/address/domain/usecases/add_first_address.dart';
-import 'package:aswaqalhelal/features/address_suggestions/presentation/DTOs/ref_address_details.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
@@ -12,6 +8,10 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/injectable.dart';
 
 import '../../../../../core/params/addresses/add_address_params.dart';
+import '../../../../../core/params/addresses/add_first_address_params.dart';
+import '../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
+import '../../../domain/entities/entities.dart';
+import '../../../domain/usecases/add_first_address.dart';
 
 part 'add_first_address_state.dart';
 
@@ -66,8 +66,7 @@ class AddFirstAddressCubit extends Cubit<AddFirstAddressState> {
                   errorMessage: (failure as ServerFailure).message,
                   status: FormzStatus.submissionFailure),
             ),
-        (address) =>
-            emit(state.copyWith(status: FormzStatus.submissionSuccess)));
+        (address) {});
   }
 
   void nameChanged(String value) {

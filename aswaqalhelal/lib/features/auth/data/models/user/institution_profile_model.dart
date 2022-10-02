@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/json_converters/time_stamp_converter.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
@@ -8,9 +10,9 @@ import '../../../domain/entities/institution_profile.dart';
 
 part 'institution_profile_model.g.dart';
 
-@JsonSerializable(explicitToJson: true,converters: [TimestampConverter()])
+@JsonSerializable(explicitToJson: true, converters: [TimestampConverter()])
 class InstitutionProfileModel extends InstitutionProfile {
- @JsonKey(name: 'address')
+  @JsonKey(name: 'address')
   final AddressModel addressModel;
   const InstitutionProfileModel({
     required super.id,
@@ -26,9 +28,9 @@ class InstitutionProfileModel extends InstitutionProfile {
 
   factory InstitutionProfileModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final address = InstitutionProfileModel.fromJson(document.data()!);
+    final institutionProfile = InstitutionProfileModel.fromJson(document.data()!);
 
-    return address._copyWithId(document.id);
+    return institutionProfile._copyWithId(document.id);
   }
   InstitutionProfileModel _copyWithId(String id) => InstitutionProfileModel(
       id: id,

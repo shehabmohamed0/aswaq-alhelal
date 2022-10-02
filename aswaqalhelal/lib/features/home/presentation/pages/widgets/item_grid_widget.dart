@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../institution_items/domain/entities/institution_item.dart';
+import '../../../../institution_items/domain/entities/unit.dart';
 
 class ItemGridWidget extends StatelessWidget {
   const ItemGridWidget({
@@ -25,11 +29,10 @@ class ItemGridWidget extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Center(
-                  child: Image.network(
-                    item.imageUrl,
-                  ),
+              Flexible(
+                child: CachedNetworkImage(
+                  imageUrl: item.imageUrl,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
               const SizedBox(height: 8),

@@ -1,9 +1,10 @@
+import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
-import '../../../institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import '../../../orders/domain/entities/order_item.dart';
+import '../cubit/institution_cart/institution_cart_cubit.dart';
 
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
@@ -11,7 +12,7 @@ class CartItemWidget extends StatelessWidget {
   final OrderItem cartItem;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<InstitutionCartCubit>();
+    final cubit = context.read<ClientInstitutionsCubit>();
     return Container(
       height: 120,
       color: Colors.white,
@@ -46,7 +47,7 @@ class CartItemWidget extends StatelessWidget {
                         visualDensity: VisualDensity.compact,
                         splashRadius: 16,
                         onPressed: () {
-                          cubit.remove(cartItem);
+                          cubit.reduce(cartItem);
                         },
                         icon: const Icon(
                           Icons.delete,
@@ -82,12 +83,22 @@ class CartItemWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                          onPressed: () => cubit.add(cartItem),
+                          onPressed: () => WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                context
+                                    .read<ClientInstitutionsCubit>()
+                                    .add(cartItem);
+                              }),
                           icon: const Icon(Icons.add)),
                       Text('${cartItem.quantity}'),
                       IconButton(
                           onPressed: cartItem.quantity > 0
-                              ? () => cubit.reduce(cartItem)
+                              ? () => () => WidgetsBinding.instance
+                                      .addPostFrameCallback((timeStamp) {
+                                    context
+                                        .read<ClientInstitutionsCubit>()
+                                        .reduce(cartItem);
+                                  })
                               : null,
                           icon: const Icon(Icons.remove)),
                     ],

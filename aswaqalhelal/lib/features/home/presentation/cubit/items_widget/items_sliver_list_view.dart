@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../../institution_items/domain/entities/institution_item.dart';
-import 'item_list_widget.dart';
-
-class ItemsSliverListView extends StatelessWidget {
-  const ItemsSliverListView({
+class ItemsSliverListView2<T> extends StatelessWidget {
+  const ItemsSliverListView2({
     Key? key,
     required this.onItemPressed,
     required this.institutions,
     required this.onItemLongPressed,
+    required this.widgetBuilder,
   }) : super(key: key);
 
-  final Function(InstitutionItem institution)? onItemPressed;
-  final List<InstitutionItem> institutions;
-  final Function(InstitutionItem institution)? onItemLongPressed;
+  final Function(T institution)? onItemPressed;
+  final List<T> institutions;
+  final Function(T institution)? onItemLongPressed;
+  final Widget Function(T) widgetBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class ItemsSliverListView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: 8,
               ),
-              child: ItemListWidget(item: institutions[index]),
+              child: widgetBuilder(institutions[index]),
             )),
         childCount: institutions.length,
       ),

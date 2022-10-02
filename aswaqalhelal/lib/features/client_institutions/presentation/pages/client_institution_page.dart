@@ -1,22 +1,25 @@
 import 'dart:developer';
 
+import 'package:aswaqalhelal/features/home/presentation/cubit/items_widget/items_widget_cubit%20copy.dart';
 import 'package:expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
-import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
-import '../../../home/presentation/pages/widgets/items_widget.dart';
-import '../../../institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
+import '../../../cart/presentation/cubit/institution_cart/institution_cart_cubit.dart';
+import '../../../cart/presentation/widgets/add_to_cart_dialog.dart';
+import '../../../cart/presentation/widgets/cart_item_widget.dart';
+import '../../../home/presentation/cubit/items_widget/item_grid_widget.dart';
+import '../../../home/presentation/cubit/items_widget/item_list_widget.dart';
+import '../../../home/presentation/cubit/items_widget/items_widget_2.dart';
 import '../../../orders/domain/entities/order_item.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
 import '../../../widgets/loading_widget.dart';
 import '../cubit/client_institution/client_institutions_cubit.dart';
-import '../widgets/cart_item_widget.dart';
-import '../widgets/item_add_to_cart_dialog.dart';
 
 class ClientInstitutionPage extends StatefulWidget {
   const ClientInstitutionPage({Key? key}) : super(key: key);
@@ -33,124 +36,172 @@ class _ClientInstitutionPageState extends State<ClientInstitutionPage> {
     final cubit = context.read<InstitutionCartCubit>();
     final institution =
         ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
-    final user = context.select((AppBloc element) => element.state.user);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(institution.nickName),
+    return BlocProvider<ItemsWidgetCubit2<OrderItem>>(
+      create: (context) => ItemsWidgetCubit2<OrderItem>(
+        dateTimeValue: (p0) => p0.item.creationTime,
+        stringValue: (p0) => p0.item.name,
       ),
-      body: BlocBuilder<ClientInstitutionsCubit, ClientInstitutionsState>(
-        builder: (context, state) {
-          switch (state.itemsState) {
-            case RequestState.initial:
-              return kEmptyWidget;
-            case RequestState.loading:
-              return const LoadingWidget();
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(institution.nickName),
+        ),
+        body: BlocConsumer<ClientInstitutionsCubit, ClientInstitutionsState>(
+          listener: (context, state) {
+            context
+                .read<ItemsWidgetCubit2<OrderItem>>()
+                .initialized(state.ordersItems);
+          },
+          builder: (context, state) {
+            log('Rebuild');
+            switch (state.ordersItemsState) {
+              case RequestState.initial:
+                return kEmptyWidget;
+              case RequestState.loading:
+                return const LoadingWidget();
+              case RequestState.error:
+                return CheckInternetConnection(onPressed: () {
+                  context.read<ClientInstitutionsCubit>().getItems(institution);
+                });
+              case RequestState.loaded:
+                // return ItemsWidget(
+                //   items: state.items,
+                //   onItemPressed: (item) {},
+                // );
 
-            case RequestState.error:
-              return CheckInternetConnection(onPressed: () {
-                context.read<ClientInstitutionsCubit>().getItems(institution);
-              });
-            case RequestState.loaded:
-              // return ItemsWidget(
-              //   items: state.items,
-              //   onItemPressed: (item) {},
-              // );
-
-              return ExpandableBottomSheet(
-                key: key,
-                background: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ItemsWidget(
-                    items: state.items,
-                    onItemPressed: (item) async {
-                      if (user.id == institution.userId) {
-                        log('message');
-                      } else {
-                        final cartItem = await showDialog<OrderItem>(
-                          context: context,
-                          builder: (context) {
-                            return ItemAddToCartDialog(
-                              item: item,
-                            );
+                return ExpandableBottomSheet(
+                  key: key,
+                  background: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ItemsWidget2<OrderItem>(
+                      items: state.ordersItems,
+                      dateTimeValue: (orderItem) => orderItem.item.creationTime,
+                      stringValue: (orderItem) => orderItem.item.name,
+                      gridBuilder: (orderItem) {
+                        return ItemGridWidget2(
+                          imageURL: orderItem.item.imageUrl,
+                          itemName: orderItem.item.name,
+                          unitName: orderItem.item.units.first.name,
+                          unitPrice: orderItem.item.units.first.price,
+                        );
+                      },
+                      listBuilder: (orderItem) {
+                        return ItemListWidget2.client(
+                          imageURL: orderItem.item.imageUrl,
+                          itemName: orderItem.item.name,
+                          unitName: orderItem.item.units.first.name,
+                          unitPrice: orderItem.item.units.first.price,
+                          units: orderItem.item.units,
+                          quantity: orderItem.quantity,
+                          selectedUnit: orderItem.unit,
+                          totalPrice: orderItem.quantity * orderItem.price,
+                          onAdd: () {
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((timeStamp) {
+                              context
+                                  .read<ClientInstitutionsCubit>()
+                                  .add(orderItem);
+                            });
+                          },
+                          onRemove: () {
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((timeStamp) {
+                              context
+                                  .read<ClientInstitutionsCubit>()
+                                  .reduce(orderItem);
+                            });
                           },
                         );
-                        if (cartItem != null) {
-                          cubit.addCartItem(cartItem);
-                        }
-                      }
-                    },
-                    onItemLongPressed: (item) {},
+                      },
+                      onItemPressed: (orderItem) async {
+                        // final cartItem = await showDialog<OrderItem>(
+                        //   context: context,
+                        //   builder: (context) {
+                        //     return ItemAddToCartDialog(
+                        //       item: orderItem.item,
+                        //     );
+                        //   },
+                        // );
+                        // if (cartItem != null) {
+                        //   cubit.addCartItem(cartItem);
+                        // }
+                      },
+                      onItemLongPressed: (item) {},
+                    ),
                   ),
-                ),
-                expandableContent:
-                    BlocBuilder<InstitutionCartCubit, InstitutionCartState>(
-                        builder: (context, state) {
-                  return state.cartItems.isEmpty
-                      ? kEmptyWidget
-                      : Container(
-                          color: Colors.grey.shade200,
-                          padding: const EdgeInsets.all(8),
-                          child: CustomScrollView(shrinkWrap: true, slivers: [
-                            SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                    (context, index) => CartItemWidget(
-                                        cartItem: state.cartItems[index]),
-                                    childCount: state.cartItems.length)),
-                            const SliverToBoxAdapter(
-                                child: SizedBox(height: 8)),
-                            SliverToBoxAdapter(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        CartConfirmationDialog(),
-                                  );
-                                },
-                                child: const Text('Order now'),
-                              ),
-                            )
-                          ]),
-                        );
-                }),
-                persistentHeader:
-                    BlocConsumer<InstitutionCartCubit, InstitutionCartState>(
-                  listener: (context, state) {
-                    key.currentState!.setState(() {});
-                  },
-                  builder: (context, state) {
-                    if (state.cartItems.isEmpty) {
-                      return Container();
-                    }
+                  expandableContent: BlocBuilder<ClientInstitutionsCubit,
+                      ClientInstitutionsState>(builder: (context, state) {
+                    final cartItems = state.cartItems.entries.toList();
+                    return state.cartItems.isEmpty
+                        ? kEmptyWidget
+                        : Container(
+                            color: Colors.grey.shade200,
+                            padding: const EdgeInsets.all(8),
+                            child: CustomScrollView(shrinkWrap: true, slivers: [
+                              SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                      (context, index) => CartItemWidget(
+                                          cartItem: cartItems[index].value),
+                                      childCount: cartItems.length)),
+                              const SliverToBoxAdapter(
+                                  child: SizedBox(height: 8)),
+                              SliverToBoxAdapter(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          const CartConfirmationDialog(),
+                                    );
+                                  },
+                                  child: const Text('Order now'),
+                                ),
+                              )
+                            ]),
+                          );
+                  }),
+                  persistentHeader: BlocConsumer<ClientInstitutionsCubit,
+                      ClientInstitutionsState>(
+                    listener: (context, state) {
+                      log('listener');
+                      key.currentState!.setState(() {});
+                    },
+                    builder: (context, state) {
+                      log(state.cartItems.length.toString());
+                      if (state.cartItems.isEmpty) {
+                        log('empty');
+                        return Container();
+                      }
 
-                    return Container(
-                      height: 40,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      color: Theme.of(context).primaryColor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const FaIcon(FontAwesomeIcons.cartShopping),
-                          const Spacer(flex: 1),
-                          Flexible(
-                            flex: 2,
-                            child: FittedBox(
-                              child: Text(
-                                'Total price: ${state.totalPrice} EGP',
-                                style: Theme.of(context).textTheme.titleMedium,
+                      return Container(
+                        height: 40,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        color: Theme.of(context).primaryColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const FaIcon(FontAwesomeIcons.cartShopping),
+                            const Spacer(flex: 1),
+                            Flexible(
+                              flex: 2,
+                              child: FittedBox(
+                                child: Text(
+                                  'Total price: ${state.totalPrice} EGP',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
                               ),
                             ),
-                          ),
-                          const Spacer(flex: 1),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                enableToggle: true,
-              );
-          }
-        },
+                            const Spacer(flex: 1),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  enableToggle: true,
+                );
+            }
+          },
+        ),
       ),
     );
   }

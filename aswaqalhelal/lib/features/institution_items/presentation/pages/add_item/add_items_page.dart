@@ -238,6 +238,7 @@ class AddItemPage extends HookWidget {
                     log(state.addingNewItem.toString());
                     return AutoSuggestTextField<ReferenceItem>(
                       controller: controller,
+                      autoFocus: true,
                       focusNode: focusNode,
                       enabled: !state.itemFromReference && !state.addingNewItem,
                       showRemoveButton: !state.isEdit,

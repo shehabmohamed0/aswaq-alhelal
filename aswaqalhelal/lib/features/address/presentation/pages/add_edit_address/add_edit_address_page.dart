@@ -3,6 +3,7 @@ import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
+import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
@@ -13,13 +14,13 @@ import '../../../../address_suggestions/presentation/widgets/location_widget.dar
 import '../../../domain/entities/address.dart';
 import '../../cubit/add_edit_address/add_edit_address_cubit.dart';
 
-class AddEditAddressPage extends StatelessWidget {
+class AddEditAddressPage extends HookWidget {
   const AddEditAddressPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final address = ModalRoute.of(context)!.settings.arguments as Address?;
-
+    final focusNode = useFocusNode();
     return MultiBlocProvider(
       providers: [
         BlocProvider<GovernatesSuggestionsBloc>(
@@ -84,6 +85,7 @@ class AddEditAddressPage extends StatelessWidget {
                     context
                         .read<AddEditAddressCubit>()
                         .addressDetailsChanged(refAddressDetails);
+                        focusNode.requestFocus();
                   },
                   onNeighborhoodUnSelected: () {
                     context.read<AddEditAddressCubit>().deleteAddressDetails();
@@ -106,6 +108,7 @@ class AddEditAddressPage extends StatelessWidget {
                     builder: (context, state) {
                       return TextFormField(
                         maxLines: null,
+                        focusNode: focusNode,
                         initialValue: address?.description,
                         keyboardType: TextInputType.multiline,
                         onChanged: context

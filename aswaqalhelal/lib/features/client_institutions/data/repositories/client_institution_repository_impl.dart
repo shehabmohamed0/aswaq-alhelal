@@ -18,9 +18,11 @@ class ClientInstitutionRepositoryImpl extends ClientInstitutionRepository {
   @override
   Future<Either<Failure, List<InstitutionItem>>> getClientInstitutionItems(
       InstitutionProfile institution) async {
-    if (!await _networkInfo.isConnected) {
-      return Left(ServerFailure.internetConnection());
-    }
+    //Todo: Uncomment this
+
+    // if (!await _networkInfo.isConnected) {
+    //   return Left(ServerFailure.internetConnection());
+    // }
 
     try {
       final items = await _api.getItems(institution);

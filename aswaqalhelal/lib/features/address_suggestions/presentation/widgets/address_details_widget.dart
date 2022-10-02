@@ -69,6 +69,7 @@ class AddressDetailsWidget extends HookWidget {
             },
             onAddressSelected: () {
               cityBloc.add(const AddressSuggestionsEvent.enabel());
+              cityFocusNode.requestFocus();
             },
             onAddressUnSelected: () {
               cityBloc.add(const AddressSuggestionsEvent.unSelectRefAddress(
@@ -110,6 +111,7 @@ class AddressDetailsWidget extends HookWidget {
           },
           onAddressSelected: () {
             neighborhoodBloc.add(const AddressSuggestionsEvent.enabel());
+            neighborhoodFocusNode.requestFocus();
           },
           onAddressUnSelected: () {
             neighborhoodBloc.add(
@@ -152,7 +154,7 @@ class AddressDetailsWidget extends HookWidget {
                 refCity: cityBloc.state.addressOrNull.toNullable()!,
                 refNeighborhood:
                     neighborhoodBloc.state.addressOrNull.toNullable()!);
-
+            
             onfullRefAddress(fullAddressDetails);
           },
           onAddressUnSelected: () {

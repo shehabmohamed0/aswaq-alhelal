@@ -15,13 +15,13 @@ import 'features/auth/domain/entities/base_profile.dart';
 import 'features/auth/domain/entities/institution_profile.dart';
 import 'features/auth/domain/entities/user_profile.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
+import 'features/cart/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import 'features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import 'features/client_institutions/presentation/pages/client_institution_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/institution_items/presentation/bloc/add_item/add_item_bloc.dart';
-import 'features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart';
 import 'features/institution_items/presentation/cubit/institution_items/institution_items_cubit.dart';
 import 'features/institution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/institution_items/presentation/pages/institution_items/institution_items_page.dart';
@@ -51,8 +51,8 @@ import 'features/start_up/presentation/pages/splash_screen.dart';
 import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
 import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
-import 'features/user_institutions/presentation/pages/institution/user_institution_page.dart';
-import 'features/user_institutions/presentation/pages/user_institutions/user_institutions_page.dart';
+import 'features/user_institutions/presentation/pages/institution/owner_institution_page.dart';
+import 'features/user_institutions/presentation/pages/owner_institutions/owner_institutions_page.dart';
 import 'features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
 import 'features/work_institutions/presentation/pages/ins_page.dart';
 import 'features/work_institutions/presentation/pages/work_institution_page.dart';
@@ -181,7 +181,7 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => const UserInstitutionPage(),
+          builder: (context) => const OwnerInstitutionPage(),
         );
       case Routes.addInstitution:
         final user = settings.arguments as UserProfile;

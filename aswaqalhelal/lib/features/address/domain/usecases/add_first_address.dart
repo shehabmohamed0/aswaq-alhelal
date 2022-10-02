@@ -13,7 +13,8 @@ class AddFirstAddress extends UseCase<Address, AddFirstAddressParams> {
   AddFirstAddress(this._repository);
 
   @override
-  Future<Either<Failure, Address>> call({required AddFirstAddressParams params}) {
+  Future<Either<Failure, Address>> call(
+      {required AddFirstAddressParams params}) {
     return _repository.addFirstAddress(params);
   }
 }

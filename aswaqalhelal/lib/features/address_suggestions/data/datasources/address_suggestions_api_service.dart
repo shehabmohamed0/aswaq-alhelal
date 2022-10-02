@@ -39,7 +39,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
         .where('searchText', isGreaterThanOrEqualTo: params.searchText)
-        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .where('searchText', isLessThanOrEqualTo: "${params.searchText}\uf8ff")
         .orderBy('searchText')
         .get();
 
@@ -56,7 +56,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
         .where('country', isEqualTo: params.country)
         .where('governate', isEqualTo: params.governate)
         .where('searchText', isGreaterThanOrEqualTo: params.searchText)
-        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .where('searchText', isLessThanOrEqualTo: "${params.searchText}\uf8ff")
         .orderBy('searchText')
         .get();
 
@@ -73,7 +73,7 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
         .where('governate', isEqualTo: params.governate)
         .where('city', isEqualTo: params.city)
         .where('searchText', isGreaterThanOrEqualTo: params.searchText)
-        .where('searchText', isLessThanOrEqualTo: params.searchText + "\uf8ff")
+        .where('searchText', isLessThanOrEqualTo: "${params.searchText}\uf8ff")
         .orderBy('searchText')
         .get();
 

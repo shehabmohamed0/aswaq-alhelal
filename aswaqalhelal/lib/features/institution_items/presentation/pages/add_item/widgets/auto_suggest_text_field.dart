@@ -33,6 +33,7 @@ class AutoSuggestTextField<T> extends StatefulWidget {
     this.showRemoveButton = true,
     this.validator,
     this.autovalidateMode,
+this.autoFocus = false
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -51,6 +52,7 @@ class AutoSuggestTextField<T> extends StatefulWidget {
   final VoidCallback onRemoveSelection;
   final bool showRemoveButton;
   final bool enabled;
+  final bool autoFocus;
   final String? Function(String?)? validator;
   final AutovalidateMode? autovalidateMode;
   @override
@@ -231,6 +233,7 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
           AbsorbPointer(
             absorbing: !widget.enabled,
             child: TextFormField(
+              autofocus: widget.autoFocus,
               focusNode: widget.focusNode,
               controller: widget.controller,
               onChanged: widget.onChanged,

@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
@@ -24,8 +25,10 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
   }
 
   void search(String val) {
-    final searchItem =
-        state.items.where((element) => element.name.contains(val)).toList();
+    final searchItem = state.items
+        .where((element) =>
+            element.name.prepareForSearch().contains(val.prepareForSearch()))
+        .toList();
     emit(state.copyWith(searchItems: searchItem, searchValue: val));
   }
 

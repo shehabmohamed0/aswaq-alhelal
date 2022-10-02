@@ -86,6 +86,10 @@ import '../features/auth/domain/usecases/verify_phone_number.dart' as _i149;
 import '../features/auth/presentation/bloc/app_status/app_bloc.dart' as _i161;
 import '../features/auth/presentation/bloc/sign_in/phone_sign_in_form_cubit.dart'
     as _i62;
+import '../features/cart/presentation/cubit/institution_cart/institution_cart_cubit.dart'
+    as _i33;
+import '../features/cart/presentation/cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart'
+    as _i44;
 import '../features/client_institutions/data/datasources/client_institution_items_api.dart'
     as _i16;
 import '../features/client_institutions/data/repositories/client_institution_repository_impl.dart'
@@ -96,8 +100,6 @@ import '../features/client_institutions/domain/usecases/get_client_institution_i
     as _i28;
 import '../features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart'
     as _i116;
-import '../features/client_institutions/presentation/cubit/item_add_to_cart_dialog/item_add_to_cart_dialog_cubit.dart'
-    as _i44;
 import '../features/distribution_areas/data/datasources/distribution_area_api_service.dart'
     as _i20;
 import '../features/distribution_areas/data/repositories/distribution_areas_repository_impl.dart'
@@ -151,8 +153,6 @@ import '../features/institution_items/presentation/bloc/add_item/add_item_bloc.d
     as _i158;
 import '../features/institution_items/presentation/bloc/add_unit/add_unit_bloc.dart'
     as _i159;
-import '../features/institution_items/presentation/cubit/institution_cart/institution_cart_cubit.dart'
-    as _i33;
 import '../features/institution_items/presentation/cubit/institution_items/institution_items_cubit.dart'
     as _i130;
 import '../features/institution_receipts/data/datasources/institution_receipts_api_service.dart'

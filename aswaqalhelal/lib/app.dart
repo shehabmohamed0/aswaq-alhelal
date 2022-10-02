@@ -4,7 +4,6 @@ import 'package:root_package/core/locale/locale_cubit.dart';
 import 'package:root_package/core/resources/theme_manager.dart';
 import 'package:root_package/l10n/l10n.dart';
 import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 

@@ -136,6 +136,7 @@ class ChangeProfileDialog extends StatelessWidget {
                     ),
                   )
                 : ExpansionTile(
+                  initiallyExpanded: true,
                     textColor: Colors.black87,
                     tilePadding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

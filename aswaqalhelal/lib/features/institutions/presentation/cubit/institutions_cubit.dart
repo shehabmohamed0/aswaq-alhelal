@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
@@ -22,6 +24,7 @@ class InstitutionsCubit extends Cubit<InstitutionsState> {
     either.fold((failure) {
       emit(const InstitutionsState.error());
     }, (institutions) {
+      log('Here');
       emit(InstitutionsState.loaded(institutions: institutions));
     });
   }
