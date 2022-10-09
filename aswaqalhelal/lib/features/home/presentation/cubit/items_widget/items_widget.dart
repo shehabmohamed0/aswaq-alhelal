@@ -1,155 +1,131 @@
+import 'items_sliver_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
 
 import '../../../../address/presentation/widgets/normal_text_field.dart';
-import '../../../../institution_items/domain/entities/institution_item.dart';
-import '../../cubit/items_widget/items_widget_cubit.dart';
 import 'items_sliver_grid_view.dart';
-import 'items_sliver_list_view.dart';
+import 'items_widget_cubit.dart';
 
-class ItemsWidget extends StatelessWidget {
-  factory ItemsWidget.withoutProvider({
-    Key? key,
-    Function(InstitutionItem)? onItemPressed,
-    Function(InstitutionItem)? onItemLongPressed,
-    required List<InstitutionItem> items,
-  }) =>
-      ItemsWidget._(
-        items: items,
-        hasItsOwnProvider: false,
-        onItemPressed: onItemPressed,
-        onItemLongPressed: onItemLongPressed,
-      );
-  factory ItemsWidget({
-    Key? key,
-    required List<InstitutionItem> items,
-    Function(InstitutionItem)? onItemPressed,
-    Function(InstitutionItem)? onItemLongPressed,
-  }) =>
-      ItemsWidget._(
-        items: items,
-        hasItsOwnProvider: true,
-        onItemPressed: onItemPressed,
-        onItemLongPressed: onItemLongPressed,
-      );
-
-  const ItemsWidget._({
+class ItemsWidget2<T> extends StatefulWidget {
+  const ItemsWidget2({
     Key? key,
     required this.items,
-    this.hasItsOwnProvider = true,
     this.onItemLongPressed,
     this.onItemPressed,
+    required this.dateTimeValue,
+    required this.stringValue,
+    required this.gridBuilder,
+    required this.listBuilder,
   }) : super(key: key);
 
-  final List<InstitutionItem> items;
-  final bool hasItsOwnProvider;
-  final Function(InstitutionItem)? onItemPressed;
-  final Function(InstitutionItem)? onItemLongPressed;
+  final List<T> items;
+  final Function(T)? onItemPressed;
+  final Function(T)? onItemLongPressed;
+  final DateTime Function(T) dateTimeValue;
+  final String Function(T) stringValue;
+  final Widget Function(T) gridBuilder;
+  final Widget Function(T) listBuilder;
 
   @override
-  Widget build(BuildContext context) {
-    if (hasItsOwnProvider) {
-      return BlocProvider<ItemsWidgetCubit>(
-        create: (context) => locator()..initialized(items),
-        child: BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
-          builder: (context, state) {
-            return _LoadedWidget(
-                state: state,
-                onItemPressed: onItemPressed,
-                onItemLongPressed: onItemLongPressed);
-          },
-        ),
-      );
-    }
-
-    return BlocBuilder<ItemsWidgetCubit, ItemsWidgetState>(
-        builder: (context, state) {
-      return _LoadedWidget(
-        state: state,
-        onItemPressed: onItemPressed,
-        onItemLongPressed: onItemLongPressed,
-      );
-    });
-  }
+  State<ItemsWidget2<T>> createState() => _ItemsWidget2State<T>();
 }
 
-class _LoadedWidget extends HookWidget {
-  const _LoadedWidget({
-    Key? key,
-    required this.state,
-    required this.onItemLongPressed,
-    required this.onItemPressed,
-  }) : super(key: key);
-  final ItemsWidgetState state;
-  final Function(InstitutionItem i)? onItemPressed;
-  final Function(InstitutionItem i)? onItemLongPressed;
+class _ItemsWidget2State<T> extends State<ItemsWidget2<T>> {
+  late final ItemsWidgetCubit2<T> cubit;
+  final TextEditingController controller = TextEditingController();
+  final focusNode = FocusNode();
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    cubit = ItemsWidgetCubit2<T>(
+      dateTimeValue: widget.dateTimeValue,
+      stringValue: widget.stringValue,
+    )..initialized(widget.items);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ItemsWidget2<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    cubit.initialized(widget.items);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // cubit.initialized(widget.items);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ItemsWidgetCubit>();
-    final TextEditingController controller = useTextEditingController();
-    final focusNode = useFocusNode();
-    final ScrollController scrollController = useScrollController();
-    final usedList = (state.isSearching && state.searchValue.isNotEmpty)
-        ? state.searchItems
-        : state.items;
-
-    return BlocListener<ItemsWidgetCubit, ItemsWidgetState>(
-      listenWhen: (previous, current) {
+    return BlocProvider.value(
+      value: cubit,
+      child: BlocConsumer<ItemsWidgetCubit2<T>, ItemsWidgetState2<T>>(
+          listenWhen: (previous, current) {
         return previous.isSearching != current.isSearching;
-      },
-      listener: (context, state) {
+      }, listener: (context, state) {
         if (state.isSearching == true) {
           focusNode.requestFocus();
         }
-      },
-      child: CustomScrollView(
-        controller: scrollController,
-        clipBehavior: Clip.none,
-        slivers: [
-          SliverPersistentHeader(
-            floating: true,
-            delegate: PresistentHeaderDelegate(
-              _HeaderOptions(
-                state: state,
-                cubit: cubit,
-                searchController: controller,
-                focusNode: focusNode,
-              ),
-            ),
-          ),
-          if (_isEmptySearch(state))
-            const SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  'No Items',
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black45,
-                      fontWeight: FontWeight.w600),
+      }, builder: (context, state) {
+        final cubit = context.read<ItemsWidgetCubit2<T>>();
+
+        final usedList = (state.isSearching && state.searchValue.isNotEmpty)
+            ? state.searchItems
+            : state.items;
+        return CustomScrollView(
+          controller: scrollController,
+          clipBehavior: Clip.none,
+          slivers: [
+            SliverPersistentHeader(
+              floating: true,
+              delegate: PresistentHeaderDelegate(
+                _HeaderOptions(
+                  state: state,
+                  cubit: cubit,
+                  searchController: controller,
+                  focusNode: focusNode,
                 ),
               ),
-            )
-          else if (state.displayItem.isGridView)
-            SliverPadding(
-              padding: const EdgeInsets.all(8),
-              sliver: ItemsSliverGridView(
-                  onItemPressed: onItemPressed,
+            ),
+            if (_isEmptySearch(state))
+              const SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    'No Items',
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.black45,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              )
+            else if (state.displayItem.isGridView)
+              SliverPadding(
+                padding: const EdgeInsets.all(8),
+                sliver: ItemsSliverGridView2<T>(
+                  onItemPressed: widget.onItemPressed,
                   institutions: usedList,
-                  onItemLongPressed: onItemLongPressed),
-            )
-          else
-            ItemsSliverListView(
-                onItemPressed: onItemPressed,
-                institutions: usedList,
-                onItemLongPressed: onItemLongPressed)
-        ],
-      ),
+                  onItemLongPressed: widget.onItemLongPressed,
+                  widgetBuilder: widget.gridBuilder,
+                ),
+              )
+            else
+              ItemsSliverListView2<T>(
+                  onItemPressed: widget.onItemPressed,
+                  institutions: usedList,
+                  widgetBuilder: widget.listBuilder,
+                  onItemLongPressed: widget.onItemLongPressed)
+          ],
+        );
+      }),
     );
   }
 
-  bool _isEmptySearch(ItemsWidgetState state) {
+  bool _isEmptySearch(ItemsWidgetState2 state) {
     return state.isSearching &&
         state.searchItems.isEmpty &&
         state.searchValue.isNotEmpty;
@@ -189,8 +165,8 @@ class _HeaderOptions extends StatelessWidget {
     required this.focusNode,
   }) : super(key: key);
 
-  final ItemsWidgetState state;
-  final ItemsWidgetCubit cubit;
+  final ItemsWidgetState2 state;
+  final ItemsWidgetCubit2 cubit;
   final TextEditingController searchController;
   final FocusNode focusNode;
 
@@ -225,8 +201,8 @@ class _OptionsWidgets extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final ItemsWidgetState state;
-  final ItemsWidgetCubit cubit;
+  final ItemsWidgetState2 state;
+  final ItemsWidgetCubit2 cubit;
 
   @override
   Widget build(BuildContext context) {

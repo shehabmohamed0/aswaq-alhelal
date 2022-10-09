@@ -17,9 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$InstitutionOrdersState {
   List<Order> get pendingOrders => throw _privateConstructorUsedError;
-  dynamic get pendingOrdersState => throw _privateConstructorUsedError;
-  List<Order> get shippingOrders => throw _privateConstructorUsedError;
-  dynamic get shippingOrdersState => throw _privateConstructorUsedError;
+  RequestState get pendingOrdersState => throw _privateConstructorUsedError;
+  List<Order> get processingOrders => throw _privateConstructorUsedError;
+  RequestState get processingOrdersState => throw _privateConstructorUsedError;
+  RequestState get updateState => throw _privateConstructorUsedError;
+  String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InstitutionOrdersStateCopyWith<InstitutionOrdersState> get copyWith =>
@@ -33,9 +35,11 @@ abstract class $InstitutionOrdersStateCopyWith<$Res> {
       _$InstitutionOrdersStateCopyWithImpl<$Res>;
   $Res call(
       {List<Order> pendingOrders,
-      dynamic pendingOrdersState,
-      List<Order> shippingOrders,
-      dynamic shippingOrdersState});
+      RequestState pendingOrdersState,
+      List<Order> processingOrders,
+      RequestState processingOrdersState,
+      RequestState updateState,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -51,8 +55,10 @@ class _$InstitutionOrdersStateCopyWithImpl<$Res>
   $Res call({
     Object? pendingOrders = freezed,
     Object? pendingOrdersState = freezed,
-    Object? shippingOrders = freezed,
-    Object? shippingOrdersState = freezed,
+    Object? processingOrders = freezed,
+    Object? processingOrdersState = freezed,
+    Object? updateState = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       pendingOrders: pendingOrders == freezed
@@ -62,15 +68,23 @@ class _$InstitutionOrdersStateCopyWithImpl<$Res>
       pendingOrdersState: pendingOrdersState == freezed
           ? _value.pendingOrdersState
           : pendingOrdersState // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      shippingOrders: shippingOrders == freezed
-          ? _value.shippingOrders
-          : shippingOrders // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      processingOrders: processingOrders == freezed
+          ? _value.processingOrders
+          : processingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      shippingOrdersState: shippingOrdersState == freezed
-          ? _value.shippingOrdersState
-          : shippingOrdersState // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      processingOrdersState: processingOrdersState == freezed
+          ? _value.processingOrdersState
+          : processingOrdersState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      updateState: updateState == freezed
+          ? _value.updateState
+          : updateState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -84,9 +98,11 @@ abstract class _$$_InstitutionOrdersStateCopyWith<$Res>
   @override
   $Res call(
       {List<Order> pendingOrders,
-      dynamic pendingOrdersState,
-      List<Order> shippingOrders,
-      dynamic shippingOrdersState});
+      RequestState pendingOrdersState,
+      List<Order> processingOrders,
+      RequestState processingOrdersState,
+      RequestState updateState,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -105,8 +121,10 @@ class __$$_InstitutionOrdersStateCopyWithImpl<$Res>
   $Res call({
     Object? pendingOrders = freezed,
     Object? pendingOrdersState = freezed,
-    Object? shippingOrders = freezed,
-    Object? shippingOrdersState = freezed,
+    Object? processingOrders = freezed,
+    Object? processingOrdersState = freezed,
+    Object? updateState = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_InstitutionOrdersState(
       pendingOrders: pendingOrders == freezed
@@ -115,14 +133,24 @@ class __$$_InstitutionOrdersStateCopyWithImpl<$Res>
               as List<Order>,
       pendingOrdersState: pendingOrdersState == freezed
           ? _value.pendingOrdersState
-          : pendingOrdersState,
-      shippingOrders: shippingOrders == freezed
-          ? _value._shippingOrders
-          : shippingOrders // ignore: cast_nullable_to_non_nullable
+          : pendingOrdersState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      processingOrders: processingOrders == freezed
+          ? _value._processingOrders
+          : processingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      shippingOrdersState: shippingOrdersState == freezed
-          ? _value.shippingOrdersState
-          : shippingOrdersState,
+      processingOrdersState: processingOrdersState == freezed
+          ? _value.processingOrdersState
+          : processingOrdersState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      updateState: updateState == freezed
+          ? _value.updateState
+          : updateState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -133,10 +161,12 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
   const _$_InstitutionOrdersState(
       {final List<Order> pendingOrders = const [],
       this.pendingOrdersState = RequestState.initial,
-      final List<Order> shippingOrders = const [],
-      this.shippingOrdersState = RequestState.initial})
+      final List<Order> processingOrders = const [],
+      this.processingOrdersState = RequestState.initial,
+      this.updateState = RequestState.initial,
+      this.errorMessage = 'Error'})
       : _pendingOrders = pendingOrders,
-        _shippingOrders = shippingOrders;
+        _processingOrders = processingOrders;
 
   final List<Order> _pendingOrders;
   @override
@@ -148,22 +178,28 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
 
   @override
   @JsonKey()
-  final dynamic pendingOrdersState;
-  final List<Order> _shippingOrders;
+  final RequestState pendingOrdersState;
+  final List<Order> _processingOrders;
   @override
   @JsonKey()
-  List<Order> get shippingOrders {
+  List<Order> get processingOrders {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_shippingOrders);
+    return EqualUnmodifiableListView(_processingOrders);
   }
 
   @override
   @JsonKey()
-  final dynamic shippingOrdersState;
+  final RequestState processingOrdersState;
+  @override
+  @JsonKey()
+  final RequestState updateState;
+  @override
+  @JsonKey()
+  final String errorMessage;
 
   @override
   String toString() {
-    return 'InstitutionOrdersState(pendingOrders: $pendingOrders, pendingOrdersState: $pendingOrdersState, shippingOrders: $shippingOrders, shippingOrdersState: $shippingOrdersState)';
+    return 'InstitutionOrdersState(pendingOrders: $pendingOrders, pendingOrdersState: $pendingOrdersState, processingOrders: $processingOrders, processingOrdersState: $processingOrdersState, updateState: $updateState, errorMessage: $errorMessage)';
   }
 
   @override
@@ -176,9 +212,13 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
             const DeepCollectionEquality()
                 .equals(other.pendingOrdersState, pendingOrdersState) &&
             const DeepCollectionEquality()
-                .equals(other._shippingOrders, _shippingOrders) &&
+                .equals(other._processingOrders, _processingOrders) &&
             const DeepCollectionEquality()
-                .equals(other.shippingOrdersState, shippingOrdersState));
+                .equals(other.processingOrdersState, processingOrdersState) &&
+            const DeepCollectionEquality()
+                .equals(other.updateState, updateState) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
@@ -186,8 +226,10 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
       runtimeType,
       const DeepCollectionEquality().hash(_pendingOrders),
       const DeepCollectionEquality().hash(pendingOrdersState),
-      const DeepCollectionEquality().hash(_shippingOrders),
-      const DeepCollectionEquality().hash(shippingOrdersState));
+      const DeepCollectionEquality().hash(_processingOrders),
+      const DeepCollectionEquality().hash(processingOrdersState),
+      const DeepCollectionEquality().hash(updateState),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -199,18 +241,24 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
 abstract class _InstitutionOrdersState implements InstitutionOrdersState {
   const factory _InstitutionOrdersState(
       {final List<Order> pendingOrders,
-      final dynamic pendingOrdersState,
-      final List<Order> shippingOrders,
-      final dynamic shippingOrdersState}) = _$_InstitutionOrdersState;
+      final RequestState pendingOrdersState,
+      final List<Order> processingOrders,
+      final RequestState processingOrdersState,
+      final RequestState updateState,
+      final String errorMessage}) = _$_InstitutionOrdersState;
 
   @override
   List<Order> get pendingOrders;
   @override
-  dynamic get pendingOrdersState;
+  RequestState get pendingOrdersState;
   @override
-  List<Order> get shippingOrders;
+  List<Order> get processingOrders;
   @override
-  dynamic get shippingOrdersState;
+  RequestState get processingOrdersState;
+  @override
+  RequestState get updateState;
+  @override
+  String get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_InstitutionOrdersStateCopyWith<_$_InstitutionOrdersState> get copyWith =>

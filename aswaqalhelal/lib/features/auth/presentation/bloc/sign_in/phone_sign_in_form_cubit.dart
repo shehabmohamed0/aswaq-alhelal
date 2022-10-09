@@ -46,7 +46,6 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
 
   Future<void> verifiy() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
-    log('here');
     final either = await _verifyPhoneNumber(
       params: VerifyPhoneParams(
         phoneNumber: state.phoneNumber.value,
@@ -56,13 +55,10 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
             verificationId: code.verificationId,
             verificationCompleted: true,
           ));
-          log(code.token.toString());
         },
         codeAutoRetrievalTimeout: (timeOut) {
-          log('time out');
         },
         codeSent: (verificationId, forceSent) {
-          log('code sent');
           emit(state.copyWith(
             verificationId: verificationId,
             status: FormzStatus.valid,
@@ -82,7 +78,6 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
       ),
     );
     either.fold((failure) {
-      log('failure message');
       if (failure is ServerFailure) {
         emit(
           state.copyWith(
@@ -92,7 +87,6 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
         );
       }
     }, (_) {
-      log('Success');
     });
   }
 

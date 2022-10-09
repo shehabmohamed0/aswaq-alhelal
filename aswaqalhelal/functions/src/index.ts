@@ -30,7 +30,6 @@ export const onNotification = functions.firestore.document('notifications/{notif
             title: title,
             body: body,
             clickAction: 'FLUTTER_NOTIFICATION_CLICK'
-
         },
         data: data
     };
@@ -129,6 +128,7 @@ export const jobOffer = functions.https.onCall(async (data, context) => {
 
 
 
+
     batch.create(
         notificationDoc, {
         'id': notificationDoc.id,
@@ -187,6 +187,7 @@ export const onJobOfferUpdate = functions.firestore.document('jobs_offers/{jobOf
         )
 
     }
+
     const notificationDoc = firestore.collection('notifications').doc();
     batch.create(
         notificationDoc, {
@@ -210,3 +211,51 @@ export const onJobOfferUpdate = functions.firestore.document('jobs_offers/{jobOf
     return batch.commit();
 });
 
+
+export const onOrder = functions.firestore.document('orders/{order}').onWrite(async (snapshot, context) => {
+    // const firestore = admin.firestore();
+    // const data = snapshot.after.data()!;
+    // const institutionId = data.from;
+    // const institutionOwnerId = data.institutionOwnerId;
+    // const userId = data.to;
+    // const name = data.name;
+    // const phoneNumber = data.phoneNumber;
+    // const orderState = data.orderState;
+
+    // if (!snapshot.before.exists) {
+    //     const doc = firestore.collection('notifications').doc();
+
+    //     return doc.create({
+    //         'id': doc.id,
+    //         'userId': institutionOwnerId,
+    //         'title': 'Orders',
+    //         'body': `New Order has been sent by ${name}`,
+    //         'data': data
+    //     });
+
+    // } else {
+    //     const doc = firestore.collection('notifications').doc();
+    //     if (orderState == 'declined') {
+    //         return doc.create({
+    //             'id': doc.id,
+    //             'userId': userId,
+    //             'title': 'Orders',
+    //             'body': `Your Order has been declined`,
+    //             'data': data
+    //         });
+
+    //     } else if (orderState == 'canceled') {
+    //         return doc.create({
+    //             'id': doc.id,
+    //             'userId': userId,
+    //             'title': 'Orders',
+    //             'body': `Your Order has been declined`,
+    //             'data': data
+    //         });
+
+    //     }
+    //     return;
+
+    // }
+
+});

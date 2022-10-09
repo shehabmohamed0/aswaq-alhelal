@@ -34,8 +34,6 @@ class AddressSuggestionsApiServiceImpl implements AddressSuggestionsApiService {
   Future<List<RefGovernateModel>> getGovernateSuggestions(
       GetGovernatesSuggestionsParams params) async {
     final collection = _firestore.collection(FirestorePath.refGovernates);
-    log(params.country);
-    log(params.searchText);
     final snapshot = await collection
         .where('country', isEqualTo: params.country)
         .where('searchText', isGreaterThanOrEqualTo: params.searchText)

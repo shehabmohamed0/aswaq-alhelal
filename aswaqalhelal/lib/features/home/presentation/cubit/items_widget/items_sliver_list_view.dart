@@ -18,19 +18,12 @@ class ItemsSliverListView2<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, index) => InkWell(
-            onTap: () {
-              onItemPressed?.call(institutions[index]);
-            },
-            onLongPress: () {
-              onItemLongPressed?.call(institutions[index]);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-              ),
-              child: widgetBuilder(institutions[index]),
-            )),
+        (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 4,
+          ),
+          child: widgetBuilder(institutions[index]),
+        ),
         childCount: institutions.length,
       ),
     );

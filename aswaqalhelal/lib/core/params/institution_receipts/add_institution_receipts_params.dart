@@ -8,14 +8,16 @@ import '../../../features/orders/domain/entities/order_item.dart';
 class AddInstitutionReceiptParams {
   final List<OrderItem> receiptItems;
   final double totalPrice;
-  final String? from;
-  final String to;
+  final String from;
+  final String institutionOwnerId;
+  final String? to;
   final String? editorId;
   final String? sellerId;
   AddInstitutionReceiptParams(
       {required this.receiptItems,
       required this.totalPrice,
       required this.from,
+      required this.institutionOwnerId,
       required this.to,
       required this.editorId,
       required this.sellerId});
@@ -23,7 +25,10 @@ class AddInstitutionReceiptParams {
   OrderModel toModel(String id) => OrderModel(
         id: id,
         from: from,
+        institutionOwnerId: institutionOwnerId,
         orderState: OrderState.shipping,
+        name: 'dasdasd',
+        phoneNumber: '+15051',
         itemsModels: receiptItems
             .map(
               (receiptItem) => OrderItemModel(

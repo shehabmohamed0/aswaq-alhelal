@@ -46,7 +46,6 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
     either.fold(
       (_) => emit(state.copyWith(initStatus: RequestState.error)),
       (notifications) {
-        log('init ${state.ids}');
 
         final newList = List.of(state.notifications);
         FStoreNotificationItem notification;
@@ -63,7 +62,6 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
           initStatus: RequestState.loaded,
           hasReachedMax: notifications.length < 8,
         ));
-        log('finish init ${state.ids}');
       },
     );
   }

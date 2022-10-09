@@ -1,7 +1,9 @@
 import 'package:aswaqalhelal/features/orders/data/models/order_model.dart';
+import 'package:root_package/core/exceptions/exceptions.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/exceptions/orders/accept_order_exception.dart';
 import '../../../../core/firebase/firebase_path.dart';
 import '../../domain/repositories/institution_orders_repository.dart';
 
@@ -16,16 +18,15 @@ class InstitutionOrdersApiServiceImpl extends InstitutionOrdersApiService {
   InstitutionOrdersApiServiceImpl(this._firestore);
 
   @override
-  Future<List<OrderModel>> getOrders(
-      GetInstitutionOrdersParams params) async {
+  Future<List<OrderModel>> getOrders(GetInstitutionOrdersParams params) async {
     final collection = _firestore.collection(FirestorePath.orders);
     var query = collection
-        .where('to', isEqualTo: params.institutionId)
+        .where('from', isEqualTo: params.institutionId)
         .where('orderState',
             whereIn: params.whereIn
                 .map((orderState) => orderState.toString())
                 .toList())
-        .orderBy('creationTime', descending: true);
+        .orderBy('creationTime');
     if (params.order != null) {
       query = query.startAfter([
         Timestamp.fromDate(params.order!.creationTime),
@@ -40,7 +41,16 @@ class InstitutionOrdersApiServiceImpl extends InstitutionOrdersApiService {
   @override
   Future<OrderModel> updateOrder(UpdateInstitutionOrderParams params) async {
     final doc = _firestore.doc(FirestorePath.order(params.order.id));
-    await doc.update({'orderState': params.orderState});
+
+    if (params.checkIfAvailiable) {
+      final document = (await doc.get());
+      final model = OrderModel.fromFirestore(document);
+      if (!model.orderState.isPending) {
+        throw AcceptOrderException(model);
+      }
+    }
+
+    await doc.update({'orderState': params.orderState.toString()});
     return OrderModel.fromDomain(params.order)
         .copyWith(orderState: params.orderState);
   }

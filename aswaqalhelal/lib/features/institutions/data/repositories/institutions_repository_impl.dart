@@ -15,10 +15,9 @@ class InstitutionsRepositoryImpl extends InstitutionsRepository {
   @override
   Future<Either<Failure, List<InstitutionProfile>>> getAddressInstitutions(
       Address address) async {
-    //Todo: Uncomment this
-    // if (!await _networkInfo.isConnected) {
-    //   return Left(ServerFailure.internetConnection());
-    // }
+    if (!await _networkInfo.isConnected) {
+      return Left(ServerFailure.internetConnection());
+    }
 
     try {
       final institutions = await _apiService.getInstitutions(address);

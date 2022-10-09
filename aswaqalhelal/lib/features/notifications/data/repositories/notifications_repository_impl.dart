@@ -64,7 +64,6 @@ class NotificationsRepositoryImpl extends NotificationsRepository {
   Future<Either<Failure, void>> seen(
       FStoreNotificationItem notification) async {
     try {
-      log('message');
       await _notificationsApiService.seen(notification);
       return const Right(null);
     } catch (e) {

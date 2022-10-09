@@ -36,7 +36,6 @@ class RecruitmentPage extends HookWidget {
           listenWhen: (previous, current) =>
               previous.bottomSheetOpened != current.bottomSheetOpened,
           listener: (context, state) {
-            log('message');
             if (!state.bottomSheetOpened) {
               controller?.close();
             }
@@ -73,7 +72,6 @@ class RecruitmentPage extends HookWidget {
                 );
 
                 controller?.closed.then((_) {
-                  log('then');
                   context.read<RecruitmentCubit>().onClosed();
                 });
               },

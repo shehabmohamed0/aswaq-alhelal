@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -15,7 +14,6 @@ abstract class VerifiyPhoneCubit extends Cubit<VerifiyPhoneState> {
   VerifiyPhoneCubit(this._autoFill) : super(const VerifiyPhoneState()) {
     _autoFill.listenForCode().then((value) {
       _codeSubscription = _autoFill.code.listen((code) {
-        log(code);
         final newOTP = OTP.dirty(code);
         emit(
           state.copyWith(

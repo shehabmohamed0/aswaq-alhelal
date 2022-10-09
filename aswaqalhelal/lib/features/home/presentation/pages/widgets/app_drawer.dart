@@ -47,6 +47,15 @@ class AppDrawer extends StatelessWidget {
               if (state.profile.isUser)
                 ListTile(
                   onTap: () {
+                    Navigator.pushNamed(context, Routes.userOrders,
+                        arguments: profile);
+                  },
+                  leading: const Icon(FontAwesomeIcons.boxOpen),
+                  title: const Text('My Orders'),
+                ),
+              if (state.profile.isUser)
+                ListTile(
+                  onTap: () {
                     Navigator.pushNamed(context, Routes.workInstitutions,
                         arguments: profile);
                   },
@@ -136,7 +145,7 @@ class ChangeProfileDialog extends StatelessWidget {
                     ),
                   )
                 : ExpansionTile(
-                  initiallyExpanded: true,
+                    initiallyExpanded: true,
                     textColor: Colors.black87,
                     tilePadding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

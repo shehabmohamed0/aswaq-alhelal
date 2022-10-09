@@ -16,8 +16,8 @@ class UserOrdersRepositoryImpl extends UserOrdersRepository {
   UserOrdersRepositoryImpl(this._apiService, this._networkInfo);
 
   @override
-  Future<Either<Failure, List<Order>>> getOrders(
-      GetUserOrderParams params) async {
+  Future<Either<Failure, Stream<List<Order>>>> getOrders(
+      GetUserOrdersParams params) async {
     if (!await _networkInfo.isConnected) {
       return Left(ServerFailure.internetConnection());
     }

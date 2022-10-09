@@ -8,16 +8,17 @@ import '../entities/order.dart';
 import '../entities/order_item.dart';
 
 abstract class UserOrdersRepository {
-  Future<Either<Failure, List<Order>>> getOrders(GetUserOrderParams params);
+  Future<Either<Failure, Stream<List<Order>>>> getOrders(
+      GetUserOrdersParams params);
   Future<Either<Failure, Order>> placeOrder(PlaceOrderParams params);
 }
 
-class GetUserOrderParams {
-  final String institutionId;
+class GetUserOrdersParams {
+  final String id;
   final Order? order;
 
-  GetUserOrderParams({
-    required this.institutionId,
+  GetUserOrdersParams({
+    required this.id,
     this.order,
   });
 }
@@ -27,7 +28,10 @@ class PlaceOrderParams {
   final double totalPrice;
   final OrderState orderState;
   final String from;
+  final String institutionOwnerId;
   final String to;
+  final String name;
+  final String phoneNumber;
   final String? editorId;
   final String? sellerId;
   PlaceOrderParams(
@@ -35,7 +39,10 @@ class PlaceOrderParams {
       required this.totalPrice,
       required this.orderState,
       required this.from,
+      required this.institutionOwnerId,
       required this.to,
+      required this.name,
+      required this.phoneNumber,
       required this.editorId,
       required this.sellerId});
 
@@ -69,9 +76,11 @@ class PlaceOrderParams {
       totalPrice: totalPrice,
       orderState: orderState,
       from: from,
+      institutionOwnerId: institutionOwnerId,
       to: to,
+      name: name,
+      phoneNumber: phoneNumber,
       editorId: editorId,
       sellerId: sellerId,
-
       creationTime: DateTime.now());
 }

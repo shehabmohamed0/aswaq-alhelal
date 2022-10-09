@@ -8,8 +8,11 @@ part of 'order_model.dart';
 
 OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       id: json['id'] as String? ?? '',
-      from: json['from'] as String?,
-      to: json['to'] as String,
+      from: json['from'] as String,
+      institutionOwnerId: json['institutionOwnerId'] as String,
+      to: json['to'] as String?,
+      name: json['name'] as String,
+      phoneNumber: json['phoneNumber'] as String,
       itemsModels: (json['items'] as List<dynamic>)
           .map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -27,7 +30,10 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'from': instance.from,
+      'institutionOwnerId': instance.institutionOwnerId,
       'to': instance.to,
+      'name': instance.name,
+      'phoneNumber': instance.phoneNumber,
       'totalPrice': instance.totalPrice,
       'creationTime': const TimestampConverter().toJson(instance.creationTime),
       'editorId': instance.editorId,
@@ -43,4 +49,6 @@ const _$OrderStateEnumMap = {
   OrderState.processing: 'processing',
   OrderState.shipping: 'shipping',
   OrderState.completed: 'completed',
+  OrderState.declined: 'declined',
+  OrderState.canceled: 'canceled',
 };

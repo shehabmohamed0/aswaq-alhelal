@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-
 class ItemGridWidget2 extends StatelessWidget {
   const ItemGridWidget2({
     Key? key,
@@ -9,54 +8,62 @@ class ItemGridWidget2 extends StatelessWidget {
     required this.itemName,
     required this.unitName,
     required this.unitPrice,
+    required this.onPressed,
+    this.onLongPressed,
   }) : super(key: key);
   final String imageURL;
   final String itemName;
   final String unitName;
   final double unitPrice;
+  final VoidCallback onPressed;
+  final VoidCallback? onLongPressed;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          blurRadius: 2,
-          color: Colors.grey.shade200,
-        ),
-      ]),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      padding: const EdgeInsets.all(8),
-      child: LayoutBuilder(
-        builder: (context, constrains) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: CachedNetworkImage(
-                  imageUrl: imageURL,
-                  fit: BoxFit.fitWidth,
+    return GestureDetector(
+      onTap: onPressed,
+      onLongPress: onLongPressed,
+      child: Container(
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            blurRadius: 2,
+            color: Colors.grey.shade200,
+          ),
+        ]),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        padding: const EdgeInsets.all(8),
+        child: LayoutBuilder(
+          builder: (context, constrains) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: CachedNetworkImage(
+                    imageUrl: imageURL,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                itemName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 20),
-              ),
-              Text(
-                unitName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 4),
-              Text('$unitPrice' ' EGP',
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(color: Colors.green))
-            ],
-          );
-        },
+                const SizedBox(height: 8),
+                Text(
+                  itemName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Text(
+                  unitName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 4),
+                Text('$unitPrice' ' EGP',
+                    style: theme.textTheme.titleMedium!
+                        .copyWith(color: Colors.green))
+              ],
+            );
+          },
+        ),
       ),
     );
   }

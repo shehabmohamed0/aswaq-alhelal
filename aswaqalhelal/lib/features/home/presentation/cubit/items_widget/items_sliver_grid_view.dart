@@ -1,8 +1,6 @@
 import 'package:aswaqalhelal/features/home/presentation/cubit/items_widget/item_grid_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/widgets/item_grid_widget.dart';
-
 class ItemsSliverGridView2<T> extends StatelessWidget {
   const ItemsSliverGridView2(
       {Key? key,
@@ -23,7 +21,7 @@ class ItemsSliverGridView2<T> extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
-          childAspectRatio: 9 / 16),
+          childAspectRatio: 3 / 4),
       delegate: SliverChildBuilderDelegate(
         (context, index) => GestureDetector(
             onTap: () {

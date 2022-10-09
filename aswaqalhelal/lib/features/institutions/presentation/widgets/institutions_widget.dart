@@ -7,6 +7,7 @@ import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../user_institutions/presentation/widgets/institution_widget.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/loading_widget.dart';
+import '../../../widgets/no_data_widget.dart';
 import '../cubit/institutions_cubit.dart';
 
 class InstitutionsSliverWidget extends StatelessWidget {
@@ -34,12 +35,9 @@ class InstitutionsSliverWidget extends StatelessWidget {
             if (state.institutions.isEmpty) {
               return const SliverFillRemaining(
                 child: Center(
-                  child: Text(
-                    'No Available institution\nin your address',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                ),
+                    child: NoDataWidget(
+                        message:
+                            'There is No Available institution\nin your address')),
               );
             }
             return SliverPadding(

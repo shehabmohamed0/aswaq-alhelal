@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -19,8 +18,8 @@ import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
-import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../orders/domain/entities/order_item.dart';
+import '../../../widgets/check_internet_connection_widget.dart';
 import '../cubit/institution_receipts_cubit.dart';
 import '../widgets/compo_box_widget.dart';
 import '../widgets/receipt_item_widget.dart';
@@ -31,7 +30,8 @@ class InstitutionReceiptPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionReceiptsCubit>();
-    final userId = context.select((AppBloc element) => element.state.profile.id);
+    final userId =
+        context.select((AppBloc element) => element.state.profile.id);
     final institution =
         ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     final itemController = useTextEditingController();
@@ -46,7 +46,6 @@ class InstitutionReceiptPage extends HookWidget {
       buildWhen: (previous, current) =>
           previous.itemsState != current.itemsState,
       builder: (context, state) {
-        log(state.receiptSaved.toString());
         switch (state.itemsState) {
           case RequestState.loading:
             return const Center(child: CircularProgressIndicator());
@@ -234,7 +233,7 @@ class InstitutionReceiptPage extends HookWidget {
                                             AlignmentDirectional.topStart,
                                         child: Text(
                                           'Total price\n${state.totalPrice} EGP',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ),
@@ -248,14 +247,14 @@ class InstitutionReceiptPage extends HookWidget {
                                                     await createPdf(
                                                         state.receiptItems));
                                               },
-                                        child: Icon(Icons.print)),
-                                    SizedBox(width: 4),
+                                        child: const Icon(Icons.print)),
+                                    const SizedBox(width: 4),
                                     ElevatedButton(
                                         onPressed: state.receiptSaved
                                             ? null
                                             : () => cubit.saveReceipt(
-                                                institution.id, userId),
-                                        child: Icon(Icons.save))
+                                                institution, userId),
+                                        child: const Icon(Icons.save))
                                   ],
                                 ),
                               if (state.receiptItems.isNotEmpty)
@@ -460,8 +459,8 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                         fontSize: 18, fontWeight: pw.FontWeight.bold)),
                 pw.Container(
                   decoration: pw.BoxDecoration(
-                      border:
-                          pw.Border.all(width: 1, color: PdfColor(0, 0, 0))),
+                      border: pw.Border.all(
+                          width: 1, color: const PdfColor(0, 0, 0))),
                   child: pw.LayoutBuilder(
                       builder: (context, constraints) => pw.ListView.builder(
                             itemCount: items.length,
@@ -475,7 +474,7 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                                           child: pw.FittedBox(
                                               child: pw.Text(
                                                   items[index].item.name,
-                                                  style: pw.TextStyle(
+                                                  style: const pw.TextStyle(
                                                       fontSize: 18))))),
                                   pw.SizedBox(
                                       width: constraints.maxWidth * .25,
@@ -483,7 +482,7 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                                           child: pw.FittedBox(
                                               child: pw.Text(
                                                   items[index].unit.name,
-                                                  style: pw.TextStyle(
+                                                  style: const pw.TextStyle(
                                                       fontSize: 18))))),
                                   pw.SizedBox(
                                       width: constraints.maxWidth * .25,
@@ -493,7 +492,7 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                                                   items[index]
                                                       .quantity
                                                       .toString(),
-                                                  style: pw.TextStyle(
+                                                  style: const pw.TextStyle(
                                                       fontSize: 18))))),
                                   pw.SizedBox(
                                       width: constraints.maxWidth * .25,
@@ -501,7 +500,7 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                                           child: pw.FittedBox(
                                               child: pw.Text(
                                                   items[index].price.toString(),
-                                                  style: pw.TextStyle(
+                                                  style: const pw.TextStyle(
                                                       fontSize: 18))))),
                                 ]),
                           )),

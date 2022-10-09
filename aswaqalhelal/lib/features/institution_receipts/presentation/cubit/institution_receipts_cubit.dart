@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
@@ -178,15 +179,17 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
         totalPrice: state.totalPrice - (toRemove.price * toRemove.quantity)));
   }
 
-  Future<void> saveReceipt(String institutionId, String employeeId) async {
+  Future<void> saveReceipt(
+      InstitutionProfile institution, String employeeId) async {
     if (state.status == InstitutionReceiptStatus.loading) return;
     emit(state.copyWith(status: InstitutionReceiptStatus.loading));
 
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
-          to: institutionId,
+          to: null,
           receiptItems: state.receiptItems,
-          from: null,
+          from: institution.id,
+          institutionOwnerId: institution.userId,
           totalPrice: state.totalPrice,
           editorId: employeeId,
           sellerId: employeeId),

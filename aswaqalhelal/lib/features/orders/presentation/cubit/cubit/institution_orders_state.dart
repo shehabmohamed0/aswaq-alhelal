@@ -4,8 +4,10 @@ part of 'institution_orders_cubit.dart';
 class InstitutionOrdersState with _$InstitutionOrdersState {
   const factory InstitutionOrdersState({
     @Default([]) List<Order> pendingOrders,
-    @Default(RequestState.initial) pendingOrdersState,
-    @Default([]) List<Order> shippingOrders,
-    @Default(RequestState.initial) shippingOrdersState,
+    @Default(RequestState.initial) RequestState pendingOrdersState,
+    @Default([]) List<Order> processingOrders,
+    @Default(RequestState.initial) RequestState processingOrdersState,
+    @Default(RequestState.initial) RequestState updateState,
+    @Default('Error') String errorMessage,
   }) = _InstitutionOrdersState;
 }

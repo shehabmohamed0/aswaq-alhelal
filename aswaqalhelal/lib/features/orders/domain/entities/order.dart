@@ -6,8 +6,11 @@ import 'order_item.dart';
 class Order extends Equatable {
   @JsonKey(defaultValue: '')
   final String id;
-  final String? from;
-  final String to;
+  final String from;
+  final String institutionOwnerId;
+  final String? to;
+  final String name;
+  final String phoneNumber;
   final List<OrderItem> items;
   final double totalPrice;
   final DateTime creationTime;
@@ -21,6 +24,9 @@ class Order extends Equatable {
     required this.id,
     required this.from,
     required this.to,
+    required this.institutionOwnerId,
+    required this.name,
+    required this.phoneNumber,
     required this.items,
     required this.totalPrice,
     required this.editorId,
@@ -35,7 +41,10 @@ class Order extends Equatable {
   List<Object?> get props => [
         id,
         from,
+        institutionOwnerId,
         to,
+        name,
+        phoneNumber,
         items,
         totalPrice,
         editorId,
@@ -51,7 +60,10 @@ enum OrderState {
   pending,
   processing,
   shipping,
-  completed;
+  completed,
+  declined,
+  //canceled by user
+  canceled;
 
   @override
   String toString() {
@@ -64,6 +76,17 @@ enum OrderState {
         return 'shipping';
       case OrderState.completed:
         return 'completed';
+      case OrderState.declined:
+        return 'declined';
+      case OrderState.canceled:
+        return 'canceled';
     }
   }
+
+  bool get isPending => this == pending;
+  bool get isProcessing => this == processing;
+  bool get isShipping => this == shipping;
+  bool get isCompleted => this == completed;
+  bool get isDeclined => this == declined;
+  bool get isCanceled => this == canceled;
 }

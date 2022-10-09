@@ -78,10 +78,8 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
 
   void _listener() {
     if (widget.focusNode.hasFocus) {
-      log('show');
       showOverlay();
     } else {
-      log('Hide');
 
       hideOverlay();
     }

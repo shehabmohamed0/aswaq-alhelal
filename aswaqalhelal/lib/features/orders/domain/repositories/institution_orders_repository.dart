@@ -22,12 +22,11 @@ class GetInstitutionOrdersParams {
 }
 
 class UpdateInstitutionOrderParams {
-  final String institutionId;
   final Order order;
   final OrderState orderState;
-  UpdateInstitutionOrderParams({
-    required this.institutionId,
-    required this.order,
-    required this.orderState,
-  });
+  final bool checkIfAvailiable;
+  UpdateInstitutionOrderParams(
+      {required this.order,
+      required this.orderState,
+      this.checkIfAvailiable = false});
 }

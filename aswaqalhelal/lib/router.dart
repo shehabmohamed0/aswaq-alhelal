@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/features/orders/presentation/cubit/user_orders/user_orders_event.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -31,7 +32,9 @@ import 'features/jobs_offers/presentation/cubit/jobs_offers_cubit.dart';
 import 'features/jobs_offers/presentation/pages/jobs_offers_page.dart';
 import 'features/notifications/presentation/pages/notifications_page.dart';
 import 'features/orders/presentation/cubit/cubit/institution_orders_cubit.dart';
+import 'features/orders/presentation/cubit/user_orders/user_orders_bloc.dart';
 import 'features/orders/presentation/pages/institution_orders_page.dart';
+import 'features/orders/presentation/pages/user_orders_page.dart';
 import 'features/recruitment/presentation/cubit/employees/employees_cubit.dart';
 import 'features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart';
 import 'features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart';
@@ -325,14 +328,31 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
+            final institution = settings.arguments as InstitutionProfile;
+
             return MultiBlocProvider(
               providers: [
                 BlocProvider<InstitutionOrdersCubit>(
-                  create: (context) => locator(),
+                  create: (context) => locator()..init(institution.id),
                 ),
               ],
               child: const InstitutionOrdersPage(),
             );
+          },
+        );
+      case Routes.userOrders:
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            final userProfile = settings.arguments as UserProfile;
+
+            return MultiBlocProvider(providers: [
+              BlocProvider<UserOrdersBloc>(
+                create: (context) =>
+                    locator()..add(UserOrdersRequested(userProfile.id)),
+              ),
+            ], child: const UserOrdersPage());
           },
         );
 

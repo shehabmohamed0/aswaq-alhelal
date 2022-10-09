@@ -77,6 +77,10 @@ dependencies:
   localstorage: ^4.0.0+1
   badges: ^2.0.3
   animations: ^2.0.5
+  easy_debounce: ^2.0.2+1
+  expandable: ^5.0.1
+  auto_size_text: ^3.0.0
+
 
   # geo_logic:
   #   path: ../geo_logic
@@ -113,6 +117,7 @@ flutter:
 
     - assets/images/
     - assets/jsons/
+    - assets/vectors/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

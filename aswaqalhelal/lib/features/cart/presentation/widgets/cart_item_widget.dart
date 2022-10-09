@@ -1,10 +1,9 @@
-import 'package:aswaqalhelal/features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
+import '../../../client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import '../../../orders/domain/entities/order_item.dart';
-import '../cubit/institution_cart/institution_cart_cubit.dart';
 
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
@@ -83,22 +82,16 @@ class CartItemWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                          onPressed: () => WidgetsBinding.instance
-                                  .addPostFrameCallback((timeStamp) {
-                                context
-                                    .read<ClientInstitutionsCubit>()
-                                    .add(cartItem);
-                              }),
+                          onPressed: () => context
+                              .read<ClientInstitutionsCubit>()
+                              .add(cartItem),
                           icon: const Icon(Icons.add)),
                       Text('${cartItem.quantity}'),
                       IconButton(
                           onPressed: cartItem.quantity > 0
-                              ? () => () => WidgetsBinding.instance
-                                      .addPostFrameCallback((timeStamp) {
-                                    context
-                                        .read<ClientInstitutionsCubit>()
-                                        .reduce(cartItem);
-                                  })
+                              ? () => context
+                                  .read<ClientInstitutionsCubit>()
+                                  .reduce(cartItem)
                               : null,
                           icon: const Icon(Icons.remove)),
                     ],

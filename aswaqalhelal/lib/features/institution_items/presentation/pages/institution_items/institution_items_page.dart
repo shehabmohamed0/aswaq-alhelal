@@ -6,11 +6,9 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../../auth/domain/entities/institution_profile.dart';
-import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../home/presentation/cubit/items_widget/item_grid_widget.dart';
 import '../../../../home/presentation/cubit/items_widget/item_list_widget.dart';
-import '../../../../home/presentation/cubit/items_widget/items_widget_2.dart';
-import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
+import '../../../../home/presentation/cubit/items_widget/items_widget.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
@@ -23,7 +21,6 @@ class InstitutionItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionItemsCubit>();
-    final user = context.read<AppBloc>().state.profile;
 
     final institution =
         (ModalRoute.of(context)!.settings.arguments as InstitutionProfile);
@@ -34,11 +31,10 @@ class InstitutionItemsPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is InstitutionItemsLoaded) {
           return _InstitutionsLoadedWidget(
-              state: state, institution: institution, userId: user.userId);
+              state: state, institution: institution);
         } else if (state is InstitutionItemsEmpty) {
           return _InstitutionItemsEmptyWidget(
             institution: institution,
-            userId: user.id,
           );
         } else if (state is InstitutionsItemsError) {
           return CheckInternetConnection(
@@ -57,12 +53,10 @@ class InstitutionItemsPage extends StatelessWidget {
 class _InstitutionsLoadedWidget extends StatelessWidget {
   final InstitutionItemsLoaded state;
   final InstitutionProfile institution;
-  final String userId;
   const _InstitutionsLoadedWidget({
     Key? key,
     required this.state,
     required this.institution,
-    required this.userId,
   }) : super(key: key);
 
   @override
@@ -73,17 +67,15 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
       backgroundColor: const Color(0xFFFAFFFF),
       appBar: AppBar(
         title: const Text('items'),
-        actions: userId != institution.userId
-            ? null
-            : [
-                TextButton(
-                  style: TextButton.styleFrom(foregroundColor: Colors.black),
-                  onPressed: () {
-                    _navigateToAddItem(context);
-                  },
-                  child: const Text('Add'),
-                )
-              ],
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: Colors.black),
+            onPressed: () {
+              _navigateToAddItem(context);
+            },
+            child: const Text('Add'),
+          )
+        ],
       ),
       body: ItemsWidget2<InstitutionItem>(
         items: items,
@@ -91,39 +83,63 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
         stringValue: (item) => item.name,
         gridBuilder: (item) {
           return ItemGridWidget2(
-              imageURL: item.imageUrl,
-              itemName: item.name,
-              unitName: item.units.first.name,
-              unitPrice: item.units.first.price);
+            imageURL: item.imageUrl,
+            itemName: item.name,
+            unitName: item.units.first.name,
+            unitPrice: item.units.first.price,
+            onPressed: () {},
+            onLongPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  settings: RouteSettings(
+                      arguments: institution.id, name: Routes.addItem),
+                  builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(
+                        value: context.read<InstitutionItemsCubit>(),
+                      ),
+                      BlocProvider<AddItemBloc>(
+                        create: (context) => locator()..add(InitEdit(item)),
+                      ),
+                    ],
+                    child: const AddItemPage(),
+                  ),
+                ),
+              );
+            },
+          );
         },
         listBuilder: (item) {
           return ItemListWidget2.owner(
-              imageURL: item.imageUrl,
-              itemName: item.name,
-              unitName: item.units.first.name,
-              unitPrice: item.units.first.price);
+            imageURL: item.imageUrl,
+            itemName: item.name,
+            unitName: item.units.first.name,
+            unitPrice: item.units.first.price,
+            onLongPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  settings: RouteSettings(
+                      arguments: institution.id, name: Routes.addItem),
+                  builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(
+                        value: context.read<InstitutionItemsCubit>(),
+                      ),
+                      BlocProvider<AddItemBloc>(
+                        create: (context) => locator()..add(InitEdit(item)),
+                      ),
+                    ],
+                    child: const AddItemPage(),
+                  ),
+                ),
+              );
+            },
+          );
         },
-        onItemPressed: (item) async {
-          if (userId == institution.userId) {
-          } else {
-            // final cartItem = await showDialog<OrderItem>(
-            //   context: context,
-            //   builder: (context) {
-            //     return ItemAddToCartDialog(
-            //       item: item,
-            //     );
-            //   },
-            // );
-            // if (cartItem != null) {
-            //   cubit.addCartItem(cartItem);
-            // }
-          }
-        },
-        onItemLongPressed: (item) {
-          if (userId == institution.userId) {
-            // _navigateToEditItem(context, item);
-          }
-        },
+        onItemPressed: (item) async {},
+        onItemLongPressed: (item) {},
       ),
     );
   }
@@ -137,9 +153,6 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
           providers: [
             BlocProvider<AddItemBloc>(
               create: (context) => locator(),
-            ),
-            BlocProvider.value(
-              value: context.read<ItemsWidgetCubit>(),
             ),
             BlocProvider.value(
               value: context.read<InstitutionItemsCubit>(),
@@ -156,27 +169,23 @@ class _InstitutionItemsEmptyWidget extends StatelessWidget {
   const _InstitutionItemsEmptyWidget({
     Key? key,
     required this.institution,
-    required this.userId,
   }) : super(key: key);
   final InstitutionProfile institution;
-  final String userId;
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(userId == institution.userId
-            ? 'You have no items'
-            : 'Their is no items'),
+        const Text('There is no items'),
         const SizedBox(height: 8),
-        if (userId == institution.userId)
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8))),
-            child: const Text('Add item'),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8))),
+          child: const Text('Add item'),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
                 settings: RouteSettings(
                     name: Routes.addItem, arguments: institution.id),
                 builder: (_) => MultiBlocProvider(
@@ -190,9 +199,10 @@ class _InstitutionItemsEmptyWidget extends StatelessWidget {
                   ],
                   child: const AddItemPage(),
                 ),
-              ));
-            },
-          )
+              ),
+            );
+          },
+        )
       ],
     );
   }

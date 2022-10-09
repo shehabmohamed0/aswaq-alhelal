@@ -23,7 +23,6 @@ class UpdatePhoneCubit extends Cubit<UpdatePhoneState> {
 
   void phoneChanged(String phoneNumber) {
     final newPhone = PhoneNumber.dirty(phoneNumber);
-    log(phoneNumber);
     emit(state.copyWith(
         phoneNumber: newPhone, status: Formz.validate([newPhone])));
   }
@@ -36,14 +35,12 @@ class UpdatePhoneCubit extends Cubit<UpdatePhoneState> {
         verificationCompleted: (_) {},
         codeAutoRetrievalTimeout: (_) {},
         codeSent: (verificationId, forceSent) {
-          log('Code sent');
           emit(state.copyWith(
             verificationId: verificationId,
             status: FormzStatus.submissionSuccess,
           ));
         },
         verificationFailed: (authException) {
-          log(authException.code);
           final failure =
               PhoneCredentialFailure.fromCode(authException.code);
           emit(

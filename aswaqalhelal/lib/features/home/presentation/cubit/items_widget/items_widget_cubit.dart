@@ -1,22 +1,23 @@
 import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
+import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
 
-import '../../../../institution_items/domain/entities/institution_item.dart';
-
-part 'items_widget_cubit.freezed.dart';
 part 'items_widget_state.dart';
 
-@injectable
-class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
-  ItemsWidgetCubit() : super(const ItemsWidgetState());
+class ItemsWidgetCubit2<T> extends Cubit<ItemsWidgetState2<T>> {
+  ItemsWidgetCubit2({
+    required String Function(T) stringValue,
+    required DateTime Function(T) dateTimeValue,
+  }) : super(ItemsWidgetState2<T>(
+            stringValue: stringValue, dateTimeValue: dateTimeValue));
 
   void displayChanged(DisplayItems displayItems) {
-    emit(state.copyWith(displayItem: displayItems));
+     emit(state.copyWith(displayItem: displayItems));
   }
 
-  void initialized(List<InstitutionItem> items) {
+  void initialized(List<T> items) {
     emit(state.copyWith(items: items));
   }
 
@@ -25,9 +26,12 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
   }
 
   void search(String val) {
+  
     final searchItem = state.items
-        .where((element) =>
-            element.name.prepareForSearch().contains(val.prepareForSearch()))
+        .where((element) => state
+            .stringValue(element)
+            .prepareForSearch()
+            .contains(val.prepareForSearch()))
         .toList();
     emit(state.copyWith(searchItems: searchItem, searchValue: val));
   }
@@ -36,28 +40,11 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
     emit(state.copyWith(isSearching: false, searchItems: [], searchValue: ''));
   }
 
-  void addItem(InstitutionItem institutionItem) {
-    final sortedList = _sort(List.of(state.items)..add(institutionItem),
-        state.sortType, state.sortDirection);
-    emit(state.copyWith(items: sortedList));
-  }
-
-  void updateInstitutionItem(InstitutionItem institution) {
-    final index =
-        state.items.indexWhere((element) => element.id == institution.id);
-    final list = List.of(state.items)
-      ..removeAt(index)
-      ..add(institution);
-    final sortedList = _sort(list, state.sortType, state.sortDirection);
-    emit(state.copyWith(items: sortedList));
-  }
-
   void sort(SortType sortType, SortDirection sortDirection) {
     if (_noChange(state, sortType, sortDirection)) {
       return;
     }
-    List<InstitutionItem> sortedList =
-        _sort(state.items, sortType, sortDirection);
+    List<T> sortedList = _sort(state.items, sortType, sortDirection);
     emit(state.copyWith(
       items: sortedList,
       sortType: sortType,
@@ -65,9 +52,8 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
     ));
   }
 
-  List<InstitutionItem> _sort(List<InstitutionItem> items, SortType sortType,
-      SortDirection sortDirection) {
-    late final List<InstitutionItem> sortedList;
+  List<T> _sort(List<T> items, SortType sortType, SortDirection sortDirection) {
+    late final List<T> sortedList;
     switch (sortType) {
       case SortType.alphabetically:
         sortedList = _sortAlphabetically(items, sortDirection, sortType);
@@ -81,12 +67,12 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
   }
 
   bool _noChange(
-      ItemsWidgetState state, SortType sortType, SortDirection sortDirection) {
+      ItemsWidgetState2 state, SortType sortType, SortDirection sortDirection) {
     return state.sortType == sortType && state.sortDirection == sortDirection;
   }
 
-  List<InstitutionItem> _sortAlphabetically(List<InstitutionItem> items,
-      SortDirection sortDirection, SortType sortType) {
+  List<T> _sortAlphabetically(
+      List<T> items, SortDirection sortDirection, SortType sortType) {
     final list = List.of(items)
       ..sort(
         sortDirection == SortDirection.ascending
@@ -97,8 +83,8 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
     return list;
   }
 
-  List<InstitutionItem> _sortByTime(List<InstitutionItem> items,
-      SortDirection sortDirection, SortType sortType) {
+  List<T> _sortByTime(
+      List<T> items, SortDirection sortDirection, SortType sortType) {
     final list = List.of(items)
       ..sort(sortDirection == SortDirection.ascending
           ? _timeComparatorAscending
@@ -106,25 +92,25 @@ class ItemsWidgetCubit extends Cubit<ItemsWidgetState> {
     return list;
   }
 
-  int _sortAlphbeticallyAscending(InstitutionItem a, InstitutionItem b) {
-    return a.name.compareTo(b.name);
+  int _sortAlphbeticallyAscending(T a, T b) {
+    return state.stringValue(a).compareTo(state.stringValue(b));
   }
 
-  int _sortAlphbeticallyDescending(InstitutionItem a, InstitutionItem b) {
+  int _sortAlphbeticallyDescending(T a, T b) {
     return _sortAlphbeticallyAscending(b, a);
   }
 
-  int _timeComparatorAscending(InstitutionItem a, InstitutionItem b) {
-    if (a.creationTime.isBefore(b.creationTime)) {
+  int _timeComparatorAscending(T a, T b) {
+    if (state.dateTimeValue(a).isBefore(state.dateTimeValue(b))) {
       return -1;
-    } else if (a.creationTime.isAfter(b.creationTime)) {
+    } else if (state.dateTimeValue(a).isAfter(state.dateTimeValue(b))) {
       return 1;
     } else {
       return 0;
     }
   }
 
-  int _timeComparatorDescending(InstitutionItem a, InstitutionItem b) {
+  int _timeComparatorDescending(T a, T b) {
     return _invert(_timeComparatorAscending(a, b));
   }
 

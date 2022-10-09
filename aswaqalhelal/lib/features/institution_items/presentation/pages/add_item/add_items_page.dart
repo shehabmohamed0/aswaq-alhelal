@@ -10,7 +10,7 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
-import '../../../../home/presentation/cubit/items_widget/items_widget_cubit.dart';
+import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
@@ -29,7 +29,8 @@ class AddItemPage extends HookWidget {
     final focusNode = useFocusNode();
     final bloc = context.read<AddItemBloc>();
     final institutionId = ModalRoute.of(context)!.settings.arguments as String;
-    final itemsState = context.read<ItemsWidgetCubit>().state;
+    final cubit = context.read<InstitutionItemsCubit>();
+
     return MultiBlocListener(
       listeners: [
         BlocListener<AddItemBloc, AddItemState>(
@@ -37,6 +38,7 @@ class AddItemPage extends HookWidget {
           listener: (context, state) {
             if (state.isEdit) {
               controller.text = state.itemName.value;
+              focusNode.unfocus();
             }
           },
         ),
@@ -66,10 +68,9 @@ class AddItemPage extends HookWidget {
               );
             } else if (state.status.isSubmissionSuccess) {
               EasyLoading.dismiss();
-              final cubit = context.read<ItemsWidgetCubit>();
 
               if (state.isEdit) {
-                cubit.updateInstitutionItem(state.institutionItem!);
+                cubit.updateInstitution(state.institutionItem!);
                 Navigator.pop(context);
                 showSuccessSnackBar(context, 'Item Updated succefully');
                 return;
@@ -235,7 +236,6 @@ class AddItemPage extends HookWidget {
                       previous.itemFromReference != current.itemFromReference ||
                       previous.addingNewItem != current.addingNewItem,
                   builder: (context, state) {
-                    log(state.addingNewItem.toString());
                     return AutoSuggestTextField<ReferenceItem>(
                       controller: controller,
                       autoFocus: true,
@@ -288,42 +288,41 @@ class AddItemPage extends HookWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                            children: [
-                              Text(
-                                'Units',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                visualDensity: VisualDensity.compact,
-                                icon: const Icon(Icons.add),
-                                splashRadius: 16,
-                                onPressed: () async {
-                                  final unit = await showModalBottomSheet<Unit>(
-                                    context: context,
-                                    shape: const RoundedRectangleBorder(
-                                      side: BorderSide(),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8),
-                                        topRight: Radius.circular(8),
-                                      ),
-                                    ),
-                                    isScrollControlled: true,
-                                    builder: (context) => Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom),
-                                      child: const AddUnitBottomSheet(),
-                                    ),
-                                  );
-                                  if (unit != null) {
-                                    bloc.add(AddUnitEvent(unit));
-                                  }
-                                },
-                              )
-                            ]),
+                        Row(children: [
+                          Text(
+                            'Units',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            visualDensity: VisualDensity.compact,
+                            icon: const Icon(Icons.add),
+                            splashRadius: 16,
+                            onPressed: () async {
+                              final unit = await showModalBottomSheet<Unit>(
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  side: BorderSide(),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8),
+                                  ),
+                                ),
+                                isScrollControlled: true,
+                                builder: (context) => Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom),
+                                  child: const AddUnitBottomSheet(),
+                                ),
+                              );
+                              if (unit != null) {
+                                bloc.add(AddUnitEvent(unit));
+                              }
+                            },
+                          )
+                        ]),
                         UnitWidget(
                           name: 'Name',
                           quantity: 'Quantity',
@@ -380,10 +379,17 @@ class AddItemPage extends HookWidget {
                                 (state.imageFile.value != null ||
                                     state.imageUrl.value != null)
                             ? () {
+                                final state = cubit.state;
+                                late final List<InstitutionItem> items;
+                                if (state is InstitutionItemsLoaded) {
+                                  items = state.items;
+                                } else {
+                                  items = [];
+                                }
                                 bloc.add(
                                   AddItemSubmit(
                                     institutionId: institutionId,
-                                    currentItems: itemsState.items,
+                                    currentItems: items,
                                   ),
                                 );
                               }

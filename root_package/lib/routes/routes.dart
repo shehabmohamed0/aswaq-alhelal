@@ -47,4 +47,5 @@ class Routes {
   static const clientInstitution = '/clientInstitution';
 
   static const institutionOrders = '/institutionOrders';
+  static const userOrders = '/userOrders';
 }
