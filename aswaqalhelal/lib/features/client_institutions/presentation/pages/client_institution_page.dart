@@ -1,5 +1,6 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:aswaqalhelal/features/auth/presentation/bloc/app_status/app_bloc.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -25,6 +26,7 @@ class ClientInstitutionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final institution =
         ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
     final user = context.select((AppBloc element) => element.state.profile);
@@ -48,7 +50,7 @@ class ClientInstitutionPage extends StatelessWidget {
             case RequestState.loaded:
               EasyLoading.dismiss();
               showSuccessSnackBar(
-                  context, 'You order has been placed sucessfully');
+                  context, intl.youOrderHasBeenPlacedSucessfully);
               Navigator.pop(context);
 
               break;
@@ -142,7 +144,7 @@ class ClientInstitutionPage extends StatelessWidget {
                               flex: 2,
                               child: FittedBox(
                                 child: Text(
-                                  'Total price: ${state.totalPrice} EGP',
+                                  '${intl.totalPrice} ${state.totalPrice} ${intl.egp}',
                                   style:
                                       Theme.of(context).textTheme.titleMedium,
                                 ),
@@ -201,7 +203,7 @@ class ClientInstitutionPage extends StatelessWidget {
                                       institution, user as UserProfile);
                                 }
                               },
-                              child: const Text('Order now'),
+                              child: Text(intl.orderNow),
                             ),
                           )
                         ]),
@@ -228,7 +230,7 @@ class CartConfirmationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Are you sure you want to\norder now ?',
+            Text(AppLocalizations.of(context).areYouSureYouWantTonorderNow,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),

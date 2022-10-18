@@ -5,6 +5,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../../l10n/l10n.dart';
 import '../cubit/cubit/institution_orders_cubit.dart';
 import 'widgets/pending_tab_view.dart';
 import 'widgets/processing_tab_view.dart';
@@ -40,8 +41,9 @@ class InstitutionOrdersPage extends StatelessWidget {
                   sliver: SliverAppBar(
                     centerTitle: true,
                     elevation: 1,
-                    title: const Text(
-                        'Orders'), // This is the title in the app bar.
+
+                    title: Text(AppLocalizations.of(context)
+                        .orders), // This is the title in the app bar.
                     pinned: true,
                     floating: true,
                     // The "forceElevated" property causes the SliverAppBar to show

@@ -25,5 +25,7 @@ Future<void> main() async {
 
   await RootPackageLocator.configureDependencies();
   await configureDependencies(locator);
+  // Wrap your app
+
   runApp(const App());
 }

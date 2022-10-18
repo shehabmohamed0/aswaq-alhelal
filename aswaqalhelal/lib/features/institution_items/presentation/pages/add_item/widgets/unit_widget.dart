@@ -23,7 +23,7 @@ class UnitWidget extends StatelessWidget {
         return Row(
           children: [
             SizedBox(
-              width: constrains.maxWidth * .3,
+              width: constrains.maxWidth * .4,
               child: Center(
                 child: FittedBox(
                   child: Text(
@@ -37,23 +37,23 @@ class UnitWidget extends StatelessWidget {
                 ),
               ),
             ),
+            // SizedBox(
+            //   width: constrains.maxWidth * .3,
+            //   child: Center(
+            //     child: FittedBox(
+            //       child: Text(
+            //         quantity,
+            //         maxLines: 1,
+            //         style: const TextStyle(
+            //           color: Colors.black45,
+            //           fontSize: 18,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
-              width: constrains.maxWidth * .3,
-              child: Center(
-                child: FittedBox(
-                  child: Text(
-                    quantity,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      color: Colors.black45,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: constrains.maxWidth * .3,
+              width: constrains.maxWidth * .4,
               child: Center(
                 child: FittedBox(
                   child: Text(
@@ -71,7 +71,7 @@ class UnitWidget extends StatelessWidget {
               GestureDetector(
                 onTap: onRemove,
                 child: SizedBox(
-                  width: constrains.maxWidth * .1,
+                  width: constrains.maxWidth * .2,
                   child: const Center(
                     child: FittedBox(
                       child: Icon(

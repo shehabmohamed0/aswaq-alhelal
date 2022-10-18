@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';
 import '../../../../home/presentation/cubit/items_widget/item_grid_widget.dart';
 import '../../../../home/presentation/cubit/items_widget/item_list_widget.dart';
@@ -21,12 +20,10 @@ class InstitutionItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InstitutionItemsCubit>();
-
     final institution =
         (ModalRoute.of(context)!.settings.arguments as InstitutionProfile);
     return BlocBuilder<InstitutionItemsCubit, InstitutionItemsState>(
       builder: (context, state) {
-        log(state.runtimeType.toString());
         if (state is InstitutionsItemsLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is InstitutionItemsLoaded) {
@@ -62,18 +59,19 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = state.items;
+    final intl = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFAFFFF),
       appBar: AppBar(
-        title: const Text('items'),
+        title: Text(intl.items),
         actions: [
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.black),
             onPressed: () {
               _navigateToAddItem(context);
             },
-            child: const Text('Add'),
+            child: Text(intl.add),
           )
         ],
       ),
@@ -173,16 +171,17 @@ class _InstitutionItemsEmptyWidget extends StatelessWidget {
   final InstitutionProfile institution;
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('There is no items'),
+        Text(intl.thereIsNoItems),
         const SizedBox(height: 8),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8))),
-          child: const Text('Add item'),
+          child: Text(intl.addItem),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(

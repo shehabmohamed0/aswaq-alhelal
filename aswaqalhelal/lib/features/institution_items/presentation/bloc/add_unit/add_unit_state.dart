@@ -4,7 +4,7 @@ part of 'add_unit_bloc.dart';
 class AddUnitState with _$AddUnitState {
   const factory AddUnitState({
     @Default('') String name,
-    @Default(0) int quantity,
+    @Default(1) int quantity,
     @Default(0) double price,
     @Default([]) List<Unit> suggestions,
     @Default(true) bool enabled,

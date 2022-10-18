@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/services/network_info.dart';
@@ -90,6 +91,21 @@ class AddressesRepositoryImpl extends AddressesRepository {
       return Left(ServerFailure.general());
     }
   }
+  @override
+  Future<Either<Failure, Address>> updateMainAddress(
+      UpdateAddressParams params) async {
+    if (!await _networkInfo.isConnected) {
+      return Left(ServerFailure.internetConnection());
+    }
+
+    try {
+      final address = await _addressesServiceApi.updateMainAddress(params);
+      return Right(address);
+    } on Exception catch (e) {
+      log(e.toString());
+      return Left(ServerFailure.general());
+    }
+  }
 
   @override
   Future<Either<Failure, GeoPoint>> getCurrentLocation() async {
@@ -100,7 +116,7 @@ class AddressesRepositoryImpl extends AddressesRepository {
       return Left(LocationDeniedFailure());
     } on LocationDeniedForeverException {
       return Left(LocationDeniedForeverFailure(
-          'Denied For ever, please go to settings'));
+          AppLocalizations.current.deniedForEverPleaseGoToSettings));
     } on Exception catch (e) {
       log(e.toString());
       return Left(ServerFailure.general());

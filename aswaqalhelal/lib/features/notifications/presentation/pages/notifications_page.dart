@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
 import '../../../widgets/loading_widget.dart';
@@ -27,7 +28,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Notifications')),
+      appBar: AppBar(title:  Text(AppLocalizations.of(context).notifications)),
       body: BlocBuilder<NotificationsBloc, NotificationsState>(
         builder: (context, state) {
           switch (state.initStatus) {
@@ -43,7 +44,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             case RequestState.loaded:
               if (state.notifications.isEmpty) {
                 return Center(
-                  child: Text('No notifications',
+                  child: Text(AppLocalizations.of(context).noNotifications,
                       style: Theme.of(context).textTheme.titleLarge),
                 );
               }

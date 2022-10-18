@@ -27,7 +27,7 @@ class AppState extends Equatable {
   final User user;
   final BaseProfile profile;
   final AppStatus status;
-
+  
   const AppState({
     required this.user,
     required this.profile,

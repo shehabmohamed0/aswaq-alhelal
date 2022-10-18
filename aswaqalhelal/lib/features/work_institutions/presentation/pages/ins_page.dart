@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../l10n/l10n.dart';
+
 
 class InsPage extends StatelessWidget {
   const InsPage({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class InsPage extends StatelessWidget {
             GridTile(
               backgroundColor: Colors.lightGreen,
               iconData: FontAwesomeIcons.receipt,
-              title: 'Receipts',
+              title: AppLocalizations.of(context).receipts,
               onTap: () {
                 Navigator.pushNamed(context, Routes.institutionReceipts,
                     arguments: institution);

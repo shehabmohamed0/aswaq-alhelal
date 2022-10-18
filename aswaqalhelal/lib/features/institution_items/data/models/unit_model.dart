@@ -23,13 +23,19 @@ class UnitModel extends Unit {
       DocumentSnapshot<Map<String, dynamic>> document) {
     final address = UnitModel.fromJson(document.data()!);
 
-    return address._copyWithId(document.id);
+    return address.copyWith(referenceId: document.id);
   }
-  UnitModel _copyWithId(String id) => UnitModel(
-        referenceId: id,
-        name: name,
-        price: price,
-        quantity: quantity,
+  UnitModel copyWith({
+    String? referenceId,
+    String? name,
+    double? price,
+    double? quantity,
+  }) =>
+      UnitModel(
+        referenceId: referenceId ?? this.referenceId,
+        name: name ?? this.name,
+        price: price ?? this.price,
+        quantity: quantity ?? this.quantity,
       );
 
   factory UnitModel.fromJson(Map<String, dynamic> json) =>

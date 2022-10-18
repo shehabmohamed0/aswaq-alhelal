@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../../../l10n/l10n.dart';
 import '../../../../recruitment/domain/entities/job_offer.dart';
 import '../../cubit/jobs_offers_cubit.dart';
 
@@ -55,7 +56,7 @@ class UserJobOfferListTile extends StatelessWidget {
                     maxLines: 2,
                     softWrap: true,
                     text: TextSpan(
-                        text: 'From ',
+                        text: AppLocalizations.of(context).from,
                         style: Theme.of(context).textTheme.bodySmall,
                         children: [
                           TextSpan(

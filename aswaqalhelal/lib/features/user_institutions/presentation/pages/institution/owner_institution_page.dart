@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';
 import '../../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 
@@ -32,9 +33,11 @@ class InstitutionPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.count(
+        physics: const BouncingScrollPhysics(),
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
@@ -42,7 +45,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.lightBlueAccent,
             iconData: Icons.category_rounded,
-            title: 'Items',
+            title: intl.items,
             onTap: () {
               Navigator.pushNamed(context, Routes.institutionItems,
                   arguments: institution);
@@ -51,7 +54,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.tealAccent.shade400,
             iconData: Icons.list_alt_rounded,
-            title: 'Orders',
+            title: intl.orders,
             onTap: () {
               Navigator.pushNamed(context, Routes.institutionOrders,
                   arguments: institution);
@@ -60,7 +63,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.orangeAccent,
             iconData: Icons.local_shipping_rounded,
-            title: 'Distribution ',
+            title: intl.distribution,
             onTap: () {
               Navigator.pushNamed(context, Routes.distributionAreas,
                   arguments: institution);
@@ -69,7 +72,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.lightGreen,
             iconData: FontAwesomeIcons.receipt,
-            title: 'Receipts',
+            title: intl.receipts,
             onTap: () {
               Navigator.pushNamed(context, Routes.institutionReceipts,
                   arguments: institution);
@@ -78,7 +81,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.redAccent.shade400,
             iconData: Icons.people,
-            title: 'Recruitment',
+            title: intl.recruitment,
             onTap: () {
               Navigator.pushNamed(context, Routes.recruitment,
                   arguments: RecruitmentPageArguments(
@@ -89,7 +92,7 @@ class InstitutionPageBody extends StatelessWidget {
           GridTile(
             backgroundColor: Colors.deepPurpleAccent,
             iconData: Icons.settings,
-            title: 'Settings',
+            title: intl.settings,
             onTap: () {},
           ),
         ],

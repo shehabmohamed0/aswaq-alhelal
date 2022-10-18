@@ -1,4 +1,4 @@
-import 'package:aswaqalhelal/features/address/presentation/cubit/add_first_address/add_first_address_cubit.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
@@ -13,6 +13,8 @@ import '../../../../address_suggestions/presentation/bloc/address_suggestions_bl
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
 import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
+import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
+import '../../cubit/add_first_address/add_first_address_cubit.dart';
 
 class AddFirstAddressPage extends StatelessWidget {
   const AddFirstAddressPage({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class AddFirstAddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddFirstAddressCubit>();
+    final intl = AppLocalizations.of(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider<AddFirstAddressCubit>(
@@ -70,12 +73,26 @@ class AddFirstAddressPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'User name',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        intl.userName,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      IconButton(
+                          visualDensity: VisualDensity.compact,
+                          splashRadius: 24,
+                          style: const ButtonStyle(
+                              visualDensity: VisualDensity.compact),
+                          onPressed: () {
+                            context.read<AppBloc>().add(AppLogoutRequested());
+                          },
+                          icon: const Icon(Icons.exit_to_app))
+                    ],
                   ),
                   const SizedBox(height: 8),
                   BlocBuilder<AddFirstAddressCubit, AddFirstAddressState>(
@@ -91,9 +108,9 @@ class AddFirstAddressPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 18),
-                  const Text(
-                    'Delivery address',
-                    style: TextStyle(
+                  Text(
+                    intl.deliveryAddress,
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: Colors.black),
@@ -129,7 +146,7 @@ class AddFirstAddressPage extends StatelessWidget {
                             .read<AddFirstAddressCubit>()
                             .descriptionchanged,
                         decoration: InputDecoration(
-                          labelText: 'Description',
+                          labelText: intl.description,
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           errorText: state.description.validationMessage,
                         ),
@@ -154,7 +171,7 @@ class AddFirstAddressPage extends StatelessWidget {
                                   context.read<AddFirstAddressCubit>().submit();
                                 }
                               : null,
-                          child: const Text('Continue'),
+                          child: Text(intl.Continue),
                         );
                       },
                     ),

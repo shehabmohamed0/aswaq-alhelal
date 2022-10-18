@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import '../../../../../../core/request_state.dart';
+import '../../../../../../l10n/l10n.dart';
 import '../../../../../widgets/check_internet_connection_widget.dart';
 import '../../../../../widgets/constants.dart';
 import '../../../../../widgets/loading_widget.dart';
@@ -13,8 +14,9 @@ class OffersTabView extends StatelessWidget {
   const OffersTabView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
-
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
+    final intl = AppLocalizations.of(context);
     return SafeArea(
       top: false,
       bottom: false,
@@ -34,8 +36,8 @@ class OffersTabView extends StatelessWidget {
               });
             case RequestState.loaded:
               if (state.jobsOffers.isEmpty) {
-                return const Center(
-                  child: Text('No Sent Offers'),
+                return  Center(
+                  child: Text(intl.noSentOffers),
                 );
               }
               return CustomScrollView(
@@ -47,7 +49,7 @@ class OffersTabView extends StatelessWidget {
                 // The PageStorageKey should be unique to this ScrollView;
                 // it allows the list to remember its scroll position when
                 // the tab view is not on the screen.
-                key: const PageStorageKey<String>('Offers'),
+                key:  const PageStorageKey<String>('Offers'),
                 slivers: <Widget>[
                   SliverOverlapInjector(
                     // This is the flip side of the SliverOverlapAbsorber

@@ -1,18 +1,18 @@
-import 'package:aswaqalhelal/features/address/domain/entities/entities.dart';
-import 'package:aswaqalhelal/features/address_suggestions/presentation/DTOs/ref_address_details.dart';
-import 'package:aswaqalhelal/features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/widgets/ensure_visible_when_focused.dart';
 
+import '../../../../../../l10n/l10n.dart';
+import '../../../../../address/domain/entities/entities.dart';
 import '../../../../../address/presentation/DTOs/full_address_details.dart';
+import '../../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
 import '../../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
 import '../../../../../address_suggestions/presentation/widgets/location_widget.dart';
+import '../../../cubit/add_institution/add_institution_cubit.dart';
 
 class AddUpdateAddressWidget extends StatefulWidget {
   const AddUpdateAddressWidget({
@@ -111,7 +111,7 @@ class _AddUpdateAddressWidgetState extends State<AddUpdateAddressWidget> {
                 },
                 decoration: InputDecoration(
                   errorText: description.validationMessage,
-                  labelText: 'Description',
+                  labelText: AppLocalizations.of(context).description,
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
               );

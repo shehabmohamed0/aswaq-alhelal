@@ -18,20 +18,20 @@ class StepperButtons extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8))),
                 onPressed: cubit.onStepContinue(),
                 child: state.step == 2
-                    ? const Text('Submit')
-                    : const Text('Continue')),
+                    ?  Text(AppLocalizations.of(context).submit)
+                    :  Text(AppLocalizations.of(context).Continue)),
             const SizedBox(width: 4),
             TextButton(
                 style: TextButton.styleFrom(
-                    primary: Theme.of(context).primaryColor),
+                    foregroundColor: Theme.of(context).primaryColor),
                 onPressed: state.step > 0
                     ? () {
                         cubit.previousStep();
                       }
                     : null,
-                child: const Text(
-                  'Previous',
-                  style: TextStyle(fontSize: 16),
+                child:  Text(
+                  AppLocalizations.of(context).previous,
+                  style: const TextStyle(fontSize: 16),
                 )),
           ],
         );

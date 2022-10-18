@@ -51,7 +51,7 @@ class AppDrawer extends StatelessWidget {
                         arguments: profile);
                   },
                   leading: const Icon(FontAwesomeIcons.boxOpen),
-                  title: const Text('My Orders'),
+                  title: Text(intl.myOrders),
                 ),
               if (state.profile.isUser)
                 ListTile(
@@ -60,7 +60,7 @@ class AppDrawer extends StatelessWidget {
                         arguments: profile);
                   },
                   leading: const Icon(Icons.business_center),
-                  title: const Text('Work'),
+                  title:  Text(intl.work),
                 ),
               if (state.profile.isUser)
                 ListTile(
@@ -69,7 +69,7 @@ class AppDrawer extends StatelessWidget {
                         arguments: profile.id);
                   },
                   leading: const Icon(FontAwesomeIcons.userTag),
-                  title: const Text('Job offers'),
+                  title:  Text(intl.jobOffers),
                 ),
               if (state.profile.isUser)
                 ListTile(
@@ -98,7 +98,7 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 onTap: () async {
                   if (await launchUrl(
-                      Uri.parse('https://aswaqalhelal.godaddysites.com/'),
+                      Uri.parse('https://sites.google.com/view/aswaq-alhelal/home'),
                       mode: LaunchMode.externalApplication)) {
                   } else {
                     showErrorSnackBar(context, intl.somethingWentWrong);

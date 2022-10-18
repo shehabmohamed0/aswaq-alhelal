@@ -8,6 +8,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
 import 'widgets/address_step.dart';
 
@@ -21,11 +22,12 @@ class AddInstitutionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final cubit = context.read<AddInstitutionCubit>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Add Institution'),
+        title:  Text(intl.addInstitution),
       ),
       body: BlocConsumer<AddInstitutionCubit, AddInstitutionState>(
         listenWhen: (previous, current) => previous.status != current.status,
@@ -77,16 +79,16 @@ class AddInstitutionPage extends StatelessWidget {
                       type: StepperType.horizontal,
                       steps: [
                         Step(
-                          title: const Text('Name'),
+                          title:  Text(intl.name),
                           isActive: cubit.isActive(0),
                           content: _NameStepWidget(cubit: cubit),
                         ),
                         Step(
-                            title: const Text('Contacts'),
+                            title:  Text(intl.contacts),
                             isActive: cubit.isActive(1),
                             content: const _ContactsStepWidget()),
                         Step(
-                            title: const Text('Address'),
+                            title:  Text(AppLocalizations.of(context).address),
                             isActive: cubit.isActive(2),
                             content: AddUpdateAddressWidget(
                               onAddressDetailsChanged: (addressDetails) {

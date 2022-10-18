@@ -1,8 +1,3 @@
-import 'dart:developer';
-
-import '../../../../../core/firebase/firebase_path.dart';
-import '../../../../../core/utils/logs.dart';
-import '../../models/user/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
@@ -13,8 +8,10 @@ import 'package:injectable/injectable.dart';
 import 'package:root_package/packages/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../../core/firebase/firebase_path.dart';
+import '../../../../../core/utils/logs.dart';
 import '../../../domain/entities/base_profile.dart';
-import '../../models/user/user_profile_model.dart';
+import '../../models/user/user_model.dart';
 
 abstract class AuthApiService {
   Future<void> signInWithPhoneCredential(
@@ -58,10 +55,7 @@ class AuthApiServiceImpl implements AuthApiService {
       if (user != null) {
         final snapshots =
             firestore.doc(FirestorePath.user(user.uid)).snapshots();
-        yield* snapshots.map((e) {
-          log(e.data().toString());
-          return UserModel.fromFirestore(e);
-        });
+        yield* snapshots.map(UserModel.fromFirestore);
       } else {
         yield UserModel.empty;
       }

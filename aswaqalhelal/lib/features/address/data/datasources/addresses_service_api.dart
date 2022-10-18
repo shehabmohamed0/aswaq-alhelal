@@ -18,6 +18,8 @@ abstract class AddressesServiceApi {
   Future<List<AddressModel>> getAddresses();
 
   Future<AddressModel> addFirstAddress(AddFirstAddressParams params);
+
+  Future<AddressModel> updateMainAddress(UpdateAddressParams params);
 }
 
 @LazySingleton(as: AddressesServiceApi)
@@ -93,6 +95,24 @@ class AddressesServiceApiImpl extends AddressesServiceApi {
     //   },
     // );
 
+    await batch.commit();
+    return model;
+  }
+
+  @override
+  Future<AddressModel> updateMainAddress(UpdateAddressParams params) async {
+    final user = _firebaseAuth.currentUser!;
+    final batch = _firestore.batch();
+
+    final addressDoc =
+        _firestore.doc(FirestorePath.userAddress(user.uid, params.id));
+    final userDoc = _firestore.doc(FirestorePath.user(user.uid));
+    final model = params.toModel;
+    batch.update(addressDoc, model.toJson());
+
+    batch.update(userDoc, {
+      'profiles.${user.uid}.address': model.toJson(),
+    });
     await batch.commit();
     return model;
   }

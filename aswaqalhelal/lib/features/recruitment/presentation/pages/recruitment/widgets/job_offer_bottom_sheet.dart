@@ -3,6 +3,7 @@ import 'package:root_package/core/form_inputs/form_inputs.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/widgets/international_phone_text_field.dart';
 
+import '../../../../../../l10n/l10n.dart';
 import '../../../cubit/job_offers/send_job_offers_cubit.dart';
 import '../DTOs/recruitment_page_arguments.dart';
 
@@ -31,7 +32,7 @@ class JobOfferBottomSheet extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'Send offer',
+                AppLocalizations.of(context).sendOffer,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
@@ -50,13 +51,13 @@ class JobOfferBottomSheet extends StatelessWidget {
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               isExpanded: true,
-              items: const [
+              items: [
                 DropdownMenuItem(
-                  value: 'Cachier',
-                  child: Text('Cachier'),
+                  value: 'Cashier',
+                  child: Text(AppLocalizations.of(context).cashier),
                 )
               ],
-              value: 'Cachier',
+              value: 'Cashier',
               onChanged: (val) {},
             ),
             const SizedBox(height: 8),
@@ -68,10 +69,10 @@ class JobOfferBottomSheet extends StatelessWidget {
                         arguments.institutionId,
                         arguments.ownerId,
                         phoneController.text,
-                        'Cachier');
+                        AppLocalizations.of(context).cashier);
                   }
                 },
-                child: const Text('Send'))
+                child: Text(AppLocalizations.of(context).send))
           ],
         ),
       ),

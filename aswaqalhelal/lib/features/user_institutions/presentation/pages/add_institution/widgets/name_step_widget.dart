@@ -23,7 +23,7 @@ class _NameStepWidget extends StatelessWidget {
                 TextFormField(
                   onChanged: cubit.officialNameChanged,
                   decoration: InputDecoration(
-                      labelText: 'Official name',
+                      labelText: AppLocalizations.of(context).officialName,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       errorText: state.officialName.validationMessage),
                 ),
@@ -31,7 +31,7 @@ class _NameStepWidget extends StatelessWidget {
                 TextFormField(
                   onChanged: cubit.nickNameChanged,
                   decoration: InputDecoration(
-                      labelText: 'Nick name',
+                      labelText: AppLocalizations.of(context).nickName,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       errorText: state.nickName.validationMessage),
                 ),

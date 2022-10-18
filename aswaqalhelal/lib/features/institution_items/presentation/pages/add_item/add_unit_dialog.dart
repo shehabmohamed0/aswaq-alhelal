@@ -2,6 +2,7 @@ import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../domain/entities/unit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
@@ -27,6 +28,8 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
   final priceFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
+
     return BlocProvider<AddUnitBloc>(
       create: (context) => locator(),
       child: BlocConsumer<AddUnitBloc, AddUnitState>(
@@ -78,7 +81,7 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Unit name',
+                      intl.unitName,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     AutoSuggestTextField<Unit>(
@@ -114,28 +117,28 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
                       validator: (value) {
                         value = value ?? '';
                         if (value.trim().isEmpty) {
-                          return 'Required';
+                          return intl.required;
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 8),
-                    Text('Quantity',
-                        style: Theme.of(context).textTheme.titleLarge),
-                    TextFormField(
-                      controller: quantityController,
-                      focusNode: quantityFocusNode,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      keyboardType: TextInputType.number,
-                      validator: _numberValidator,
-                      onChanged: (s) {
-                        bloc.add(UnitQuantityChanged(s));
-                      },
-                      decoration: const InputDecoration(),
-                    ),
-                    const SizedBox(height: 8),
+                    // Text('Quantity',
+                    //     style: Theme.of(context).textTheme.titleLarge),
+                    // TextFormField(
+                    //   controller: quantityController,
+                    //   focusNode: quantityFocusNode,
+                    //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                    //   keyboardType: TextInputType.number,
+                    //   validator: _numberValidator,
+                    //   onChanged: (s) {
+                    //     bloc.add(UnitQuantityChanged(s));
+                    //   },
+                    //   decoration: const InputDecoration(),
+                    // ),
+                    // const SizedBox(height: 8),
                     Text(
-                      'Price',
+                      intl.price,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     TextFormField(
@@ -144,7 +147,14 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
                       keyboardType: TextInputType.number,
                       validator: _numberValidator,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: const InputDecoration(),
+                      decoration: InputDecoration(
+                          suffix: Text(
+                        intl.egp,
+                        style: const TextStyle(
+                            fontFamily: 'Cairo',
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold),
+                      )),
                       onChanged: (s) {
                         bloc.add(UnitPriceChanged(s));
                       },
@@ -156,7 +166,7 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
                           bloc.add(FormSubmitted());
                         }
                       },
-                      child: const Text('Add'),
+                      child: Text(intl.add),
                     ),
                   ],
                 ),
@@ -172,10 +182,10 @@ class _AddUnitBottomSheetState extends State<AddUnitBottomSheet> {
     if (s != null) {
       final quantity = double.tryParse(s);
       if (quantity == null) {
-        return 'invalid';
+        return AppLocalizations.of(context).invalid;
       } else {
         if (quantity <= 0) {
-          return 'invalid';
+          return AppLocalizations.of(context).invalid;
         }
       }
     }

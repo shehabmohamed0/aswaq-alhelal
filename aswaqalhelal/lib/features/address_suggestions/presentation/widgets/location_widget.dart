@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../../../address/domain/entities/geo_point.dart';
 import '../cubit/location_widget/location_widget_cubit.dart';
 
@@ -14,6 +15,8 @@ class LocationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
+
     if (geoPoint != null) {
       context.read<LocationWidgetCubit>().geoPointChanged(geoPoint!);
     }
@@ -31,8 +34,8 @@ class LocationWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Text(
-                  'Location',
+                Text(
+                  intl.location,
                   style: TextStyle(fontSize: 16),
                 ),
                 const Spacer(),
@@ -66,8 +69,8 @@ class LocationWidget extends StatelessWidget {
                             .read<LocationWidgetCubit>()
                             .getCurrentLocation();
                       },
-                      label: const Text(
-                        'Current location',
+                      label: Text(
+                        intl.currentLocation,
                         style: TextStyle(fontSize: 16),
                       ),
                       icon: const Icon(
@@ -88,8 +91,8 @@ class LocationWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(10),
                       ),
-                      label: const Text('Select location ',
-                          style: TextStyle(fontSize: 16)),
+                      label: Text(intl.selectLocation,
+                          style: const TextStyle(fontSize: 16)),
                       icon: const Icon(
                         Icons.location_on_outlined,
                         size: 28,

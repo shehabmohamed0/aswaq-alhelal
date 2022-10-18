@@ -1,10 +1,10 @@
-import 'items_sliver_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../../address/presentation/widgets/normal_text_field.dart';
 import 'items_sliver_grid_view.dart';
+import 'items_sliver_list_view.dart';
 import 'items_widget_cubit.dart';
 
 class ItemsWidget2<T> extends StatefulWidget {
@@ -92,10 +92,10 @@ class _ItemsWidget2State<T> extends State<ItemsWidget2<T>> {
               ),
             ),
             if (_isEmptySearch(state))
-              const SliverToBoxAdapter(
+               SliverToBoxAdapter(
                 child: Center(
                   child: Text(
-                    'No Items',
+                    AppLocalizations.of(context).thereIsNoItems,
                     style: TextStyle(
                         fontSize: 24,
                         color: Colors.black45,
@@ -229,14 +229,14 @@ class _OptionsWidgets extends StatelessWidget {
               visualDensity: VisualDensity.compact,
             ),
             value: state.sortType,
-            items: const [
+            items:  [
               DropdownMenuItem<SortType>(
                 value: SortType.creationTime,
-                child: Text('Creation time'),
+                child: Text(AppLocalizations.of(context).creationTime),
               ),
               DropdownMenuItem<SortType>(
                 value: SortType.alphabetically,
-                child: Text('Alphabetically'),
+                child: Text(AppLocalizations.of(context).alphabetically),
               ),
             ],
             onChanged: (sortType) {

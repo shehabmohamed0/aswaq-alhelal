@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
@@ -14,6 +15,7 @@ class ItemAddToCartDialog extends StatelessWidget {
   final InstitutionItem item;
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return BlocProvider<ItemAddToCartDialogCubit>(
       create: (context) => locator(),
@@ -60,7 +62,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                               child: Text(e.name),
                             ))
                         .toList(),
-                    hintText: "Select measure unit",
+                    hintText: intl.selectMeasureUnit,
                     borderRadius: 5,
                     onChanged: (unit) {
                       cubit.changeUnit(unit);
@@ -77,7 +79,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                               .copyWith(color: Colors.green),
                           children: [
                             TextSpan(
-                              text: ' EGP',
+                              text: intl.egp,
                               style: theme.textTheme.titleSmall!
                                   .copyWith(color: Colors.green),
                             ),
@@ -129,7 +131,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                                     .copyWith(color: Colors.green),
                                 children: [
                                   TextSpan(
-                                    text: ' EGP',
+                                    text: intl.egp,
                                     style: theme.textTheme.titleSmall!
                                         .copyWith(color: Colors.green),
                                   ),
@@ -146,7 +148,7 @@ class ItemAddToCartDialog extends StatelessWidget {
                           onPressed: () {
                             cubit.submit();
                           },
-                          child: const Text('Add to cart')))
+                          child: Text(intl.addToCart)))
                 ],
               ),
             );

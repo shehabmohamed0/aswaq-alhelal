@@ -14,6 +14,7 @@ abstract class AddressesRepository {
   Future<Either<Failure, String>> removeAddress(RemoveAddressParams params);
 
   Future<Either<Failure, Address>> updateAddress(UpdateAddressParams params);
+  Future<Either<Failure, Address>> updateMainAddress(UpdateAddressParams params);
 
   Future<Either<Failure, GeoPoint>> getCurrentLocation();
 

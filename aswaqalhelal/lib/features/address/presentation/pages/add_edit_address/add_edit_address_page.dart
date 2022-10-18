@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
 import 'package:root_package/locator/locator.dart';
@@ -11,6 +12,7 @@ import '../../../../address_suggestions/presentation/bloc/address_suggestions_bl
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
 import '../../../../address_suggestions/presentation/widgets/location_widget.dart';
+import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../domain/entities/address.dart';
 import '../../cubit/add_edit_address/add_edit_address_cubit.dart';
 
@@ -19,6 +21,8 @@ class AddEditAddressPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
+    final user = context.read<AppBloc>().state.profile.toUser();
     final address = ModalRoute.of(context)!.settings.arguments as Address?;
     final focusNode = useFocusNode();
     return MultiBlocProvider(
@@ -54,8 +58,11 @@ class AddEditAddressPage extends HookWidget {
             case AddEditAddressStatus.success:
               EasyLoading.dismiss();
               Navigator.pop(context, state.address);
-              showSuccessSnackBar(context,
-                  address == null ? 'Added succefully' : 'Updated succefully');
+              showSuccessSnackBar(
+                  context,
+                  address == null
+                      ? intl.addedSuccefully
+                      : intl.updatedSuccefully);
               break;
             case AddEditAddressStatus.failure:
               EasyLoading.dismiss();
@@ -65,7 +72,21 @@ class AddEditAddressPage extends HookWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text(address == null ? 'Add address' : 'Edit address'),
+            title: Text(address == null ? intl.addAddress : intl.editAddress),
+            actions: address != null && user.address?.id != address.id
+                ? [
+                    TextButton(
+                        onPressed: () {
+                          // context.read<AddEditAddressCubit>().;
+                        },
+                        child: Text(
+                          intl.delete,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54),
+                        ))
+                  ]
+                : null,
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -85,7 +106,7 @@ class AddEditAddressPage extends HookWidget {
                     context
                         .read<AddEditAddressCubit>()
                         .addressDetailsChanged(refAddressDetails);
-                        focusNode.requestFocus();
+                    focusNode.requestFocus();
                   },
                   onNeighborhoodUnSelected: () {
                     context.read<AddEditAddressCubit>().deleteAddressDetails();
@@ -115,7 +136,7 @@ class AddEditAddressPage extends HookWidget {
                             .read<AddEditAddressCubit>()
                             .descriptionchanged,
                         decoration: InputDecoration(
-                            labelText: 'Description',
+                            labelText: intl.description,
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             errorText: state.description.validationMessage),
                       );
@@ -136,12 +157,12 @@ class AddEditAddressPage extends HookWidget {
                                   state.description.valid &&
                                   state.geoPoint.valid
                               ? () {
-                                  context
-                                      .read<AddEditAddressCubit>()
-                                      .submit(id: address?.id);
+                                  context.read<AddEditAddressCubit>().submit(
+                                      id: address?.id,
+                                      isMain: user.address!.id == address?.id);
                                 }
                               : null,
-                          child: Text(address == null ? 'Add' : 'Update'),
+                          child: Text(address == null ? intl.add : intl.update),
                         );
                       },
                     ))

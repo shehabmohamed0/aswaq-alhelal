@@ -1,4 +1,5 @@
 import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
@@ -21,6 +22,7 @@ class AddressDetailsWidget extends HookWidget {
   final VoidCallback onNeighborhoodUnSelected;
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final governateController = useTextEditingController();
     final governateFocusNode = useFocusNode();
     final cityController = useTextEditingController();
@@ -47,7 +49,7 @@ class AddressDetailsWidget extends HookWidget {
               AddNewGovernateParams, GovernatesSuggestionsBloc>(
             controller: governateController,
             focusNode: governateFocusNode,
-            label: 'Governate',
+            label: intl.governate,
             searchAddress: (bloc) {
               bloc.add(AddressSuggestionsEvent.searchRefAddress(
                 governateController.text,
@@ -85,7 +87,7 @@ class AddressDetailsWidget extends HookWidget {
             CitiesSuggestionsBloc>(
           controller: cityController,
           focusNode: cityFocusNode,
-          label: 'City',
+          label: intl.city,
           searchAddress: (bloc) {
             bloc.add(AddressSuggestionsEvent.searchRefAddress(
               cityController.text,
@@ -124,7 +126,7 @@ class AddressDetailsWidget extends HookWidget {
             AddNewNeighborhoodParams, NeighborhoodsSuggestionsBloc>(
           controller: neighborhoodController,
           focusNode: neighborhoodFocusNode,
-          label: 'Neighborhood',
+          label:intl.neighborhood,
           searchAddress: (bloc) {
             bloc.add(AddressSuggestionsEvent.searchRefAddress(
               neighborhoodController.text,
@@ -154,7 +156,7 @@ class AddressDetailsWidget extends HookWidget {
                 refCity: cityBloc.state.addressOrNull.toNullable()!,
                 refNeighborhood:
                     neighborhoodBloc.state.addressOrNull.toNullable()!);
-            
+
             onfullRefAddress(fullAddressDetails);
           },
           onAddressUnSelected: () {

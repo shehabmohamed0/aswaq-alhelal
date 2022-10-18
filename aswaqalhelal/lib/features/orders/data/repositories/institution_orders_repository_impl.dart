@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:aswaqalhelal/core/failures/orders/update_order_failure.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:root_package/core/exceptions/exceptions.dart';
 import 'package:root_package/core/failures/failure.dart';
@@ -44,8 +45,11 @@ class InstitutionOrdersRepositoryImpl extends InstitutionOrdersRepository {
       final orders = await _apiService.updateOrder(params);
       return Right(orders);
     } on AcceptOrderException catch (e) {
+      AppLocalizations.current;
+
       return Left(UpdateOrderFailure(
-          'This order has been canceled by the user', e.newOrder));
+          AppLocalizations.current.thisOrderHasBeenCanceledByTheUser,
+          e.newOrder));
     } on Exception {
       return Left(ServerFailure.general());
     }

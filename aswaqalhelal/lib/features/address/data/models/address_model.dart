@@ -59,4 +59,5 @@ class AddressModel extends Address {
 
   /// Connect the generated [_$AddressModelToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$AddressModelToJson(this);
+
 }

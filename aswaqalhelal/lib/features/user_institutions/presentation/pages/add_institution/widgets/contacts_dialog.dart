@@ -1,4 +1,5 @@
-part of'../add_institution_page.dart';
+part of '../add_institution_page.dart';
+
 class _ContactsDialog extends StatefulWidget {
   const _ContactsDialog({
     Key? key,
@@ -12,8 +13,8 @@ class _ContactsDialogState extends State<_ContactsDialog> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   bool emailSelected = true;
-  PhoneNumber phoneNumber = PhoneNumber.pure();
-  Email email = Email.pure();
+  PhoneNumber phoneNumber = const PhoneNumber.pure();
+  Email email = const Email.pure();
 
   @override
   void dispose() {
@@ -26,11 +27,12 @@ class _ContactsDialogState extends State<_ContactsDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Add contact', style: Theme.of(context).textTheme.titleLarge),
+            Text(AppLocalizations.of(context).addContact,
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +45,7 @@ class _ContactsDialogState extends State<_ContactsDialog> {
                               emailSelected = true;
                             });
                           },
-                    child: Icon(Icons.email)),
+                    child: const Icon(Icons.email)),
                 const SizedBox(width: 4),
                 ElevatedButton(
                     onPressed: emailSelected
@@ -76,7 +78,7 @@ class _ContactsDialogState extends State<_ContactsDialog> {
                   });
                 },
                 errorText: phoneNumber.validationMessage,
-                countries: ['EG'],
+                countries: const ['EG'],
               ),
             const SizedBox(height: 8),
             SizedBox(
@@ -99,7 +101,7 @@ class _ContactsDialogState extends State<_ContactsDialog> {
                                 Navigator.of(context).pop();
                               }
                             : null,
-                    child: const Text('Add')))
+                    child: Text(AppLocalizations.of(context).add)))
           ],
         ),
       ),

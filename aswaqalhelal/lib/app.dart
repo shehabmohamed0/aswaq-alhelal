@@ -1,5 +1,9 @@
+import 'dart:developer';
+
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:root_package/core/locale/locale_cubit.dart';
 import 'package:root_package/core/resources/theme_manager.dart';
 import 'package:root_package/l10n/l10n.dart';
@@ -73,6 +77,7 @@ class _AppState extends State<App>
 
   @override
   Widget build(BuildContext context) {
+    
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
@@ -91,13 +96,30 @@ class _AppState extends State<App>
       child: BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, state) {
           return MaterialApp(
+            useInheritedMediaQuery: true,
             title: state.locale?.languageCode == 'ar'
                 ? 'أسواق الهلال'
                 : 'Aswaq Alhelal',
             theme: getApplicationTheme(),
             navigatorKey: App.navigatorKey,
             onGenerateRoute: AppRouter.generateRoute,
-            builder: EasyLoading.init(),
+            builder: EasyLoading.init(
+              builder: (context, child) => ResponsiveWrapper.builder(
+                child,
+                maxWidth: 1200,
+                minWidth: 392,
+                defaultScale: true,
+                breakpoints: const [
+                  ResponsiveBreakpoint.resize(392, name: MOBILE),
+                  ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                  ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+                ],
+                background: Container(
+                  color: const Color(0xFFF5F5F5),
+                ),
+                
+              ),
+            ),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               RootPackageLocalizations.delegate,

@@ -1,6 +1,7 @@
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/extensions/prepare_for_search.dart';
 import '../../domain/repositories/units_repository.dart';
 import '../models/unit_model.dart';
 
@@ -17,10 +18,21 @@ class UnitsApiServiceImpl extends UnitsApiService {
   @override
   Future<UnitModel> addUnitToReference(AddUnitToReferenceParams params) async {
     final collection = _firestore.collection('units_reference');
+
+    final unitSnapshot = await collection
+        .where('searchText', isEqualTo: params.name.prepareForSearch())
+        .limit(1)
+        .get();
+    if (unitSnapshot.docs.isNotEmpty) {
+      final unit = UnitModel.fromFirestore(unitSnapshot.docs.first);
+      unit.copyWith(price: params.price, quantity: params.quantity.toDouble());
+      return unit;
+    }
     final doc = collection.doc();
     final model = params.toModel(doc.id);
 
     final jsonData = model.toJson();
+    jsonData['searchText'] = model.name.prepareForSearch();
     jsonData['creationTime'] = FieldValue.serverTimestamp();
 
     await doc.set(jsonData);
@@ -31,11 +43,11 @@ class UnitsApiServiceImpl extends UnitsApiService {
   Future<List<UnitModel>> getUnitSuggestions(
       GetUnitSuggestionsParams params) async {
     final collection = _firestore.collection('units_reference');
-
+    final searchText = params.searchText.prepareForSearch();
     final snapshot = await collection
-        .where('name', isGreaterThanOrEqualTo: params.searchText)
-        .where('name', isLessThanOrEqualTo: params.searchText + "\uf8ff")
-        .orderBy('name')
+        .where('searchText', isGreaterThanOrEqualTo: searchText)
+        .where('searchText', isLessThanOrEqualTo: searchText + "\uf8ff")
+        .orderBy('searchText')
         .get();
 
     final items = snapshot.docs.map(UnitModel.fromFirestore).toList();

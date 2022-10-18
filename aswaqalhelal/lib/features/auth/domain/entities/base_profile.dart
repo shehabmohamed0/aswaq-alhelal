@@ -80,6 +80,11 @@ abstract class BaseProfile extends Equatable {
       return onInstitution(this as InstitutionProfile);
     }
   }
+
+  UserProfile toUser() {
+    if (this is UserProfile) return this as UserProfile;
+    throw Exception();
+  }
 }
 
 enum ProfileType {

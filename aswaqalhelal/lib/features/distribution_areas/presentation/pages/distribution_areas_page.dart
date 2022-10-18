@@ -5,6 +5,7 @@ import 'package:root_package/packages/flutter_hooks.dart';
 import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
@@ -16,6 +17,7 @@ class DistributionAreasPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final governateController = useTextEditingController();
     final cityController = useTextEditingController();
     final neighborhoodController = useTextEditingController();
@@ -49,7 +51,7 @@ class DistributionAreasPage extends HookWidget {
           default:
             return Scaffold(
               appBar: AppBar(
-                title: const Text('distribution Areas'),
+                title: Text(intl.distributionAreas),
               ),
               body: Theme(
                 data: ThemeData(
@@ -174,7 +176,7 @@ class DistributionAreasPage extends HookWidget {
                             return AutoSuggestTextField<RefGovernate>(
                               controller: governateController,
                               focusNode: governateFocusNode,
-                              labelText: 'Governate',
+                              labelText: intl.governate,
                               onChanged: (searctText) {
                                 bloc.add(DistributionAreasEvent.searchGovernate(
                                     searctText));
@@ -195,7 +197,8 @@ class DistributionAreasPage extends HookWidget {
                                     governate));
                               },
                               onEmptyWidgetClicked: () {
-                                if (governateController.text.trim().isEmpty) return;
+                                if (governateController.text.trim().isEmpty)
+                                  return;
                                 bloc.add(DistributionAreasEvent.addNewGovernate(
                                     governateController.text.trim()));
                               },
@@ -223,7 +226,7 @@ class DistributionAreasPage extends HookWidget {
                             return AutoSuggestTextField<RefCity>(
                               controller: cityController,
                               focusNode: cityFocusNode,
-                              labelText: 'City',
+                              labelText: intl.city,
                               onChanged: (searchText) {
                                 bloc.add(DistributionAreasEvent.searchCity(
                                     searchText));
@@ -274,7 +277,7 @@ class DistributionAreasPage extends HookWidget {
                             return AutoSuggestTextField<RefNeighborhood>(
                               controller: neighborhoodController,
                               focusNode: neighborhoodFocusNode,
-                              labelText: 'Neighborhood / Village',
+                              labelText: intl.neighborhoodVillage,
                               onChanged: (searchText) {
                                 bloc.add(
                                     DistributionAreasEvent.searchNeighborhood(
@@ -321,7 +324,7 @@ class DistributionAreasPage extends HookWidget {
                           height: 48,
                           width: double.infinity,
                           child: ElevatedButton(
-                            child: Text('Add'),
+                            child: Text(intl.add),
                             onPressed: () {
                               context.read<DistributionAreasBloc>().add(
                                   DistributionAreasEvent.addDistributionAreas(
@@ -350,13 +353,14 @@ class DistributionAreasPage extends HookWidget {
                                     columnSpacing: 27,
                                     showCheckboxColumn: true,
                                     onSelectAll: (s) {},
-                                    columns: const [
-                                      DataColumn(
+                                    columns: [
+                                      const DataColumn(
                                         label: Text(''),
                                       ),
-                                      DataColumn(label: Text('Governate')),
-                                      DataColumn(label: Text('City')),
-                                      DataColumn(label: Text('Neighborhood')),
+                                      DataColumn(label: Text(intl.governate)),
+                                      DataColumn(label: Text(intl.city)),
+                                      DataColumn(
+                                          label: Text(intl.neighborhood)),
                                     ],
                                     rows: state.distribtionAreas
                                         .map(
@@ -381,10 +385,10 @@ class DistributionAreasPage extends HookWidget {
                                                   distributionArea.governate)),
                                               DataCell(Text(
                                                   distributionArea.city ??
-                                                      'all')),
+                                                      intl.all)),
                                               DataCell(Text(distributionArea
                                                       .neighborhood ??
-                                                  'all')),
+                                                  intl.all)),
                                             ],
                                           ),
                                         )

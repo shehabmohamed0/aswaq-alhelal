@@ -4,6 +4,7 @@ import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/firebase_auth.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../core/extensions/prepare_for_search.dart';
 import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/add_item/params.dart';
 import '../../domain/entities/institution_item.dart';
@@ -39,11 +40,12 @@ class ItemsApiServiceImpl implements ItemsApiService {
   @override
   Future<List<ReferenceItemModel>> searchItem(String val) async {
     final collection = _firestore.collection(FirestorePath.itemsReference);
-
+    final searchText= val.prepareForSearch();
     final snapshot = await collection
-        .where('name', isGreaterThanOrEqualTo: val)
-        .where('name', isLessThanOrEqualTo: val + "\uf8ff")
-        .orderBy('name')
+        .where('searchText', isGreaterThanOrEqualTo: searchText)
+        // ignore: prefer_interpolation_to_compose_strings
+        .where('searchText', isLessThanOrEqualTo: searchText + "\uf8ff")
+        .orderBy('searchText')
         .get();
     final items = snapshot.docs.map(ReferenceItemModel.fromFirestore).toList();
     return items;
@@ -66,6 +68,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
     if (params.imageFile == null) {
       ref.set({
         'name': params.itemName,
+        'searchText': params.itemName.prepareForSearch(),
         'institutionId': params.institutionId,
         'referenceId': params.referenceId,
         'creationTime': FieldValue.serverTimestamp(),
@@ -90,6 +93,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
       (imageUrl) async {
         ref.set({
           'name': params.itemName,
+          'searchText': params.itemName.prepareForSearch(),
           'institutionId': params.institutionId,
           'referenceId': params.referenceId,
           'creationTime': FieldValue.serverTimestamp(),
@@ -133,6 +137,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
         refDoc,
         {
           'name': params.itemName,
+          'searchText': params.itemName.prepareForSearch(),
           'institutionId': params.institutionId,
           'creationTime': FieldValue.serverTimestamp(),
           'imageUrl': imageUrl,
@@ -142,6 +147,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
 
       batch.set(doc, {
         'name': params.itemName,
+        'searchText': params.itemName.prepareForSearch(),
         'institutionId': params.institutionId,
         'referenceId': refDoc.id,
         'creationTime': FieldValue.serverTimestamp(),

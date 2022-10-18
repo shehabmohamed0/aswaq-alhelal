@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
 import 'package:root_package/core/form_inputs/required_object.dart';
+import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/equatable.dart';
 import 'package:root_package/packages/injectable.dart';
 
@@ -10,16 +12,19 @@ import '../../../../../core/params/addresses/update_address_params.dart';
 import '../../../../address_suggestions/domain/entities/entities.dart';
 import '../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
 import '../../../domain/entities/entities.dart';
+import '../../../domain/usecases/update_main_address.dart';
 import '../../../domain/usecases/usecases.dart';
 
 part 'add_edit_address_state.dart';
 
 @injectable
 class AddEditAddressCubit extends Cubit<AddEditAddressState> {
-  AddEditAddressCubit(this._addAddress, this._updateAddress)
+  AddEditAddressCubit(
+      this._addAddress, this._updateAddress, this._updateMainAddress)
       : super(const AddEditAddressState());
   final AddAddress _addAddress;
   final UpdateAddress _updateAddress;
+  final UpdateMainAddress _updateMainAddress;
 
   void initEdit(Address address) {
     final fullAddressDetails = FullAddressDetails.fromAddress(address);
@@ -50,14 +55,14 @@ class AddEditAddressCubit extends Cubit<AddEditAddressState> {
     emit(state.copyWith(geoPoint: RequiredObject.dirty(geoPoint)));
   }
 
-  Future<void> submit({String? id}) async {
+  Future<void> submit({String? id, required bool isMain}) async {
     if (state.status == AddEditAddressStatus.loading) return;
 
     emit(state.copyWith(status: AddEditAddressStatus.loading));
     if (id == null) {
       await _add();
     } else {
-      await _update(id);
+      await _update(id, isMain);
     }
   }
 
@@ -92,23 +97,31 @@ class AddEditAddressCubit extends Cubit<AddEditAddressState> {
     });
   }
 
-  Future<void> _update(String id) async {
+  Future<Either<Failure, Address>> _updateMethod(
+      {required bool isMain, required UpdateAddressParams params}) async {
+    return isMain
+        ? await _updateMainAddress(params: params)
+        : await _updateAddress(params: params);
+  }
+
+  Future<void> _update(String id, bool isMain) async {
     final addressDetails = state.refAddressDetails.value!;
     final geoPoint = state.geoPoint.value!;
     final description = state.description.value;
-    final either = await _updateAddress(
+    final either = await _updateMethod(
+        isMain: isMain,
         params: UpdateAddressParams(
-      id: id,
-      country: 'egypt',
-      governateId: addressDetails.refGovernate.id,
-      governate: addressDetails.refGovernate.name,
-      cityId: addressDetails.refCity.id,
-      city: addressDetails.refCity.name,
-      neighborhoodId: addressDetails.refNeighborhood.id,
-      neighborhood: addressDetails.refNeighborhood.name,
-      description: description,
-      geoPoint: geoPoint,
-    ));
+          id: id,
+          country: 'egypt',
+          governateId: addressDetails.refGovernate.id,
+          governate: addressDetails.refGovernate.name,
+          cityId: addressDetails.refCity.id,
+          city: addressDetails.refCity.name,
+          neighborhoodId: addressDetails.refNeighborhood.id,
+          neighborhood: addressDetails.refNeighborhood.name,
+          description: description,
+          geoPoint: geoPoint,
+        ));
 
     either.fold((failure) {
       failure as ServerFailure;

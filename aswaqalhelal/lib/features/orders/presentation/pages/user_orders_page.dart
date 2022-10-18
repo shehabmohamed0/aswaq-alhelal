@@ -1,13 +1,14 @@
-import 'package:aswaqalhelal/features/orders/presentation/cubit/user_orders/user_orders_bloc.dart';
-import 'package:aswaqalhelal/features/orders/presentation/pages/widgets/order_widget.dart';
-import 'package:aswaqalhelal/features/widgets/constants.dart';
-import 'package:aswaqalhelal/features/widgets/loading_widget.dart';
-import 'package:aswaqalhelal/features/widgets/no_data_widget.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/widgets/check_internet_connection_widget.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../widgets/constants.dart';
+import '../../../widgets/loading_widget.dart';
+import '../../../widgets/no_data_widget.dart';
+import '../cubit/user_orders/user_orders_bloc.dart';
+import 'widgets/order_widget.dart';
 
 class UserOrdersPage extends StatelessWidget {
   const UserOrdersPage({super.key});
@@ -15,7 +16,7 @@ class UserOrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My orders')),
+      appBar: AppBar(title:  Text(AppLocalizations.of(context).myOrders)),
       body: BlocConsumer<UserOrdersBloc, UserOrdersState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -28,9 +29,9 @@ class UserOrdersPage extends StatelessWidget {
               return CheckInternetConnection(onPressed: () {});
             case RequestState.loaded:
               if (state.orders.isEmpty) {
-                return const Center(
+                return  Center(
                   child: NoDataWidget(
-                    message: 'There is no orders yet',
+                    message: AppLocalizations.of(context).thereIsNoOrdersYet,
                   ),
                 );
               }

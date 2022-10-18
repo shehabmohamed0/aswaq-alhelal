@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -68,6 +69,7 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
   @override
   void initState() {
     super.initState();
+
     layerLink = LayerLink();
     // WidgetsBinding.instance!.addPostFrameCallback((_) => showOverlay());
 
@@ -178,12 +180,12 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               .toList(),
         );
       case AutoSuggestionState.error:
-        return widget.errorWidget ?? const ListTile(title: Text('Error'));
+        return widget.errorWidget ??  ListTile(title: Text(AppLocalizations.of(context).error));
       case AutoSuggestionState.emptyText:
         return const SizedBox.shrink();
       case AutoSuggestionState.emptyShowNoSuggestions:
-        return const ListTile(
-          title: Text('No Suggestions'),
+        return  ListTile(
+          title: Text(AppLocalizations.of(context).noSuggestions),
         );
     }
   }

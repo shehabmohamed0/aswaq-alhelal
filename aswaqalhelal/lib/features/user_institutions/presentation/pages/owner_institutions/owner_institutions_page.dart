@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../cubit/institutions_cubit/institutions_cubit.dart';
@@ -48,15 +49,13 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Institutions'),
+        title: Text(AppLocalizations.of(context).institutions),
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                Routes.addInstitution,
-                arguments: user
-              ).then((institution) {
+              Navigator.pushNamed(context, Routes.addInstitution,
+                      arguments: user)
+                  .then((institution) {
                 if (institution != null) {
                   context
                       .read<UserInstitutionsCubit>()
@@ -67,9 +66,9 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               alignment: Alignment.center,
-              child: const Text(
-                'Add',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context).add,
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                   color: Colors.black87,
@@ -96,16 +95,17 @@ class _InstitutionsEmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('You have no institutions'),
+        Text(intl.youHaveNoInstitutions),
         const SizedBox(height: 8),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8))),
-          child: const Text('Add institution'),
+          child: Text(intl.addInstitution),
           onPressed: () {
             Navigator.of(context)
                 .pushNamed(

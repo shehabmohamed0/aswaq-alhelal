@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../../core/request_state.dart';
+import '../../../../../l10n/l10n.dart';
 import '../../cubit/employees/employees_cubit.dart';
 import '../../cubit/job_offers/send_job_offers_cubit.dart';
 import '../../cubit/recruitment/recruitment_cubit.dart';
@@ -23,7 +23,10 @@ class RecruitmentPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     PersistentBottomSheetController? controller;
-    final List<String> tabs = <String>['Employees', 'Offers'];
+    final List<String> tabs = <String>[
+      AppLocalizations.of(context).employees,
+      AppLocalizations.of(context).offers
+    ];
     final arguments =
         ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
 
@@ -100,7 +103,7 @@ class RecruitmentPage extends HookWidget {
                 controller?.close();
                 EasyLoading.dismiss();
 
-                showSuccessSnackBar(context, 'Send successfuly');
+                showSuccessSnackBar(context, AppLocalizations.of(context).sendSuccessfuly);
                 break;
               case RequestState.error:
                 // controller?.close();
@@ -145,8 +148,8 @@ class RecruitmentPage extends HookWidget {
                         context),
                     sliver: SliverAppBar(
                       centerTitle: false,
-                      title: const Text(
-                          'Recruitment'), // This is the title in the app bar.
+                      title:  Text(
+                          AppLocalizations.of(context).recruitment), // This is the title in the app bar.
                       pinned: true,
                       floating: true,
                       // The "forceElevated" property causes the SliverAppBar to show

@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -21,12 +22,13 @@ class _SelectLocationMapPageState extends State<SelectLocationMapPage> {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final bloc = context.read<SelectLocationMapBloc>();
     final geoPoint = ModalRoute.of(context)?.settings.arguments as GeoPoint?;
     late GoogleMapController _mapController;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Delivery location'),
+        title: Text(intl.deliveryLocation),
         elevation: 1,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.white,
@@ -107,7 +109,7 @@ class _SelectLocationMapPageState extends State<SelectLocationMapPage> {
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8))),
-                      child: Text('Confirm'),
+                      child: Text(intl.confirm),
                       onPressed: () {
                         final geoPoint = GeoPoint(
                             lat: state.position.latitude,
@@ -139,31 +141,33 @@ class _SelectLocationMapPageState extends State<SelectLocationMapPage> {
 }
 
 class MapCenterMarker extends StatelessWidget {
-  const MapCenterMarker({Key? key}) : super(key: key);
-
+  const MapCenterMarker({Key? key, this.size}) : super(key: key);
+  final double? size;
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: CenterMapMarker(Theme.of(context).primaryColor),
+      painter: CenterMapMarker(Theme.of(context).primaryColor, size: size),
     );
   }
 }
 
 class CenterMapMarker extends CustomPainter {
   final Color color;
-  CenterMapMarker(this.color);
+  final double? size;
+  CenterMapMarker(this.color, {this.size});
 
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint();
     paint.color = color;
     canvas.drawCircle(
-      const Offset(0, -34),
-      12,
+      Offset(0, -1 * (this.size ?? 36)),
+      (this.size ?? 36) / 3,
       paint,
     );
     paint.strokeWidth = 3;
-    canvas.drawLine(const Offset(0, 0), const Offset(0, -34), paint);
+    canvas.drawLine(
+        const Offset(0, 0), Offset(0, -1 * (this.size ?? 36)), paint);
   }
 
   @override

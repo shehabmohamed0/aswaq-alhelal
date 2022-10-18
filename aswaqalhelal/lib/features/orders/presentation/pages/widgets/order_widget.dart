@@ -1,5 +1,4 @@
-import 'package:aswaqalhelal/features/orders/presentation/cubit/user_orders/user_orders_bloc.dart';
-import 'package:aswaqalhelal/features/orders/presentation/cubit/user_orders/user_orders_event.dart';
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../../domain/entities/order.dart';
 import '../../../domain/entities/order_item.dart';
 import '../../cubit/cubit/institution_orders_cubit.dart';
+import '../../cubit/user_orders/user_orders_bloc.dart';
+import '../../cubit/user_orders/user_orders_event.dart';
 
 class OrderWidget extends StatefulWidget {
   const OrderWidget({
@@ -71,6 +72,7 @@ class _OrderWidgetState extends State<OrderWidget>
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
@@ -178,9 +180,9 @@ class _OrderWidgetState extends State<OrderWidget>
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 8),
               shrinkWrap: true,
-              itemCount: widget.order.items.length + 3,
+              itemCount: widget.order.items.length,
               itemBuilder: (context, index) =>
-                  _ItemDetails(orderItem: widget.order.items[index * 0]),
+                  _ItemDetails(orderItem: widget.order.items[index]),
               separatorBuilder: (context, index) => const Divider(),
             ),
           ),
@@ -189,7 +191,7 @@ class _OrderWidgetState extends State<OrderWidget>
           valueListenable: expanded,
           child: RichText(
             text: TextSpan(
-              text: 'Total Price: ',
+              text: AppLocalizations.of(context).totalPrice_,
               style: TextStyle(
                   color: ColorManager.primary, fontWeight: FontWeight.bold),
               children: [
@@ -197,7 +199,7 @@ class _OrderWidgetState extends State<OrderWidget>
                     text: '${widget.order.totalPrice}',
                     style: const TextStyle(color: Colors.black)),
                 TextSpan(
-                  text: ' EGP',
+                  text: intl.egp,
                   style: TextStyle(
                     color: Colors.amber.shade700,
                     fontWeight: FontWeight.bold,
@@ -260,7 +262,7 @@ class _OrderWidgetState extends State<OrderWidget>
                                   });
                                 },
                           child: Text(
-                            widget.isUser ? 'Cancel' : 'decline',
+                            widget.isUser ? intl.cancel : intl.decline,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey),
@@ -304,11 +306,12 @@ class _DeclineOrderDialog extends StatelessWidget {
   final bool isUser;
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     return SimpleDialog(
       title: Text(
         isUser
-            ? 'Are you sure to cancel the order?'
-            : 'Are you sure to decline the order?',
+            ? intl.areYouSureToCancelTheOrder
+            : intl.areYouSureToDeclineTheOrder,
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -322,7 +325,7 @@ class _DeclineOrderDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
-                child: const Text('Cancel')),
+                child: Text(intl.cancel)),
             const SizedBox(width: 4),
             OutlinedButton(
                 style: ElevatedButton.styleFrom(
@@ -330,9 +333,10 @@ class _DeclineOrderDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
-                child: const Text(
-                  'Decline',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                child: Text(
+                  intl.decline,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
                 )),
           ],
         )

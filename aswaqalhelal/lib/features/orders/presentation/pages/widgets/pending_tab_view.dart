@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import '../../../../../core/request_state.dart';
+import '../../../../../l10n/l10n.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../../../widgets/constants.dart';
 import '../../../../widgets/loading_widget.dart';
@@ -38,10 +39,10 @@ class PendingTabView extends StatelessWidget {
                         context),
                   ),
                   if (orders.isEmpty)
-                    const SliverFillRemaining(
+                     SliverFillRemaining(
                       child: Center(
                           child: NoDataWidget(
-                        message: 'No Orders Yet.',
+                        message: AppLocalizations.of(context).noOrdersYet,
                       )),
                     )
                   else

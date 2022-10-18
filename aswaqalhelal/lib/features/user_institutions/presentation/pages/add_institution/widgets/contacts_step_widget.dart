@@ -84,7 +84,7 @@ class _ContactsStepWidget extends HookWidget {
                                       .addPhoneNumber(phoneNumber);
                                 }
                               : null,
-                      child: const Text('Add')))
+                      child:  Text(AppLocalizations.of(context).add)))
             ],
           );
         },

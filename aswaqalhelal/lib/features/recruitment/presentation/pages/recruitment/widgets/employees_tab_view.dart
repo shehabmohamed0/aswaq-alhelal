@@ -1,3 +1,4 @@
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
@@ -14,8 +15,9 @@ class EmployeesTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
-
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as RecruitmentPageArguments;
+    final intl = AppLocalizations.of(context);
     return SafeArea(
       top: false,
       bottom: false,
@@ -29,12 +31,14 @@ class EmployeesTabView extends StatelessWidget {
               return const LoadingWidget();
             case RequestState.error:
               return CheckInternetConnection(onPressed: () {
-                context.read<EmployeesCubit>().getEmployees(arguments.institutionId);
+                context
+                    .read<EmployeesCubit>()
+                    .getEmployees(arguments.institutionId);
               });
             case RequestState.loaded:
               if (state.employees.isEmpty) {
-                return const Center(
-                  child: Text('No Employees yet'),
+                return  Center(
+                  child: Text(intl.noEmployeesYet),
                 );
               }
               return CustomScrollView(
@@ -46,7 +50,7 @@ class EmployeesTabView extends StatelessWidget {
                 // The PageStorageKey should be unique to this ScrollView;
                 // it allows the list to remember its scroll position when
                 // the tab view is not on the screen.
-                key: const PageStorageKey<String>('Offers'),
+                key:  const PageStorageKey<String>('employees'),
                 slivers: <Widget>[
                   SliverOverlapInjector(
                     // This is the flip side of the SliverOverlapAbsorber

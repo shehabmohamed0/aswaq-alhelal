@@ -52,6 +52,9 @@ class Address extends Equatable {
           name: neighborhood,
         ),
       );
+
+  
+
   @override
   List<Object?> get props => [
         id,

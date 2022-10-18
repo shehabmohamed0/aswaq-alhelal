@@ -3,6 +3,7 @@ import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/routes/routes.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../auth/domain/entities/user_profile.dart';
 import '../../../user_institutions/presentation/widgets/institutions_grid_view.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
@@ -30,13 +31,13 @@ class WorkInstitutionsPage extends StatelessWidget {
             });
           case RequestState.loaded:
             if (state.institutions.isEmpty) {
-              return const Center(
-                child: Text('No Institutions'),
+              return  Center(
+                child: Text(AppLocalizations.of(context).noInstitutions),
               );
             }
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Work institutions'),
+                title:  Text(AppLocalizations.of(context).workInstitutions),
               ),
               body: InstitutionsGridView(
                 institutions: state.institutions,

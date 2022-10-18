@@ -110,7 +110,7 @@ class LoginPage extends HookWidget {
                             onPressed: () async {
                               if (await launchUrl(
                                   Uri.parse(
-                                      'https://aswaqalhelal.godaddysites.com/'),
+                                      'https://sites.google.com/view/aswaq-alhelal/home'),
                                   mode: LaunchMode.externalApplication)) {
                               } else {
                                 showErrorSnackBar(context, intl.error);
@@ -148,12 +148,12 @@ class LoginPage extends HookWidget {
                         //   ],
                         // ),
                         if (state.codeSent)
-                          const Text(
-                            'Verifiy phone number',
-                            style: TextStyle(
+                          Text(
+                            intl.verifiyPhoneNumber,
+                            style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w600),
                           ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         if (state.codeSent)
                           EnsureVisibleWhenFocused(
                             focusNode: focusNode,

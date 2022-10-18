@@ -1,6 +1,7 @@
-import '../../l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
+
+import '../../l10n/l10n.dart';
 
 class CheckInternetConnection extends StatelessWidget {
   const CheckInternetConnection({Key? key, required this.onPressed})
@@ -14,10 +15,10 @@ class CheckInternetConnection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Check internet connection.',
+            intl.checkInternetConnection,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          ElevatedButton(onPressed: onPressed, child: const Text('Try again'))
+          ElevatedButton(onPressed: onPressed, child: Text(intl.tryAgain))
         ],
       ),
     );

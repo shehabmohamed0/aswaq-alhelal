@@ -20,7 +20,6 @@ class UserProfile extends BaseProfile {
     this.gender,
     this.address,
   });
-
   @override
   List<Object?> get props => [
         id,

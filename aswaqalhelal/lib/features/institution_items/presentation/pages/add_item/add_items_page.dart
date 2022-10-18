@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -10,6 +8,7 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../../l10n/l10n.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
@@ -25,6 +24,7 @@ class AddItemPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final controller = useTextEditingController();
     final focusNode = useFocusNode();
     final bloc = context.read<AddItemBloc>();
@@ -58,7 +58,7 @@ class AddItemPage extends HookWidget {
           listener: (context, state) {
             if (state.status.isSubmissionInProgress) {
               EasyLoading.show(
-                status: 'loading',
+                status: intl.loading,
                 indicator: const FittedBox(
                   child: SpinKitRipple(
                     duration: Duration(milliseconds: 1200),
@@ -72,14 +72,10 @@ class AddItemPage extends HookWidget {
               if (state.isEdit) {
                 cubit.updateInstitution(state.institutionItem!);
                 Navigator.pop(context);
-                showSuccessSnackBar(context, 'Item Updated succefully');
+                showSuccessSnackBar(context, intl.itemUpdatedSuccefully);
                 return;
               }
-              final institutionItemsCubit =
-                  context.read<InstitutionItemsCubit>();
-              if (institutionItemsCubit.state is InstitutionItemsEmpty) {
-                institutionItemsCubit.addItem(state.institutionItem!);
-              }
+
               cubit.addItem(state.institutionItem!);
               Navigator.pop(context);
             }
@@ -105,7 +101,7 @@ class AddItemPage extends HookWidget {
               case UnitStatus.initial:
                 break;
               case UnitStatus.exsists:
-                showErrorSnackBar(context, 'Unit exsists before');
+                showErrorSnackBar(context, intl.unitExsistsBefore);
 
                 break;
             }
@@ -113,7 +109,7 @@ class AddItemPage extends HookWidget {
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(title: const Text('Add item')),
+        appBar: AppBar(title: Text(intl.addItem)),
         body: Padding(
           padding: const EdgeInsets.all(8) - const EdgeInsets.only(bottom: 8),
           child: SingleChildScrollView(
@@ -166,7 +162,7 @@ class AddItemPage extends HookWidget {
                                   top: 4,
                                   right: 4,
                                   child: Container(
-                                    padding: EdgeInsets.all(2),
+                                    padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.grey.shade200,
@@ -206,14 +202,14 @@ class AddItemPage extends HookWidget {
                                     ))
                               ]);
                             } else {
-                              return const Padding(
-                                padding: EdgeInsets.all(4),
+                              return Padding(
+                                padding: const EdgeInsets.all(4),
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Text(
-                                    'Tap to\nSelect item image.',
+                                    intl.tapTonselectItemImage,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black45,
                                     ),
@@ -228,7 +224,7 @@ class AddItemPage extends HookWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Name', style: Theme.of(context).textTheme.titleMedium),
+                Text(intl.name, style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 2),
                 BlocBuilder<AddItemBloc, AddItemState>(
                   buildWhen: (previous, current) =>
@@ -255,7 +251,7 @@ class AddItemPage extends HookWidget {
                       suggestionBuilder: (context, item) {
                         return ListTile(
                           title: Text(item.name),
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.check,
                             color: Colors.green,
                           ),
@@ -266,7 +262,7 @@ class AddItemPage extends HookWidget {
                         focusNode.unfocus();
                         bloc.add(AddNewItem(controller.text));
                       },
-                      errorWidget: const ListTile(title: Text('Error')),
+                      errorWidget: ListTile(title: Text(intl.error)),
                       loadingWidget: const Center(
                         child: Padding(
                           padding: EdgeInsets.all(4.0),
@@ -290,7 +286,7 @@ class AddItemPage extends HookWidget {
                       children: [
                         Row(children: [
                           Text(
-                            'Units',
+                            intl.units,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const Spacer(),
@@ -324,9 +320,9 @@ class AddItemPage extends HookWidget {
                           )
                         ]),
                         UnitWidget(
-                          name: 'Name',
-                          quantity: 'Quantity',
-                          price: 'Price EGP',
+                          name: intl.name,
+                          quantity: intl.quantity,
+                          price: intl.priceEgp,
                           color: Colors.grey.shade200,
                         ),
                         if (state.units.isNotEmpty)
@@ -394,7 +390,7 @@ class AddItemPage extends HookWidget {
                                 );
                               }
                             : null,
-                        child: const Text('add'),
+                        child: Text(state.isEdit ? intl.update : intl.add),
                       );
                     },
                   ),

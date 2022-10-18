@@ -315,7 +315,6 @@ class _ItemListWidget2State extends State<ItemListWidget2> {
                           ),
                           onChanged: (text) {
                             final number = int.tryParse(text);
-                            log(number.toString());
                             if (number != null && number >= 0) {
                               widget.onCounterChanged?.call(number);
                             }

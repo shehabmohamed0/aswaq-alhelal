@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../l10n/l10n.dart';
+
 class ImageBottomSheetWidget extends StatelessWidget {
   const ImageBottomSheetWidget({
     Key? key,
@@ -19,14 +21,14 @@ class ImageBottomSheetWidget extends StatelessWidget {
             _SquaredContainerButton(
               dimension: constrains.maxWidth / 2 - 8,
               iconData: Icons.camera_alt,
-              label: 'Take Photo',
+              label: AppLocalizations.of(context).takePhoto,
               onPressed: onCameraPressed,
             ),
             const SizedBox(width: 16),
             _SquaredContainerButton(
               dimension: constrains.maxWidth / 2 - 8,
               iconData: Icons.image_rounded,
-              label: 'Gallery',
+              label: AppLocalizations.of(context).gallery,
               onPressed: onGalleryPressed,
             )
           ],

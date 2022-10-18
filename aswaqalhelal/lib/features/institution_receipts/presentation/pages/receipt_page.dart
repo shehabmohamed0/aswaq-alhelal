@@ -1,8 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -29,6 +30,7 @@ class InstitutionReceiptPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     final cubit = context.read<InstitutionReceiptsCubit>();
     final userId =
         context.select((AppBloc element) => element.state.profile.id);
@@ -54,7 +56,7 @@ class InstitutionReceiptPage extends HookWidget {
           default:
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Receipt'),
+                title: Text(intl.receipt),
                 elevation: 0,
               ),
               body: GestureDetector(
@@ -100,7 +102,7 @@ class InstitutionReceiptPage extends HookWidget {
                               ComboBoxWidget<InstitutionItem>(
                                 controller: itemController,
                                 focusNode: itemFocusNode,
-                                labelText: 'Item',
+                                labelText: intl.item,
                                 suggestions: state.filteredItems,
                                 suggestionBuilder: (context, item) =>
                                     ListTile(title: Text(item.name)),
@@ -116,10 +118,10 @@ class InstitutionReceiptPage extends HookWidget {
                               const SizedBox(height: 4),
                               DropdownSearch<Unit>(
                                 dropdownDecoratorProps:
-                                    const DropDownDecoratorProps(
+                                     DropDownDecoratorProps(
                                         dropdownSearchDecoration:
                                             InputDecoration(
-                                                labelText: 'Unit',
+                                                labelText: intl.unit,
                                                 floatingLabelBehavior:
                                                     FloatingLabelBehavior
                                                         .always)),
@@ -165,8 +167,8 @@ class InstitutionReceiptPage extends HookWidget {
                                       onSubmitted: (string) {
                                         priceFocusNode.requestFocus();
                                       },
-                                      decoration: const InputDecoration(
-                                        labelText: 'Quantity',
+                                      decoration:  InputDecoration(
+                                        labelText:intl.quantity,
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.always,
                                       ),
@@ -183,13 +185,13 @@ class InstitutionReceiptPage extends HookWidget {
                                       focusNode: priceFocusNode,
                                       enabled: !state.receiptSaved,
                                       onChanged: cubit.unitPriceChanged,
-                                      decoration: const InputDecoration(
-                                          labelText: 'Price',
+                                      decoration:  InputDecoration(
+                                          labelText:intl.price,
                                           floatingLabelBehavior:
                                               FloatingLabelBehavior.always,
                                           suffix: Text(
-                                            'EGP',
-                                            style: TextStyle(
+                                           intl.egp,
+                                            style:const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       keyboardType:
@@ -428,6 +430,7 @@ class InstitutionReceiptPage extends HookWidget {
         break;
 
       case InstitutionReceiptStatus.success:
+        FocusScope.of(context).unfocus();
         EasyLoading.dismiss();
         showSuccessSnackBar(context, 'Receipt saved successfully');
         break;
@@ -440,12 +443,18 @@ class InstitutionReceiptPage extends HookWidget {
   }
 }
 
-Future<Uint8List> createPdf(List<OrderItem> items) {
+Future<Uint8List> createPdf(List<OrderItem> items) async {
+  final theme = pw.ThemeData.withFont(
+    base: pw.Font.ttf(await rootBundle.load('fonts/Cairo-Regular.ttf')),
+    bold: pw.Font.ttf(await rootBundle.load('fonts/Cairo-Bold.ttf')),
+  );
   final totalPrice = items
       .map((e) => e.quantity * e.price)
       .reduce((value, element) => value + element);
   final pdf = pw.Document();
   pdf.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      theme: theme,
       build: (context) => pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
@@ -472,18 +481,24 @@ Future<Uint8List> createPdf(List<OrderItem> items) {
                                       width: constraints!.maxWidth * .25,
                                       child: pw.Center(
                                           child: pw.FittedBox(
-                                              child: pw.Text(
-                                                  items[index].item.name,
-                                                  style: const pw.TextStyle(
-                                                      fontSize: 18))))),
+                                              child: pw.Directionality(
+                                                  textDirection:
+                                                      pw.TextDirection.rtl,
+                                                  child: pw.Text(
+                                                      items[index].item.name,
+                                                      style: const pw.TextStyle(
+                                                          fontSize: 18)))))),
                                   pw.SizedBox(
                                       width: constraints.maxWidth * .25,
                                       child: pw.Center(
                                           child: pw.FittedBox(
-                                              child: pw.Text(
-                                                  items[index].unit.name,
-                                                  style: const pw.TextStyle(
-                                                      fontSize: 18))))),
+                                              child: pw.Directionality(
+                                                  textDirection:
+                                                      pw.TextDirection.rtl,
+                                                  child: pw.Text(
+                                                      items[index].unit.name,
+                                                      style: const pw.TextStyle(
+                                                          fontSize: 18)))))),
                                   pw.SizedBox(
                                       width: constraints.maxWidth * .25,
                                       child: pw.Center(

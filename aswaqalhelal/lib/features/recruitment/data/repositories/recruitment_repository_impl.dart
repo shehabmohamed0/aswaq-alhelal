@@ -8,6 +8,7 @@ import 'package:root_package/packages/cloud_functions.dart';
 import 'package:root_package/packages/dartz.dart';
 import 'package:root_package/packages/injectable.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../../domain/entities/employee.dart';
 import '../../domain/entities/job_offer.dart';
 import '../../domain/repositories/recruitment_repository.dart';
@@ -75,18 +76,19 @@ class RecruitmentRepositoryImpl extends RecruitmentRepository {
     } on FirebaseFunctionsException catch (e) {
       if (e.code == 'not-found') {
         return Left(UserNotFoundFailure(
-            'The phone number does not correspond to any user'));
+            AppLocalizations.current.thePhoneNumberDoesNotCorrespondToAnyUser));
       }
       if (e.code == 'already-exists') {
-        return Left(
-            AlreadySendOfferFailure('Already sent an offer to this user.'));
+        return Left(AlreadySendOfferFailure(
+            AppLocalizations.current.alreadySentAnOfferToThisUser));
       }
       if (e.code == 'failed-precondition') {
-        return Left(AlreadySendOfferFailure(
-            'This user is currently working for the institution.'));
+        return Left(AlreadySendOfferFailure(AppLocalizations
+            .current.thisUserIsCurrentlyWorkingForTheInstitution));
       }
       if (e.code == 'internal') {
-        return Left(AlreadySendOfferFailure('Server error.'));
+        return Left(
+            AlreadySendOfferFailure(AppLocalizations.current.serverError));
       } else {
         return Left(ServerFailure.general());
       }

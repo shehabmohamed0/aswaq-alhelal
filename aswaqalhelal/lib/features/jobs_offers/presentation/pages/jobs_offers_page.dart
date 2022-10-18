@@ -5,6 +5,7 @@ import 'package:root_package/packages/flutter_spinkit.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
@@ -21,7 +22,7 @@ class JobsOffersPage extends StatelessWidget {
     final userId = context.select((AppBloc e) => e.state.profile.id);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Jobs Offers'),
+        title:  Text(AppLocalizations.of(context).jobsOffers),
         elevation: 0,
       ),
       body: BlocConsumer<JobsOffersCubit, JobsOffersState>(
@@ -92,7 +93,7 @@ class JobsOffersPage extends StatelessWidget {
                                   height: constraines.maxHeight,
                                   child: Center(
                                       child: Text(
-                                    'No jobs\noffers',
+                                    AppLocalizations.of(context).noJobsnoffers,
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme
