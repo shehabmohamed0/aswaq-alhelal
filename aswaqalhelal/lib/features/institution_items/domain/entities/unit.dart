@@ -5,16 +5,16 @@ class Unit extends Equatable {
   @JsonKey()
   final String referenceId;
   final String name;
-  final double quantity;
   final double price;
-
-  const Unit({
-    required this.referenceId,
-    required this.name,
-    required this.quantity,
-    required this.price,
-  });
+  final double quantity;
+  final Unit? baseUnit;
+  const Unit(
+      {required this.referenceId,
+      required this.name,
+      required this.quantity,
+      required this.price,
+      this.baseUnit});
 
   @override
-  List<Object?> get props => [referenceId, name, quantity, price];
+  List<Object?> get props => [referenceId, name, quantity, price, baseUnit];
 }

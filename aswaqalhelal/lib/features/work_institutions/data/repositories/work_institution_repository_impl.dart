@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:root_package/core/failures/failure.dart';
 import 'package:root_package/core/failures/server_failure.dart';
@@ -25,6 +27,8 @@ class WorkInstitutionRepositoryImpl extends WorkInstitutionRepository {
 
       return Right(institutions);
     } catch (e) {
+      rethrow;
+      log(e.toString());
       return Left(ServerFailure.general());
     }
   }

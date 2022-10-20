@@ -11,7 +11,7 @@ class ReferenceItem extends BaseItem {
     required this.id,
     required String institutionId,
     required String name,
-    required String imageUrl,
+    required String? imageUrl,
     required List<Unit> units,
     required DateTime creationTime,
   }) : super(

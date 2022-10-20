@@ -39,10 +39,9 @@ class OrderItemModel extends OrderItem {
   /// Connect the generated [_$ReceiptItemModelToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$OrderItemModelToJson(this);
 
-  factory OrderItemModel.fromDomain(OrderItem receiptItem) =>
-      OrderItemModel(
-          itemModel: InstitutionItemModel.fromDomain(receiptItem.item),
-          unitModel: UnitModel.fromDomain(receiptItem.unit),
-          quantity: receiptItem.quantity,
-          price: receiptItem.price);
+  factory OrderItemModel.fromDomain(OrderItem receiptItem) => OrderItemModel(
+      itemModel: InstitutionItemModel.fromDomain(receiptItem.item),
+      unitModel: UnitModel.fromDomain(receiptItem.unit),
+      quantity: receiptItem.quantity,
+      price: receiptItem.price);
 }

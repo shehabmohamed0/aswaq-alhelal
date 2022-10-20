@@ -16,7 +16,7 @@ class InstitutionItemModel extends InstitutionItem {
     required String institutionId,
     required String referenceId,
     required String name,
-    required String imageUrl,
+    required String? imageUrl,
     required DateTime creationTime,
     required this.unitModels,
   }) : super(

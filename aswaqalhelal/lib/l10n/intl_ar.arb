@@ -6,7 +6,7 @@
   "settings": "الاعدادات",
   "logout": "تسجيل خروج",
   "home": "الرئيسية",
-  "aswaqLhelal": "أسواق الهلال",
+  "aswaqAlhilal": "أسواق الهلال",
   "noImage": "لا يوجد صورة",
   "uploadedSucceffully": "تم الرفع بنجاح",
   "uploadingFailed": "فشل الرفع",
@@ -201,5 +201,7 @@
   "noItems": "لا يوجد اصناف",
   "creationTime": "وقت الانشاء",
   "alphabetically": "ابجدى",
-  "areYouSureYouWantTonorderNow": "هل أنت متأكد أنك تريد الطلب الآن؟"
+  "areYouSureYouWantTonorderNow": "هل أنت متأكد أنك تريد الطلب الآن؟",
+  "areaExistsBefore": "Area exists before",
+  "itemNameAlreadyExists": "Item name already exists"
 }

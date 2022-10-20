@@ -1,9 +1,10 @@
-import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 
+import '../../../../l10n/l10n.dart';
 import '../../../home/presentation/pages/widgets/custom_drop_down_button.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
@@ -41,11 +42,20 @@ class ItemAddToCartDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: CachedNetworkImage(
-                      imageUrl: item.imageUrl,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (item.imageUrl == null) const Spacer(),
+                      item.imageUrl == null
+                          ? const Expanded(
+                              flex: 2,
+                              child: FittedBox(
+                                  child: FaIcon(FontAwesomeIcons.box)))
+                          : CachedNetworkImage(
+                              imageUrl: item.imageUrl!,
+                            ),
+                      if (item.imageUrl == null) const Spacer(),
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Text(

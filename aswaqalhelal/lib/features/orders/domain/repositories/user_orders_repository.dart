@@ -48,31 +48,7 @@ class PlaceOrderParams {
 
   OrderModel toModel(String id) => OrderModel(
       id: id,
-      itemsModels: orderItems
-          .map((cartItem) => OrderItemModel(
-              price: cartItem.price,
-              itemModel: InstitutionItemModel(
-                id: cartItem.item.id,
-                institutionId: cartItem.item.institutionId,
-                referenceId: cartItem.item.referenceId,
-                name: cartItem.item.name,
-                imageUrl: cartItem.item.imageUrl,
-                creationTime: cartItem.item.creationTime,
-                unitModels: cartItem.item.units
-                    .map((e) => UnitModel(
-                        referenceId: e.referenceId,
-                        name: e.name,
-                        quantity: e.quantity,
-                        price: e.price))
-                    .toList(),
-              ),
-              unitModel: UnitModel(
-                  referenceId: cartItem.unit.referenceId,
-                  name: cartItem.unit.name,
-                  quantity: cartItem.unit.quantity,
-                  price: cartItem.unit.price),
-              quantity: cartItem.quantity))
-          .toList(),
+      itemsModels: orderItems.map(OrderItemModel.fromDomain).toList(),
       totalPrice: totalPrice,
       orderState: orderState,
       from: from,

@@ -42,7 +42,9 @@ class ItemsRepositoryImpl extends ItemsRepository {
     try {
       final items = await _itemsApiService.addInstitutionItem(params);
       return Right(items);
-    } on UploadFileException {
+    } on UploadFileException catch (e) {
+      log(e.toString());
+
       return Left(UploadFileFailure.image());
     } on Exception catch (e) {
       log(e.toString());
@@ -59,12 +61,13 @@ class ItemsRepositoryImpl extends ItemsRepository {
     try {
       final items = await _itemsApiService.addRefAndInstitutionItem(params);
       return Right(items);
-    } on UploadFileException {
+    } on UploadFileException catch (e) {
+      log('e.toString()');
       return Left(UploadFileFailure.image());
-    } on Exception catch (e) {
-      log(e.toString());
+    }  catch (e) {
+      log('e.toString() 2');
       return Left(ServerFailure.general());
-    }
+    } 
   }
 
   @override
@@ -77,7 +80,6 @@ class ItemsRepositoryImpl extends ItemsRepository {
       final items = await _itemsApiService.getInstitutionItems(params);
       return Right(items);
     } catch (e) {
-      print(e.toString());
       log(e.toString());
       return Left(ServerFailure.general());
     }

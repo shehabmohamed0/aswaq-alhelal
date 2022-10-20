@@ -40,7 +40,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
   @override
   Future<List<ReferenceItemModel>> searchItem(String val) async {
     final collection = _firestore.collection(FirestorePath.itemsReference);
-    final searchText= val.prepareForSearch();
+    final searchText = val.prepareForSearch();
     final snapshot = await collection
         .where('searchText', isGreaterThanOrEqualTo: searchText)
         // ignore: prefer_interpolation_to_compose_strings
@@ -117,56 +117,27 @@ class ItemsApiServiceImpl implements ItemsApiService {
       AddRefAndInstitutionItemParams params) async {
     final refDoc = _firestore.collection(FirestorePath.itemsReference).doc();
     final doc = _firestore.collection(FirestorePath.items).doc();
-
-    final either = await Utils.uploadFile(params.imageFile,
-        'items/${refDoc.id}/${basename(params.imageFile.path)}');
-
-    return either.fold<Future<InstitutionItemModel>>((exception) {
-      throw exception;
-    }, (imageUrl) async {
-      final batch = _firestore.batch();
-      final units = params.units
-          .map((e) => {
-                'referenceId': e.referenceId,
-                'name': e.name,
-                'quantity': e.quantity,
-                'price': e.price,
-              })
-          .toList();
-      batch.set(
-        refDoc,
-        {
-          'name': params.itemName,
-          'searchText': params.itemName.prepareForSearch(),
-          'institutionId': params.institutionId,
-          'creationTime': FieldValue.serverTimestamp(),
-          'imageUrl': imageUrl,
-          'units': units
-        },
+    String? imageUrl;
+    if (params.imageFile != null) {
+      final eitherUrlOrFailure = await Utils.uploadFile(
+        params.imageFile!,
+        'items/${refDoc.id}/${basename(params.imageFile!.path)}',
       );
+      imageUrl =
+          eitherUrlOrFailure.fold((exception) => throw exception, (url) => url);
+    }
+    final model = params.toModel(doc.id, refDoc.id, imageUrl);
+    final jsonData = model.toJson();
+    jsonData['searchText'] = params.itemName.prepareForSearch();
+    jsonData['creationTime'] = FieldValue.serverTimestamp();
 
-      batch.set(doc, {
-        'name': params.itemName,
-        'searchText': params.itemName.prepareForSearch(),
-        'institutionId': params.institutionId,
-        'referenceId': refDoc.id,
-        'creationTime': FieldValue.serverTimestamp(),
-        'imageUrl': imageUrl,
-        'units': units
-      });
+    final batch = _firestore.batch();
+    batch.set(refDoc, jsonData);
+    batch.set(doc, jsonData);
 
-      await batch.commit();
+    await batch.commit();
 
-      return InstitutionItemModel(
-        id: doc.id,
-        institutionId: params.institutionId,
-        name: params.itemName,
-        imageUrl: imageUrl,
-        referenceId: refDoc.id,
-        creationTime: DateTime.now(),
-        unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),
-      );
-    });
+    return model;
   }
 
   @override

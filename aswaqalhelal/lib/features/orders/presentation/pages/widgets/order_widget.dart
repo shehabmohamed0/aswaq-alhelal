@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:root_package/core/resources/color_manager.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 import 'package:root_package/packages/url_launcher.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -89,7 +90,7 @@ class _OrderWidgetState extends State<OrderWidget>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.order.name,
+                    widget.order.name ?? 'Anonymous user',
                     style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: ColorManager.primary),
@@ -110,10 +111,12 @@ class _OrderWidgetState extends State<OrderWidget>
                         padding: EdgeInsets.zero,
                         visualDensity:
                             const VisualDensity(horizontal: -4, vertical: -4),
-                        onPressed: () {
-                          launchUrl(
-                              Uri.parse("tel://${widget.order.phoneNumber}"));
-                        },
+                        onPressed: widget.order.phoneNumber == null
+                            ? null
+                            : () {
+                                launchUrl(Uri.parse(
+                                    "tel://${widget.order.phoneNumber}"));
+                              },
                         icon: const Icon(
                           Icons.phone,
                           size: 20,
@@ -122,7 +125,7 @@ class _OrderWidgetState extends State<OrderWidget>
                       )),
                   const SizedBox(width: 4),
                   Text(
-                    widget.order.phoneNumber,
+                    widget.order.phoneNumber ?? '----------',
                     style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold, color: Colors.black45),
                   ),
@@ -439,10 +442,14 @@ class _ItemDetails extends StatelessWidget {
               child: SizedBox(
                 child: Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: orderItem.item.imageUrl,
-                      height: 60,
-                    ),
+                    if (orderItem.item.imageUrl == null)
+                      const Expanded(
+                          child: FittedBox(child: FaIcon(FontAwesomeIcons.box)))
+                    else
+                      CachedNetworkImage(
+                        imageUrl: orderItem.item.imageUrl!,
+                        height: 60,
+                      ),
                     const SizedBox(width: 4),
                     Flexible(
                       child: AutoSizeText(

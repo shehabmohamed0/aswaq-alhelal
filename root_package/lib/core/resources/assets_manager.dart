@@ -6,6 +6,7 @@ class ImageAssets {
   static const String googleLogo = "$imagePath/google_logo.svg";
   static const String otpSVG = "$imagePath/otp.svg";
   static const String otpPNG = "$imagePath/otp.png";
+  static const String logoJPG = "$imagePath/logo.jpg";
   static const String profile = "$imagePath/profile.png";
   
 }

@@ -11,11 +11,15 @@ UnitModel _$UnitModelFromJson(Map<String, dynamic> json) => UnitModel(
       name: json['name'] as String,
       quantity: (json['quantity'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
+      baseUnitModel: json['baseUnit'] == null
+          ? null
+          : UnitModel.fromJson(json['baseUnit'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UnitModelToJson(UnitModel instance) => <String, dynamic>{
       'referenceId': instance.referenceId,
       'name': instance.name,
-      'quantity': instance.quantity,
       'price': instance.price,
+      'quantity': instance.quantity,
+      'baseUnit': instance.baseUnitModel,
     };

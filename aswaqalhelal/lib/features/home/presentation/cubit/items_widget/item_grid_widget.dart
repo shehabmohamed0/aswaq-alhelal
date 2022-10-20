@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 
 class ItemGridWidget2 extends StatelessWidget {
   const ItemGridWidget2({
@@ -11,7 +12,7 @@ class ItemGridWidget2 extends StatelessWidget {
     required this.onPressed,
     this.onLongPressed,
   }) : super(key: key);
-  final String imageURL;
+  final String? imageURL;
   final String itemName;
   final String unitName;
   final double unitPrice;
@@ -37,12 +38,25 @@ class ItemGridWidget2 extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
-                  child: CachedNetworkImage(
-                    imageUrl: imageURL,
-                    fit: BoxFit.fitWidth,
+                if (imageURL == null)
+                  const Flexible(
+                      fit: FlexFit.tight,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: FaIcon(
+                              FontAwesomeIcons.box,
+                              color: Colors.black54,
+                            )),
+                      ))
+                else
+                  Flexible(
+                    child: CachedNetworkImage(
+                      imageUrl: imageURL!,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
-                ),
                 const SizedBox(height: 8),
                 Text(
                   itemName,

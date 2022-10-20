@@ -6,7 +6,6 @@ class Routes {
   static const landingPage = '/landing';
 
   static const startup = '/startup';
-  static const home = '/home';
   static const signup = '/signup';
   static const verifiyPhone = '/verifiyPhone';
 

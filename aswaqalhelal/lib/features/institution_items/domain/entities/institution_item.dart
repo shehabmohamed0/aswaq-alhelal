@@ -14,7 +14,7 @@ class InstitutionItem extends BaseItem {
     required this.referenceId,
     required String institutionId,
     required String name,
-    required String imageUrl,
+    required String? imageUrl,
     required List<Unit> units,
     required DateTime creationTime,
   }) : super(
@@ -27,5 +27,5 @@ class InstitutionItem extends BaseItem {
 
   @override
   List<Object?> get props =>
-      [id, name, institutionId, referenceId, units, creationTime];
+      [id, name, institutionId, imageUrl, referenceId, units, creationTime];
 }

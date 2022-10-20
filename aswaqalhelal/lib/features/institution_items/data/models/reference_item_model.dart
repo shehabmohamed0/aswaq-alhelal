@@ -15,7 +15,7 @@ class ReferenceItemModel extends ReferenceItem {
     required String id,
     required String institutionId,
     required String name,
-    required String imageUrl,
+    required String? imageUrl,
     required DateTime creationTime,
     required this.unitModels,
   }) : super(

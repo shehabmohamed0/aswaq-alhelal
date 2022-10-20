@@ -17,6 +17,7 @@ import 'package:root_package/packages/stream_transform.dart';
 
 import '../../../../../core/params/add_item/params.dart';
 import '../../../../../core/params/add_item/search_item_params.dart';
+import '../../../../../l10n/l10n.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
@@ -144,7 +145,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       if (index != -1) {
         emit(state.copyWith(
             status: FormzStatus.submissionFailure,
-            errorMessage: 'Item name already exists.'));
+            errorMessage: AppLocalizations.current.itemNameAlreadyExists));
         return;
       }
     }
@@ -187,12 +188,11 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       );
       return;
     }
-
     if (!state.itemFromReference) {
       final either = await _addRefAndInstitutionItem(
         params: AddRefAndInstitutionItemParams(
           itemName: state.itemName.value,
-          imageFile: state.imageFile.value!,
+          imageFile: state.imageFile.value,
           units: state.units,
           institutionId: event.institutionId,
         ),

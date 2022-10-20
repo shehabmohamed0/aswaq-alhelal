@@ -2,12 +2,13 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 
 import '../../../../institution_items/domain/entities/unit.dart';
 
 class ItemListWidget2 extends StatefulWidget {
   factory ItemListWidget2.client({
-    required String imageURL,
+    required String? imageURL,
     required String itemName,
     required String unitName,
     required double unitPrice,
@@ -37,7 +38,7 @@ class ItemListWidget2 extends StatefulWidget {
           onCounterChanged: onCounterChanged,
           isCart: isCart);
   factory ItemListWidget2.owner(
-          {required String imageURL,
+          {required String? imageURL,
           required String itemName,
           required String unitName,
           required double unitPrice,
@@ -71,7 +72,7 @@ class ItemListWidget2 extends StatefulWidget {
       this.isCart = false})
       : super(key: key);
 
-  final String imageURL;
+  final String? imageURL;
   final String itemName;
   final String unitName;
   final double unitPrice;
@@ -144,10 +145,22 @@ class _ItemListWidget2State extends State<ItemListWidget2> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: widget.imageURL,
-                    width: 140,
-                  ),
+                  if (widget.imageURL == null)
+                    const Flexible(
+                        child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: FittedBox(
+                          child: FaIcon(
+                        FontAwesomeIcons.box,
+                        color: Colors.black54,
+                        size: 140,
+                      )),
+                    ))
+                  else
+                    CachedNetworkImage(
+                      imageUrl: widget.imageURL!,
+                      width: 140,
+                    ),
                   const SizedBox(width: 4),
                   Flexible(
                     child: SizedBox(

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
 
@@ -17,10 +18,15 @@ class ImageUtils {
     Interpolation interpolation = Interpolation.nearest,
   }) async {
     final imageXFile = await ImagePicker().pickImage(source: source);
+
     if (imageXFile == null) {
+      log('No image');
       return none();
     }
+
     final imageFile = File(imageXFile.path);
+    //todo: prevent unsuppotred image format
+    // if (imageFile.path.contains('.webp')) return none();
     final compressedImage =
         await compressImage(imageFile, width: width, height: height);
 

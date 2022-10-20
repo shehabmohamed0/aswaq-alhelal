@@ -10,7 +10,7 @@ xmlns:tools="http://schemas.android.com/tools"
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="Aswaq Alhelal">
+        android:label="Aswaq Alhilal">
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

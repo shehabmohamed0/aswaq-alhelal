@@ -120,11 +120,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Aswaq Alhelal`
-  String get aswaqLhelal {
+  /// `Aswaq Alhilal`
+  String get aswaqAlhilal {
     return Intl.message(
-      'Aswaq Alhelal',
-      name: 'aswaqLhelal',
+      'Aswaq Alhilal',
+      name: 'aswaqAlhilal',
       desc: '',
       args: [],
     );
@@ -230,10 +230,10 @@ class AppLocalizations {
     );
   }
 
-  /// `provider\'s credential is not valid.`
+  /// `provider's credential is not valid.`
   String get providersCredentialIsNotValid {
     return Intl.message(
-      'provider\\\'s credential is not valid.',
+      'provider\'s credential is not valid.',
       name: 'providersCredentialIsNotValid',
       desc: '',
       args: [],
@@ -410,10 +410,10 @@ class AppLocalizations {
     );
   }
 
-  /// `The email and password you entered does\'t belong this user.`
+  /// `The email and password you entered does't belong this user.`
   String get theEmailAndPasswordYouEnteredDoestBelongThisUser {
     return Intl.message(
-      'The email and password you entered does\\\'t belong this user.',
+      'The email and password you entered does\'t belong this user.',
       name: 'theEmailAndPasswordYouEnteredDoestBelongThisUser',
       desc: '',
       args: [],
@@ -460,10 +460,10 @@ class AppLocalizations {
     );
   }
 
-  /// `The user\'s last sign-in time does not meet the security threshold.`
+  /// `The user's last sign-in time does not meet the security threshold.`
   String get theUsersLastSigninTimeDoesNotMeetTheSecurity {
     return Intl.message(
-      'The user\\\'s last sign-in time does not meet the security threshold.',
+      'The user\'s last sign-in time does not meet the security threshold.',
       name: 'theUsersLastSigninTimeDoesNotMeetTheSecurity',
       desc: '',
       args: [],
@@ -1342,10 +1342,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Deliver to a different addressaddress`
+  /// `Deliver to a different address`
   String get deliverToDifferentAddress {
     return Intl.message(
-      'Deliver to a different addressaddress',
+      'Deliver to a different address',
       name: 'deliverToDifferentAddress',
       desc: '',
       args: [],
@@ -1425,7 +1425,7 @@ class AppLocalizations {
   /// `Tap to\nSelect item image.`
   String get tapTonselectItemImage {
     return Intl.message(
-      'Tap to\\nSelect item image.',
+      'Tap to\nSelect item image.',
       name: 'tapTonselectItemImage',
       desc: '',
       args: [],
@@ -1967,6 +1967,26 @@ class AppLocalizations {
     return Intl.message(
       'Are you sure you want to\norder now ?',
       name: 'areYouSureYouWantTonorderNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area exists before`
+  String get areaExistsBefore {
+    return Intl.message(
+      'Area exists before',
+      name: 'areaExistsBefore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item name already exists`
+  String get itemNameAlreadyExists {
+    return Intl.message(
+      'Item name already exists',
+      name: 'itemNameAlreadyExists',
       desc: '',
       args: [],
     );

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
               drawer: const AppDrawer(),
               appBar: AppBar(
                 title: state.profile.fold(
-                    (user) => Text(AppLocalizations.of(context).aswaqLhelal),
+                    (user) => Text(AppLocalizations.of(context).aswaqAlhilal),
                     (institution) => Text(institution.name)),
                 elevation: 0,
                 actions: const [NotificationsBell()],
@@ -64,3 +64,7 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+

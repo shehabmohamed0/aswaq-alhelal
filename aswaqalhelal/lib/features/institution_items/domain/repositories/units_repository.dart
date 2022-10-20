@@ -27,9 +27,12 @@ class AddUnitToReferenceParams {
     required this.price,
   });
 
+//TODO: get the base unit and pass it to add new unit
   UnitModel toModel(String referenceId) => UnitModel(
-      referenceId: referenceId,
-      name: name,
-      quantity: quantity.toDouble(),
-      price: price);
+        referenceId: referenceId,
+        name: name,
+        quantity: quantity.toDouble(),
+        price: price,
+        baseUnitModel: null
+      );
 }

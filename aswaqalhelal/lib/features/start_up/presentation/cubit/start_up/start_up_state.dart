@@ -5,5 +5,14 @@ abstract class StartUpState {}
 
 class StartUpInitial extends StartUpState {}
 
-class StartUpOnboarding extends StartUpState {}
-class StartUpHomePage extends StartUpState {}
+class StartUpFinished extends StartUpState {
+  final String routeName;
+  final Object? arguments;
+
+  StartUpFinished({
+    required this.routeName,
+    this.arguments,
+  });
+}
+
+class StartupNeedToUpdateTheApp extends StartUpState {}

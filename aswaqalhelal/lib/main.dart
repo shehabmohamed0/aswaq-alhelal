@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/firebase_core.dart';
+import 'package:root_package/packages/firebase_remote_config.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 
 import 'app.dart';
@@ -22,10 +23,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  FirebaseRemoteConfig.instance.activate();
   await RootPackageLocator.configureDependencies();
   await configureDependencies(locator);
   // Wrap your app
-
   runApp(const App());
 }

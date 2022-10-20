@@ -10,6 +10,7 @@ import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/stream_transform.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../../address_suggestions/domain/usecases/usecases.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
@@ -92,7 +93,7 @@ class DistributionAreasBloc
         if (index != -1) {
           emit(state.copyWith(
               status: DistributionAreasStatus.failure,
-              errorMessage: 'Area exists before.'));
+              errorMessage: AppLocalizations.current.areaExistsBefore));
           return;
         }
 

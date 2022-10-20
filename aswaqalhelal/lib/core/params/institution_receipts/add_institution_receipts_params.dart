@@ -11,53 +11,31 @@ class AddInstitutionReceiptParams {
   final String from;
   final String institutionOwnerId;
   final String? to;
+  final String? name;
+  final String? phoneNumber;
   final String? editorId;
   final String? sellerId;
-  AddInstitutionReceiptParams(
-      {required this.receiptItems,
-      required this.totalPrice,
-      required this.from,
-      required this.institutionOwnerId,
-      required this.to,
-      required this.editorId,
-      required this.sellerId});
+  AddInstitutionReceiptParams({
+    required this.receiptItems,
+    required this.totalPrice,
+    required this.from,
+    required this.institutionOwnerId,
+    required this.to,
+    required this.name,
+    required this.phoneNumber,
+    required this.editorId,
+    required this.sellerId,
+  });
 
   OrderModel toModel(String id) => OrderModel(
         id: id,
         from: from,
         institutionOwnerId: institutionOwnerId,
         orderState: OrderState.shipping,
-        name: 'dasdasd',
-        phoneNumber: '+15051',
-        itemsModels: receiptItems
-            .map(
-              (receiptItem) => OrderItemModel(
-                  itemModel: InstitutionItemModel(
-                    id: receiptItem.item.id,
-                    name: receiptItem.item.name,
-                    institutionId: receiptItem.item.institutionId,
-                    referenceId: receiptItem.item.referenceId,
-                    imageUrl: receiptItem.item.imageUrl,
-                    unitModels: receiptItem.item.units
-                        .map((unit) => UnitModel(
-                            referenceId: unit.referenceId,
-                            name: unit.name,
-                            quantity: unit.quantity,
-                            price: unit.price))
-                        .toList(),
-                    creationTime: receiptItem.item.creationTime,
-                  ),
-                  price: receiptItem.price,
-                  quantity: receiptItem.quantity,
-                  unitModel: UnitModel(
-                    referenceId: receiptItem.unit.referenceId,
-                    name: receiptItem.unit.name,
-                    price: receiptItem.unit.price,
-                    quantity: receiptItem.unit.quantity,
-                  )),
-            )
-            .toList(),
+        itemsModels: receiptItems.map(OrderItemModel.fromDomain).toList(),
         to: to,
+        name: name,
+        phoneNumber: phoneNumber,
         totalPrice: totalPrice,
         editorId: editorId,
         sellerId: sellerId,

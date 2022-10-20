@@ -1,4 +1,3 @@
-import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
@@ -7,6 +6,7 @@ import 'package:root_package/root_package.dart' hide Unit;
 import '../../../../core/params/add_item/params.dart';
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/request_state.dart';
+import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
 import '../../../institution_items/domain/usecases/get_institution_items.dart';
@@ -187,6 +187,8 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
           to: null,
+          name: null,
+          phoneNumber: null,
           receiptItems: state.receiptItems,
           from: institution.id,
           institutionOwnerId: institution.userId,

@@ -51,7 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure to decline the order?"),
         "areYouSureYouWantTonorderNow": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to\norder now ?"),
-        "aswaqLhelal": MessageLookupByLibrary.simpleMessage("Aswaq Alhelal"),
+        "areaExistsBefore":
+            MessageLookupByLibrary.simpleMessage("Area exists before"),
+        "aswaqAlhilal": MessageLookupByLibrary.simpleMessage("Aswaq Alhilal"),
         "authenticationFailure":
             MessageLookupByLibrary.simpleMessage("Authentication Failure"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -83,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "decline": MessageLookupByLibrary.simpleMessage("Decline"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deliverToDifferentAddress": MessageLookupByLibrary.simpleMessage(
-            "Deliver to a different addressaddress"),
+            "Deliver to a different address"),
         "deliveryAddress":
             MessageLookupByLibrary.simpleMessage("Delivery address"),
         "deliveryLocation":
@@ -137,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Invalid phone number."),
         "item": MessageLookupByLibrary.simpleMessage("Item"),
+        "itemNameAlreadyExists":
+            MessageLookupByLibrary.simpleMessage("Item name already exists"),
         "itemUpdatedSuccefully":
             MessageLookupByLibrary.simpleMessage("Item Updated successfully"),
         "items": MessageLookupByLibrary.simpleMessage("items"),
@@ -201,7 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "priceEgp": MessageLookupByLibrary.simpleMessage("Price EGP"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "providersCredentialIsNotValid": MessageLookupByLibrary.simpleMessage(
-            "provider\\\'s credential is not valid."),
+            "provider\'s credential is not valid."),
         "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "receipt": MessageLookupByLibrary.simpleMessage("Receipt"),
         "receipts": MessageLookupByLibrary.simpleMessage("Receipts"),
@@ -230,7 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Switch Currencies"),
         "takePhoto": MessageLookupByLibrary.simpleMessage("Take Photo"),
         "tapTonselectItemImage":
-            MessageLookupByLibrary.simpleMessage("Tap to\\nSelect item image."),
+            MessageLookupByLibrary.simpleMessage("Tap to\nSelect item image."),
         "theCredentialGivenDoesNotCorrespondToAnyExistingUser":
             MessageLookupByLibrary.simpleMessage(
                 "The credential given does not correspond to any existing user."),
@@ -239,7 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The credential received is malformed or has expired."),
         "theEmailAndPasswordYouEnteredDoestBelongThisUser":
             MessageLookupByLibrary.simpleMessage(
-                "The email and password you entered does\\\'t belong this user."),
+                "The email and password you entered does\'t belong this user."),
         "theEmailHasAlreadyBeenLinkedToTheUser":
             MessageLookupByLibrary.simpleMessage(
                 "The Email has already been linked to the user."),
@@ -252,7 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The phone number does not correspond to any user"),
         "theUsersLastSigninTimeDoesNotMeetTheSecurity":
             MessageLookupByLibrary.simpleMessage(
-                "The user\\\'s last sign-in time does not meet the security threshold."),
+                "The user\'s last sign-in time does not meet the security threshold."),
         "theVerificationCodeReceivedIsInvalid":
             MessageLookupByLibrary.simpleMessage(
                 "The verification code received is invalid."),

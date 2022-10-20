@@ -15,6 +15,15 @@ import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
+  bool _canChangeProfile(BaseProfile profile) {
+    return profile.fold(
+        (user) =>
+            user.phoneNumber == '+201553583931' ||
+            user.phoneNumber == '+201001042111' ||
+            user.phoneNumber == '+201111354351',
+        (institution) => true);
+  }
+
   @override
   Widget build(BuildContext context) {
     final intl = AppLocalizations.of(context);
@@ -29,20 +38,24 @@ class AppDrawer extends StatelessWidget {
             children: [
               _DrawerHeader(
                 profile: profile,
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) => Dialog(
-                      child: ChangeProfileDialog(
-                        onProfileClicked: (profile) {
-                          context.read<AppBloc>().add(ProfileChanged(profile));
-                          Navigator.pop(context);
-                          Scaffold.of(context).closeDrawer();
-                        },
-                      ),
-                    ),
-                  );
-                },
+                onTap: !_canChangeProfile(state.profile)
+                    ? null
+                    : () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: ChangeProfileDialog(
+                              onProfileClicked: (profile) {
+                                context
+                                    .read<AppBloc>()
+                                    .add(ProfileChanged(profile));
+                                Navigator.pop(context);
+                                Scaffold.of(context).closeDrawer();
+                              },
+                            ),
+                          ),
+                        );
+                      },
               ),
               if (state.profile.isUser)
                 ListTile(
@@ -60,7 +73,7 @@ class AppDrawer extends StatelessWidget {
                         arguments: profile);
                   },
                   leading: const Icon(Icons.business_center),
-                  title:  Text(intl.work),
+                  title: Text(intl.work),
                 ),
               if (state.profile.isUser)
                 ListTile(
@@ -69,7 +82,7 @@ class AppDrawer extends StatelessWidget {
                         arguments: profile.id);
                   },
                   leading: const Icon(FontAwesomeIcons.userTag),
-                  title:  Text(intl.jobOffers),
+                  title: Text(intl.jobOffers),
                 ),
               if (state.profile.isUser)
                 ListTile(
@@ -98,7 +111,8 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 onTap: () async {
                   if (await launchUrl(
-                      Uri.parse('https://sites.google.com/view/aswaq-alhelal/home'),
+                      Uri.parse(
+                          'https://sites.google.com/view/aswaq-alhelal/home'),
                       mode: LaunchMode.externalApplication)) {
                   } else {
                     showErrorSnackBar(context, intl.somethingWentWrong);
@@ -202,7 +216,7 @@ class _DrawerHeader extends StatelessWidget {
   }) : super(key: key);
 
   final BaseProfile profile;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(

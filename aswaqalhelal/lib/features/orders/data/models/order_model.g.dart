@@ -11,8 +11,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       from: json['from'] as String,
       institutionOwnerId: json['institutionOwnerId'] as String,
       to: json['to'] as String?,
-      name: json['name'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      name: json['name'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
       itemsModels: (json['items'] as List<dynamic>)
           .map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),

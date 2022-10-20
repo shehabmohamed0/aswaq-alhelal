@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:aswaqalhelal/features/institution_items/data/models/institution_item_model.dart';
+import 'package:aswaqalhelal/features/institution_items/data/models/unit_model.dart';
+
 import '../../../features/institution_items/domain/entities/institution_item.dart';
 import '../../../features/institution_items/domain/entities/unit.dart';
 
 class AddRefAndInstitutionItemParams {
   final String itemName;
-  final File imageFile;
+  final File? imageFile;
   final List<Unit> units;
   final String institutionId;
 
@@ -15,6 +18,17 @@ class AddRefAndInstitutionItemParams {
     required this.units,
     required this.institutionId,
   });
+
+  InstitutionItemModel toModel(
+          String id, String referenceId, String? imageUrl) =>
+      InstitutionItemModel(
+          id: id,
+          institutionId: institutionId,
+          referenceId: referenceId,
+          name: itemName,
+          imageUrl: imageUrl,
+          creationTime: DateTime.now(),
+          unitModels: units.map(UnitModel.fromDomain).toList());
 }
 
 class AddInstitutionItemParams {

@@ -9,7 +9,7 @@ abstract class BaseItem extends Equatable {
   @JsonKey()
   final String name;
   @JsonKey()
-  final String imageUrl;
+  final String? imageUrl;
   @JsonKey()
   final List<Unit> units;
   @TimestampConverter()

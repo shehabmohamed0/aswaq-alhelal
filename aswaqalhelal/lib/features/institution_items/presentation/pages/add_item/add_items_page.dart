@@ -371,9 +371,7 @@ class AddItemPage extends HookWidget {
                         onPressed: state.itemName.value.isNotEmpty &&
                                 state.itemName.value.length > 2 &&
                                 state.units.isNotEmpty &&
-                                !state.status.isSubmissionInProgress &&
-                                (state.imageFile.value != null ||
-                                    state.imageUrl.value != null)
+                                !state.status.isSubmissionInProgress
                             ? () {
                                 final state = cubit.state;
                                 late final List<InstitutionItem> items;

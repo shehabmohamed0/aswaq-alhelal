@@ -22,7 +22,7 @@ class WorkIstitutionsApiServiceImpl extends WorkIstitutionsApiService {
 
     final futures = snapshpt.docs.map((employee) {
       final institutionId = employee.get('institutionId');
-      final institutionDoc = _firestore.doc('institutions/$institutionId');
+      final institutionDoc = _firestore.doc('profiles/$institutionId');
 
       return institutionDoc.get();
     });

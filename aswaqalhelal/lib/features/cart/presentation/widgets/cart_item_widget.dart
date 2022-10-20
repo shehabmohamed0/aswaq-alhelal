@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:root_package/packages/font_awesome_flutter.dart';
 
 import '../../../client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
 import '../../../orders/domain/entities/order_item.dart';
@@ -19,8 +20,10 @@ class CartItemWidget extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: CachedNetworkImage(
-              imageUrl: cartItem.item.imageUrl,
+            child: cartItem.item.imageUrl == null
+                        ? const FaIcon(FontAwesomeIcons.box)
+                        : CachedNetworkImage(
+              imageUrl: cartItem.item.imageUrl!,
             ),
           ),
           Expanded(

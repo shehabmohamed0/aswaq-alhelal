@@ -60,11 +60,11 @@ class InstitutionsSliverWidget extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(
                                   context, Routes.clientInstitution,
-                                  arguments: state.institutions[0]);
+                                  arguments: state.institutions[index]);
                             },
                           ),
                         ),
-                    childCount: state.institutions.length + 10),
+                    childCount: state.institutions.length),
               ),
             );
           },

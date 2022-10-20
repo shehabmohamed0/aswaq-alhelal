@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -61,8 +58,7 @@ class _AppState extends State<App>
 
         notificationService.init(notificationDelegate: this);
         notificationService.requestPermission();
-        printLog(
-            '[AppState] Register Firebase or OneSignal Modules', startTime);
+        printLog('[AppState] Register Firebase', startTime);
       },
     );
   }
@@ -77,7 +73,6 @@ class _AppState extends State<App>
 
   @override
   Widget build(BuildContext context) {
-    
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
@@ -97,11 +92,10 @@ class _AppState extends State<App>
         builder: (context, state) {
           return MaterialApp(
             useInheritedMediaQuery: true,
-            title: state.locale?.languageCode == 'ar'
-                ? 'أسواق الهلال'
-                : 'Aswaq Alhelal',
+            title: getAppTitle(state),
             theme: getApplicationTheme(),
             navigatorKey: App.navigatorKey,
+            //first page => SplashScreen
             onGenerateRoute: AppRouter.generateRoute,
             builder: EasyLoading.init(
               builder: (context, child) => ResponsiveWrapper.builder(
@@ -117,7 +111,6 @@ class _AppState extends State<App>
                 background: Container(
                   color: const Color(0xFFF5F5F5),
                 ),
-                
               ),
             ),
             localizationsDelegates: const [
@@ -143,6 +136,12 @@ class _AppState extends State<App>
         },
       ),
     );
+  }
+
+  String getAppTitle(LocaleState state) {
+    return state.locale?.languageCode == 'ar'
+        ? 'أسواق الهلال'
+        : 'Aswaq Alhilal';
   }
 
   @override

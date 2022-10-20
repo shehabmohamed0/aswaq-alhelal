@@ -210,7 +210,7 @@ class __$$_AddUnitStateCopyWithImpl<$Res>
 class _$_AddUnitState implements _AddUnitState {
   const _$_AddUnitState(
       {this.name = '',
-      this.quantity = 0,
+      this.quantity = 1,
       this.price = 0,
       final List<Unit> suggestions = const [],
       this.enabled = true,

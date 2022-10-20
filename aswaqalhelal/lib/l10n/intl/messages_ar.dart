@@ -48,7 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل أنت متأكد من رفض الطلب؟"),
         "areYouSureYouWantTonorderNow": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد الطلب الآن؟"),
-        "aswaqLhelal": MessageLookupByLibrary.simpleMessage("أسواق الهلال"),
+        "areaExistsBefore":
+            MessageLookupByLibrary.simpleMessage("Area exists before"),
+        "aswaqAlhilal": MessageLookupByLibrary.simpleMessage("أسواق الهلال"),
         "authenticationFailure":
             MessageLookupByLibrary.simpleMessage("فشل فالتحقق."),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -131,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح"),
         "item": MessageLookupByLibrary.simpleMessage("صنف"),
+        "itemNameAlreadyExists":
+            MessageLookupByLibrary.simpleMessage("Item name already exists"),
         "itemUpdatedSuccefully":
             MessageLookupByLibrary.simpleMessage("تم تحديث الصنف بنجاح"),
         "items": MessageLookupByLibrary.simpleMessage("الاصناف"),

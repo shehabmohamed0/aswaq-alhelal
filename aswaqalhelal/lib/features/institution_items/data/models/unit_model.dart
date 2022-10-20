@@ -7,17 +7,15 @@ part 'unit_model.g.dart';
 
 @JsonSerializable()
 class UnitModel extends Unit {
-  const UnitModel({
-    required String referenceId,
-    required String name,
-    required double quantity,
-    required double price,
-  }) : super(
-          referenceId: referenceId,
-          name: name,
-          quantity: quantity,
-          price: price,
-        );
+  @JsonKey(name: 'baseUnit')
+  final UnitModel? baseUnitModel;
+  const UnitModel(
+      {required super.referenceId,
+      required super.name,
+      required super.quantity,
+      required super.price,
+      required this.baseUnitModel})
+      : super(baseUnit: baseUnitModel);
 
   factory UnitModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -30,12 +28,14 @@ class UnitModel extends Unit {
     String? name,
     double? price,
     double? quantity,
+    UnitModel? baseUnitModel,
   }) =>
       UnitModel(
         referenceId: referenceId ?? this.referenceId,
         name: name ?? this.name,
         price: price ?? this.price,
         quantity: quantity ?? this.quantity,
+        baseUnitModel: baseUnitModel ?? this.baseUnitModel,
       );
 
   factory UnitModel.fromJson(Map<String, dynamic> json) =>
@@ -48,5 +48,7 @@ class UnitModel extends Unit {
         name: unit.name,
         quantity: unit.quantity,
         price: unit.price,
+        baseUnitModel:
+            unit.baseUnit == null ? null : UnitModel.fromDomain(unit.baseUnit!),
       );
 }

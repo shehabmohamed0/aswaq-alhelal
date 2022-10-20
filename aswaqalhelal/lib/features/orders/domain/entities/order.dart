@@ -9,8 +9,8 @@ class Order extends Equatable {
   final String from;
   final String institutionOwnerId;
   final String? to;
-  final String name;
-  final String phoneNumber;
+  final String? name;
+  final String? phoneNumber;
   final List<OrderItem> items;
   final double totalPrice;
   final DateTime creationTime;

@@ -53,7 +53,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
         final address = user.address!;
         return RefreshIndicator(
           onRefresh: () async {
-            widget.cubit.getInstitutions(address);
+            return widget.cubit.getInstitutions(address);
           },
           child: CustomScrollView(
             clipBehavior: Clip.antiAlias,
