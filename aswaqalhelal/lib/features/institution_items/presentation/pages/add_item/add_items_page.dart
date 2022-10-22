@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:root_package/core/form_inputs/number.dart';
+import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
@@ -13,11 +17,10 @@ import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
+import '../../bloc/unit_entry/unit_entry_bloc.dart';
 import '../../cubit/institution_items/institution_items_cubit.dart';
-import 'add_unit_dialog.dart';
 import 'widgets/auto_suggest_text_field.dart';
 import 'widgets/image_bottom_sheet_widget.dart';
-import 'widgets/unit_widget.dart';
 
 class AddItemPage extends HookWidget {
   const AddItemPage({Key? key}) : super(key: key);
@@ -110,129 +113,129 @@ class AddItemPage extends HookWidget {
       ],
       child: Scaffold(
         appBar: AppBar(title: Text(intl.addItem)),
-        body: Padding(
-          padding: const EdgeInsets.all(8) - const EdgeInsets.only(bottom: 8),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Center(
-                  child: SizedBox.square(
-                    dimension: MediaQuery.of(context).size.width / 2,
-                    child: Material(
-                      color: Colors.grey.shade200,
-                      child: InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) => ImageBottomSheetWidget(
-                                    onCameraPressed: () {
-                                      bloc.add(
-                                        SelectImagePressed(
-                                          ImageSource.camera,
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    },
-                                    onGalleryPressed: () {
-                                      bloc.add(
-                                        SelectImagePressed(
-                                          ImageSource.gallery,
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    },
-                                  ));
-                        },
-                        child: BlocBuilder<AddItemBloc, AddItemState>(
-                          buildWhen: ((p, c) =>
-                              p.imageFile != c.imageFile ||
-                              p.imageUrl != c.imageUrl),
-                          builder: (context, state) {
-                            if (state.imageFile.value != null) {
-                              return Stack(children: [
-                                Positioned.fill(
-                                  child: Image.file(
-                                    state.imageFile.value!,
-                                    fit: BoxFit.cover,
-                                  ),
+        body: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 8)),
+            SliverToBoxAdapter(
+              child: Center(
+                child: SizedBox.square(
+                  dimension: MediaQuery.of(context).size.width / 2,
+                  child: Material(
+                    color: Colors.grey.shade200,
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) => ImageBottomSheetWidget(
+                                  onCameraPressed: () {
+                                    bloc.add(
+                                      SelectImagePressed(
+                                        ImageSource.camera,
+                                      ),
+                                    );
+                                    Navigator.pop(context);
+                                  },
+                                  onGalleryPressed: () {
+                                    bloc.add(
+                                      SelectImagePressed(
+                                        ImageSource.gallery,
+                                      ),
+                                    );
+                                    Navigator.pop(context);
+                                  },
+                                ));
+                      },
+                      child: BlocBuilder<AddItemBloc, AddItemState>(
+                        buildWhen: ((p, c) =>
+                            p.imageFile != c.imageFile ||
+                            p.imageUrl != c.imageUrl),
+                        builder: (context, state) {
+                          if (state.imageFile.value != null) {
+                            return Stack(children: [
+                              Positioned.fill(
+                                child: Image.file(
+                                  state.imageFile.value!,
+                                  fit: BoxFit.cover,
                                 ),
-                                Positioned(
+                              ),
+                              Positioned(
+                                top: 4,
+                                right: 4,
+                                child: Container(
+                                  padding: const EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.shade200,
+                                  ),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        bloc.add(DeleteImageFile());
+                                      },
+                                      child: const Icon(Icons.close,
+                                          size: 18, color: Colors.red)),
+                                ),
+                              ),
+                            ]);
+                          } else if (state.imageFile.value == null &&
+                              state.imageUrl.value != null) {
+                            return Stack(children: [
+                              Positioned.fill(
+                                child: CachedNetworkImage(
+                                  imageUrl: state.imageUrl.value!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
                                   top: 4,
                                   right: 4,
                                   child: Container(
-                                    padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.grey.shade200,
                                     ),
                                     child: GestureDetector(
                                         onTap: () {
-                                          bloc.add(DeleteImageFile());
+                                          bloc.add(DeleteImageUrl());
                                         },
                                         child: const Icon(Icons.close,
-                                            size: 18, color: Colors.red)),
+                                            color: Colors.red)),
+                                  ))
+                            ]);
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  intl.tapTonselectItemImage,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black45,
                                   ),
                                 ),
-                              ]);
-                            } else if (state.imageFile.value == null &&
-                                state.imageUrl.value != null) {
-                              return Stack(children: [
-                                Positioned.fill(
-                                  child: CachedNetworkImage(
-                                    imageUrl: state.imageUrl.value!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                    top: 4,
-                                    right: 4,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey.shade200,
-                                      ),
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            bloc.add(DeleteImageUrl());
-                                          },
-                                          child: const Icon(Icons.close,
-                                              color: Colors.red)),
-                                    ))
-                              ]);
-                            } else {
-                              return Padding(
-                                padding: const EdgeInsets.all(4),
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    intl.tapTonselectItemImage,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black45,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Text(intl.name, style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 2),
-                BlocBuilder<AddItemBloc, AddItemState>(
-                  buildWhen: (previous, current) =>
-                      previous.suggestionState != current.suggestionState ||
-                      previous.itemFromReference != current.itemFromReference ||
-                      previous.addingNewItem != current.addingNewItem,
-                  builder: (context, state) {
-                    return AutoSuggestTextField<ReferenceItem>(
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            BlocBuilder<AddItemBloc, AddItemState>(
+              buildWhen: (previous, current) =>
+                  previous.suggestionState != current.suggestionState ||
+                  previous.itemFromReference != current.itemFromReference ||
+                  previous.addingNewItem != current.addingNewItem,
+              builder: (context, state) {
+                return SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  sliver: SliverToBoxAdapter(
+                    child: AutoSuggestTextField<ReferenceItem>(
+                      labelText: intl.name,
                       controller: controller,
                       autoFocus: true,
                       focusNode: focusNode,
@@ -270,97 +273,74 @@ class AddItemPage extends HookWidget {
                         ),
                       ),
                       onChanged: (text) => bloc.add(AddItemSearch(text)),
-                    );
-                  },
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 12)),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              sliver: SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      //todo: translation
+                      'Measure units',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.add),
+                      splashRadius: 18,
+                      visualDensity: VisualDensity.compact,
+                    )
+                  ],
                 ),
-                const SizedBox(height: 16),
-                BlocBuilder<AddItemBloc, AddItemState>(
-                  buildWhen: (previous, current) =>
-                      previous.selectedItem != current.selectedItem ||
-                      previous.itemFromReference != current.itemFromReference ||
-                      previous.units != current.units,
-                  builder: (context, state) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Text(
-                            intl.units,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            visualDensity: VisualDensity.compact,
-                            icon: const Icon(Icons.add),
-                            splashRadius: 16,
-                            onPressed: () async {
-                              final unit = await showModalBottomSheet<Unit>(
-                                context: context,
-                                shape: const RoundedRectangleBorder(
-                                  side: BorderSide(),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                  ),
-                                ),
-                                isScrollControlled: true,
-                                builder: (context) => Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom),
-                                  child: const AddUnitBottomSheet(),
-                                ),
-                              );
-                              if (unit != null) {
-                                bloc.add(AddUnitEvent(unit));
-                              }
-                            },
-                          )
-                        ]),
-                        UnitWidget(
-                          name: intl.name,
-                          quantity: intl.quantity,
-                          price: intl.priceEgp,
-                          color: Colors.grey.shade200,
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            BlocBuilder<AddItemBloc, AddItemState>(
+              buildWhen: (previous, current) =>
+                  previous.selectedItem != current.selectedItem ||
+                  previous.itemFromReference != current.itemFromReference ||
+                  previous.units != current.units,
+              builder: (context, state) {
+                return SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => BlocProvider<UnitEntryBloc>(
+                        create: (context) => locator(),
+                        child: UnitEntry(
+                          onChanged: (unit) {},
+                          units: const [
+                            Unit(
+                                referenceId: 'asdasdad1',
+                                name: 'Test unit1',
+                                quantity: 10,
+                                price: 105.0),
+                            Unit(
+                                referenceId: 'asdasdad2',
+                                name: 'Test unit2',
+                                quantity: 5,
+                                price: 67.0)
+                          ],
                         ),
-                        if (state.units.isNotEmpty)
-                          Flexible(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.units.length,
-                              itemBuilder: (context, index) {
-                                final unit = state.units[index];
-                                return UnitWidget(
-                                  color: index % 2 == 0
-                                      ? Colors.grey.shade100
-                                      : Colors.grey.shade200,
-                                  name: unit.name,
-                                  quantity: '${unit.quantity}',
-                                  price: '${unit.price}',
-                                  onRemove: () {
-                                    bloc.add(RemoveUnitEvent(index));
-                                  },
-                                );
-                              },
-                            ),
-                          )
-                        else
-                          UnitWidget(
-                            name: ' ',
-                            quantity: ' ',
-                            price: ' ',
-                            color: state.suggestions.length % 2 == 0
-                                ? Colors.grey.shade100
-                                : Colors.grey.shade200,
-                          ),
-                      ],
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
+                      ),
+                      childCount: 1,
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              sliver: SliverToBoxAdapter(
+                child: SizedBox(
                   width: double.infinity,
                   child: BlocBuilder<AddItemBloc, AddItemState>(
                     builder: (context, state) {
@@ -392,12 +372,246 @@ class AddItemPage extends HookWidget {
                       );
                     },
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
+            SliverToBoxAdapter(
+                child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+            ))
+          ],
         ),
       ),
     );
+  }
+}
+
+class UnitEntry extends StatefulWidget {
+  const UnitEntry({
+    Key? key,
+    required this.units,
+    required this.onChanged,
+  }) : super(key: key);
+  final List<Unit> units;
+  final void Function(Unit unit) onChanged;
+  @override
+  State<UnitEntry> createState() => _UnitEntryState();
+}
+
+class _UnitEntryState extends State<UnitEntry> {
+  late final TextEditingController nameController;
+  late final FocusNode nameFocusNode;
+  late final TextEditingController quantityController;
+  late final FocusNode quantityFocusNode;
+  late final TextEditingController priceController;
+  late final FocusNode priceFocusNode;
+
+  void onValidUnitChanged(UnitEntryState state) {
+    final status = Formz.validate(
+        [state.unit, state.fromUnit, state.quantity, state.price]);
+
+    if (status.isValid) {
+      widget.onChanged(Unit(
+          referenceId: state.unit.value!.referenceId,
+          name: state.unit.value!.name,
+          quantity: state.quantity.value.toDouble(),
+          price: state.price.value.toDouble()));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+    nameFocusNode = FocusNode();
+    quantityController = TextEditingController();
+    quantityFocusNode = FocusNode();
+    priceController = TextEditingController();
+    priceFocusNode = FocusNode();
+
+    quantityController.text = '0';
+    priceController.text = '0';
+
+    nameFocusNode.addListener(_onHasFocus);
+  }
+
+  void _onHasFocus() {
+    if (nameFocusNode.hasFocus) {
+      Scrollable.ensureVisible(context,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+          alignment: .45,
+          alignmentPolicy: ScrollPositionAlignmentPolicy.explicit);
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    nameFocusNode.removeListener(_onHasFocus);
+    nameFocusNode.dispose();
+    quantityController.dispose();
+    quantityFocusNode.dispose();
+    priceController.dispose();
+    priceFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant UnitEntry oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // context.read<UnitEntryBloc>().add(UnitEntryEvent.)
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<UnitEntryBloc>();
+
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<UnitEntryBloc, UnitEntryState>(
+          listenWhen: _unitDataChanged,
+          listener: (context, state) {
+            onValidUnitChanged(state);
+          },
+        ),
+        BlocListener<UnitEntryBloc, UnitEntryState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            switch (state.status) {
+              case UnitEntryStatus.loading:
+                EasyLoading.show(
+                    indicator: const FittedBox(
+                  child: SpinKitRipple(
+                      duration: Duration(milliseconds: 1200),
+                      color: Colors.white),
+                ));
+                break;
+              case UnitEntryStatus.success:
+                EasyLoading.dismiss();
+                nameFocusNode.unfocus();
+                break;
+              case UnitEntryStatus.failure:
+                showErrorSnackBar(context, state.errorMessage);
+                EasyLoading.dismiss();
+                break;
+              case UnitEntryStatus.unitSelected:
+                nameFocusNode.unfocus();
+                break;
+              case UnitEntryStatus.unitUnselected:
+                nameController.clear();
+
+                break;
+              case UnitEntryStatus.fromUnitChanged:
+                quantityFocusNode.requestFocus();
+                quantityController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: quantityController.text.length));
+                break;
+
+              default:
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<UnitEntryBloc, UnitEntryState>(
+        builder: (context, state) {
+          return Row(
+            children: [
+              Flexible(
+                child: AutoSuggestTextField<Unit>(
+                  labelText: 'Unit name',
+                  controller: nameController,
+                  focusNode: nameFocusNode,
+                  suggestions: state.unitSuggestions,
+                  suggestionState: state.sugggestionStatus,
+                  suggestionBuilder: (context, unit) =>
+                      ListTile(title: Text(unit.name)),
+                  onChanged: (name) =>
+                      bloc.add(UnitEntryEvent.unitNameChanged(name: name)),
+                  onSuggestionSelected: (unit) =>
+                      bloc.add(UnitEntryEvent.unitSelected(unit: unit)),
+                  onEmptyWidgetClicked: () =>
+                      bloc.add(const UnitEntryEvent.unitAdded()),
+                  onRemoveSelection: () =>
+                      bloc.add(const UnitEntryEvent.unitUnselected()),
+                  enabled: state.unit.value == null,
+                  showRemoveButton: state.unit.valid,
+                  emptyWidget: ListTile(
+                    onTap: () => bloc.add(const UnitEntryEvent.unitAdded()),
+                    title: FittedBox(
+                        alignment: AlignmentDirectional.centerStart,
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          nameController.text,
+                        )),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 4),
+              Flexible(
+                  child: DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                    labelText: 'From unit',
+                    floatingLabelBehavior: FloatingLabelBehavior.always),
+                isExpanded: true,
+                items: const [
+                  DropdownMenuItem(
+                    value: '1',
+                    child: FittedBox(child: Text('aasd asds')),
+                  ),
+                  DropdownMenuItem(
+                    value: '2',
+                    child: FittedBox(child: Text('asd')),
+                  ),
+                  DropdownMenuItem(
+                    value: '3',
+                    child: FittedBox(child: Text('asd')),
+                  ),
+                ],
+                value: '1',
+                onChanged: (unit) {},
+              )),
+              const SizedBox(width: 4),
+              Flexible(
+                child: TextField(
+                  controller: quantityController,
+                  focusNode: quantityFocusNode,
+                  onChanged: (quantity) => bloc
+                      .add(UnitEntryEvent.quantityChanged(quantity: quantity)),
+                  decoration: InputDecoration(
+                    //todo: translation
+                    labelText: 'Quantity',
+                    errorText: state.quantity.validationMessage(),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 4),
+              Flexible(
+                child: TextField(
+                  controller: priceController,
+                  focusNode: priceFocusNode,
+                  onChanged: (price) =>
+                      bloc.add(UnitEntryEvent.priceChanged(price: price)),
+                  decoration: InputDecoration(
+                    //todo: translation
+                    labelText: 'Price',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    errorText: state.price.validationMessage(),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  bool _unitDataChanged(UnitEntryState previous, UnitEntryState current) {
+    return previous.unit != current.unit ||
+        previous.fromUnit != current.fromUnit ||
+        previous.price != current.price ||
+        previous.quantity != current.quantity;
   }
 }

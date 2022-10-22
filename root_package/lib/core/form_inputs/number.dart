@@ -22,6 +22,7 @@ class Number extends FormzInput<num, NumberValidationError> {
     this.acceptZero = false,
   }) : super.pure(0);
 
+ 
   // const Number._dirty(
   //     {required num number,
   //     required this.acceptNegative,

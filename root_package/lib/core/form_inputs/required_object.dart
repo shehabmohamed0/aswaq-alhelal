@@ -21,7 +21,8 @@ class RequiredObject<T> extends FormzInput<T?, RequiredObjectValidationError> {
 
   @override
   RequiredObjectValidationError? validator(T? value) {
-    return value == null ? RequiredObjectValidationError.invalid : null;
+    if(value != null) return null;
+    return RequiredObjectValidationError.invalid;
   }
 }
 

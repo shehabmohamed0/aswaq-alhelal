@@ -14,6 +14,21 @@ class Unit extends Equatable {
       required this.quantity,
       required this.price,
       this.baseUnit});
+  Unit copyWith({
+    String? referenceId,
+    String? name,
+    double? price,
+    double? quantity,
+    Unit? baseUnit,
+  }) {
+    return Unit(
+      referenceId: referenceId ?? this.referenceId,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      baseUnit: baseUnit ?? this.baseUnit,
+    );
+  }
 
   @override
   List<Object?> get props => [referenceId, name, quantity, price, baseUnit];

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';

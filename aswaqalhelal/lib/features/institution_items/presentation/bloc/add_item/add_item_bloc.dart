@@ -51,8 +51,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     on<AddItemSearch>(_onAddItemSearch, transformer: debounce());
     on<AddItemSelectedEvent>(_onAddItemSelectedEvent);
     on<AddNewItem>(_onAddNewItem);
-    on<AddUnitEvent>(_onAddUnitEvent);
-    on<RemoveUnitEvent>(_onRemoveUnitEvent);
     on<AddItemSubmit>(_onAddItemSubmit);
     on<RemoveSelectionPressed>(_onRemoveSelectionPressed);
     on<SelectImagePressed>(_onSelectImagePressed);
@@ -111,24 +109,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
         addingNewItem: true,
       ),
     );
-  }
-
-  FutureOr<void> _onAddUnitEvent(
-      AddUnitEvent event, Emitter<AddItemState> emit) {
-    emit(state.copyWith(unitStatus: UnitStatus.initial));
-
-    final exists = state.units.indexWhere((element) =>
-            element.name.trim().toLowerCase() ==
-            event.unit.name.trim().toLowerCase()) !=
-        -1;
-    exists
-        ? emit(state.copyWith(unitStatus: UnitStatus.exsists))
-        : emit(state.copyWith(units: List.of(state.units)..add(event.unit)));
-  }
-
-  FutureOr<void> _onRemoveUnitEvent(
-      RemoveUnitEvent event, Emitter<AddItemState> emit) {
-    emit(state.copyWith(units: List.of(state.units)..removeAt(event.index)));
   }
 
   FutureOr<void> _onAddItemSubmit(

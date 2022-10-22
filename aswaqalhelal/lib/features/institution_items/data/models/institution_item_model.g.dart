@@ -13,7 +13,7 @@ InstitutionItemModel _$InstitutionItemModelFromJson(
       institutionId: json['institutionId'] as String,
       referenceId: json['referenceId'] as String,
       name: json['name'] as String,
-      imageUrl: json['imageUrl'] as String,
+      imageUrl: json['imageUrl'] as String?,
       creationTime: const TimestampConverter()
           .fromJson(json['creationTime'] as Timestamp),
       unitModels: (json['units'] as List<dynamic>)

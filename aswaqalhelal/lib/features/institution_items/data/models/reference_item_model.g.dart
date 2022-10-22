@@ -11,7 +11,7 @@ ReferenceItemModel _$ReferenceItemModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       institutionId: json['institutionId'] as String,
       name: json['name'] as String,
-      imageUrl: json['imageUrl'] as String,
+      imageUrl: json['imageUrl'] as String?,
       creationTime: const TimestampConverter()
           .fromJson(json['creationTime'] as Timestamp),
       unitModels: (json['units'] as List<dynamic>)

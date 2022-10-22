@@ -19,11 +19,11 @@ class UnitModel extends Unit {
 
   factory UnitModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final address = UnitModel.fromJson(document.data()!);
+    final unitModel = UnitModel.fromJson(document.data()!);
 
-    return address.copyWith(referenceId: document.id);
+    return unitModel.copyWith2(referenceId: document.id);
   }
-  UnitModel copyWith({
+  UnitModel copyWith2({
     String? referenceId,
     String? name,
     double? price,
