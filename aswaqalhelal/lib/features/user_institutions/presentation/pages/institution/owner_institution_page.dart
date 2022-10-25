@@ -162,3 +162,12 @@ class GridTile extends StatelessWidget {
     );
   }
 }
+
+// class SuggestionExamble extends StatelessWidget {
+//   const SuggestionExamble({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }

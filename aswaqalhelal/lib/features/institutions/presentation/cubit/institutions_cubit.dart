@@ -20,11 +20,7 @@ class InstitutionsCubit extends Cubit<InstitutionsState> {
   Future<void> getInstitutions(Address address) async {
     emit(const InstitutionsState.loading());
     final either = await _getInstitution(params: address);
-    log('''
-        goernate: ${address.governate}
-        city: ${address.city}
-        neighborhood: ${address.neighborhood}
-        ''');
+
     either.fold((failure) {
       emit(const InstitutionsState.error());
     }, (institutions) {

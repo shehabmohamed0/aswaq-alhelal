@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:root_package/core/failures/file_upload_failure.dart';
-import 'package:root_package/core/failures/server_failure.dart';
 import 'package:root_package/core/form_inputs/required_object.dart';
 import 'package:root_package/core/form_inputs/required_string.dart';
 import 'package:root_package/core/utils/image_utils.dart';
@@ -14,6 +12,7 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/packages/injectable.dart';
 import 'package:root_package/packages/stream_transform.dart';
+import 'package:root_package/root_package.dart' hide Unit;
 
 import '../../../../../core/params/add_item/params.dart';
 import '../../../../../core/params/add_item/search_item_params.dart';
@@ -57,6 +56,8 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     on<InitEdit>(_onInitEdit);
     on<DeleteImageFile>(_onDeleteImageFile);
     on<DeleteImageUrl>(_onDeleteImageUrl);
+    on<UnitAddPressed>(_onUnitAddPressed);
+    on<UnitChanged>(_onUnitChanged);
   }
 
   FutureOr<void> _onAddItemSearch(
@@ -92,7 +93,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       state.copyWith(
         selectedItem: RequiredObject.dirty(event.item),
         itemName: RequiredString.dirty(event.item.name),
-        units: event.item.units,
+        measureUnits: event.item.units.map((e) => some(e)).toList(),
         imageFile: const RequiredObject.pure(),
         itemFromReference: true,
         addingNewItem: false,
@@ -135,7 +136,10 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           oldItem: state.oldItem!,
           imageFile: state.imageFile.value,
           imageUrl: state.imageUrl.value,
-          units: state.units,
+          units: state.measureUnits
+              .where((element) => element.isSome())
+              .map((e) => e.toNullable()!)
+              .toList(),
         ),
       );
 
@@ -173,7 +177,10 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
         params: AddRefAndInstitutionItemParams(
           itemName: state.itemName.value,
           imageFile: state.imageFile.value,
-          units: state.units,
+          units: state.measureUnits
+              .where((element) => element.isSome())
+              .map((e) => e.toNullable()!)
+              .toList(),
           institutionId: event.institutionId,
         ),
       );
@@ -209,7 +216,10 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           institutionId: event.institutionId,
           imageUrl: state.imageUrl.value,
           referenceId: state.selectedItem.value!.id,
-          units: state.units,
+          units: state.measureUnits
+              .where((element) => element.isSome())
+              .map((e) => e.toNullable()!)
+              .toList(),
         ),
       );
 
@@ -260,7 +270,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     emit(
       AddItemState(
           imageUrl: RequiredObject.dirty(event.item.imageUrl),
-          units: event.item.units,
+          measureUnits: event.item.units.map((e) => some(e)).toList(),
           itemName: RequiredString.dirty(event.item.name),
           isEdit: true,
           itemFromReference: true,
@@ -278,5 +288,32 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
   FutureOr<void> _onDeleteImageUrl(
       DeleteImageUrl event, Emitter<AddItemState> emit) {
     emit(state.copyWith(imageUrl: const RequiredObject.pure()));
+  }
+
+  FutureOr<void> _onUnitChanged(UnitChanged event, Emitter<AddItemState> emit) {
+    List<Option<Unit>> newList = state.measureUnits;
+    if (event.unit == null) {
+      final previousValue = state.measureUnits[event.index];
+      if (previousValue.isSome()) {
+        newList = List.of(state.measureUnits
+            .where((element) => element.isSome())
+            .where((element) =>
+                element.toNullable()!.referenceId !=
+                previousValue.toNullable()!.referenceId)
+            .where((element) =>
+                element.toNullable()!.baseUnit != previousValue.toNullable()));
+      }
+    } else {
+      newList = List.of(state.measureUnits);
+      newList[event.index] = some(event.unit!);
+    }
+
+    emit(state.copyWith(measureUnits: newList));
+  }
+
+  FutureOr<void> _onUnitAddPressed(
+      UnitAddPressed event, Emitter<AddItemState> emit) {
+    emit(
+        state.copyWith(measureUnits: List.of(state.measureUnits)..add(none())));
   }
 }

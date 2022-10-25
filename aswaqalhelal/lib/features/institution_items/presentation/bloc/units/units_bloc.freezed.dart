@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'unit_entry_bloc.dart';
+part of 'units_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,41 +15,43 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$UnitEntryEvent {
+mixin _$UnitsEvent {
+  int get index => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,36 +92,54 @@ mixin _$UnitEntryEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UnitsEventCopyWith<UnitsEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UnitEntryEventCopyWith<$Res> {
-  factory $UnitEntryEventCopyWith(
-          UnitEntryEvent value, $Res Function(UnitEntryEvent) then) =
-      _$UnitEntryEventCopyWithImpl<$Res>;
+abstract class $UnitsEventCopyWith<$Res> {
+  factory $UnitsEventCopyWith(
+          UnitsEvent value, $Res Function(UnitsEvent) then) =
+      _$UnitsEventCopyWithImpl<$Res>;
+  $Res call({int index});
 }
 
 /// @nodoc
-class _$UnitEntryEventCopyWithImpl<$Res>
-    implements $UnitEntryEventCopyWith<$Res> {
-  _$UnitEntryEventCopyWithImpl(this._value, this._then);
+class _$UnitsEventCopyWithImpl<$Res> implements $UnitsEventCopyWith<$Res> {
+  _$UnitsEventCopyWithImpl(this._value, this._then);
 
-  final UnitEntryEvent _value;
+  final UnitsEvent _value;
   // ignore: unused_field
-  final $Res Function(UnitEntryEvent) _then;
+  final $Res Function(UnitsEvent) _then;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(_value.copyWith(
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$$UnitNameChangedCopyWith<$Res> {
+abstract class _$$UnitNameChangedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$UnitNameChangedCopyWith(
           _$UnitNameChanged value, $Res Function(_$UnitNameChanged) then) =
       __$$UnitNameChangedCopyWithImpl<$Res>;
-  $Res call({String name});
+  @override
+  $Res call({String name, int index});
 }
 
 /// @nodoc
 class __$$UnitNameChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$UnitNameChangedCopyWith<$Res> {
   __$$UnitNameChangedCopyWithImpl(
       _$UnitNameChanged _value, $Res Function(_$UnitNameChanged) _then)
@@ -131,12 +151,17 @@ class __$$UnitNameChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$UnitNameChanged(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -144,14 +169,16 @@ class __$$UnitNameChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnitNameChanged implements UnitNameChanged {
-  const _$UnitNameChanged({required this.name});
+  const _$UnitNameChanged({required this.name, required this.index});
 
   @override
   final String name;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.unitNameChanged(name: $name)';
+    return 'UnitsEvent.unitNameChanged(name: $name, index: $index)';
   }
 
   @override
@@ -159,12 +186,15 @@ class _$UnitNameChanged implements UnitNameChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitNameChanged &&
-            const DeepCollectionEquality().equals(other.name, name));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -174,48 +204,49 @@ class _$UnitNameChanged implements UnitNameChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return unitNameChanged(name);
+    return unitNameChanged(name, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return unitNameChanged?.call(name);
+    return unitNameChanged?.call(name, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (unitNameChanged != null) {
-      return unitNameChanged(name);
+      return unitNameChanged(name, index);
     }
     return orElse();
   }
@@ -270,26 +301,31 @@ class _$UnitNameChanged implements UnitNameChanged {
   }
 }
 
-abstract class UnitNameChanged implements UnitEntryEvent {
-  const factory UnitNameChanged({required final String name}) =
-      _$UnitNameChanged;
+abstract class UnitNameChanged implements UnitsEvent {
+  const factory UnitNameChanged(
+      {required final String name,
+      required final int index}) = _$UnitNameChanged;
 
   String get name;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$UnitNameChangedCopyWith<_$UnitNameChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnitAddedCopyWith<$Res> {
+abstract class _$$UnitAddedCopyWith<$Res> implements $UnitsEventCopyWith<$Res> {
   factory _$$UnitAddedCopyWith(
           _$UnitAdded value, $Res Function(_$UnitAdded) then) =
       __$$UnitAddedCopyWithImpl<$Res>;
-  $Res call({String name});
+  @override
+  $Res call({String name, int index});
 }
 
 /// @nodoc
-class __$$UnitAddedCopyWithImpl<$Res> extends _$UnitEntryEventCopyWithImpl<$Res>
+class __$$UnitAddedCopyWithImpl<$Res> extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$UnitAddedCopyWith<$Res> {
   __$$UnitAddedCopyWithImpl(
       _$UnitAdded _value, $Res Function(_$UnitAdded) _then)
@@ -301,12 +337,17 @@ class __$$UnitAddedCopyWithImpl<$Res> extends _$UnitEntryEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$UnitAdded(
       name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -314,14 +355,16 @@ class __$$UnitAddedCopyWithImpl<$Res> extends _$UnitEntryEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnitAdded implements UnitAdded {
-  const _$UnitAdded(this.name);
+  const _$UnitAdded(this.name, this.index);
 
   @override
   final String name;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.unitAdded(name: $name)';
+    return 'UnitsEvent.unitAdded(name: $name, index: $index)';
   }
 
   @override
@@ -329,12 +372,15 @@ class _$UnitAdded implements UnitAdded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitAdded &&
-            const DeepCollectionEquality().equals(other.name, name));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -344,48 +390,49 @@ class _$UnitAdded implements UnitAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return unitAdded(name);
+    return unitAdded(name, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return unitAdded?.call(name);
+    return unitAdded?.call(name, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (unitAdded != null) {
-      return unitAdded(name);
+      return unitAdded(name, index);
     }
     return orElse();
   }
@@ -440,26 +487,30 @@ class _$UnitAdded implements UnitAdded {
   }
 }
 
-abstract class UnitAdded implements UnitEntryEvent {
-  const factory UnitAdded(final String name) = _$UnitAdded;
+abstract class UnitAdded implements UnitsEvent {
+  const factory UnitAdded(final String name, final int index) = _$UnitAdded;
 
   String get name;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$UnitAddedCopyWith<_$UnitAdded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnitSelectedCopyWith<$Res> {
+abstract class _$$UnitSelectedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$UnitSelectedCopyWith(
           _$UnitSelected value, $Res Function(_$UnitSelected) then) =
       __$$UnitSelectedCopyWithImpl<$Res>;
-  $Res call({Unit unit});
+  @override
+  $Res call({Unit unit, int index});
 }
 
 /// @nodoc
-class __$$UnitSelectedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+class __$$UnitSelectedCopyWithImpl<$Res> extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$UnitSelectedCopyWith<$Res> {
   __$$UnitSelectedCopyWithImpl(
       _$UnitSelected _value, $Res Function(_$UnitSelected) _then)
@@ -471,12 +522,17 @@ class __$$UnitSelectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$UnitSelected(
       unit: unit == freezed
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -484,14 +540,16 @@ class __$$UnitSelectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UnitSelected implements UnitSelected {
-  const _$UnitSelected({required this.unit});
+  const _$UnitSelected({required this.unit, required this.index});
 
   @override
   final Unit unit;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.unitSelected(unit: $unit)';
+    return 'UnitsEvent.unitSelected(unit: $unit, index: $index)';
   }
 
   @override
@@ -499,12 +557,15 @@ class _$UnitSelected implements UnitSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitSelected &&
-            const DeepCollectionEquality().equals(other.unit, unit));
+            const DeepCollectionEquality().equals(other.unit, unit) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(unit));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(unit),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -514,48 +575,49 @@ class _$UnitSelected implements UnitSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return unitSelected(unit);
+    return unitSelected(unit, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return unitSelected?.call(unit);
+    return unitSelected?.call(unit, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (unitSelected != null) {
-      return unitSelected(unit);
+      return unitSelected(unit, index);
     }
     return orElse();
   }
@@ -610,25 +672,32 @@ class _$UnitSelected implements UnitSelected {
   }
 }
 
-abstract class UnitSelected implements UnitEntryEvent {
-  const factory UnitSelected({required final Unit unit}) = _$UnitSelected;
+abstract class UnitSelected implements UnitsEvent {
+  const factory UnitSelected(
+      {required final Unit unit, required final int index}) = _$UnitSelected;
 
   Unit get unit;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$UnitSelectedCopyWith<_$UnitSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnitUnselectedCopyWith<$Res> {
+abstract class _$$UnitUnselectedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$UnitUnselectedCopyWith(
           _$UnitUnselected value, $Res Function(_$UnitUnselected) then) =
       __$$UnitUnselectedCopyWithImpl<$Res>;
+  @override
+  $Res call({int index});
 }
 
 /// @nodoc
 class __$$UnitUnselectedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$UnitUnselectedCopyWith<$Res> {
   __$$UnitUnselectedCopyWithImpl(
       _$UnitUnselected _value, $Res Function(_$UnitUnselected) _then)
@@ -636,72 +705,96 @@ class __$$UnitUnselectedCopyWithImpl<$Res>
 
   @override
   _$UnitUnselected get _value => super._value as _$UnitUnselected;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(_$UnitUnselected(
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UnitUnselected implements UnitUnselected {
-  const _$UnitUnselected();
+  const _$UnitUnselected({required this.index});
+
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.unitUnselected()';
+    return 'UnitsEvent.unitUnselected(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnitUnselected);
+        (other.runtimeType == runtimeType &&
+            other is _$UnitUnselected &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(index));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UnitUnselectedCopyWith<_$UnitUnselected> get copyWith =>
+      __$$UnitUnselectedCopyWithImpl<_$UnitUnselected>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return unitUnselected();
+    return unitUnselected(index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return unitUnselected?.call();
+    return unitUnselected?.call(index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (unitUnselected != null) {
-      return unitUnselected();
+      return unitUnselected(index);
     }
     return orElse();
   }
@@ -756,21 +849,30 @@ class _$UnitUnselected implements UnitUnselected {
   }
 }
 
-abstract class UnitUnselected implements UnitEntryEvent {
-  const factory UnitUnselected() = _$UnitUnselected;
+abstract class UnitUnselected implements UnitsEvent {
+  const factory UnitUnselected({required final int index}) = _$UnitUnselected;
+
+  @override
+  int get index;
+  @override
+  @JsonKey(ignore: true)
+  _$$UnitUnselectedCopyWith<_$UnitUnselected> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FromUnitChangedCopyWith<$Res> {
+abstract class _$$FromUnitChangedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$FromUnitChangedCopyWith(
           _$FromUnitChanged value, $Res Function(_$FromUnitChanged) then) =
       __$$FromUnitChangedCopyWithImpl<$Res>;
-  $Res call({Unit unit, double? quantity});
+  @override
+  $Res call({Unit unit, int index, double? quantity});
 }
 
 /// @nodoc
 class __$$FromUnitChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$FromUnitChangedCopyWith<$Res> {
   __$$FromUnitChangedCopyWithImpl(
       _$FromUnitChanged _value, $Res Function(_$FromUnitChanged) _then)
@@ -782,6 +884,7 @@ class __$$FromUnitChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
+    Object? index = freezed,
     Object? quantity = freezed,
   }) {
     return _then(_$FromUnitChanged(
@@ -789,6 +892,10 @@ class __$$FromUnitChangedCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -800,16 +907,19 @@ class __$$FromUnitChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FromUnitChanged implements FromUnitChanged {
-  const _$FromUnitChanged({required this.unit, this.quantity});
+  const _$FromUnitChanged(
+      {required this.unit, required this.index, this.quantity});
 
   @override
   final Unit unit;
+  @override
+  final int index;
   @override
   final double? quantity;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.fromUnitChanged(unit: $unit, quantity: $quantity)';
+    return 'UnitsEvent.fromUnitChanged(unit: $unit, index: $index, quantity: $quantity)';
   }
 
   @override
@@ -818,6 +928,7 @@ class _$FromUnitChanged implements FromUnitChanged {
         (other.runtimeType == runtimeType &&
             other is _$FromUnitChanged &&
             const DeepCollectionEquality().equals(other.unit, unit) &&
+            const DeepCollectionEquality().equals(other.index, index) &&
             const DeepCollectionEquality().equals(other.quantity, quantity));
   }
 
@@ -825,6 +936,7 @@ class _$FromUnitChanged implements FromUnitChanged {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(unit),
+      const DeepCollectionEquality().hash(index),
       const DeepCollectionEquality().hash(quantity));
 
   @JsonKey(ignore: true)
@@ -835,48 +947,49 @@ class _$FromUnitChanged implements FromUnitChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return fromUnitChanged(unit, quantity);
+    return fromUnitChanged(unit, index, quantity);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return fromUnitChanged?.call(unit, quantity);
+    return fromUnitChanged?.call(unit, index, quantity);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (fromUnitChanged != null) {
-      return fromUnitChanged(unit, quantity);
+      return fromUnitChanged(unit, index, quantity);
     }
     return orElse();
   }
@@ -931,28 +1044,35 @@ class _$FromUnitChanged implements FromUnitChanged {
   }
 }
 
-abstract class FromUnitChanged implements UnitEntryEvent {
+abstract class FromUnitChanged implements UnitsEvent {
   const factory FromUnitChanged(
-      {required final Unit unit, final double? quantity}) = _$FromUnitChanged;
+      {required final Unit unit,
+      required final int index,
+      final double? quantity}) = _$FromUnitChanged;
 
   Unit get unit;
+  @override
+  int get index;
   double? get quantity;
+  @override
   @JsonKey(ignore: true)
   _$$FromUnitChangedCopyWith<_$FromUnitChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuantityChangedCopyWith<$Res> {
+abstract class _$$QuantityChangedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$QuantityChangedCopyWith(
           _$QuantityChanged value, $Res Function(_$QuantityChanged) then) =
       __$$QuantityChangedCopyWithImpl<$Res>;
-  $Res call({String quantity});
+  @override
+  $Res call({String quantity, int index});
 }
 
 /// @nodoc
 class __$$QuantityChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$QuantityChangedCopyWith<$Res> {
   __$$QuantityChangedCopyWithImpl(
       _$QuantityChanged _value, $Res Function(_$QuantityChanged) _then)
@@ -964,12 +1084,17 @@ class __$$QuantityChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quantity = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$QuantityChanged(
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as String,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -977,14 +1102,16 @@ class __$$QuantityChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$QuantityChanged implements QuantityChanged {
-  const _$QuantityChanged({required this.quantity});
+  const _$QuantityChanged({required this.quantity, required this.index});
 
   @override
   final String quantity;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.quantityChanged(quantity: $quantity)';
+    return 'UnitsEvent.quantityChanged(quantity: $quantity, index: $index)';
   }
 
   @override
@@ -992,12 +1119,15 @@ class _$QuantityChanged implements QuantityChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuantityChanged &&
-            const DeepCollectionEquality().equals(other.quantity, quantity));
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(quantity));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -1007,48 +1137,49 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return quantityChanged(quantity);
+    return quantityChanged(quantity, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return quantityChanged?.call(quantity);
+    return quantityChanged?.call(quantity, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (quantityChanged != null) {
-      return quantityChanged(quantity);
+      return quantityChanged(quantity, index);
     }
     return orElse();
   }
@@ -1103,27 +1234,32 @@ class _$QuantityChanged implements QuantityChanged {
   }
 }
 
-abstract class QuantityChanged implements UnitEntryEvent {
-  const factory QuantityChanged({required final String quantity}) =
-      _$QuantityChanged;
+abstract class QuantityChanged implements UnitsEvent {
+  const factory QuantityChanged(
+      {required final String quantity,
+      required final int index}) = _$QuantityChanged;
 
   String get quantity;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$QuantityChangedCopyWith<_$QuantityChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PriceChangedCopyWith<$Res> {
+abstract class _$$PriceChangedCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$PriceChangedCopyWith(
           _$PriceChanged value, $Res Function(_$PriceChanged) then) =
       __$$PriceChangedCopyWithImpl<$Res>;
-  $Res call({String price});
+  @override
+  $Res call({String price, int index});
 }
 
 /// @nodoc
-class __$$PriceChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+class __$$PriceChangedCopyWithImpl<$Res> extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$PriceChangedCopyWith<$Res> {
   __$$PriceChangedCopyWithImpl(
       _$PriceChanged _value, $Res Function(_$PriceChanged) _then)
@@ -1135,12 +1271,17 @@ class __$$PriceChangedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? price = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$PriceChanged(
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1148,14 +1289,16 @@ class __$$PriceChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PriceChanged implements PriceChanged {
-  const _$PriceChanged({required this.price});
+  const _$PriceChanged({required this.price, required this.index});
 
   @override
   final String price;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.priceChanged(price: $price)';
+    return 'UnitsEvent.priceChanged(price: $price, index: $index)';
   }
 
   @override
@@ -1163,12 +1306,15 @@ class _$PriceChanged implements PriceChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PriceChanged &&
-            const DeepCollectionEquality().equals(other.price, price));
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(price));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -1178,48 +1324,49 @@ class _$PriceChanged implements PriceChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return priceChanged(price);
+    return priceChanged(price, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return priceChanged?.call(price);
+    return priceChanged?.call(price, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (priceChanged != null) {
-      return priceChanged(price);
+      return priceChanged(price, index);
     }
     return orElse();
   }
@@ -1274,26 +1421,31 @@ class _$PriceChanged implements PriceChanged {
   }
 }
 
-abstract class PriceChanged implements UnitEntryEvent {
-  const factory PriceChanged({required final String price}) = _$PriceChanged;
+abstract class PriceChanged implements UnitsEvent {
+  const factory PriceChanged(
+      {required final String price, required final int index}) = _$PriceChanged;
 
   String get price;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$PriceChangedCopyWith<_$PriceChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$InitForEditCopyWith<$Res> {
+abstract class _$$InitForEditCopyWith<$Res>
+    implements $UnitsEventCopyWith<$Res> {
   factory _$$InitForEditCopyWith(
           _$InitForEdit value, $Res Function(_$InitForEdit) then) =
       __$$InitForEditCopyWithImpl<$Res>;
-  $Res call({Unit unit});
+  @override
+  $Res call({Unit unit, int index});
 }
 
 /// @nodoc
-class __$$InitForEditCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+class __$$InitForEditCopyWithImpl<$Res> extends _$UnitsEventCopyWithImpl<$Res>
     implements _$$InitForEditCopyWith<$Res> {
   __$$InitForEditCopyWithImpl(
       _$InitForEdit _value, $Res Function(_$InitForEdit) _then)
@@ -1305,12 +1457,17 @@ class __$$InitForEditCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
+    Object? index = freezed,
   }) {
     return _then(_$InitForEdit(
       unit: unit == freezed
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1318,14 +1475,16 @@ class __$$InitForEditCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitForEdit implements InitForEdit {
-  const _$InitForEdit({required this.unit});
+  const _$InitForEdit({required this.unit, required this.index});
 
   @override
   final Unit unit;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'UnitEntryEvent.initForEdit(unit: $unit)';
+    return 'UnitsEvent.initForEdit(unit: $unit, index: $index)';
   }
 
   @override
@@ -1333,12 +1492,15 @@ class _$InitForEdit implements InitForEdit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitForEdit &&
-            const DeepCollectionEquality().equals(other.unit, unit));
+            const DeepCollectionEquality().equals(other.unit, unit) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(unit));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(unit),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -1348,48 +1510,49 @@ class _$InitForEdit implements InitForEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) unitNameChanged,
-    required TResult Function(String name) unitAdded,
-    required TResult Function(Unit unit) unitSelected,
-    required TResult Function() unitUnselected,
-    required TResult Function(Unit unit, double? quantity) fromUnitChanged,
-    required TResult Function(String quantity) quantityChanged,
-    required TResult Function(String price) priceChanged,
-    required TResult Function(Unit unit) initForEdit,
+    required TResult Function(String name, int index) unitNameChanged,
+    required TResult Function(String name, int index) unitAdded,
+    required TResult Function(Unit unit, int index) unitSelected,
+    required TResult Function(int index) unitUnselected,
+    required TResult Function(Unit unit, int index, double? quantity)
+        fromUnitChanged,
+    required TResult Function(String quantity, int index) quantityChanged,
+    required TResult Function(String price, int index) priceChanged,
+    required TResult Function(Unit unit, int index) initForEdit,
   }) {
-    return initForEdit(unit);
+    return initForEdit(unit, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
   }) {
-    return initForEdit?.call(unit);
+    return initForEdit?.call(unit, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult Function(String name, int index)? unitNameChanged,
+    TResult Function(String name, int index)? unitAdded,
+    TResult Function(Unit unit, int index)? unitSelected,
+    TResult Function(int index)? unitUnselected,
+    TResult Function(Unit unit, int index, double? quantity)? fromUnitChanged,
+    TResult Function(String quantity, int index)? quantityChanged,
+    TResult Function(String price, int index)? priceChanged,
+    TResult Function(Unit unit, int index)? initForEdit,
     required TResult orElse(),
   }) {
     if (initForEdit != null) {
-      return initForEdit(unit);
+      return initForEdit(unit, index);
     }
     return orElse();
   }
@@ -1444,319 +1607,158 @@ class _$InitForEdit implements InitForEdit {
   }
 }
 
-abstract class InitForEdit implements UnitEntryEvent {
-  const factory InitForEdit({required final Unit unit}) = _$InitForEdit;
+abstract class InitForEdit implements UnitsEvent {
+  const factory InitForEdit(
+      {required final Unit unit, required final int index}) = _$InitForEdit;
 
   Unit get unit;
+  @override
+  int get index;
+  @override
   @JsonKey(ignore: true)
   _$$InitForEditCopyWith<_$InitForEdit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$UnitEntryState {
-  Name get name => throw _privateConstructorUsedError;
-  List<Unit> get unitSuggestions => throw _privateConstructorUsedError;
-  AutoSuggestionState get sugggestionStatus =>
-      throw _privateConstructorUsedError;
-  RequiredObject<Unit> get unit => throw _privateConstructorUsedError;
-  RequiredObject<Unit> get fromUnit => throw _privateConstructorUsedError;
-  Number get quantity => throw _privateConstructorUsedError;
-  Number get price => throw _privateConstructorUsedError;
-  UnitEntryStatus get status => throw _privateConstructorUsedError;
-  String get errorMessage => throw _privateConstructorUsedError;
+mixin _$UnitsState {
+  List<UnitEntryRow> get units => throw _privateConstructorUsedError;
+  UnitsStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UnitEntryStateCopyWith<UnitEntryState> get copyWith =>
+  $UnitsStateCopyWith<UnitsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UnitEntryStateCopyWith<$Res> {
-  factory $UnitEntryStateCopyWith(
-          UnitEntryState value, $Res Function(UnitEntryState) then) =
-      _$UnitEntryStateCopyWithImpl<$Res>;
-  $Res call(
-      {Name name,
-      List<Unit> unitSuggestions,
-      AutoSuggestionState sugggestionStatus,
-      RequiredObject<Unit> unit,
-      RequiredObject<Unit> fromUnit,
-      Number quantity,
-      Number price,
-      UnitEntryStatus status,
-      String errorMessage});
+abstract class $UnitsStateCopyWith<$Res> {
+  factory $UnitsStateCopyWith(
+          UnitsState value, $Res Function(UnitsState) then) =
+      _$UnitsStateCopyWithImpl<$Res>;
+  $Res call({List<UnitEntryRow> units, UnitsStatus status});
 }
 
 /// @nodoc
-class _$UnitEntryStateCopyWithImpl<$Res>
-    implements $UnitEntryStateCopyWith<$Res> {
-  _$UnitEntryStateCopyWithImpl(this._value, this._then);
+class _$UnitsStateCopyWithImpl<$Res> implements $UnitsStateCopyWith<$Res> {
+  _$UnitsStateCopyWithImpl(this._value, this._then);
 
-  final UnitEntryState _value;
+  final UnitsState _value;
   // ignore: unused_field
-  final $Res Function(UnitEntryState) _then;
+  final $Res Function(UnitsState) _then;
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? unitSuggestions = freezed,
-    Object? sugggestionStatus = freezed,
-    Object? unit = freezed,
-    Object? fromUnit = freezed,
-    Object? quantity = freezed,
-    Object? price = freezed,
+    Object? units = freezed,
     Object? status = freezed,
-    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Name,
-      unitSuggestions: unitSuggestions == freezed
-          ? _value.unitSuggestions
-          : unitSuggestions // ignore: cast_nullable_to_non_nullable
-              as List<Unit>,
-      sugggestionStatus: sugggestionStatus == freezed
-          ? _value.sugggestionStatus
-          : sugggestionStatus // ignore: cast_nullable_to_non_nullable
-              as AutoSuggestionState,
-      unit: unit == freezed
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<Unit>,
-      fromUnit: fromUnit == freezed
-          ? _value.fromUnit
-          : fromUnit // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<Unit>,
-      quantity: quantity == freezed
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as Number,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as Number,
+      units: units == freezed
+          ? _value.units
+          : units // ignore: cast_nullable_to_non_nullable
+              as List<UnitEntryRow>,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as UnitEntryStatus,
-      errorMessage: errorMessage == freezed
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as UnitsStatus,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_UnitEntryStateCopyWith<$Res>
-    implements $UnitEntryStateCopyWith<$Res> {
-  factory _$$_UnitEntryStateCopyWith(
-          _$_UnitEntryState value, $Res Function(_$_UnitEntryState) then) =
-      __$$_UnitEntryStateCopyWithImpl<$Res>;
+abstract class _$$_UnitsStateCopyWith<$Res>
+    implements $UnitsStateCopyWith<$Res> {
+  factory _$$_UnitsStateCopyWith(
+          _$_UnitsState value, $Res Function(_$_UnitsState) then) =
+      __$$_UnitsStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {Name name,
-      List<Unit> unitSuggestions,
-      AutoSuggestionState sugggestionStatus,
-      RequiredObject<Unit> unit,
-      RequiredObject<Unit> fromUnit,
-      Number quantity,
-      Number price,
-      UnitEntryStatus status,
-      String errorMessage});
+  $Res call({List<UnitEntryRow> units, UnitsStatus status});
 }
 
 /// @nodoc
-class __$$_UnitEntryStateCopyWithImpl<$Res>
-    extends _$UnitEntryStateCopyWithImpl<$Res>
-    implements _$$_UnitEntryStateCopyWith<$Res> {
-  __$$_UnitEntryStateCopyWithImpl(
-      _$_UnitEntryState _value, $Res Function(_$_UnitEntryState) _then)
-      : super(_value, (v) => _then(v as _$_UnitEntryState));
+class __$$_UnitsStateCopyWithImpl<$Res> extends _$UnitsStateCopyWithImpl<$Res>
+    implements _$$_UnitsStateCopyWith<$Res> {
+  __$$_UnitsStateCopyWithImpl(
+      _$_UnitsState _value, $Res Function(_$_UnitsState) _then)
+      : super(_value, (v) => _then(v as _$_UnitsState));
 
   @override
-  _$_UnitEntryState get _value => super._value as _$_UnitEntryState;
+  _$_UnitsState get _value => super._value as _$_UnitsState;
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? unitSuggestions = freezed,
-    Object? sugggestionStatus = freezed,
-    Object? unit = freezed,
-    Object? fromUnit = freezed,
-    Object? quantity = freezed,
-    Object? price = freezed,
+    Object? units = freezed,
     Object? status = freezed,
-    Object? errorMessage = freezed,
   }) {
-    return _then(_$_UnitEntryState(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Name,
-      unitSuggestions: unitSuggestions == freezed
-          ? _value._unitSuggestions
-          : unitSuggestions // ignore: cast_nullable_to_non_nullable
-              as List<Unit>,
-      sugggestionStatus: sugggestionStatus == freezed
-          ? _value.sugggestionStatus
-          : sugggestionStatus // ignore: cast_nullable_to_non_nullable
-              as AutoSuggestionState,
-      unit: unit == freezed
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<Unit>,
-      fromUnit: fromUnit == freezed
-          ? _value.fromUnit
-          : fromUnit // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<Unit>,
-      quantity: quantity == freezed
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as Number,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as Number,
+    return _then(_$_UnitsState(
+      units: units == freezed
+          ? _value._units
+          : units // ignore: cast_nullable_to_non_nullable
+              as List<UnitEntryRow>,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as UnitEntryStatus,
-      errorMessage: errorMessage == freezed
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as UnitsStatus,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_UnitEntryState implements _UnitEntryState {
-  const _$_UnitEntryState(
-      {this.name = const Name.pure(),
-      final List<Unit> unitSuggestions = const [],
-      this.sugggestionStatus = AutoSuggestionState.emptyText,
-      this.unit = const RequiredObject.pure(),
-      this.fromUnit = const RequiredObject.pure(),
-      this.quantity = const Number.pure(
-          acceptNegative: false, acceptZero: false, isFractional: true),
-      this.price = const Number.pure(acceptNegative: false, isFractional: true),
-      this.status = UnitEntryStatus.initial,
-      this.errorMessage = ''})
-      : _unitSuggestions = unitSuggestions;
+class _$_UnitsState implements _UnitsState {
+  const _$_UnitsState(
+      {final List<UnitEntryRow> units = const [],
+      this.status = UnitsStatus.initial})
+      : _units = units;
 
+  final List<UnitEntryRow> _units;
   @override
   @JsonKey()
-  final Name name;
-  final List<Unit> _unitSuggestions;
-  @override
-  @JsonKey()
-  List<Unit> get unitSuggestions {
+  List<UnitEntryRow> get units {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_unitSuggestions);
+    return EqualUnmodifiableListView(_units);
   }
 
   @override
   @JsonKey()
-  final AutoSuggestionState sugggestionStatus;
-  @override
-  @JsonKey()
-  final RequiredObject<Unit> unit;
-  @override
-  @JsonKey()
-  final RequiredObject<Unit> fromUnit;
-  @override
-  @JsonKey()
-  final Number quantity;
-  @override
-  @JsonKey()
-  final Number price;
-  @override
-  @JsonKey()
-  final UnitEntryStatus status;
-  @override
-  @JsonKey()
-  final String errorMessage;
+  final UnitsStatus status;
 
   @override
   String toString() {
-    return 'UnitEntryState(name: $name, unitSuggestions: $unitSuggestions, sugggestionStatus: $sugggestionStatus, unit: $unit, fromUnit: $fromUnit, quantity: $quantity, price: $price, status: $status, errorMessage: $errorMessage)';
+    return 'UnitsState(units: $units, status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UnitEntryState &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other._unitSuggestions, _unitSuggestions) &&
-            const DeepCollectionEquality()
-                .equals(other.sugggestionStatus, sugggestionStatus) &&
-            const DeepCollectionEquality().equals(other.unit, unit) &&
-            const DeepCollectionEquality().equals(other.fromUnit, fromUnit) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            other is _$_UnitsState &&
+            const DeepCollectionEquality().equals(other._units, _units) &&
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_unitSuggestions),
-      const DeepCollectionEquality().hash(sugggestionStatus),
-      const DeepCollectionEquality().hash(unit),
-      const DeepCollectionEquality().hash(fromUnit),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(errorMessage));
+      const DeepCollectionEquality().hash(_units),
+      const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
-  _$$_UnitEntryStateCopyWith<_$_UnitEntryState> get copyWith =>
-      __$$_UnitEntryStateCopyWithImpl<_$_UnitEntryState>(this, _$identity);
+  _$$_UnitsStateCopyWith<_$_UnitsState> get copyWith =>
+      __$$_UnitsStateCopyWithImpl<_$_UnitsState>(this, _$identity);
 }
 
-abstract class _UnitEntryState implements UnitEntryState {
-  const factory _UnitEntryState(
-      {final Name name,
-      final List<Unit> unitSuggestions,
-      final AutoSuggestionState sugggestionStatus,
-      final RequiredObject<Unit> unit,
-      final RequiredObject<Unit> fromUnit,
-      final Number quantity,
-      final Number price,
-      final UnitEntryStatus status,
-      final String errorMessage}) = _$_UnitEntryState;
+abstract class _UnitsState implements UnitsState {
+  const factory _UnitsState(
+      {final List<UnitEntryRow> units,
+      final UnitsStatus status}) = _$_UnitsState;
 
   @override
-  Name get name;
+  List<UnitEntryRow> get units;
   @override
-  List<Unit> get unitSuggestions;
-  @override
-  AutoSuggestionState get sugggestionStatus;
-  @override
-  RequiredObject<Unit> get unit;
-  @override
-  RequiredObject<Unit> get fromUnit;
-  @override
-  Number get quantity;
-  @override
-  Number get price;
-  @override
-  UnitEntryStatus get status;
-  @override
-  String get errorMessage;
+  UnitsStatus get status;
   @override
   @JsonKey(ignore: true)
-  _$$_UnitEntryStateCopyWith<_$_UnitEntryState> get copyWith =>
+  _$$_UnitsStateCopyWith<_$_UnitsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

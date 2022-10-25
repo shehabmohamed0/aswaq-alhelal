@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:root_package/core/form_inputs/number.dart';
@@ -38,6 +39,7 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
     on<QuantityChanged>(_onQuantityChanged);
     on<PriceChanged>(_onPriceChanged);
     on<UnitAdded>(_onUnitAdded);
+    on<InitForEdit>(_onInitForEdit);
   }
   final GetUnitSuggestions _getUnitSuggestions;
   final AddUnitToReference _addUnitToReference;
@@ -75,7 +77,7 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
       } else {
         emit(state.copyWith(
           unitSuggestions: units,
-          sugggestionStatus: AutoSuggestionState.loadedButCanAdd,
+          sugggestionStatus: AutoSuggestionState.loaded,
         ));
       }
     });
@@ -92,6 +94,7 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
       UnitUnselected event, Emitter<UnitEntryState> emit) {
     emit(state.copyWith(
         unit: const RequiredObject.dirty(null),
+        sugggestionStatus: AutoSuggestionState.emptyText,
         status: UnitEntryStatus.unitUnselected,
         name: const Name.dirty('')));
   }
@@ -100,7 +103,10 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
       FromUnitChanged event, Emitter<UnitEntryState> emit) {
     emit(state.copyWith(
         fromUnit: RequiredObject.dirty(event.unit),
-        status: UnitEntryStatus.fromUnitChanged));
+        status: UnitEntryStatus.fromUnitChanged,
+        quantity: event.quantity != null
+            ? state.quantity.copyWith(event.quantity!)
+            : state.quantity));
   }
 
   FutureOr<void> _onQuantityChanged(
@@ -108,6 +114,8 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
     final number = double.tryParse(event.quantity);
     if (number != null) {
       emit(state.copyWith(quantity: state.quantity.copyWith(number)));
+    } else {
+      emit(state.copyWith(quantity: state.quantity.copyWith(0)));
     }
   }
 
@@ -115,7 +123,9 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
       PriceChanged event, Emitter<UnitEntryState> emit) {
     final number = double.tryParse(event.price);
     if (number != null) {
-      emit(state.copyWith(quantity: state.price.copyWith(number)));
+      emit(state.copyWith(price: state.price.copyWith(number)));
+    } else {
+      emit(state.copyWith(price: state.price.copyWith(0)));
     }
   }
 
@@ -123,12 +133,17 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
       UnitAdded event, Emitter<UnitEntryState> emit) async {
     if (state.status == UnitEntryStatus.loading) return;
     emit(state.copyWith(status: UnitEntryStatus.loading));
-
+    log('name : ${state.name.value}');
     final eitherOrUnit = await _addUnitToReference(
         params: AddUnitToReferenceParams(
-      name: state.name.value,
+      name: event.name,
       price: 0,
       quantity: 0,
+      p0: 0,
+      p1: 0,
+      p2: 0,
+      p3: 0,
+      p4: 0,
     ));
 
     eitherOrUnit.fold(
@@ -136,5 +151,16 @@ class UnitEntryBloc extends Bloc<UnitEntryEvent, UnitEntryState> {
         (unit) => emit(state.copyWith(
             unit: RequiredObject.dirty(unit),
             status: UnitEntryStatus.success)));
+  }
+
+  FutureOr<void> _onInitForEdit(
+      InitForEdit event, Emitter<UnitEntryState> emit) {
+    emit(state.copyWith(
+        unit: RequiredObject.dirty(event.unit),
+        fromUnit: RequiredObject.dirty(event.unit.baseUnit),
+        quantity: const Number.pure(acceptNegative: false, acceptZero: false)
+            .copyWith(event.unit.quantity),
+        price: const Number.pure(acceptNegative: false, acceptZero: false)
+            .copyWith(event.unit.price)));
   }
 }

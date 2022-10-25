@@ -18,11 +18,22 @@ class Number extends FormzInput<num, NumberValidationError> {
   /// {@macro Number}
   const Number.pure({
     this.acceptNegative = true,
-    this.isFractional = false,
+    this.isFractional = true,
+    this.acceptZero = true,
+  }) : super.pure(0);
+
+  const Number.price({
+    this.acceptNegative = false,
+    this.isFractional = true,
     this.acceptZero = false,
   }) : super.pure(0);
 
- 
+  const Number.quantity({
+    this.acceptNegative = false,
+    this.isFractional = false,
+  })  : acceptZero = false,
+        super.pure(0);
+
   // const Number._dirty(
   //     {required num number,
   //     required this.acceptNegative,

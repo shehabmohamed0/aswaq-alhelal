@@ -62,3 +62,13 @@ class DeleteImageFile extends AddItemEvent {
 class DeleteImageUrl extends AddItemEvent {
   DeleteImageUrl();
 }
+
+class UnitChanged extends AddItemEvent {
+  final Unit? unit;
+  final int index;
+  UnitChanged(this.unit, this.index);
+}
+
+class UnitAddPressed extends AddItemEvent {
+  UnitAddPressed();
+}

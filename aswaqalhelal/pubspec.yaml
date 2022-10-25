@@ -45,7 +45,7 @@ dependencies:
   dropdown_search: ^5.0.2
   pdf: ^3.8.3
   open_file: ^3.2.1
-  flutter_typeahead: ^4.0.0
+  flutter_typeahead: ^4.1.1
   
   timeago: ^3.3.0
 

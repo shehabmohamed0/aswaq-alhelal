@@ -10,13 +10,12 @@ class AddItemState extends Equatable {
   final bool addingNewItem;
   final RequiredObject<File> imageFile;
   final RequiredObject<String> imageUrl;
-  final List<Unit> units;
+  final List<Option<Unit>> measureUnits;
   final FormzStatus status;
   final UnitStatus unitStatus;
   final String? errorMessage;
   final InstitutionItem? institutionItem;
   final InstitutionItem? oldItem;
-
   final bool isEdit;
 
   const AddItemState({
@@ -26,7 +25,7 @@ class AddItemState extends Equatable {
     this.imageFile = const RequiredObject.pure(),
     this.imageUrl = const RequiredObject.pure(),
     this.itemName = const RequiredString.pure(),
-    this.units = const [],
+    this.measureUnits = const [None()],
     this.suggestionState = AutoSuggestionState.emptyText,
     this.suggestions = const [],
     this.status = FormzStatus.pure,
@@ -39,7 +38,7 @@ class AddItemState extends Equatable {
 
   AddItemState copyWith({
     RequiredObject<ReferenceItem>? selectedItem,
-    List<Unit>? units,
+    List<Option<Unit>>? measureUnits,
     RequiredObject<File>? imageFile,
     RequiredObject<String>? imageUrl,
     AutoSuggestionState? suggestionState,
@@ -57,7 +56,7 @@ class AddItemState extends Equatable {
       selectedItem: selectedItem ?? this.selectedItem,
       itemName: itemName ?? this.itemName,
       addingNewItem: addingNewItem ?? this.addingNewItem,
-      units: units ?? this.units,
+      measureUnits: measureUnits ?? this.measureUnits,
       suggestionState: suggestionState ?? this.suggestionState,
       suggestions: suggestions ?? this.suggestions,
       itemFromReference: itemFromReference ?? this.itemFromReference,
@@ -79,7 +78,7 @@ class AddItemState extends Equatable {
         suggestionState,
         selectedItem,
         itemName,
-        units,
+        measureUnits,
         status,
         unitStatus,
         errorMessage,

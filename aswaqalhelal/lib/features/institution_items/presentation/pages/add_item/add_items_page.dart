@@ -22,6 +22,8 @@ import '../../cubit/institution_items/institution_items_cubit.dart';
 import 'widgets/auto_suggest_text_field.dart';
 import 'widgets/image_bottom_sheet_widget.dart';
 
+part 'widgets/unit_entry_widget.dart';
+
 class AddItemPage extends HookWidget {
   const AddItemPage({Key? key}) : super(key: key);
 
@@ -292,7 +294,9 @@ class AddItemPage extends HookWidget {
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        bloc.add(UnitAddPressed());
+                      },
                       icon: const Icon(Icons.add),
                       splashRadius: 18,
                       visualDensity: VisualDensity.compact,
@@ -301,36 +305,43 @@ class AddItemPage extends HookWidget {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
             BlocBuilder<AddItemBloc, AddItemState>(
               buildWhen: (previous, current) =>
                   previous.selectedItem != current.selectedItem ||
                   previous.itemFromReference != current.itemFromReference ||
-                  previous.units != current.units,
+                  previous.measureUnits != current.measureUnits ||
+                  previous.measureUnits != current.measureUnits,
               builder: (context, state) {
+                state.measureUnits
+                    .where((element) => element.isSome())
+                    .map((e) => e.toNullable()!)
+                    .toList()
+                    .forEach((element) {
+                  log(element.name);
+                });
                 return SliverPadding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) => BlocProvider<UnitEntryBloc>(
-                        create: (context) => locator(),
-                        child: UnitEntry(
-                          onChanged: (unit) {},
-                          units: const [
-                            Unit(
-                                referenceId: 'asdasdad1',
-                                name: 'Test unit1',
-                                quantity: 10,
-                                price: 105.0),
-                            Unit(
-                                referenceId: 'asdasdad2',
-                                name: 'Test unit2',
-                                quantity: 5,
-                                price: 67.0)
-                          ],
-                        ),
-                      ),
-                      childCount: 1,
+                      (context, index) {
+                        return BlocProvider<UnitEntryBloc>(
+                          create: (context) => locator(),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: UnitEntry(
+                                onChanged: (unit) {
+                                  bloc.add(UnitChanged(unit, index));
+                                  log('${unit?.name} Changed');
+                                },
+                                firstIndex: index == 0,
+                                units: state.measureUnits
+                                    .where((element) => element.isSome())
+                                    .map((e) => e.toNullable()!)
+                                    .toList()),
+                          ),
+                        );
+                      },
+                      childCount: state.measureUnits.length,
                     ),
                   ),
                 );
@@ -350,7 +361,7 @@ class AddItemPage extends HookWidget {
                                 borderRadius: BorderRadius.circular(8))),
                         onPressed: state.itemName.value.isNotEmpty &&
                                 state.itemName.value.length > 2 &&
-                                state.units.isNotEmpty &&
+                                state.measureUnits.isNotEmpty &&
                                 !state.status.isSubmissionInProgress
                             ? () {
                                 final state = cubit.state;
@@ -383,235 +394,5 @@ class AddItemPage extends HookWidget {
         ),
       ),
     );
-  }
-}
-
-class UnitEntry extends StatefulWidget {
-  const UnitEntry({
-    Key? key,
-    required this.units,
-    required this.onChanged,
-  }) : super(key: key);
-  final List<Unit> units;
-  final void Function(Unit unit) onChanged;
-  @override
-  State<UnitEntry> createState() => _UnitEntryState();
-}
-
-class _UnitEntryState extends State<UnitEntry> {
-  late final TextEditingController nameController;
-  late final FocusNode nameFocusNode;
-  late final TextEditingController quantityController;
-  late final FocusNode quantityFocusNode;
-  late final TextEditingController priceController;
-  late final FocusNode priceFocusNode;
-
-  void onValidUnitChanged(UnitEntryState state) {
-    final status = Formz.validate(
-        [state.unit, state.fromUnit, state.quantity, state.price]);
-
-    if (status.isValid) {
-      widget.onChanged(Unit(
-          referenceId: state.unit.value!.referenceId,
-          name: state.unit.value!.name,
-          quantity: state.quantity.value.toDouble(),
-          price: state.price.value.toDouble()));
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    nameController = TextEditingController();
-    nameFocusNode = FocusNode();
-    quantityController = TextEditingController();
-    quantityFocusNode = FocusNode();
-    priceController = TextEditingController();
-    priceFocusNode = FocusNode();
-
-    quantityController.text = '0';
-    priceController.text = '0';
-
-    nameFocusNode.addListener(_onHasFocus);
-  }
-
-  void _onHasFocus() {
-    if (nameFocusNode.hasFocus) {
-      Scrollable.ensureVisible(context,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeIn,
-          alignment: .45,
-          alignmentPolicy: ScrollPositionAlignmentPolicy.explicit);
-    }
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    nameFocusNode.removeListener(_onHasFocus);
-    nameFocusNode.dispose();
-    quantityController.dispose();
-    quantityFocusNode.dispose();
-    priceController.dispose();
-    priceFocusNode.dispose();
-    super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant UnitEntry oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    // context.read<UnitEntryBloc>().add(UnitEntryEvent.)
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<UnitEntryBloc>();
-
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<UnitEntryBloc, UnitEntryState>(
-          listenWhen: _unitDataChanged,
-          listener: (context, state) {
-            onValidUnitChanged(state);
-          },
-        ),
-        BlocListener<UnitEntryBloc, UnitEntryState>(
-          listenWhen: (previous, current) => previous.status != current.status,
-          listener: (context, state) {
-            switch (state.status) {
-              case UnitEntryStatus.loading:
-                EasyLoading.show(
-                    indicator: const FittedBox(
-                  child: SpinKitRipple(
-                      duration: Duration(milliseconds: 1200),
-                      color: Colors.white),
-                ));
-                break;
-              case UnitEntryStatus.success:
-                EasyLoading.dismiss();
-                nameFocusNode.unfocus();
-                break;
-              case UnitEntryStatus.failure:
-                showErrorSnackBar(context, state.errorMessage);
-                EasyLoading.dismiss();
-                break;
-              case UnitEntryStatus.unitSelected:
-                nameFocusNode.unfocus();
-                break;
-              case UnitEntryStatus.unitUnselected:
-                nameController.clear();
-
-                break;
-              case UnitEntryStatus.fromUnitChanged:
-                quantityFocusNode.requestFocus();
-                quantityController.selection = TextSelection.fromPosition(
-                    TextPosition(offset: quantityController.text.length));
-                break;
-
-              default:
-            }
-          },
-        ),
-      ],
-      child: BlocBuilder<UnitEntryBloc, UnitEntryState>(
-        builder: (context, state) {
-          return Row(
-            children: [
-              Flexible(
-                child: AutoSuggestTextField<Unit>(
-                  labelText: 'Unit name',
-                  controller: nameController,
-                  focusNode: nameFocusNode,
-                  suggestions: state.unitSuggestions,
-                  suggestionState: state.sugggestionStatus,
-                  suggestionBuilder: (context, unit) =>
-                      ListTile(title: Text(unit.name)),
-                  onChanged: (name) =>
-                      bloc.add(UnitEntryEvent.unitNameChanged(name: name)),
-                  onSuggestionSelected: (unit) =>
-                      bloc.add(UnitEntryEvent.unitSelected(unit: unit)),
-                  onEmptyWidgetClicked: () =>
-                      bloc.add(const UnitEntryEvent.unitAdded()),
-                  onRemoveSelection: () =>
-                      bloc.add(const UnitEntryEvent.unitUnselected()),
-                  enabled: state.unit.value == null,
-                  showRemoveButton: state.unit.valid,
-                  emptyWidget: ListTile(
-                    onTap: () => bloc.add(const UnitEntryEvent.unitAdded()),
-                    title: FittedBox(
-                        alignment: AlignmentDirectional.centerStart,
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          nameController.text,
-                        )),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                  child: DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                    labelText: 'From unit',
-                    floatingLabelBehavior: FloatingLabelBehavior.always),
-                isExpanded: true,
-                items: const [
-                  DropdownMenuItem(
-                    value: '1',
-                    child: FittedBox(child: Text('aasd asds')),
-                  ),
-                  DropdownMenuItem(
-                    value: '2',
-                    child: FittedBox(child: Text('asd')),
-                  ),
-                  DropdownMenuItem(
-                    value: '3',
-                    child: FittedBox(child: Text('asd')),
-                  ),
-                ],
-                value: '1',
-                onChanged: (unit) {},
-              )),
-              const SizedBox(width: 4),
-              Flexible(
-                child: TextField(
-                  controller: quantityController,
-                  focusNode: quantityFocusNode,
-                  onChanged: (quantity) => bloc
-                      .add(UnitEntryEvent.quantityChanged(quantity: quantity)),
-                  decoration: InputDecoration(
-                    //todo: translation
-                    labelText: 'Quantity',
-                    errorText: state.quantity.validationMessage(),
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: TextField(
-                  controller: priceController,
-                  focusNode: priceFocusNode,
-                  onChanged: (price) =>
-                      bloc.add(UnitEntryEvent.priceChanged(price: price)),
-                  decoration: InputDecoration(
-                    //todo: translation
-                    labelText: 'Price',
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    errorText: state.price.validationMessage(),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  bool _unitDataChanged(UnitEntryState previous, UnitEntryState current) {
-    return previous.unit != current.unit ||
-        previous.fromUnit != current.fromUnit ||
-        previous.price != current.price ||
-        previous.quantity != current.quantity;
   }
 }

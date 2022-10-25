@@ -9,13 +9,18 @@ part 'unit_model.g.dart';
 class UnitModel extends Unit {
   @JsonKey(name: 'baseUnit')
   final UnitModel? baseUnitModel;
-  const UnitModel(
-      {required super.referenceId,
-      required super.name,
-      required super.quantity,
-      required super.price,
-      required this.baseUnitModel})
-      : super(baseUnit: baseUnitModel);
+  const UnitModel({
+    required super.referenceId,
+    required super.name,
+    required super.quantity,
+    required super.price,
+    required super.p0,
+    required super.p1,
+    required super.p2,
+    required super.p3,
+    required super.p4,
+    required this.baseUnitModel,
+  }) : super(baseUnit: baseUnitModel);
 
   factory UnitModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -28,6 +33,11 @@ class UnitModel extends Unit {
     String? name,
     double? price,
     double? quantity,
+    double? p0,
+    double? p1,
+    double? p2,
+    double? p3,
+    double? p4,
     UnitModel? baseUnitModel,
   }) =>
       UnitModel(
@@ -36,6 +46,11 @@ class UnitModel extends Unit {
         price: price ?? this.price,
         quantity: quantity ?? this.quantity,
         baseUnitModel: baseUnitModel ?? this.baseUnitModel,
+        p0: p0 ?? this.p0,
+        p1: p1 ?? this.p1,
+        p2: p2 ?? this.p2,
+        p3: p3 ?? this.p3,
+        p4: p4 ?? this.p4,
       );
 
   factory UnitModel.fromJson(Map<String, dynamic> json) =>
@@ -48,6 +63,11 @@ class UnitModel extends Unit {
         name: unit.name,
         quantity: unit.quantity,
         price: unit.price,
+        p0: unit.p0,
+        p1: unit.p1,
+        p2: unit.p2,
+        p3: unit.p3,
+        p4: unit.p4,
         baseUnitModel:
             unit.baseUnit == null ? null : UnitModel.fromDomain(unit.baseUnit!),
       );
