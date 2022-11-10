@@ -44,10 +44,23 @@ export const onNotification = functions.firestore.document('notifications/{notif
 
 });
 export const onProfile = functions.firestore.document('profiles/{profile}').onWrite(async (snapshot, context) => {
+    const firestore = admin.firestore();
     const data = snapshot.after.data();
 
     if (!snapshot.before.exists && snapshot.after.data()!.type == 'user') {
         return;
+    }
+
+    if (!snapshot.before.exists && snapshot.after.data()!.type == 'institution') {
+        let defaultCacheClient = await firestore.doc('profiles/zN9HD2x9hgfaih9KaqBM').get();
+        const institutionId = data!.id;
+        let clientProfileData = defaultCacheClient.data()!;
+        let institutionClientData = {
+            'institutionId': institutionId,
+            'profile': clientProfileData,
+
+        };
+        await firestore.collection('institution_clients').add(institutionClientData);
     }
     const profileId = snapshot.after.id;
     const userDoc = admin.firestore().doc('users/' + (data!.userId));

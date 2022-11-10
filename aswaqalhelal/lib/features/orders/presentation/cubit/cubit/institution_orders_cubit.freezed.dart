@@ -32,7 +32,8 @@ mixin _$InstitutionOrdersState {
 abstract class $InstitutionOrdersStateCopyWith<$Res> {
   factory $InstitutionOrdersStateCopyWith(InstitutionOrdersState value,
           $Res Function(InstitutionOrdersState) then) =
-      _$InstitutionOrdersStateCopyWithImpl<$Res>;
+      _$InstitutionOrdersStateCopyWithImpl<$Res, InstitutionOrdersState>;
+  @useResult
   $Res call(
       {List<Order> pendingOrders,
       RequestState pendingOrdersState,
@@ -43,49 +44,52 @@ abstract class $InstitutionOrdersStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InstitutionOrdersStateCopyWithImpl<$Res>
+class _$InstitutionOrdersStateCopyWithImpl<$Res,
+        $Val extends InstitutionOrdersState>
     implements $InstitutionOrdersStateCopyWith<$Res> {
   _$InstitutionOrdersStateCopyWithImpl(this._value, this._then);
 
-  final InstitutionOrdersState _value;
   // ignore: unused_field
-  final $Res Function(InstitutionOrdersState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pendingOrders = freezed,
-    Object? pendingOrdersState = freezed,
-    Object? processingOrders = freezed,
-    Object? processingOrdersState = freezed,
-    Object? updateState = freezed,
-    Object? errorMessage = freezed,
+    Object? pendingOrders = null,
+    Object? pendingOrdersState = null,
+    Object? processingOrders = null,
+    Object? processingOrdersState = null,
+    Object? updateState = null,
+    Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      pendingOrders: pendingOrders == freezed
+      pendingOrders: null == pendingOrders
           ? _value.pendingOrders
           : pendingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      pendingOrdersState: pendingOrdersState == freezed
+      pendingOrdersState: null == pendingOrdersState
           ? _value.pendingOrdersState
           : pendingOrdersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      processingOrders: processingOrders == freezed
+      processingOrders: null == processingOrders
           ? _value.processingOrders
           : processingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      processingOrdersState: processingOrdersState == freezed
+      processingOrdersState: null == processingOrdersState
           ? _value.processingOrdersState
           : processingOrdersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      updateState: updateState == freezed
+      updateState: null == updateState
           ? _value.updateState
           : updateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +100,7 @@ abstract class _$$_InstitutionOrdersStateCopyWith<$Res>
           $Res Function(_$_InstitutionOrdersState) then) =
       __$$_InstitutionOrdersStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Order> pendingOrders,
       RequestState pendingOrdersState,
@@ -107,47 +112,45 @@ abstract class _$$_InstitutionOrdersStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_InstitutionOrdersStateCopyWithImpl<$Res>
-    extends _$InstitutionOrdersStateCopyWithImpl<$Res>
+    extends _$InstitutionOrdersStateCopyWithImpl<$Res,
+        _$_InstitutionOrdersState>
     implements _$$_InstitutionOrdersStateCopyWith<$Res> {
   __$$_InstitutionOrdersStateCopyWithImpl(_$_InstitutionOrdersState _value,
       $Res Function(_$_InstitutionOrdersState) _then)
-      : super(_value, (v) => _then(v as _$_InstitutionOrdersState));
+      : super(_value, _then);
 
-  @override
-  _$_InstitutionOrdersState get _value =>
-      super._value as _$_InstitutionOrdersState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pendingOrders = freezed,
-    Object? pendingOrdersState = freezed,
-    Object? processingOrders = freezed,
-    Object? processingOrdersState = freezed,
-    Object? updateState = freezed,
-    Object? errorMessage = freezed,
+    Object? pendingOrders = null,
+    Object? pendingOrdersState = null,
+    Object? processingOrders = null,
+    Object? processingOrdersState = null,
+    Object? updateState = null,
+    Object? errorMessage = null,
   }) {
     return _then(_$_InstitutionOrdersState(
-      pendingOrders: pendingOrders == freezed
+      pendingOrders: null == pendingOrders
           ? _value._pendingOrders
           : pendingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      pendingOrdersState: pendingOrdersState == freezed
+      pendingOrdersState: null == pendingOrdersState
           ? _value.pendingOrdersState
           : pendingOrdersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      processingOrders: processingOrders == freezed
+      processingOrders: null == processingOrders
           ? _value._processingOrders
           : processingOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      processingOrdersState: processingOrdersState == freezed
+      processingOrdersState: null == processingOrdersState
           ? _value.processingOrdersState
           : processingOrdersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      updateState: updateState == freezed
+      updateState: null == updateState
           ? _value.updateState
           : updateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
@@ -209,30 +212,31 @@ class _$_InstitutionOrdersState implements _InstitutionOrdersState {
             other is _$_InstitutionOrdersState &&
             const DeepCollectionEquality()
                 .equals(other._pendingOrders, _pendingOrders) &&
-            const DeepCollectionEquality()
-                .equals(other.pendingOrdersState, pendingOrdersState) &&
+            (identical(other.pendingOrdersState, pendingOrdersState) ||
+                other.pendingOrdersState == pendingOrdersState) &&
             const DeepCollectionEquality()
                 .equals(other._processingOrders, _processingOrders) &&
-            const DeepCollectionEquality()
-                .equals(other.processingOrdersState, processingOrdersState) &&
-            const DeepCollectionEquality()
-                .equals(other.updateState, updateState) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            (identical(other.processingOrdersState, processingOrdersState) ||
+                other.processingOrdersState == processingOrdersState) &&
+            (identical(other.updateState, updateState) ||
+                other.updateState == updateState) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_pendingOrders),
-      const DeepCollectionEquality().hash(pendingOrdersState),
+      pendingOrdersState,
       const DeepCollectionEquality().hash(_processingOrders),
-      const DeepCollectionEquality().hash(processingOrdersState),
-      const DeepCollectionEquality().hash(updateState),
-      const DeepCollectionEquality().hash(errorMessage));
+      processingOrdersState,
+      updateState,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_InstitutionOrdersStateCopyWith<_$_InstitutionOrdersState> get copyWith =>
       __$$_InstitutionOrdersStateCopyWithImpl<_$_InstitutionOrdersState>(
           this, _$identity);

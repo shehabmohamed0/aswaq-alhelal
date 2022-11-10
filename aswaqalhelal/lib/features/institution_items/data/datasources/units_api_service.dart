@@ -25,7 +25,7 @@ class UnitsApiServiceImpl extends UnitsApiService {
         .get();
     if (unitSnapshot.docs.isNotEmpty) {
       final unit = UnitModel.fromFirestore(unitSnapshot.docs.first);
-      unit.copyWith(price: params.price, quantity: params.quantity.toDouble());
+      unit.copyWith(price: params.price, quantity: params.quantity);
       return unit;
     }
     final doc = collection.doc();

@@ -20,6 +20,8 @@ class Order extends Equatable {
   final String? distributorId;
   final String? collectorId;
   final OrderState orderState;
+  @JsonKey(defaultValue: 0)
+  final int orderNumber;
   const Order({
     required this.id,
     required this.from,
@@ -35,6 +37,7 @@ class Order extends Equatable {
     required this.collectorId,
     required this.orderState,
     required this.creationTime,
+    required this.orderNumber,
   });
 
   @override
@@ -52,7 +55,8 @@ class Order extends Equatable {
         distributorId,
         collectorId,
         orderState,
-        creationTime
+        creationTime,
+        orderNumber
       ];
 }
 

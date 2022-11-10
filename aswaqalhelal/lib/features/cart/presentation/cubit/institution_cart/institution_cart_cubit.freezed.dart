@@ -28,34 +28,38 @@ mixin _$InstitutionCartState {
 abstract class $InstitutionCartStateCopyWith<$Res> {
   factory $InstitutionCartStateCopyWith(InstitutionCartState value,
           $Res Function(InstitutionCartState) then) =
-      _$InstitutionCartStateCopyWithImpl<$Res>;
+      _$InstitutionCartStateCopyWithImpl<$Res, InstitutionCartState>;
+  @useResult
   $Res call({List<OrderItem> cartItems, double totalPrice});
 }
 
 /// @nodoc
-class _$InstitutionCartStateCopyWithImpl<$Res>
+class _$InstitutionCartStateCopyWithImpl<$Res,
+        $Val extends InstitutionCartState>
     implements $InstitutionCartStateCopyWith<$Res> {
   _$InstitutionCartStateCopyWithImpl(this._value, this._then);
 
-  final InstitutionCartState _value;
   // ignore: unused_field
-  final $Res Function(InstitutionCartState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItems = freezed,
-    Object? totalPrice = freezed,
+    Object? cartItems = null,
+    Object? totalPrice = null,
   }) {
     return _then(_value.copyWith(
-      cartItems: cartItems == freezed
+      cartItems: null == cartItems
           ? _value.cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +70,30 @@ abstract class _$$_InstitutionCartStateCopyWith<$Res>
           $Res Function(_$_InstitutionCartState) then) =
       __$$_InstitutionCartStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<OrderItem> cartItems, double totalPrice});
 }
 
 /// @nodoc
 class __$$_InstitutionCartStateCopyWithImpl<$Res>
-    extends _$InstitutionCartStateCopyWithImpl<$Res>
+    extends _$InstitutionCartStateCopyWithImpl<$Res, _$_InstitutionCartState>
     implements _$$_InstitutionCartStateCopyWith<$Res> {
   __$$_InstitutionCartStateCopyWithImpl(_$_InstitutionCartState _value,
       $Res Function(_$_InstitutionCartState) _then)
-      : super(_value, (v) => _then(v as _$_InstitutionCartState));
+      : super(_value, _then);
 
-  @override
-  _$_InstitutionCartState get _value => super._value as _$_InstitutionCartState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItems = freezed,
-    Object? totalPrice = freezed,
+    Object? cartItems = null,
+    Object? totalPrice = null,
   }) {
     return _then(_$_InstitutionCartState(
-      cartItems: cartItems == freezed
+      cartItems: null == cartItems
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
@@ -129,18 +132,17 @@ class _$_InstitutionCartState implements _InstitutionCartState {
             other is _$_InstitutionCartState &&
             const DeepCollectionEquality()
                 .equals(other._cartItems, _cartItems) &&
-            const DeepCollectionEquality()
-                .equals(other.totalPrice, totalPrice));
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_cartItems),
-      const DeepCollectionEquality().hash(totalPrice));
+      runtimeType, const DeepCollectionEquality().hash(_cartItems), totalPrice);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_InstitutionCartStateCopyWith<_$_InstitutionCartState> get copyWith =>
       __$$_InstitutionCartStateCopyWithImpl<_$_InstitutionCartState>(
           this, _$identity);

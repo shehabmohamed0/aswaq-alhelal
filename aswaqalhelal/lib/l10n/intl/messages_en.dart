@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) => "${number}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Continue": MessageLookupByLibrary.simpleMessage("Continue"),
@@ -45,10 +47,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Already, an offer sent to this user"),
         "anUnknownFailureOccurred": MessageLookupByLibrary.simpleMessage(
             "An unknown failure occurred."),
+        "anonymousUser": MessageLookupByLibrary.simpleMessage("Anonymous user"),
+        "areYouSureToAddANewReceiptPreviousData":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure to add a new receipt? previous data will be removed"),
+        "areYouSureToAddNewItemPreviousDataWill":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure to add new item? previous data will be removed"),
         "areYouSureToCancelTheOrder": MessageLookupByLibrary.simpleMessage(
             "Are you sure to cancel the order?"),
         "areYouSureToDeclineTheOrder": MessageLookupByLibrary.simpleMessage(
             "Are you sure to decline the order?"),
+        "areYouSureToResetTheForm": MessageLookupByLibrary.simpleMessage(
+            "Are you sure to reset the form?"),
         "areYouSureYouWantTonorderNow": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to\norder now ?"),
         "areaExistsBefore":
@@ -68,9 +79,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseDeliveryLocation":
             MessageLookupByLibrary.simpleMessage("Choose delivery location"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
+        "client": MessageLookupByLibrary.simpleMessage("Client"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contactInfo": MessageLookupByLibrary.simpleMessage("Contact info"),
         "contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
+        "contains": MessageLookupByLibrary.simpleMessage("Contains"),
         "createAnAccount":
             MessageLookupByLibrary.simpleMessage("Create an Account."),
         "creationTime": MessageLookupByLibrary.simpleMessage("Creation time"),
@@ -119,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "firestoreError":
             MessageLookupByLibrary.simpleMessage("Firestore error"),
         "from": MessageLookupByLibrary.simpleMessage("From "),
+        "fromUnit": MessageLookupByLibrary.simpleMessage("From unit"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "genderOptional":
             MessageLookupByLibrary.simpleMessage("Gender (optional)"),
@@ -138,11 +152,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email is not valid."),
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Invalid phone number."),
+        "invalidPrice": MessageLookupByLibrary.simpleMessage("Invalid price"),
+        "invalidQuantity":
+            MessageLookupByLibrary.simpleMessage("Invalid quantity"),
         "item": MessageLookupByLibrary.simpleMessage("Item"),
+        "itemAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Item added successfully"),
         "itemNameAlreadyExists":
             MessageLookupByLibrary.simpleMessage("Item name already exists"),
         "itemUpdatedSuccefully":
             MessageLookupByLibrary.simpleMessage("Item Updated successfully"),
+        "itemUpdatedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Item updated successfully"),
         "items": MessageLookupByLibrary.simpleMessage("items"),
         "jobOffers": MessageLookupByLibrary.simpleMessage("Job offers"),
         "jobsOffers": MessageLookupByLibrary.simpleMessage("Jobs Offers"),
@@ -151,12 +172,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "mustSelectAUnit":
+            MessageLookupByLibrary.simpleMessage("Must select a unit"),
+        "mustSelectAnItem":
+            MessageLookupByLibrary.simpleMessage("Must select an item"),
         "myOrders": MessageLookupByLibrary.simpleMessage("My Orders"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "neighborhood": MessageLookupByLibrary.simpleMessage("Neighborhood"),
         "neighborhoodVillage":
             MessageLookupByLibrary.simpleMessage("Neighborhood / Village"),
         "newEmail": MessageLookupByLibrary.simpleMessage("New email"),
+        "new_": MessageLookupByLibrary.simpleMessage("New"),
         "nickName": MessageLookupByLibrary.simpleMessage("Nick name"),
         "noEmailLinkedToTheAccount": MessageLookupByLibrary.simpleMessage(
             "No email linked to the account."),
@@ -187,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordIsNotStrongEnough": MessageLookupByLibrary.simpleMessage(
             "Password is not strong enough."),
+        "pending": MessageLookupByLibrary.simpleMessage("Pending"),
         "phoneHasBeenUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
             "phone has been updated successfully"),
         "phoneInfo": MessageLookupByLibrary.simpleMessage("Phone info"),
@@ -202,12 +229,16 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please, check internet connection and try again."),
         "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
+        "priceEGPf": m0,
         "priceEgp": MessageLookupByLibrary.simpleMessage("Price EGP"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "providersCredentialIsNotValid": MessageLookupByLibrary.simpleMessage(
             "provider\'s credential is not valid."),
         "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "receipt": MessageLookupByLibrary.simpleMessage("Receipt"),
+        "receiptSavedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Receipt saved successfully"),
         "receipts": MessageLookupByLibrary.simpleMessage("Receipts"),
         "recruitment": MessageLookupByLibrary.simpleMessage("Recruitment"),
         "required": MessageLookupByLibrary.simpleMessage("Required"),
@@ -320,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "work": MessageLookupByLibrary.simpleMessage("Work"),
         "workInstitutions":
             MessageLookupByLibrary.simpleMessage("Work institutions"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "youHaveNoInstitutions":
             MessageLookupByLibrary.simpleMessage("You have no institutions"),
         "youOrderHasBeenPlacedSucessfully":

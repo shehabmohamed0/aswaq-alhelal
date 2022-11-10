@@ -17,4 +17,7 @@ class FirestorePath {
       'users/$userId/addresses/$addressId';
   static String get orders => 'orders';
   static String order(String orderId) => 'orders/$orderId';
+  static String institutionOrdersCounter(String institutionId) =>
+      'institution_orders_counter/$institutionId';
+  static String get institutionClients => 'institution_clients';
 }

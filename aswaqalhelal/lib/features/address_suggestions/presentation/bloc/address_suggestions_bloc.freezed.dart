@@ -29,13 +29,13 @@ mixin _$AddressSuggestionsEvent<T, SP, AP> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,13 +67,13 @@ mixin _$AddressSuggestionsEvent<T, SP, AP> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,17 +95,20 @@ abstract class $AddressSuggestionsEventCopyWith<T, SP, AP, $Res> {
   factory $AddressSuggestionsEventCopyWith(
           AddressSuggestionsEvent<T, SP, AP> value,
           $Res Function(AddressSuggestionsEvent<T, SP, AP>) then) =
-      _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>;
+      _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+          AddressSuggestionsEvent<T, SP, AP>>;
 }
 
 /// @nodoc
-class _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+class _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        $Val extends AddressSuggestionsEvent<T, SP, AP>>
     implements $AddressSuggestionsEventCopyWith<T, SP, AP, $Res> {
   _$AddressSuggestionsEventCopyWithImpl(this._value, this._then);
 
-  final AddressSuggestionsEvent<T, SP, AP> _value;
   // ignore: unused_field
-  final $Res Function(AddressSuggestionsEvent<T, SP, AP>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -113,26 +116,25 @@ abstract class _$$InitEditCopyWith<T, SP, AP, $Res> {
   factory _$$InitEditCopyWith(_$InitEdit<T, SP, AP> value,
           $Res Function(_$InitEdit<T, SP, AP>) then) =
       __$$InitEditCopyWithImpl<T, SP, AP, $Res>;
+  @useResult
   $Res call({T refAddress});
 }
 
 /// @nodoc
 class __$$InitEditCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
-    implements _$$InitEditCopyWith<T, SP, AP, $Res> {
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$InitEdit<T, SP, AP>> implements _$$InitEditCopyWith<T, SP, AP, $Res> {
   __$$InitEditCopyWithImpl(
       _$InitEdit<T, SP, AP> _value, $Res Function(_$InitEdit<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$InitEdit<T, SP, AP>));
+      : super(_value, _then);
 
-  @override
-  _$InitEdit<T, SP, AP> get _value => super._value as _$InitEdit<T, SP, AP>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? refAddress = freezed,
+    Object? refAddress = null,
   }) {
     return _then(_$InitEdit<T, SP, AP>(
-      refAddress == freezed
+      null == refAddress
           ? _value.refAddress
           : refAddress // ignore: cast_nullable_to_non_nullable
               as T,
@@ -168,6 +170,7 @@ class _$InitEdit<T, SP, AP> implements InitEdit<T, SP, AP> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$InitEditCopyWith<T, SP, AP, _$InitEdit<T, SP, AP>> get copyWith =>
       __$$InitEditCopyWithImpl<T, SP, AP, _$InitEdit<T, SP, AP>>(
           this, _$identity);
@@ -189,13 +192,13 @@ class _$InitEdit<T, SP, AP> implements InitEdit<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return initEdit?.call(refAddress);
   }
@@ -239,13 +242,13 @@ class _$InitEdit<T, SP, AP> implements InitEdit<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return initEdit?.call(this);
   }
@@ -284,32 +287,31 @@ abstract class _$$SearchRefAddressCopyWith<T, SP, AP, $Res> {
   factory _$$SearchRefAddressCopyWith(_$SearchRefAddress<T, SP, AP> value,
           $Res Function(_$SearchRefAddress<T, SP, AP>) then) =
       __$$SearchRefAddressCopyWithImpl<T, SP, AP, $Res>;
+  @useResult
   $Res call({String searchText, SP params});
 }
 
 /// @nodoc
 class __$$SearchRefAddressCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$SearchRefAddress<T, SP, AP>>
     implements _$$SearchRefAddressCopyWith<T, SP, AP, $Res> {
   __$$SearchRefAddressCopyWithImpl(_$SearchRefAddress<T, SP, AP> _value,
       $Res Function(_$SearchRefAddress<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$SearchRefAddress<T, SP, AP>));
+      : super(_value, _then);
 
-  @override
-  _$SearchRefAddress<T, SP, AP> get _value =>
-      super._value as _$SearchRefAddress<T, SP, AP>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchText = freezed,
-    Object? params = freezed,
+    Object? searchText = null,
+    Object? params = null,
   }) {
     return _then(_$SearchRefAddress<T, SP, AP>(
-      searchText == freezed
+      null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
-      params == freezed
+      null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as SP,
@@ -337,19 +339,18 @@ class _$SearchRefAddress<T, SP, AP> implements SearchRefAddress<T, SP, AP> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchRefAddress<T, SP, AP> &&
-            const DeepCollectionEquality()
-                .equals(other.searchText, searchText) &&
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText) &&
             const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(searchText),
-      const DeepCollectionEquality().hash(params));
+      runtimeType, searchText, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SearchRefAddressCopyWith<T, SP, AP, _$SearchRefAddress<T, SP, AP>>
       get copyWith => __$$SearchRefAddressCopyWithImpl<T, SP, AP,
           _$SearchRefAddress<T, SP, AP>>(this, _$identity);
@@ -371,13 +372,13 @@ class _$SearchRefAddress<T, SP, AP> implements SearchRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return searchRefAddress?.call(searchText, params);
   }
@@ -421,13 +422,13 @@ class _$SearchRefAddress<T, SP, AP> implements SearchRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return searchRefAddress?.call(this);
   }
@@ -468,27 +469,26 @@ abstract class _$$SelectRefAddressCopyWith<T, SP, AP, $Res> {
   factory _$$SelectRefAddressCopyWith(_$SelectRefAddress<T, SP, AP> value,
           $Res Function(_$SelectRefAddress<T, SP, AP>) then) =
       __$$SelectRefAddressCopyWithImpl<T, SP, AP, $Res>;
+  @useResult
   $Res call({T params});
 }
 
 /// @nodoc
 class __$$SelectRefAddressCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$SelectRefAddress<T, SP, AP>>
     implements _$$SelectRefAddressCopyWith<T, SP, AP, $Res> {
   __$$SelectRefAddressCopyWithImpl(_$SelectRefAddress<T, SP, AP> _value,
       $Res Function(_$SelectRefAddress<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$SelectRefAddress<T, SP, AP>));
+      : super(_value, _then);
 
-  @override
-  _$SelectRefAddress<T, SP, AP> get _value =>
-      super._value as _$SelectRefAddress<T, SP, AP>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? params = freezed,
+    Object? params = null,
   }) {
     return _then(_$SelectRefAddress<T, SP, AP>(
-      params == freezed
+      null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as T,
@@ -523,6 +523,7 @@ class _$SelectRefAddress<T, SP, AP> implements SelectRefAddress<T, SP, AP> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SelectRefAddressCopyWith<T, SP, AP, _$SelectRefAddress<T, SP, AP>>
       get copyWith => __$$SelectRefAddressCopyWithImpl<T, SP, AP,
           _$SelectRefAddress<T, SP, AP>>(this, _$identity);
@@ -544,13 +545,13 @@ class _$SelectRefAddress<T, SP, AP> implements SelectRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return selectRefAddress?.call(params);
   }
@@ -594,13 +595,13 @@ class _$SelectRefAddress<T, SP, AP> implements SelectRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return selectRefAddress?.call(this);
   }
@@ -640,27 +641,26 @@ abstract class _$$UnSelectRefAddressCopyWith<T, SP, AP, $Res> {
   factory _$$UnSelectRefAddressCopyWith(_$UnSelectRefAddress<T, SP, AP> value,
           $Res Function(_$UnSelectRefAddress<T, SP, AP>) then) =
       __$$UnSelectRefAddressCopyWithImpl<T, SP, AP, $Res>;
+  @useResult
   $Res call({bool enabled});
 }
 
 /// @nodoc
 class __$$UnSelectRefAddressCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$UnSelectRefAddress<T, SP, AP>>
     implements _$$UnSelectRefAddressCopyWith<T, SP, AP, $Res> {
   __$$UnSelectRefAddressCopyWithImpl(_$UnSelectRefAddress<T, SP, AP> _value,
       $Res Function(_$UnSelectRefAddress<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$UnSelectRefAddress<T, SP, AP>));
+      : super(_value, _then);
 
-  @override
-  _$UnSelectRefAddress<T, SP, AP> get _value =>
-      super._value as _$UnSelectRefAddress<T, SP, AP>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? enabled = freezed,
+    Object? enabled = null,
   }) {
     return _then(_$UnSelectRefAddress<T, SP, AP>(
-      enabled: enabled == freezed
+      enabled: null == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -687,15 +687,15 @@ class _$UnSelectRefAddress<T, SP, AP> implements UnSelectRefAddress<T, SP, AP> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnSelectRefAddress<T, SP, AP> &&
-            const DeepCollectionEquality().equals(other.enabled, enabled));
+            (identical(other.enabled, enabled) || other.enabled == enabled));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(enabled));
+  int get hashCode => Object.hash(runtimeType, enabled);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UnSelectRefAddressCopyWith<T, SP, AP, _$UnSelectRefAddress<T, SP, AP>>
       get copyWith => __$$UnSelectRefAddressCopyWithImpl<T, SP, AP,
           _$UnSelectRefAddress<T, SP, AP>>(this, _$identity);
@@ -717,13 +717,13 @@ class _$UnSelectRefAddress<T, SP, AP> implements UnSelectRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return unSelectRefAddress?.call(enabled);
   }
@@ -767,13 +767,13 @@ class _$UnSelectRefAddress<T, SP, AP> implements UnSelectRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return unSelectRefAddress?.call(this);
   }
@@ -813,27 +813,26 @@ abstract class _$$AddRefAddressCopyWith<T, SP, AP, $Res> {
   factory _$$AddRefAddressCopyWith(_$AddRefAddress<T, SP, AP> value,
           $Res Function(_$AddRefAddress<T, SP, AP>) then) =
       __$$AddRefAddressCopyWithImpl<T, SP, AP, $Res>;
+  @useResult
   $Res call({AP params});
 }
 
 /// @nodoc
 class __$$AddRefAddressCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$AddRefAddress<T, SP, AP>>
     implements _$$AddRefAddressCopyWith<T, SP, AP, $Res> {
   __$$AddRefAddressCopyWithImpl(_$AddRefAddress<T, SP, AP> _value,
       $Res Function(_$AddRefAddress<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$AddRefAddress<T, SP, AP>));
+      : super(_value, _then);
 
-  @override
-  _$AddRefAddress<T, SP, AP> get _value =>
-      super._value as _$AddRefAddress<T, SP, AP>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? params = freezed,
+    Object? params = null,
   }) {
     return _then(_$AddRefAddress<T, SP, AP>(
-      params == freezed
+      null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as AP,
@@ -868,6 +867,7 @@ class _$AddRefAddress<T, SP, AP> implements AddRefAddress<T, SP, AP> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddRefAddressCopyWith<T, SP, AP, _$AddRefAddress<T, SP, AP>>
       get copyWith =>
           __$$AddRefAddressCopyWithImpl<T, SP, AP, _$AddRefAddress<T, SP, AP>>(
@@ -890,13 +890,13 @@ class _$AddRefAddress<T, SP, AP> implements AddRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return addRefAddress?.call(params);
   }
@@ -940,13 +940,13 @@ class _$AddRefAddress<T, SP, AP> implements AddRefAddress<T, SP, AP> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return addRefAddress?.call(this);
   }
@@ -990,17 +990,13 @@ abstract class _$$DisableAddressSuggestionsCopyWith<T, SP, AP, $Res> {
 
 /// @nodoc
 class __$$DisableAddressSuggestionsCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$DisableAddressSuggestions<T, SP, AP>>
     implements _$$DisableAddressSuggestionsCopyWith<T, SP, AP, $Res> {
   __$$DisableAddressSuggestionsCopyWithImpl(
       _$DisableAddressSuggestions<T, SP, AP> _value,
       $Res Function(_$DisableAddressSuggestions<T, SP, AP>) _then)
-      : super(
-            _value, (v) => _then(v as _$DisableAddressSuggestions<T, SP, AP>));
-
-  @override
-  _$DisableAddressSuggestions<T, SP, AP> get _value =>
-      super._value as _$DisableAddressSuggestions<T, SP, AP>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -1041,13 +1037,13 @@ class _$DisableAddressSuggestions<T, SP, AP>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return disabel?.call();
   }
@@ -1091,13 +1087,13 @@ class _$DisableAddressSuggestions<T, SP, AP>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return disabel?.call(this);
   }
@@ -1137,16 +1133,13 @@ abstract class _$$EnableAddressSuggestionsCopyWith<T, SP, AP, $Res> {
 
 /// @nodoc
 class __$$EnableAddressSuggestionsCopyWithImpl<T, SP, AP, $Res>
-    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res>
+    extends _$AddressSuggestionsEventCopyWithImpl<T, SP, AP, $Res,
+        _$EnableAddressSuggestions<T, SP, AP>>
     implements _$$EnableAddressSuggestionsCopyWith<T, SP, AP, $Res> {
   __$$EnableAddressSuggestionsCopyWithImpl(
       _$EnableAddressSuggestions<T, SP, AP> _value,
       $Res Function(_$EnableAddressSuggestions<T, SP, AP>) _then)
-      : super(_value, (v) => _then(v as _$EnableAddressSuggestions<T, SP, AP>));
-
-  @override
-  _$EnableAddressSuggestions<T, SP, AP> get _value =>
-      super._value as _$EnableAddressSuggestions<T, SP, AP>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -1187,13 +1180,13 @@ class _$EnableAddressSuggestions<T, SP, AP>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T refAddress)? initEdit,
-    TResult Function(String searchText, SP params)? searchRefAddress,
-    TResult Function(T params)? selectRefAddress,
-    TResult Function(bool enabled)? unSelectRefAddress,
-    TResult Function(AP params)? addRefAddress,
-    TResult Function()? disabel,
-    TResult Function()? enabel,
+    TResult? Function(T refAddress)? initEdit,
+    TResult? Function(String searchText, SP params)? searchRefAddress,
+    TResult? Function(T params)? selectRefAddress,
+    TResult? Function(bool enabled)? unSelectRefAddress,
+    TResult? Function(AP params)? addRefAddress,
+    TResult? Function()? disabel,
+    TResult? Function()? enabel,
   }) {
     return enabel?.call();
   }
@@ -1237,13 +1230,13 @@ class _$EnableAddressSuggestions<T, SP, AP>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitEdit<T, SP, AP> value)? initEdit,
-    TResult Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
-    TResult Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
-    TResult Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
-    TResult Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
-    TResult Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
-    TResult Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
+    TResult? Function(InitEdit<T, SP, AP> value)? initEdit,
+    TResult? Function(SearchRefAddress<T, SP, AP> value)? searchRefAddress,
+    TResult? Function(SelectRefAddress<T, SP, AP> value)? selectRefAddress,
+    TResult? Function(UnSelectRefAddress<T, SP, AP> value)? unSelectRefAddress,
+    TResult? Function(AddRefAddress<T, SP, AP> value)? addRefAddress,
+    TResult? Function(DisableAddressSuggestions<T, SP, AP> value)? disabel,
+    TResult? Function(EnableAddressSuggestions<T, SP, AP> value)? enabel,
   }) {
     return enabel?.call(this);
   }

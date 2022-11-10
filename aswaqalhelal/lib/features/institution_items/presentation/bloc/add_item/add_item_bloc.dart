@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:aswaqalhelal/features/institution_items/presentation/bloc/item_units/units_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:root_package/core/failures/file_upload_failure.dart';
@@ -24,6 +25,7 @@ import '../../../domain/usecases/add_instition_item.dart';
 import '../../../domain/usecases/add_ref_and_institution_item.dart';
 import '../../../domain/usecases/search_item.dart';
 import '../../../domain/usecases/update_institution_item.dart';
+import '../../DTOs/unit_entry_row.dart';
 import '../../pages/add_item/widgets/auto_suggest_text_field.dart';
 
 part 'add_item_event.dart';
@@ -56,8 +58,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     on<InitEdit>(_onInitEdit);
     on<DeleteImageFile>(_onDeleteImageFile);
     on<DeleteImageUrl>(_onDeleteImageUrl);
-    on<UnitAddPressed>(_onUnitAddPressed);
-    on<UnitChanged>(_onUnitChanged);
+    on<NewButtonClicked>(_onNewButtonClicked);
   }
 
   FutureOr<void> _onAddItemSearch(
@@ -93,7 +94,6 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
       state.copyWith(
         selectedItem: RequiredObject.dirty(event.item),
         itemName: RequiredString.dirty(event.item.name),
-        measureUnits: event.item.units.map((e) => some(e)).toList(),
         imageFile: const RequiredObject.pure(),
         itemFromReference: true,
         addingNewItem: false,
@@ -114,18 +114,17 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
 
   FutureOr<void> _onAddItemSubmit(
       AddItemSubmit event, Emitter<AddItemState> emit) async {
-    if (state.status.isSubmissionInProgress) {
+    if (state.status == AddItemStatus.loading) {
       return;
     }
-    emit(state.copyWith(status: FormzStatus.submissionInProgress));
-
+    emit(state.copyWith(status: AddItemStatus.loading));
     if (!state.isEdit) {
       final index =
           event.currentItems.indexWhere((e) => e.name == state.itemName.value);
 
       if (index != -1) {
         emit(state.copyWith(
-            status: FormzStatus.submissionFailure,
+            status: AddItemStatus.failed,
             errorMessage: AppLocalizations.current.itemNameAlreadyExists));
         return;
       }
@@ -136,10 +135,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           oldItem: state.oldItem!,
           imageFile: state.imageFile.value,
           imageUrl: state.imageUrl.value,
-          units: state.measureUnits
-              .where((element) => element.isSome())
-              .map((e) => e.toNullable()!)
-              .toList(),
+          units: event.units.map((e) => e.toUnit(event.baseUnit)).toList(),
         ),
       );
 
@@ -148,14 +144,14 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           if (failure is ServerFailure) {
             emit(
               state.copyWith(
-                status: FormzStatus.submissionFailure,
+                status: AddItemStatus.failed,
                 errorMessage: failure.message,
               ),
             );
           } else if (failure is UploadFileFailure) {
             emit(
               state.copyWith(
-                status: FormzStatus.submissionFailure,
+                status: AddItemStatus.failed,
                 errorMessage: failure.message,
               ),
             );
@@ -164,7 +160,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
         (item) {
           emit(
             state.copyWith(
-              status: FormzStatus.submissionSuccess,
+              status: AddItemStatus.success,
               institutionItem: item,
             ),
           );
@@ -177,10 +173,7 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
         params: AddRefAndInstitutionItemParams(
           itemName: state.itemName.value,
           imageFile: state.imageFile.value,
-          units: state.measureUnits
-              .where((element) => element.isSome())
-              .map((e) => e.toNullable()!)
-              .toList(),
+          units: event.units.map((e) => e.toUnit(event.baseUnit)).toList(),
           institutionId: event.institutionId,
         ),
       );
@@ -190,21 +183,21 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           if (failure is ServerFailure) {
             emit(
               state.copyWith(
-                status: FormzStatus.submissionFailure,
+                status: AddItemStatus.failed,
                 errorMessage: failure.message,
               ),
             );
           } else if (failure is UploadFileFailure) {
             emit(
               state.copyWith(
-                status: FormzStatus.submissionFailure,
+                status: AddItemStatus.failed,
                 errorMessage: failure.message,
               ),
             );
           }
         },
         (institutionItem) => emit(state.copyWith(
-          status: FormzStatus.submissionSuccess,
+          status: AddItemStatus.success,
           institutionItem: institutionItem,
         )),
       );
@@ -216,26 +209,22 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
           institutionId: event.institutionId,
           imageUrl: state.imageUrl.value,
           referenceId: state.selectedItem.value!.id,
-          units: state.measureUnits
-              .where((element) => element.isSome())
-              .map((e) => e.toNullable()!)
-              .toList(),
+          units: event.units.map((e) => e.toUnit(event.baseUnit)).toList(),
         ),
       );
 
       either.fold((failure) {
         if (failure is ServerFailure) {
           emit(state.copyWith(
-              status: FormzStatus.submissionFailure,
-              errorMessage: failure.message));
+              status: AddItemStatus.failed, errorMessage: failure.message));
         } else if (failure is UploadFileFailure) {
           emit(state.copyWith(
-              status: FormzStatus.submissionFailure,
+              status: AddItemStatus.failed,
               errorMessage: (failure as ServerFailure).message));
         }
       }, (institutionItem) {
         emit(state.copyWith(
-          status: FormzStatus.submissionSuccess,
+          status: AddItemStatus.success,
           institutionItem: institutionItem,
         ));
       });
@@ -269,12 +258,12 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
   FutureOr<void> _onInitEdit(InitEdit event, Emitter<AddItemState> emit) {
     emit(
       AddItemState(
-          imageUrl: RequiredObject.dirty(event.item.imageUrl),
-          measureUnits: event.item.units.map((e) => some(e)).toList(),
-          itemName: RequiredString.dirty(event.item.name),
-          isEdit: true,
-          itemFromReference: true,
-          oldItem: event.item),
+        imageUrl: RequiredObject.dirty(event.item.imageUrl),
+        itemName: RequiredString.dirty(event.item.name),
+        isEdit: true,
+        itemFromReference: true,
+        oldItem: event.item,
+      ),
     );
   }
 
@@ -290,30 +279,8 @@ class AddItemBloc extends Bloc<AddItemEvent, AddItemState> {
     emit(state.copyWith(imageUrl: const RequiredObject.pure()));
   }
 
-  FutureOr<void> _onUnitChanged(UnitChanged event, Emitter<AddItemState> emit) {
-    List<Option<Unit>> newList = state.measureUnits;
-    if (event.unit == null) {
-      final previousValue = state.measureUnits[event.index];
-      if (previousValue.isSome()) {
-        newList = List.of(state.measureUnits
-            .where((element) => element.isSome())
-            .where((element) =>
-                element.toNullable()!.referenceId !=
-                previousValue.toNullable()!.referenceId)
-            .where((element) =>
-                element.toNullable()!.baseUnit != previousValue.toNullable()));
-      }
-    } else {
-      newList = List.of(state.measureUnits);
-      newList[event.index] = some(event.unit!);
-    }
-
-    emit(state.copyWith(measureUnits: newList));
-  }
-
-  FutureOr<void> _onUnitAddPressed(
-      UnitAddPressed event, Emitter<AddItemState> emit) {
-    emit(
-        state.copyWith(measureUnits: List.of(state.measureUnits)..add(none())));
+  FutureOr<void> _onNewButtonClicked(
+      NewButtonClicked event, Emitter<AddItemState> emit) {
+    emit(const AddItemState(status: AddItemStatus.reset));
   }
 }

@@ -26,8 +26,9 @@ mixin _$InstitutionReceiptsState {
   int get quantity => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
   InstitutionReceiptStatus get status => throw _privateConstructorUsedError;
-  dynamic get receiptSaved => throw _privateConstructorUsedError;
+  Option<Order> get savedOrder => throw _privateConstructorUsedError;
   List<OrderItem> get receiptItems => throw _privateConstructorUsedError;
+  SystemProfile get purchaseClient => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -39,7 +40,8 @@ mixin _$InstitutionReceiptsState {
 abstract class $InstitutionReceiptsStateCopyWith<$Res> {
   factory $InstitutionReceiptsStateCopyWith(InstitutionReceiptsState value,
           $Res Function(InstitutionReceiptsState) then) =
-      _$InstitutionReceiptsStateCopyWithImpl<$Res>;
+      _$InstitutionReceiptsStateCopyWithImpl<$Res, InstitutionReceiptsState>;
+  @useResult
   $Res call(
       {List<InstitutionItem> items,
       List<InstitutionItem> filteredItems,
@@ -50,85 +52,94 @@ abstract class $InstitutionReceiptsStateCopyWith<$Res> {
       int quantity,
       double totalPrice,
       InstitutionReceiptStatus status,
-      dynamic receiptSaved,
+      Option<Order> savedOrder,
       List<OrderItem> receiptItems,
+      SystemProfile purchaseClient,
       String? errorMessage});
 }
 
 /// @nodoc
-class _$InstitutionReceiptsStateCopyWithImpl<$Res>
+class _$InstitutionReceiptsStateCopyWithImpl<$Res,
+        $Val extends InstitutionReceiptsState>
     implements $InstitutionReceiptsStateCopyWith<$Res> {
   _$InstitutionReceiptsStateCopyWithImpl(this._value, this._then);
 
-  final InstitutionReceiptsState _value;
   // ignore: unused_field
-  final $Res Function(InstitutionReceiptsState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
-    Object? filteredItems = freezed,
-    Object? itemsState = freezed,
-    Object? selectedItem = freezed,
-    Object? selectedUnit = freezed,
-    Object? unitPrice = freezed,
-    Object? quantity = freezed,
-    Object? totalPrice = freezed,
-    Object? status = freezed,
-    Object? receiptSaved = freezed,
-    Object? receiptItems = freezed,
+    Object? items = null,
+    Object? filteredItems = null,
+    Object? itemsState = null,
+    Object? selectedItem = null,
+    Object? selectedUnit = null,
+    Object? unitPrice = null,
+    Object? quantity = null,
+    Object? totalPrice = null,
+    Object? status = null,
+    Object? savedOrder = null,
+    Object? receiptItems = null,
+    Object? purchaseClient = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
-      filteredItems: filteredItems == freezed
+      filteredItems: null == filteredItems
           ? _value.filteredItems
           : filteredItems // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
-      itemsState: itemsState == freezed
+      itemsState: null == itemsState
           ? _value.itemsState
           : itemsState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      selectedItem: selectedItem == freezed
+      selectedItem: null == selectedItem
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as Option<InstitutionItem>,
-      selectedUnit: selectedUnit == freezed
+      selectedUnit: null == selectedUnit
           ? _value.selectedUnit
           : selectedUnit // ignore: cast_nullable_to_non_nullable
               as Option<Unit>,
-      unitPrice: unitPrice == freezed
+      unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InstitutionReceiptStatus,
-      receiptSaved: receiptSaved == freezed
-          ? _value.receiptSaved
-          : receiptSaved // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      receiptItems: receiptItems == freezed
+      savedOrder: null == savedOrder
+          ? _value.savedOrder
+          : savedOrder // ignore: cast_nullable_to_non_nullable
+              as Option<Order>,
+      receiptItems: null == receiptItems
           ? _value.receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      errorMessage: errorMessage == freezed
+      purchaseClient: null == purchaseClient
+          ? _value.purchaseClient
+          : purchaseClient // ignore: cast_nullable_to_non_nullable
+              as SystemProfile,
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -140,6 +151,7 @@ abstract class _$$_InstitutionReceiptsStateCopyWith<$Res>
           $Res Function(_$_InstitutionReceiptsState) then) =
       __$$_InstitutionReceiptsStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<InstitutionItem> items,
       List<InstitutionItem> filteredItems,
@@ -150,82 +162,88 @@ abstract class _$$_InstitutionReceiptsStateCopyWith<$Res>
       int quantity,
       double totalPrice,
       InstitutionReceiptStatus status,
-      dynamic receiptSaved,
+      Option<Order> savedOrder,
       List<OrderItem> receiptItems,
+      SystemProfile purchaseClient,
       String? errorMessage});
 }
 
 /// @nodoc
 class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
-    extends _$InstitutionReceiptsStateCopyWithImpl<$Res>
+    extends _$InstitutionReceiptsStateCopyWithImpl<$Res,
+        _$_InstitutionReceiptsState>
     implements _$$_InstitutionReceiptsStateCopyWith<$Res> {
   __$$_InstitutionReceiptsStateCopyWithImpl(_$_InstitutionReceiptsState _value,
       $Res Function(_$_InstitutionReceiptsState) _then)
-      : super(_value, (v) => _then(v as _$_InstitutionReceiptsState));
+      : super(_value, _then);
 
-  @override
-  _$_InstitutionReceiptsState get _value =>
-      super._value as _$_InstitutionReceiptsState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
-    Object? filteredItems = freezed,
-    Object? itemsState = freezed,
-    Object? selectedItem = freezed,
-    Object? selectedUnit = freezed,
-    Object? unitPrice = freezed,
-    Object? quantity = freezed,
-    Object? totalPrice = freezed,
-    Object? status = freezed,
-    Object? receiptSaved = freezed,
-    Object? receiptItems = freezed,
+    Object? items = null,
+    Object? filteredItems = null,
+    Object? itemsState = null,
+    Object? selectedItem = null,
+    Object? selectedUnit = null,
+    Object? unitPrice = null,
+    Object? quantity = null,
+    Object? totalPrice = null,
+    Object? status = null,
+    Object? savedOrder = null,
+    Object? receiptItems = null,
+    Object? purchaseClient = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_$_InstitutionReceiptsState(
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
-      filteredItems: filteredItems == freezed
+      filteredItems: null == filteredItems
           ? _value._filteredItems
           : filteredItems // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
-      itemsState: itemsState == freezed
+      itemsState: null == itemsState
           ? _value.itemsState
           : itemsState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      selectedItem: selectedItem == freezed
+      selectedItem: null == selectedItem
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
               as Option<InstitutionItem>,
-      selectedUnit: selectedUnit == freezed
+      selectedUnit: null == selectedUnit
           ? _value.selectedUnit
           : selectedUnit // ignore: cast_nullable_to_non_nullable
               as Option<Unit>,
-      unitPrice: unitPrice == freezed
+      unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InstitutionReceiptStatus,
-      receiptSaved:
-          receiptSaved == freezed ? _value.receiptSaved : receiptSaved,
-      receiptItems: receiptItems == freezed
+      savedOrder: null == savedOrder
+          ? _value.savedOrder
+          : savedOrder // ignore: cast_nullable_to_non_nullable
+              as Option<Order>,
+      receiptItems: null == receiptItems
           ? _value._receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      errorMessage: errorMessage == freezed
+      purchaseClient: null == purchaseClient
+          ? _value.purchaseClient
+          : purchaseClient // ignore: cast_nullable_to_non_nullable
+              as SystemProfile,
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -246,8 +264,9 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       this.quantity = 1,
       this.totalPrice = 0,
       this.status = InstitutionReceiptStatus.initial,
-      this.receiptSaved = false,
+      this.savedOrder = const None(),
       final List<OrderItem> receiptItems = const [],
+      this.purchaseClient = defaultPurchaseClient,
       this.errorMessage})
       : _items = items,
         _filteredItems = filteredItems,
@@ -292,7 +311,7 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
   final InstitutionReceiptStatus status;
   @override
   @JsonKey()
-  final dynamic receiptSaved;
+  final Option<Order> savedOrder;
   final List<OrderItem> _receiptItems;
   @override
   @JsonKey()
@@ -302,11 +321,14 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
   }
 
   @override
+  @JsonKey()
+  final SystemProfile purchaseClient;
+  @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'InstitutionReceiptsState(items: $items, filteredItems: $filteredItems, itemsState: $itemsState, selectedItem: $selectedItem, selectedUnit: $selectedUnit, unitPrice: $unitPrice, quantity: $quantity, totalPrice: $totalPrice, status: $status, receiptSaved: $receiptSaved, receiptItems: $receiptItems, errorMessage: $errorMessage)';
+    return 'InstitutionReceiptsState(items: $items, filteredItems: $filteredItems, itemsState: $itemsState, selectedItem: $selectedItem, selectedUnit: $selectedUnit, unitPrice: $unitPrice, quantity: $quantity, totalPrice: $totalPrice, status: $status, savedOrder: $savedOrder, receiptItems: $receiptItems, purchaseClient: $purchaseClient, errorMessage: $errorMessage)';
   }
 
   @override
@@ -317,23 +339,27 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
             const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality()
                 .equals(other._filteredItems, _filteredItems) &&
-            const DeepCollectionEquality()
-                .equals(other.itemsState, itemsState) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedItem, selectedItem) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedUnit, selectedUnit) &&
-            const DeepCollectionEquality().equals(other.unitPrice, unitPrice) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality()
-                .equals(other.totalPrice, totalPrice) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.receiptSaved, receiptSaved) &&
+            (identical(other.itemsState, itemsState) ||
+                other.itemsState == itemsState) &&
+            (identical(other.selectedItem, selectedItem) ||
+                other.selectedItem == selectedItem) &&
+            (identical(other.selectedUnit, selectedUnit) ||
+                other.selectedUnit == selectedUnit) &&
+            (identical(other.unitPrice, unitPrice) ||
+                other.unitPrice == unitPrice) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.savedOrder, savedOrder) ||
+                other.savedOrder == savedOrder) &&
             const DeepCollectionEquality()
                 .equals(other._receiptItems, _receiptItems) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            (identical(other.purchaseClient, purchaseClient) ||
+                other.purchaseClient == purchaseClient) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
@@ -341,19 +367,21 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       runtimeType,
       const DeepCollectionEquality().hash(_items),
       const DeepCollectionEquality().hash(_filteredItems),
-      const DeepCollectionEquality().hash(itemsState),
-      const DeepCollectionEquality().hash(selectedItem),
-      const DeepCollectionEquality().hash(selectedUnit),
-      const DeepCollectionEquality().hash(unitPrice),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(totalPrice),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(receiptSaved),
+      itemsState,
+      selectedItem,
+      selectedUnit,
+      unitPrice,
+      quantity,
+      totalPrice,
+      status,
+      savedOrder,
       const DeepCollectionEquality().hash(_receiptItems),
-      const DeepCollectionEquality().hash(errorMessage));
+      purchaseClient,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_InstitutionReceiptsStateCopyWith<_$_InstitutionReceiptsState>
       get copyWith => __$$_InstitutionReceiptsStateCopyWithImpl<
           _$_InstitutionReceiptsState>(this, _$identity);
@@ -370,8 +398,9 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
       final int quantity,
       final double totalPrice,
       final InstitutionReceiptStatus status,
-      final dynamic receiptSaved,
+      final Option<Order> savedOrder,
       final List<OrderItem> receiptItems,
+      final SystemProfile purchaseClient,
       final String? errorMessage}) = _$_InstitutionReceiptsState;
 
   @override
@@ -393,9 +422,11 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
   @override
   InstitutionReceiptStatus get status;
   @override
-  dynamic get receiptSaved;
+  Option<Order> get savedOrder;
   @override
   List<OrderItem> get receiptItems;
+  @override
+  SystemProfile get purchaseClient;
   @override
   String? get errorMessage;
   @override

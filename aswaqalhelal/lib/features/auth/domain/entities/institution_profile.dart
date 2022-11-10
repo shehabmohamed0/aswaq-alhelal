@@ -1,4 +1,3 @@
-
 import '../../../address/domain/entities/address.dart';
 import 'base_profile.dart';
 
@@ -13,7 +12,7 @@ class InstitutionProfile extends BaseProfile {
     required super.id,
     required super.userId,
     required super.name,
-    required super.type,
+    super.type = ProfileType.institution,
     super.photoURL,
     required this.nickName,
     required this.emails,

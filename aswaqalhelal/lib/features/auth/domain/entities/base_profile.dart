@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:root_package/packages/cloud_firestore.dart';
 import 'package:root_package/packages/equatable.dart';
 
 import '../../data/models/user/institution_profile_model.dart';
+import '../../data/models/user/system_profile_model.dart';
 import '../../data/models/user/user_profile_model.dart';
 import 'institution_profile.dart';
 import 'user_profile.dart';
@@ -39,6 +38,8 @@ abstract class BaseProfile extends Equatable {
         return UserProfileModel.fromFirestore(document);
       case ProfileType.institution:
         return InstitutionProfileModel.fromFirestore(document);
+      case ProfileType.system:
+        return SystemProfileModel.fromFirestore(document);
     }
   }
   factory BaseProfile.fromJson(Map<String, dynamic> json) {
@@ -48,6 +49,8 @@ abstract class BaseProfile extends Equatable {
         return UserProfileModel.fromJson(json);
       case ProfileType.institution:
         return InstitutionProfileModel.fromJson(json);
+      case ProfileType.system:
+        return SystemProfileModel.fromJson(json);
     }
   }
 
@@ -89,7 +92,8 @@ abstract class BaseProfile extends Equatable {
 
 enum ProfileType {
   user,
-  institution;
+  institution,
+  system;
 
   @override
   String toString() {
@@ -98,6 +102,8 @@ enum ProfileType {
         return 'user';
       case ProfileType.institution:
         return 'institution';
+      case ProfileType.system:
+        return 'system';
     }
   }
 }
@@ -105,4 +111,5 @@ enum ProfileType {
 const _$ProfileTypeEnumMap = {
   ProfileType.user: 'user',
   ProfileType.institution: 'institution',
+  ProfileType.system: 'system',
 };

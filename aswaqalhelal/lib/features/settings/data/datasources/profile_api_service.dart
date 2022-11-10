@@ -1,7 +1,6 @@
-import 'package:aswaqalhelal/features/auth/data/datasources/datasources.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:injectable/injectable.dart';
+import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:root_package/packages/firebase_auth.dart';
+import 'package:root_package/packages/injectable.dart';
 
 import '../../../../core/firebase/firebase_path.dart';
 
@@ -16,7 +15,6 @@ abstract class ProfileApiService {
   Future<void> updateEmail(
       String newEmail, String currentEmail, String currentPassword);
 }
-
 
 @LazySingleton(as: ProfileApiService)
 class ProfileApiServiceImpl implements ProfileApiService {

@@ -11,8 +11,6 @@ class ItemsWidget2<T> extends StatefulWidget {
   const ItemsWidget2({
     Key? key,
     required this.items,
-    this.onItemLongPressed,
-    this.onItemPressed,
     required this.dateTimeValue,
     required this.stringValue,
     required this.gridBuilder,
@@ -20,8 +18,6 @@ class ItemsWidget2<T> extends StatefulWidget {
   }) : super(key: key);
 
   final List<T> items;
-  final Function(T)? onItemPressed;
-  final Function(T)? onItemLongPressed;
   final DateTime Function(T) dateTimeValue;
   final String Function(T) stringValue;
   final Widget Function(T) gridBuilder;
@@ -92,7 +88,7 @@ class _ItemsWidget2State<T> extends State<ItemsWidget2<T>> {
               ),
             ),
             if (_isEmptySearch(state))
-               SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: Center(
                   child: Text(
                     AppLocalizations.of(context).thereIsNoItems,
@@ -107,18 +103,15 @@ class _ItemsWidget2State<T> extends State<ItemsWidget2<T>> {
               SliverPadding(
                 padding: const EdgeInsets.all(8),
                 sliver: ItemsSliverGridView2<T>(
-                  onItemPressed: widget.onItemPressed,
                   institutions: usedList,
-                  onItemLongPressed: widget.onItemLongPressed,
                   widgetBuilder: widget.gridBuilder,
                 ),
               )
             else
               ItemsSliverListView2<T>(
-                  onItemPressed: widget.onItemPressed,
-                  institutions: usedList,
-                  widgetBuilder: widget.listBuilder,
-                  onItemLongPressed: widget.onItemLongPressed)
+                institutions: usedList,
+                widgetBuilder: widget.listBuilder,
+              )
           ],
         );
       }),
@@ -229,7 +222,7 @@ class _OptionsWidgets extends StatelessWidget {
               visualDensity: VisualDensity.compact,
             ),
             value: state.sortType,
-            items:  [
+            items: [
               DropdownMenuItem<SortType>(
                 value: SortType.creationTime,
                 child: Text(AppLocalizations.of(context).creationTime),

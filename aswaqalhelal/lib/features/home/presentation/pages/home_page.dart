@@ -17,10 +17,10 @@ import '../../../address/presentation/pages/addresses/widgets/address_widget.dar
 import '../../../address/presentation/pages/select_location_map/select_location_map_page.dart';
 import '../../../auth/domain/entities/user_profile.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
-import '../../../institutions/presentation/cubit/institutions_cubit.dart';
-import '../../../institutions/presentation/widgets/institutions_widget.dart';
+import '../../../client_home_institutions/presentation/cubit/institutions_cubit.dart';
+import '../../../client_home_institutions/presentation/widgets/institutions_widget.dart';
 import '../../../notifications/presentation/widgets/notifications_bell.dart';
-import '../../../user_institutions/presentation/pages/institution/owner_institution_page.dart';
+import '../../../owner_institutions/presentation/pages/institution/owner_institution_page.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/loading_widget.dart';
 import '../cubit/items/items_cubit.dart';
@@ -64,7 +64,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-
-

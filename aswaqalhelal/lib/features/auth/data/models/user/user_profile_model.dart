@@ -43,7 +43,7 @@ class UserProfileModel extends UserProfile {
       );
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       _$UserProfileModelFromJson(json);
-
+  @override
   Map<String, dynamic> toJson() => _$UserProfileModelToJson(this);
 }
 

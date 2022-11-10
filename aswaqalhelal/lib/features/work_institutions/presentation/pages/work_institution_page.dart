@@ -5,7 +5,7 @@ import 'package:root_package/routes/routes.dart';
 import '../../../../core/request_state.dart';
 import '../../../../l10n/l10n.dart';
 import '../../../auth/domain/entities/user_profile.dart';
-import '../../../user_institutions/presentation/widgets/institutions_grid_view.dart';
+import '../../../owner_institutions/presentation/widgets/institutions_grid_view.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
 import '../../../widgets/loading_widget.dart';
@@ -31,13 +31,13 @@ class WorkInstitutionsPage extends StatelessWidget {
             });
           case RequestState.loaded:
             if (state.institutions.isEmpty) {
-              return  Center(
+              return Center(
                 child: Text(AppLocalizations.of(context).noInstitutions),
               );
             }
             return Scaffold(
               appBar: AppBar(
-                title:  Text(AppLocalizations.of(context).workInstitutions),
+                title: Text(AppLocalizations.of(context).workInstitutions),
               ),
               body: InstitutionsGridView(
                 institutions: state.institutions,

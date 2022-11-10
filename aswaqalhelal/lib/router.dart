@@ -16,12 +16,14 @@ import 'features/auth/domain/entities/institution_profile.dart';
 import 'features/auth/domain/entities/user_profile.dart';
 import 'features/auth/presentation/pages/landing/landing_page.dart';
 import 'features/cart/presentation/cubit/institution_cart/institution_cart_cubit.dart';
-import 'features/client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
-import 'features/client_institutions/presentation/pages/client_institution_page.dart';
+import 'features/client_institution/presentation/cubit/client_institution/client_institution_cubit.dart';
+import 'features/client_institution/presentation/pages/client_institution_page.dart';
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
+import 'features/institution_clients/presentation/pages/institution_clients_page.dart';
 import 'features/institution_items/presentation/bloc/add_item/add_item_bloc.dart';
+import 'features/institution_items/presentation/bloc/item_units/units_bloc.dart';
 import 'features/institution_items/presentation/cubit/institution_items/institution_items_cubit.dart';
 import 'features/institution_items/presentation/pages/add_item/add_items_page.dart';
 import 'features/institution_items/presentation/pages/institution_items/institution_items_page.dart';
@@ -35,6 +37,9 @@ import 'features/orders/presentation/cubit/user_orders/user_orders_bloc.dart';
 import 'features/orders/presentation/cubit/user_orders/user_orders_event.dart';
 import 'features/orders/presentation/pages/institution_orders_page.dart';
 import 'features/orders/presentation/pages/user_orders_page.dart';
+import 'features/owner_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
+import 'features/owner_institutions/presentation/pages/add_institution/add_institution_page.dart';
+import 'features/owner_institutions/presentation/pages/institution/owner_institution_page.dart';
 import 'features/recruitment/presentation/cubit/employees/employees_cubit.dart';
 import 'features/recruitment/presentation/cubit/job_offers/send_job_offers_cubit.dart';
 import 'features/recruitment/presentation/cubit/recruitment/recruitment_cubit.dart';
@@ -51,11 +56,6 @@ import 'features/settings/presentation/pages/settings/settings_page.dart';
 import 'features/settings/presentation/pages/update_email/update_email_page.dart';
 import 'features/start_up/presentation/pages/onboarding_page.dart';
 import 'features/start_up/presentation/pages/splash_screen.dart';
-import 'features/user_institutions/presentation/cubit/add_institution/add_institution_cubit.dart';
-import 'features/user_institutions/presentation/cubit/institutions_cubit/institutions_cubit.dart';
-import 'features/user_institutions/presentation/pages/add_institution/add_institution_page.dart';
-import 'features/user_institutions/presentation/pages/institution/owner_institution_page.dart';
-import 'features/user_institutions/presentation/pages/owner_institutions/owner_institutions_page.dart';
 import 'features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
 import 'features/work_institutions/presentation/pages/ins_page.dart';
 import 'features/work_institutions/presentation/pages/work_institution_page.dart';
@@ -171,15 +171,15 @@ class AppRouter {
             child: const SelectLocationMapPage(),
           ),
         );
-      case Routes.institutions:
-        return _getPageRoute(
-          arguments: settings.arguments,
-          routeName: settings.name,
-          builder: (context) => BlocProvider<UserInstitutionsCubit>(
-            create: (context) => locator()..getInstitutions(),
-            child: const UserInstitutionsPage(),
-          ),
-        );
+      // case Routes.institutions:
+      //   return _getPageRoute(
+      //     arguments: settings.arguments,
+      //     routeName: settings.name,
+      //     builder: (context) => BlocProvider<UserInstitutionsCubit>(
+      //       create: (context) => locator()..getInstitutions(),
+      //       child: const OwnerInstitutionsPage(),
+      //     ),
+      //   );
       case Routes.ownerInstitution:
         return _getPageRoute(
           arguments: settings.arguments,
@@ -216,8 +216,15 @@ class AppRouter {
         return _getPageRoute(
           arguments: settings.arguments,
           routeName: settings.name,
-          builder: (context) => BlocProvider<AddItemBloc>(
-            create: (context) => locator(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<AddItemBloc>(
+                create: (context) => locator(),
+              ),
+              BlocProvider<ItemUnitsBloc>(
+                create: (context) => locator(),
+              )
+            ],
             child: const AddItemPage(),
           ),
         );
@@ -312,7 +319,7 @@ class AppRouter {
             final institution = settings.arguments as InstitutionProfile;
             return MultiBlocProvider(
               providers: [
-                BlocProvider<ClientInstitutionsCubit>(
+                BlocProvider<ClientInstitutionCubit>(
                   create: (context) => locator()..getItems(institution),
                 ),
                 BlocProvider<InstitutionCartCubit>(
@@ -353,6 +360,16 @@ class AppRouter {
                     locator()..add(UserOrdersRequested(userProfile.id)),
               ),
             ], child: const UserOrdersPage());
+          },
+        );
+      case Routes.institutionClients:
+        final institution = settings.arguments as InstitutionProfile;
+
+        return _getPageRoute(
+          arguments: settings.arguments,
+          routeName: settings.name,
+          builder: (context) {
+            return const InstitutionClientsPage();
           },
         );
 

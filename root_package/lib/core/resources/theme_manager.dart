@@ -20,7 +20,8 @@ ThemeData getApplicationTheme() {
     // ripple effect color
     // cardview theme
     iconTheme: IconThemeData(color: ColorManager.primary),
-    colorScheme: ColorScheme.light().copyWith(primary: ColorManager.primary),
+    colorScheme:
+        const ColorScheme.light().copyWith(primary: ColorManager.primary),
     textSelectionTheme: TextSelectionThemeData(
         cursorColor: ColorManager.primary,
         selectionHandleColor: ColorManager.primary),
@@ -51,13 +52,15 @@ ThemeData getApplicationTheme() {
         textStyle:
             getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s16),
         padding: const EdgeInsets.all(12),
-        primary: ColorManager.primary,
-        onPrimary: ColorManager.white,
+        backgroundColor: ColorManager.primary,
+        foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
         ),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: Colors.black)),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: ColorManager.outlinedBorderColor),

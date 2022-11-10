@@ -34,35 +34,31 @@ class Number extends FormzInput<num, NumberValidationError> {
   })  : acceptZero = false,
         super.pure(0);
 
-  // const Number._dirty(
-  //     {required num number,
-  //     required this.acceptNegative,
-  //     required this.isFractional})
-  //     : super.dirty(0);
-
-  Number._(
-      {required num number,
-      required this.acceptNegative,
-      required this.isFractional,
-      required this.acceptZero})
-      : super.dirty(number);
+  Number._({
+    required num number,
+    required this.acceptNegative,
+    required this.isFractional,
+    required this.acceptZero,
+  }) : super.dirty(number);
 
   final bool isFractional;
   final bool acceptNegative;
   final bool acceptZero;
 
   Number copyWith(num number) => Number._(
-      number: number,
-      acceptNegative: acceptNegative,
-      isFractional: isFractional,
-      acceptZero: acceptZero);
+        number: number,
+        acceptNegative: acceptNegative,
+        isFractional: isFractional,
+        acceptZero: acceptZero,
+      );
 
   @override
   NumberValidationError? validator(num value) {
     if (!isFractional) {
-      if (value is int) return NumberValidationError.cantBeDouble;
+      if (!(value is int)) return NumberValidationError.cantBeDouble;
     }
     if (!acceptNegative) {
+      print(acceptNegative);
       if (value < 0) return NumberValidationError.cantBeNegative;
     }
 
@@ -81,14 +77,12 @@ extension NumberValidationMessage on Number {
     if (invalid) {
       switch (error) {
         case NumberValidationError.cantBeZero:
-          return intl.zeroIsAnInvalidNumber;
+          return intl.invalidNumber;
         case NumberValidationError.cantBeDouble:
           return intl.acceptsIntegersOnly;
-
         case NumberValidationError.cantBeNegative:
           return intl.theNumberCanNotBeNegative;
         default:
-          return intl.invalidNumber;
       }
     }
     return null;

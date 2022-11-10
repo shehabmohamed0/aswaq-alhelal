@@ -35,14 +35,12 @@ dependencies:
   intl: ^0.17.0 # Add this line  
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.0
-  json_serializable: ^6.1.4
-  json_annotation: ^4.5.0
   lottie: ^1.3.0
   location: ^4.2.0
-  google_maps_flutter: ^2.1.8
+  google_maps_flutter: ^2.2.1
   introduction_screen: ^3.0.2
   flutter_staggered_grid_view: ^0.6.2
-  dropdown_search: ^5.0.2
+  dropdown_search: ^5.0.3
   pdf: ^3.8.3
   open_file: ^3.2.1
   flutter_typeahead: ^4.1.1
@@ -51,26 +49,18 @@ dependencies:
 
   carousel_slider: ^4.1.1
   
-  #temp
-  analyzer: ^4.1.0
-  dio: ^4.0.6
-  retrofit: ^3.0.1+1
-  pretty_dio_logger: ^1.1.1
-  photo_view: ^0.14.0
-  dotted_border: ^2.0.0+2
-
   expandable_bottom_sheet: ^1.1.1+1
 
 
   path: ^1.8.0
-  root_package:
+  root_package: 
     path: ../root_package
 
+  json_annotation: ^4.7.0
 
   # users presentation
   pinput: ^2.2.9  
   sms_autofill: ^2.2.0
-  firebase_messaging: ^14.0.1
   flutter_local_notifications: ^9.9.1
   logger: ^1.1.0
   notification_permissions: ^0.6.1
@@ -95,12 +85,12 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-  retrofit_generator: ^4.0.1
-  build_runner: ^2.2.0
+  retrofit_generator: ^4.2.0
+  build_runner: ^2.3.2
   injectable_generator: ^1.5.4
-
+  json_serializable: ^6.5.4
   flutter_launcher_icons: ^0.10.0
-  freezed: ^2.0.4
+  freezed: ^2.2.0
 
 
 # For information on the generic Dart part of this file, see the

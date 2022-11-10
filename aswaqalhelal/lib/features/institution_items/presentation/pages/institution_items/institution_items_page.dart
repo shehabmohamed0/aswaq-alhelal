@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:aswaqalhelal/features/institution_items/domain/entities/unit.dart';
 import 'package:flutter/material.dart';
 import 'package:root_package/locator/locator.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
@@ -11,6 +14,7 @@ import '../../../../home/presentation/cubit/items_widget/items_widget.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
+import '../../bloc/item_units/units_bloc.dart';
 import '../../cubit/institution_items/institution_items_cubit.dart';
 import '../add_item/add_items_page.dart';
 
@@ -100,6 +104,10 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
                       BlocProvider<AddItemBloc>(
                         create: (context) => locator()..add(InitEdit(item)),
                       ),
+                      BlocProvider<ItemUnitsBloc>(
+                        create: (context) => locator()
+                          ..add(ItemUnitsEvent.initForEdit(units: item.units)),
+                      ),
                     ],
                     child: const AddItemPage(),
                   ),
@@ -114,6 +122,7 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
             itemName: item.name,
             unitName: item.units.first.name,
             unitPrice: item.units.first.price,
+            
             onLongPressed: () {
               Navigator.push(
                 context,
@@ -128,6 +137,10 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
                       BlocProvider<AddItemBloc>(
                         create: (context) => locator()..add(InitEdit(item)),
                       ),
+                      BlocProvider<ItemUnitsBloc>(
+                        create: (context) => locator()
+                          ..add(ItemUnitsEvent.initForEdit(units: item.units)),
+                      ),
                     ],
                     child: const AddItemPage(),
                   ),
@@ -136,8 +149,6 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
             },
           );
         },
-        onItemPressed: (item) async {},
-        onItemLongPressed: (item) {},
       ),
     );
   }
@@ -150,6 +161,9 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
         builder: (_) => MultiBlocProvider(
           providers: [
             BlocProvider<AddItemBloc>(
+              create: (context) => locator(),
+            ),
+            BlocProvider<ItemUnitsBloc>(
               create: (context) => locator(),
             ),
             BlocProvider.value(
@@ -190,6 +204,9 @@ class _InstitutionItemsEmptyWidget extends StatelessWidget {
                 builder: (_) => MultiBlocProvider(
                   providers: [
                     BlocProvider<AddItemBloc>(
+                      create: (context) => locator(),
+                    ),
+                    BlocProvider<ItemUnitsBloc>(
                       create: (context) => locator(),
                     ),
                     BlocProvider.value(

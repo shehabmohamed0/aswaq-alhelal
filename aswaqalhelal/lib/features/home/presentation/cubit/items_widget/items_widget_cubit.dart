@@ -1,8 +1,7 @@
-import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
-import 'package:root_package/packages/injectable.dart';
+
+import '../../../../../core/extensions/prepare_for_search.dart';
 
 part 'items_widget_state.dart';
 
@@ -14,11 +13,12 @@ class ItemsWidgetCubit2<T> extends Cubit<ItemsWidgetState2<T>> {
             stringValue: stringValue, dateTimeValue: dateTimeValue));
 
   void displayChanged(DisplayItems displayItems) {
-     emit(state.copyWith(displayItem: displayItems));
+    emit(state.copyWith(displayItem: displayItems));
   }
 
   void initialized(List<T> items) {
     emit(state.copyWith(items: items));
+    sort(state.sortType, state.sortDirection);
   }
 
   void startSearch() {
@@ -26,7 +26,6 @@ class ItemsWidgetCubit2<T> extends Cubit<ItemsWidgetState2<T>> {
   }
 
   void search(String val) {
-  
     final searchItem = state.items
         .where((element) => state
             .stringValue(element)
@@ -93,7 +92,10 @@ class ItemsWidgetCubit2<T> extends Cubit<ItemsWidgetState2<T>> {
   }
 
   int _sortAlphbeticallyAscending(T a, T b) {
-    return state.stringValue(a).compareTo(state.stringValue(b));
+    return state
+        .stringValue(a)
+        .toLowerCase()
+        .compareTo(state.stringValue(b).toLowerCase());
   }
 
   int _sortAlphbeticallyDescending(T a, T b) {

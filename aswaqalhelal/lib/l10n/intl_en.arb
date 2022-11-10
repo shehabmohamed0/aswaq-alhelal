@@ -200,5 +200,36 @@
   "alphabetically": "Alphabetically",
   "areYouSureYouWantTonorderNow": "Are you sure you want to\norder now ?",
   "areaExistsBefore": "Area exists before",
-  "itemNameAlreadyExists": "Item name already exists"
+  "itemNameAlreadyExists": "Item name already exists",
+  "anonymousUser": "Anonymous user",
+  "pending": "Pending",
+  "processing": "Processing",
+  "fromUnit": "From unit",
+  "contains": "Contains",
+  "client": "Client",
+  "new_": "New",
+  "itemUpdatedSuccessfully": "Item updated successfully",
+  "itemAddedSuccessfully": "Item added successfully",
+  "yes": "Yes",
+  "areYouSureToAddNewItemPreviousDataWill": "Are you sure to add new item? previous data will be removed",
+  "mustSelectAnItem": "Must select an item",
+  "mustSelectAUnit": "Must select a unit",
+  "invalidPrice": "Invalid price",
+  "invalidQuantity": "Invalid quantity",
+  "receiptSavedSuccessfully": "Receipt saved successfully",
+  "priceEGPf": "{number}",
+  "@priceEGPf": {
+    "placeholders": {
+      "number": {
+        "type": "double",
+        "format": "currency",
+        "optionalParameters": {
+          "symbol": "e£",
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "areYouSureToResetTheForm": "Are you sure to reset the form?",
+  "areYouSureToAddANewReceiptPreviousData": "Are you sure to add a new receipt? previous data will be removed"
 }

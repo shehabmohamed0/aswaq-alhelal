@@ -22,13 +22,14 @@ class AddRefAndInstitutionItemParams {
   InstitutionItemModel toModel(
           String id, String referenceId, String? imageUrl) =>
       InstitutionItemModel(
-          id: id,
-          institutionId: institutionId,
-          referenceId: referenceId,
-          name: itemName,
-          imageUrl: imageUrl,
-          creationTime: DateTime.now(),
-          unitModels: units.map(UnitModel.fromDomain).toList());
+        id: id,
+        institutionId: institutionId,
+        referenceId: referenceId,
+        name: itemName,
+        imageUrl: imageUrl,
+        creationTime: DateTime.now(),
+        unitModels: units.map(UnitModel.fromDomain).toList(),
+      );
 }
 
 class AddInstitutionItemParams {

@@ -5,7 +5,6 @@ import 'package:root_package/routes/routes.dart';
 
 import '../../../../l10n/l10n.dart';
 
-
 class InsPage extends StatelessWidget {
   const InsPage({Key? key}) : super(key: key);
 

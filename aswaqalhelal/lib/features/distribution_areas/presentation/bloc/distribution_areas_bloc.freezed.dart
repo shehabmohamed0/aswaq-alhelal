@@ -40,23 +40,23 @@ mixin _$DistributionAreasEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,22 +106,22 @@ mixin _$DistributionAreasEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -151,17 +151,19 @@ mixin _$DistributionAreasEvent {
 abstract class $DistributionAreasEventCopyWith<$Res> {
   factory $DistributionAreasEventCopyWith(DistributionAreasEvent value,
           $Res Function(DistributionAreasEvent) then) =
-      _$DistributionAreasEventCopyWithImpl<$Res>;
+      _$DistributionAreasEventCopyWithImpl<$Res, DistributionAreasEvent>;
 }
 
 /// @nodoc
-class _$DistributionAreasEventCopyWithImpl<$Res>
+class _$DistributionAreasEventCopyWithImpl<$Res,
+        $Val extends DistributionAreasEvent>
     implements $DistributionAreasEventCopyWith<$Res> {
   _$DistributionAreasEventCopyWithImpl(this._value, this._then);
 
-  final DistributionAreasEvent _value;
   // ignore: unused_field
-  final $Res Function(DistributionAreasEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -169,26 +171,25 @@ abstract class _$$LoadDistributionAreasCopyWith<$Res> {
   factory _$$LoadDistributionAreasCopyWith(_$LoadDistributionAreas value,
           $Res Function(_$LoadDistributionAreas) then) =
       __$$LoadDistributionAreasCopyWithImpl<$Res>;
+  @useResult
   $Res call({String institutionId});
 }
 
 /// @nodoc
 class __$$LoadDistributionAreasCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$LoadDistributionAreas>
     implements _$$LoadDistributionAreasCopyWith<$Res> {
   __$$LoadDistributionAreasCopyWithImpl(_$LoadDistributionAreas _value,
       $Res Function(_$LoadDistributionAreas) _then)
-      : super(_value, (v) => _then(v as _$LoadDistributionAreas));
+      : super(_value, _then);
 
-  @override
-  _$LoadDistributionAreas get _value => super._value as _$LoadDistributionAreas;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? institutionId = freezed,
+    Object? institutionId = null,
   }) {
     return _then(_$LoadDistributionAreas(
-      institutionId == freezed
+      null == institutionId
           ? _value.institutionId
           : institutionId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -214,16 +215,16 @@ class _$LoadDistributionAreas implements LoadDistributionAreas {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadDistributionAreas &&
-            const DeepCollectionEquality()
-                .equals(other.institutionId, institutionId));
+            (identical(other.institutionId, institutionId) ||
+                other.institutionId == institutionId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(institutionId));
+  int get hashCode => Object.hash(runtimeType, institutionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadDistributionAreasCopyWith<_$LoadDistributionAreas> get copyWith =>
       __$$LoadDistributionAreasCopyWithImpl<_$LoadDistributionAreas>(
           this, _$identity);
@@ -256,23 +257,23 @@ class _$LoadDistributionAreas implements LoadDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return loadDistributionAreas?.call(institutionId);
   }
@@ -334,22 +335,22 @@ class _$LoadDistributionAreas implements LoadDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return loadDistributionAreas?.call(this);
   }
@@ -397,26 +398,25 @@ abstract class _$$AddDistributionAreasCopyWith<$Res> {
   factory _$$AddDistributionAreasCopyWith(_$AddDistributionAreas value,
           $Res Function(_$AddDistributionAreas) then) =
       __$$AddDistributionAreasCopyWithImpl<$Res>;
+  @useResult
   $Res call({String institutionId});
 }
 
 /// @nodoc
 class __$$AddDistributionAreasCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$AddDistributionAreas>
     implements _$$AddDistributionAreasCopyWith<$Res> {
   __$$AddDistributionAreasCopyWithImpl(_$AddDistributionAreas _value,
       $Res Function(_$AddDistributionAreas) _then)
-      : super(_value, (v) => _then(v as _$AddDistributionAreas));
+      : super(_value, _then);
 
-  @override
-  _$AddDistributionAreas get _value => super._value as _$AddDistributionAreas;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? institutionId = freezed,
+    Object? institutionId = null,
   }) {
     return _then(_$AddDistributionAreas(
-      institutionId == freezed
+      null == institutionId
           ? _value.institutionId
           : institutionId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -442,16 +442,16 @@ class _$AddDistributionAreas implements AddDistributionAreas {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddDistributionAreas &&
-            const DeepCollectionEquality()
-                .equals(other.institutionId, institutionId));
+            (identical(other.institutionId, institutionId) ||
+                other.institutionId == institutionId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(institutionId));
+  int get hashCode => Object.hash(runtimeType, institutionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddDistributionAreasCopyWith<_$AddDistributionAreas> get copyWith =>
       __$$AddDistributionAreasCopyWithImpl<_$AddDistributionAreas>(
           this, _$identity);
@@ -484,23 +484,23 @@ class _$AddDistributionAreas implements AddDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return addDistributionAreas?.call(institutionId);
   }
@@ -562,22 +562,22 @@ class _$AddDistributionAreas implements AddDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return addDistributionAreas?.call(this);
   }
@@ -625,27 +625,26 @@ abstract class _$$UpdateDistributionAreasCopyWith<$Res> {
   factory _$$UpdateDistributionAreasCopyWith(_$UpdateDistributionAreas value,
           $Res Function(_$UpdateDistributionAreas) then) =
       __$$UpdateDistributionAreasCopyWithImpl<$Res>;
+  @useResult
   $Res call({String institutionId});
 }
 
 /// @nodoc
 class __$$UpdateDistributionAreasCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res,
+        _$UpdateDistributionAreas>
     implements _$$UpdateDistributionAreasCopyWith<$Res> {
   __$$UpdateDistributionAreasCopyWithImpl(_$UpdateDistributionAreas _value,
       $Res Function(_$UpdateDistributionAreas) _then)
-      : super(_value, (v) => _then(v as _$UpdateDistributionAreas));
+      : super(_value, _then);
 
-  @override
-  _$UpdateDistributionAreas get _value =>
-      super._value as _$UpdateDistributionAreas;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? institutionId = freezed,
+    Object? institutionId = null,
   }) {
     return _then(_$UpdateDistributionAreas(
-      institutionId == freezed
+      null == institutionId
           ? _value.institutionId
           : institutionId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -671,16 +670,16 @@ class _$UpdateDistributionAreas implements UpdateDistributionAreas {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateDistributionAreas &&
-            const DeepCollectionEquality()
-                .equals(other.institutionId, institutionId));
+            (identical(other.institutionId, institutionId) ||
+                other.institutionId == institutionId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(institutionId));
+  int get hashCode => Object.hash(runtimeType, institutionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UpdateDistributionAreasCopyWith<_$UpdateDistributionAreas> get copyWith =>
       __$$UpdateDistributionAreasCopyWithImpl<_$UpdateDistributionAreas>(
           this, _$identity);
@@ -713,23 +712,23 @@ class _$UpdateDistributionAreas implements UpdateDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return updateDistributionAreas?.call(institutionId);
   }
@@ -791,22 +790,22 @@ class _$UpdateDistributionAreas implements UpdateDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return updateDistributionAreas?.call(this);
   }
@@ -854,32 +853,31 @@ abstract class _$$DeleteDistributionAreasCopyWith<$Res> {
   factory _$$DeleteDistributionAreasCopyWith(_$DeleteDistributionAreas value,
           $Res Function(_$DeleteDistributionAreas) then) =
       __$$DeleteDistributionAreasCopyWithImpl<$Res>;
+  @useResult
   $Res call({String institutionId, DistributionArea distributionArea});
 }
 
 /// @nodoc
 class __$$DeleteDistributionAreasCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res,
+        _$DeleteDistributionAreas>
     implements _$$DeleteDistributionAreasCopyWith<$Res> {
   __$$DeleteDistributionAreasCopyWithImpl(_$DeleteDistributionAreas _value,
       $Res Function(_$DeleteDistributionAreas) _then)
-      : super(_value, (v) => _then(v as _$DeleteDistributionAreas));
+      : super(_value, _then);
 
-  @override
-  _$DeleteDistributionAreas get _value =>
-      super._value as _$DeleteDistributionAreas;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? institutionId = freezed,
-    Object? distributionArea = freezed,
+    Object? institutionId = null,
+    Object? distributionArea = null,
   }) {
     return _then(_$DeleteDistributionAreas(
-      institutionId == freezed
+      null == institutionId
           ? _value.institutionId
           : institutionId // ignore: cast_nullable_to_non_nullable
               as String,
-      distributionArea == freezed
+      null == distributionArea
           ? _value.distributionArea
           : distributionArea // ignore: cast_nullable_to_non_nullable
               as DistributionArea,
@@ -907,20 +905,18 @@ class _$DeleteDistributionAreas implements DeleteDistributionAreas {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteDistributionAreas &&
-            const DeepCollectionEquality()
-                .equals(other.institutionId, institutionId) &&
-            const DeepCollectionEquality()
-                .equals(other.distributionArea, distributionArea));
+            (identical(other.institutionId, institutionId) ||
+                other.institutionId == institutionId) &&
+            (identical(other.distributionArea, distributionArea) ||
+                other.distributionArea == distributionArea));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(institutionId),
-      const DeepCollectionEquality().hash(distributionArea));
+  int get hashCode => Object.hash(runtimeType, institutionId, distributionArea);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$DeleteDistributionAreasCopyWith<_$DeleteDistributionAreas> get copyWith =>
       __$$DeleteDistributionAreasCopyWithImpl<_$DeleteDistributionAreas>(
           this, _$identity);
@@ -953,23 +949,23 @@ class _$DeleteDistributionAreas implements DeleteDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return deleteDistributionAreas?.call(institutionId, distributionArea);
   }
@@ -1031,22 +1027,22 @@ class _$DeleteDistributionAreas implements DeleteDistributionAreas {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return deleteDistributionAreas?.call(this);
   }
@@ -1096,26 +1092,25 @@ abstract class _$$SearchGovernateCopyWith<$Res> {
   factory _$$SearchGovernateCopyWith(
           _$SearchGovernate value, $Res Function(_$SearchGovernate) then) =
       __$$SearchGovernateCopyWithImpl<$Res>;
+  @useResult
   $Res call({String searchText});
 }
 
 /// @nodoc
 class __$$SearchGovernateCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SearchGovernate>
     implements _$$SearchGovernateCopyWith<$Res> {
   __$$SearchGovernateCopyWithImpl(
       _$SearchGovernate _value, $Res Function(_$SearchGovernate) _then)
-      : super(_value, (v) => _then(v as _$SearchGovernate));
+      : super(_value, _then);
 
-  @override
-  _$SearchGovernate get _value => super._value as _$SearchGovernate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchText = freezed,
+    Object? searchText = null,
   }) {
     return _then(_$SearchGovernate(
-      searchText == freezed
+      null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1141,16 +1136,16 @@ class _$SearchGovernate implements SearchGovernate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchGovernate &&
-            const DeepCollectionEquality()
-                .equals(other.searchText, searchText));
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchText));
+  int get hashCode => Object.hash(runtimeType, searchText);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SearchGovernateCopyWith<_$SearchGovernate> get copyWith =>
       __$$SearchGovernateCopyWithImpl<_$SearchGovernate>(this, _$identity);
 
@@ -1182,23 +1177,23 @@ class _$SearchGovernate implements SearchGovernate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return searchGovernate?.call(searchText);
   }
@@ -1260,22 +1255,22 @@ class _$SearchGovernate implements SearchGovernate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return searchGovernate?.call(this);
   }
@@ -1322,26 +1317,25 @@ abstract class _$$SearchCityCopyWith<$Res> {
   factory _$$SearchCityCopyWith(
           _$SearchCity value, $Res Function(_$SearchCity) then) =
       __$$SearchCityCopyWithImpl<$Res>;
+  @useResult
   $Res call({String searchText});
 }
 
 /// @nodoc
 class __$$SearchCityCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SearchCity>
     implements _$$SearchCityCopyWith<$Res> {
   __$$SearchCityCopyWithImpl(
       _$SearchCity _value, $Res Function(_$SearchCity) _then)
-      : super(_value, (v) => _then(v as _$SearchCity));
+      : super(_value, _then);
 
-  @override
-  _$SearchCity get _value => super._value as _$SearchCity;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchText = freezed,
+    Object? searchText = null,
   }) {
     return _then(_$SearchCity(
-      searchText == freezed
+      null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1367,16 +1361,16 @@ class _$SearchCity implements SearchCity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchCity &&
-            const DeepCollectionEquality()
-                .equals(other.searchText, searchText));
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchText));
+  int get hashCode => Object.hash(runtimeType, searchText);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SearchCityCopyWith<_$SearchCity> get copyWith =>
       __$$SearchCityCopyWithImpl<_$SearchCity>(this, _$identity);
 
@@ -1408,23 +1402,23 @@ class _$SearchCity implements SearchCity {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return searchCity?.call(searchText);
   }
@@ -1486,22 +1480,22 @@ class _$SearchCity implements SearchCity {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return searchCity?.call(this);
   }
@@ -1548,26 +1542,25 @@ abstract class _$$SearchNeighborhoodCopyWith<$Res> {
   factory _$$SearchNeighborhoodCopyWith(_$SearchNeighborhood value,
           $Res Function(_$SearchNeighborhood) then) =
       __$$SearchNeighborhoodCopyWithImpl<$Res>;
+  @useResult
   $Res call({String searchText});
 }
 
 /// @nodoc
 class __$$SearchNeighborhoodCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SearchNeighborhood>
     implements _$$SearchNeighborhoodCopyWith<$Res> {
   __$$SearchNeighborhoodCopyWithImpl(
       _$SearchNeighborhood _value, $Res Function(_$SearchNeighborhood) _then)
-      : super(_value, (v) => _then(v as _$SearchNeighborhood));
+      : super(_value, _then);
 
-  @override
-  _$SearchNeighborhood get _value => super._value as _$SearchNeighborhood;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchText = freezed,
+    Object? searchText = null,
   }) {
     return _then(_$SearchNeighborhood(
-      searchText == freezed
+      null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1593,16 +1586,16 @@ class _$SearchNeighborhood implements SearchNeighborhood {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchNeighborhood &&
-            const DeepCollectionEquality()
-                .equals(other.searchText, searchText));
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(searchText));
+  int get hashCode => Object.hash(runtimeType, searchText);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SearchNeighborhoodCopyWith<_$SearchNeighborhood> get copyWith =>
       __$$SearchNeighborhoodCopyWithImpl<_$SearchNeighborhood>(
           this, _$identity);
@@ -1635,23 +1628,23 @@ class _$SearchNeighborhood implements SearchNeighborhood {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return searchNeighborhood?.call(searchText);
   }
@@ -1713,22 +1706,22 @@ class _$SearchNeighborhood implements SearchNeighborhood {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return searchNeighborhood?.call(this);
   }
@@ -1776,26 +1769,25 @@ abstract class _$$SelectGovernateCopyWith<$Res> {
   factory _$$SelectGovernateCopyWith(
           _$SelectGovernate value, $Res Function(_$SelectGovernate) then) =
       __$$SelectGovernateCopyWithImpl<$Res>;
+  @useResult
   $Res call({RefGovernate governate});
 }
 
 /// @nodoc
 class __$$SelectGovernateCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SelectGovernate>
     implements _$$SelectGovernateCopyWith<$Res> {
   __$$SelectGovernateCopyWithImpl(
       _$SelectGovernate _value, $Res Function(_$SelectGovernate) _then)
-      : super(_value, (v) => _then(v as _$SelectGovernate));
+      : super(_value, _then);
 
-  @override
-  _$SelectGovernate get _value => super._value as _$SelectGovernate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? governate = freezed,
+    Object? governate = null,
   }) {
     return _then(_$SelectGovernate(
-      governate == freezed
+      null == governate
           ? _value.governate
           : governate // ignore: cast_nullable_to_non_nullable
               as RefGovernate,
@@ -1821,15 +1813,16 @@ class _$SelectGovernate implements SelectGovernate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectGovernate &&
-            const DeepCollectionEquality().equals(other.governate, governate));
+            (identical(other.governate, governate) ||
+                other.governate == governate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(governate));
+  int get hashCode => Object.hash(runtimeType, governate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SelectGovernateCopyWith<_$SelectGovernate> get copyWith =>
       __$$SelectGovernateCopyWithImpl<_$SelectGovernate>(this, _$identity);
 
@@ -1861,23 +1854,23 @@ class _$SelectGovernate implements SelectGovernate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return selectGovernate?.call(governate);
   }
@@ -1939,22 +1932,22 @@ class _$SelectGovernate implements SelectGovernate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return selectGovernate?.call(this);
   }
@@ -2002,26 +1995,25 @@ abstract class _$$SelectCityCopyWith<$Res> {
   factory _$$SelectCityCopyWith(
           _$SelectCity value, $Res Function(_$SelectCity) then) =
       __$$SelectCityCopyWithImpl<$Res>;
+  @useResult
   $Res call({RefCity city});
 }
 
 /// @nodoc
 class __$$SelectCityCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SelectCity>
     implements _$$SelectCityCopyWith<$Res> {
   __$$SelectCityCopyWithImpl(
       _$SelectCity _value, $Res Function(_$SelectCity) _then)
-      : super(_value, (v) => _then(v as _$SelectCity));
+      : super(_value, _then);
 
-  @override
-  _$SelectCity get _value => super._value as _$SelectCity;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? city = freezed,
+    Object? city = null,
   }) {
     return _then(_$SelectCity(
-      city == freezed
+      null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as RefCity,
@@ -2047,15 +2039,15 @@ class _$SelectCity implements SelectCity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectCity &&
-            const DeepCollectionEquality().equals(other.city, city));
+            (identical(other.city, city) || other.city == city));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(city));
+  int get hashCode => Object.hash(runtimeType, city);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SelectCityCopyWith<_$SelectCity> get copyWith =>
       __$$SelectCityCopyWithImpl<_$SelectCity>(this, _$identity);
 
@@ -2087,23 +2079,23 @@ class _$SelectCity implements SelectCity {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return selectCity?.call(city);
   }
@@ -2165,22 +2157,22 @@ class _$SelectCity implements SelectCity {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return selectCity?.call(this);
   }
@@ -2227,26 +2219,25 @@ abstract class _$$SelectNeighborhoodCopyWith<$Res> {
   factory _$$SelectNeighborhoodCopyWith(_$SelectNeighborhood value,
           $Res Function(_$SelectNeighborhood) then) =
       __$$SelectNeighborhoodCopyWithImpl<$Res>;
+  @useResult
   $Res call({RefNeighborhood neighborhood});
 }
 
 /// @nodoc
 class __$$SelectNeighborhoodCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$SelectNeighborhood>
     implements _$$SelectNeighborhoodCopyWith<$Res> {
   __$$SelectNeighborhoodCopyWithImpl(
       _$SelectNeighborhood _value, $Res Function(_$SelectNeighborhood) _then)
-      : super(_value, (v) => _then(v as _$SelectNeighborhood));
+      : super(_value, _then);
 
-  @override
-  _$SelectNeighborhood get _value => super._value as _$SelectNeighborhood;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? neighborhood = freezed,
+    Object? neighborhood = null,
   }) {
     return _then(_$SelectNeighborhood(
-      neighborhood == freezed
+      null == neighborhood
           ? _value.neighborhood
           : neighborhood // ignore: cast_nullable_to_non_nullable
               as RefNeighborhood,
@@ -2272,16 +2263,16 @@ class _$SelectNeighborhood implements SelectNeighborhood {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectNeighborhood &&
-            const DeepCollectionEquality()
-                .equals(other.neighborhood, neighborhood));
+            (identical(other.neighborhood, neighborhood) ||
+                other.neighborhood == neighborhood));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(neighborhood));
+  int get hashCode => Object.hash(runtimeType, neighborhood);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SelectNeighborhoodCopyWith<_$SelectNeighborhood> get copyWith =>
       __$$SelectNeighborhoodCopyWithImpl<_$SelectNeighborhood>(
           this, _$identity);
@@ -2314,23 +2305,23 @@ class _$SelectNeighborhood implements SelectNeighborhood {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return selectNeighborhood?.call(neighborhood);
   }
@@ -2392,22 +2383,22 @@ class _$SelectNeighborhood implements SelectNeighborhood {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return selectNeighborhood?.call(this);
   }
@@ -2459,14 +2450,11 @@ abstract class _$$UnSelectGovernateCopyWith<$Res> {
 
 /// @nodoc
 class __$$UnSelectGovernateCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$UnSelectGovernate>
     implements _$$UnSelectGovernateCopyWith<$Res> {
   __$$UnSelectGovernateCopyWithImpl(
       _$UnSelectGovernate _value, $Res Function(_$UnSelectGovernate) _then)
-      : super(_value, (v) => _then(v as _$UnSelectGovernate));
-
-  @override
-  _$UnSelectGovernate get _value => super._value as _$UnSelectGovernate;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -2516,23 +2504,23 @@ class _$UnSelectGovernate implements UnSelectGovernate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return unSelectGovernate?.call();
   }
@@ -2594,22 +2582,22 @@ class _$UnSelectGovernate implements UnSelectGovernate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return unSelectGovernate?.call(this);
   }
@@ -2655,14 +2643,11 @@ abstract class _$$UnSelectCityCopyWith<$Res> {
 
 /// @nodoc
 class __$$UnSelectCityCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$UnSelectCity>
     implements _$$UnSelectCityCopyWith<$Res> {
   __$$UnSelectCityCopyWithImpl(
       _$UnSelectCity _value, $Res Function(_$UnSelectCity) _then)
-      : super(_value, (v) => _then(v as _$UnSelectCity));
-
-  @override
-  _$UnSelectCity get _value => super._value as _$UnSelectCity;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -2712,23 +2697,23 @@ class _$UnSelectCity implements UnSelectCity {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return unSelectCity?.call();
   }
@@ -2790,22 +2775,22 @@ class _$UnSelectCity implements UnSelectCity {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return unSelectCity?.call(this);
   }
@@ -2851,14 +2836,11 @@ abstract class _$$UnSelectNeighborhoodCopyWith<$Res> {
 
 /// @nodoc
 class __$$UnSelectNeighborhoodCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$UnSelectNeighborhood>
     implements _$$UnSelectNeighborhoodCopyWith<$Res> {
   __$$UnSelectNeighborhoodCopyWithImpl(_$UnSelectNeighborhood _value,
       $Res Function(_$UnSelectNeighborhood) _then)
-      : super(_value, (v) => _then(v as _$UnSelectNeighborhood));
-
-  @override
-  _$UnSelectNeighborhood get _value => super._value as _$UnSelectNeighborhood;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -2908,23 +2890,23 @@ class _$UnSelectNeighborhood implements UnSelectNeighborhood {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return unSelectNeighborhood?.call();
   }
@@ -2986,22 +2968,22 @@ class _$UnSelectNeighborhood implements UnSelectNeighborhood {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return unSelectNeighborhood?.call(this);
   }
@@ -3043,26 +3025,25 @@ abstract class _$$AddNewGovernateEventCopyWith<$Res> {
   factory _$$AddNewGovernateEventCopyWith(_$AddNewGovernateEvent value,
           $Res Function(_$AddNewGovernateEvent) then) =
       __$$AddNewGovernateEventCopyWithImpl<$Res>;
+  @useResult
   $Res call({String governate});
 }
 
 /// @nodoc
 class __$$AddNewGovernateEventCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$AddNewGovernateEvent>
     implements _$$AddNewGovernateEventCopyWith<$Res> {
   __$$AddNewGovernateEventCopyWithImpl(_$AddNewGovernateEvent _value,
       $Res Function(_$AddNewGovernateEvent) _then)
-      : super(_value, (v) => _then(v as _$AddNewGovernateEvent));
+      : super(_value, _then);
 
-  @override
-  _$AddNewGovernateEvent get _value => super._value as _$AddNewGovernateEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? governate = freezed,
+    Object? governate = null,
   }) {
     return _then(_$AddNewGovernateEvent(
-      governate == freezed
+      null == governate
           ? _value.governate
           : governate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -3088,15 +3069,16 @@ class _$AddNewGovernateEvent implements AddNewGovernateEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddNewGovernateEvent &&
-            const DeepCollectionEquality().equals(other.governate, governate));
+            (identical(other.governate, governate) ||
+                other.governate == governate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(governate));
+  int get hashCode => Object.hash(runtimeType, governate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddNewGovernateEventCopyWith<_$AddNewGovernateEvent> get copyWith =>
       __$$AddNewGovernateEventCopyWithImpl<_$AddNewGovernateEvent>(
           this, _$identity);
@@ -3129,23 +3111,23 @@ class _$AddNewGovernateEvent implements AddNewGovernateEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return addNewGovernate?.call(governate);
   }
@@ -3207,22 +3189,22 @@ class _$AddNewGovernateEvent implements AddNewGovernateEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return addNewGovernate?.call(this);
   }
@@ -3270,26 +3252,25 @@ abstract class _$$AddNewCityEventCopyWith<$Res> {
   factory _$$AddNewCityEventCopyWith(
           _$AddNewCityEvent value, $Res Function(_$AddNewCityEvent) then) =
       __$$AddNewCityEventCopyWithImpl<$Res>;
+  @useResult
   $Res call({String city});
 }
 
 /// @nodoc
 class __$$AddNewCityEventCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res, _$AddNewCityEvent>
     implements _$$AddNewCityEventCopyWith<$Res> {
   __$$AddNewCityEventCopyWithImpl(
       _$AddNewCityEvent _value, $Res Function(_$AddNewCityEvent) _then)
-      : super(_value, (v) => _then(v as _$AddNewCityEvent));
+      : super(_value, _then);
 
-  @override
-  _$AddNewCityEvent get _value => super._value as _$AddNewCityEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? city = freezed,
+    Object? city = null,
   }) {
     return _then(_$AddNewCityEvent(
-      city == freezed
+      null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
@@ -3315,15 +3296,15 @@ class _$AddNewCityEvent implements AddNewCityEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddNewCityEvent &&
-            const DeepCollectionEquality().equals(other.city, city));
+            (identical(other.city, city) || other.city == city));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(city));
+  int get hashCode => Object.hash(runtimeType, city);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddNewCityEventCopyWith<_$AddNewCityEvent> get copyWith =>
       __$$AddNewCityEventCopyWithImpl<_$AddNewCityEvent>(this, _$identity);
 
@@ -3355,23 +3336,23 @@ class _$AddNewCityEvent implements AddNewCityEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return addNewCity?.call(city);
   }
@@ -3433,22 +3414,22 @@ class _$AddNewCityEvent implements AddNewCityEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return addNewCity?.call(this);
   }
@@ -3495,27 +3476,26 @@ abstract class _$$AddNewNeighborhoodEventCopyWith<$Res> {
   factory _$$AddNewNeighborhoodEventCopyWith(_$AddNewNeighborhoodEvent value,
           $Res Function(_$AddNewNeighborhoodEvent) then) =
       __$$AddNewNeighborhoodEventCopyWithImpl<$Res>;
+  @useResult
   $Res call({String neighborhood});
 }
 
 /// @nodoc
 class __$$AddNewNeighborhoodEventCopyWithImpl<$Res>
-    extends _$DistributionAreasEventCopyWithImpl<$Res>
+    extends _$DistributionAreasEventCopyWithImpl<$Res,
+        _$AddNewNeighborhoodEvent>
     implements _$$AddNewNeighborhoodEventCopyWith<$Res> {
   __$$AddNewNeighborhoodEventCopyWithImpl(_$AddNewNeighborhoodEvent _value,
       $Res Function(_$AddNewNeighborhoodEvent) _then)
-      : super(_value, (v) => _then(v as _$AddNewNeighborhoodEvent));
+      : super(_value, _then);
 
-  @override
-  _$AddNewNeighborhoodEvent get _value =>
-      super._value as _$AddNewNeighborhoodEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? neighborhood = freezed,
+    Object? neighborhood = null,
   }) {
     return _then(_$AddNewNeighborhoodEvent(
-      neighborhood == freezed
+      null == neighborhood
           ? _value.neighborhood
           : neighborhood // ignore: cast_nullable_to_non_nullable
               as String,
@@ -3541,16 +3521,16 @@ class _$AddNewNeighborhoodEvent implements AddNewNeighborhoodEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddNewNeighborhoodEvent &&
-            const DeepCollectionEquality()
-                .equals(other.neighborhood, neighborhood));
+            (identical(other.neighborhood, neighborhood) ||
+                other.neighborhood == neighborhood));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(neighborhood));
+  int get hashCode => Object.hash(runtimeType, neighborhood);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddNewNeighborhoodEventCopyWith<_$AddNewNeighborhoodEvent> get copyWith =>
       __$$AddNewNeighborhoodEventCopyWithImpl<_$AddNewNeighborhoodEvent>(
           this, _$identity);
@@ -3583,23 +3563,23 @@ class _$AddNewNeighborhoodEvent implements AddNewNeighborhoodEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String institutionId)? loadDistributionAreas,
-    TResult Function(String institutionId)? addDistributionAreas,
-    TResult Function(String institutionId)? updateDistributionAreas,
-    TResult Function(String institutionId, DistributionArea distributionArea)?
+    TResult? Function(String institutionId)? loadDistributionAreas,
+    TResult? Function(String institutionId)? addDistributionAreas,
+    TResult? Function(String institutionId)? updateDistributionAreas,
+    TResult? Function(String institutionId, DistributionArea distributionArea)?
         deleteDistributionAreas,
-    TResult Function(String searchText)? searchGovernate,
-    TResult Function(String searchText)? searchCity,
-    TResult Function(String searchText)? searchNeighborhood,
-    TResult Function(RefGovernate governate)? selectGovernate,
-    TResult Function(RefCity city)? selectCity,
-    TResult Function(RefNeighborhood neighborhood)? selectNeighborhood,
-    TResult Function()? unSelectGovernate,
-    TResult Function()? unSelectCity,
-    TResult Function()? unSelectNeighborhood,
-    TResult Function(String governate)? addNewGovernate,
-    TResult Function(String city)? addNewCity,
-    TResult Function(String neighborhood)? addNewNeighborhood,
+    TResult? Function(String searchText)? searchGovernate,
+    TResult? Function(String searchText)? searchCity,
+    TResult? Function(String searchText)? searchNeighborhood,
+    TResult? Function(RefGovernate governate)? selectGovernate,
+    TResult? Function(RefCity city)? selectCity,
+    TResult? Function(RefNeighborhood neighborhood)? selectNeighborhood,
+    TResult? Function()? unSelectGovernate,
+    TResult? Function()? unSelectCity,
+    TResult? Function()? unSelectNeighborhood,
+    TResult? Function(String governate)? addNewGovernate,
+    TResult? Function(String city)? addNewCity,
+    TResult? Function(String neighborhood)? addNewNeighborhood,
   }) {
     return addNewNeighborhood?.call(neighborhood);
   }
@@ -3661,22 +3641,22 @@ class _$AddNewNeighborhoodEvent implements AddNewNeighborhoodEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoadDistributionAreas value)? loadDistributionAreas,
-    TResult Function(AddDistributionAreas value)? addDistributionAreas,
-    TResult Function(UpdateDistributionAreas value)? updateDistributionAreas,
-    TResult Function(DeleteDistributionAreas value)? deleteDistributionAreas,
-    TResult Function(SearchGovernate value)? searchGovernate,
-    TResult Function(SearchCity value)? searchCity,
-    TResult Function(SearchNeighborhood value)? searchNeighborhood,
-    TResult Function(SelectGovernate value)? selectGovernate,
-    TResult Function(SelectCity value)? selectCity,
-    TResult Function(SelectNeighborhood value)? selectNeighborhood,
-    TResult Function(UnSelectGovernate value)? unSelectGovernate,
-    TResult Function(UnSelectCity value)? unSelectCity,
-    TResult Function(UnSelectNeighborhood value)? unSelectNeighborhood,
-    TResult Function(AddNewGovernateEvent value)? addNewGovernate,
-    TResult Function(AddNewCityEvent value)? addNewCity,
-    TResult Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
+    TResult? Function(LoadDistributionAreas value)? loadDistributionAreas,
+    TResult? Function(AddDistributionAreas value)? addDistributionAreas,
+    TResult? Function(UpdateDistributionAreas value)? updateDistributionAreas,
+    TResult? Function(DeleteDistributionAreas value)? deleteDistributionAreas,
+    TResult? Function(SearchGovernate value)? searchGovernate,
+    TResult? Function(SearchCity value)? searchCity,
+    TResult? Function(SearchNeighborhood value)? searchNeighborhood,
+    TResult? Function(SelectGovernate value)? selectGovernate,
+    TResult? Function(SelectCity value)? selectCity,
+    TResult? Function(SelectNeighborhood value)? selectNeighborhood,
+    TResult? Function(UnSelectGovernate value)? unSelectGovernate,
+    TResult? Function(UnSelectCity value)? unSelectCity,
+    TResult? Function(UnSelectNeighborhood value)? unSelectNeighborhood,
+    TResult? Function(AddNewGovernateEvent value)? addNewGovernate,
+    TResult? Function(AddNewCityEvent value)? addNewCity,
+    TResult? Function(AddNewNeighborhoodEvent value)? addNewNeighborhood,
   }) {
     return addNewNeighborhood?.call(this);
   }
@@ -3756,7 +3736,8 @@ mixin _$DistributionAreasState {
 abstract class $DistributionAreasStateCopyWith<$Res> {
   factory $DistributionAreasStateCopyWith(DistributionAreasState value,
           $Res Function(DistributionAreasState) then) =
-      _$DistributionAreasStateCopyWithImpl<$Res>;
+      _$DistributionAreasStateCopyWithImpl<$Res, DistributionAreasState>;
+  @useResult
   $Res call(
       {String governateSearch,
       List<RefGovernate> governatesSuggestions,
@@ -3777,99 +3758,102 @@ abstract class $DistributionAreasStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DistributionAreasStateCopyWithImpl<$Res>
+class _$DistributionAreasStateCopyWithImpl<$Res,
+        $Val extends DistributionAreasState>
     implements $DistributionAreasStateCopyWith<$Res> {
   _$DistributionAreasStateCopyWithImpl(this._value, this._then);
 
-  final DistributionAreasState _value;
   // ignore: unused_field
-  final $Res Function(DistributionAreasState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? governateSearch = freezed,
-    Object? governatesSuggestions = freezed,
-    Object? governatesSuggestionState = freezed,
-    Object? citySearch = freezed,
-    Object? citiesSuggestions = freezed,
-    Object? citiesSuggestionState = freezed,
-    Object? neighborhoodSearch = freezed,
-    Object? neighborhoodsSuggestions = freezed,
-    Object? neighborhoodsSuggestionState = freezed,
-    Object? governateOrNull = freezed,
-    Object? cityOrNull = freezed,
-    Object? neighborhoodOrNull = freezed,
-    Object? distribtionAreas = freezed,
-    Object? addressStatus = freezed,
-    Object? status = freezed,
+    Object? governateSearch = null,
+    Object? governatesSuggestions = null,
+    Object? governatesSuggestionState = null,
+    Object? citySearch = null,
+    Object? citiesSuggestions = null,
+    Object? citiesSuggestionState = null,
+    Object? neighborhoodSearch = null,
+    Object? neighborhoodsSuggestions = null,
+    Object? neighborhoodsSuggestionState = null,
+    Object? governateOrNull = null,
+    Object? cityOrNull = null,
+    Object? neighborhoodOrNull = null,
+    Object? distribtionAreas = null,
+    Object? addressStatus = null,
+    Object? status = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
-      governateSearch: governateSearch == freezed
+      governateSearch: null == governateSearch
           ? _value.governateSearch
           : governateSearch // ignore: cast_nullable_to_non_nullable
               as String,
-      governatesSuggestions: governatesSuggestions == freezed
+      governatesSuggestions: null == governatesSuggestions
           ? _value.governatesSuggestions
           : governatesSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefGovernate>,
-      governatesSuggestionState: governatesSuggestionState == freezed
+      governatesSuggestionState: null == governatesSuggestionState
           ? _value.governatesSuggestionState
           : governatesSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      citySearch: citySearch == freezed
+      citySearch: null == citySearch
           ? _value.citySearch
           : citySearch // ignore: cast_nullable_to_non_nullable
               as String,
-      citiesSuggestions: citiesSuggestions == freezed
+      citiesSuggestions: null == citiesSuggestions
           ? _value.citiesSuggestions
           : citiesSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefCity>,
-      citiesSuggestionState: citiesSuggestionState == freezed
+      citiesSuggestionState: null == citiesSuggestionState
           ? _value.citiesSuggestionState
           : citiesSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      neighborhoodSearch: neighborhoodSearch == freezed
+      neighborhoodSearch: null == neighborhoodSearch
           ? _value.neighborhoodSearch
           : neighborhoodSearch // ignore: cast_nullable_to_non_nullable
               as String,
-      neighborhoodsSuggestions: neighborhoodsSuggestions == freezed
+      neighborhoodsSuggestions: null == neighborhoodsSuggestions
           ? _value.neighborhoodsSuggestions
           : neighborhoodsSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefNeighborhood>,
-      neighborhoodsSuggestionState: neighborhoodsSuggestionState == freezed
+      neighborhoodsSuggestionState: null == neighborhoodsSuggestionState
           ? _value.neighborhoodsSuggestionState
           : neighborhoodsSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      governateOrNull: governateOrNull == freezed
+      governateOrNull: null == governateOrNull
           ? _value.governateOrNull
           : governateOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefGovernate>,
-      cityOrNull: cityOrNull == freezed
+      cityOrNull: null == cityOrNull
           ? _value.cityOrNull
           : cityOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefCity>,
-      neighborhoodOrNull: neighborhoodOrNull == freezed
+      neighborhoodOrNull: null == neighborhoodOrNull
           ? _value.neighborhoodOrNull
           : neighborhoodOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefNeighborhood>,
-      distribtionAreas: distribtionAreas == freezed
+      distribtionAreas: null == distribtionAreas
           ? _value.distribtionAreas
           : distribtionAreas // ignore: cast_nullable_to_non_nullable
               as List<DistributionArea>,
-      addressStatus: addressStatus == freezed
+      addressStatus: null == addressStatus
           ? _value.addressStatus
           : addressStatus // ignore: cast_nullable_to_non_nullable
               as AddressSuggestionsStatus,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as DistributionAreasStatus,
-      errorMessage: errorMessage == freezed
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -3880,6 +3864,7 @@ abstract class _$$_DistributionAreasStateCopyWith<$Res>
           $Res Function(_$_DistributionAreasState) then) =
       __$$_DistributionAreasStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String governateSearch,
       List<RefGovernate> governatesSuggestions,
@@ -3901,97 +3886,95 @@ abstract class _$$_DistributionAreasStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_DistributionAreasStateCopyWithImpl<$Res>
-    extends _$DistributionAreasStateCopyWithImpl<$Res>
+    extends _$DistributionAreasStateCopyWithImpl<$Res,
+        _$_DistributionAreasState>
     implements _$$_DistributionAreasStateCopyWith<$Res> {
   __$$_DistributionAreasStateCopyWithImpl(_$_DistributionAreasState _value,
       $Res Function(_$_DistributionAreasState) _then)
-      : super(_value, (v) => _then(v as _$_DistributionAreasState));
+      : super(_value, _then);
 
-  @override
-  _$_DistributionAreasState get _value =>
-      super._value as _$_DistributionAreasState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? governateSearch = freezed,
-    Object? governatesSuggestions = freezed,
-    Object? governatesSuggestionState = freezed,
-    Object? citySearch = freezed,
-    Object? citiesSuggestions = freezed,
-    Object? citiesSuggestionState = freezed,
-    Object? neighborhoodSearch = freezed,
-    Object? neighborhoodsSuggestions = freezed,
-    Object? neighborhoodsSuggestionState = freezed,
-    Object? governateOrNull = freezed,
-    Object? cityOrNull = freezed,
-    Object? neighborhoodOrNull = freezed,
-    Object? distribtionAreas = freezed,
-    Object? addressStatus = freezed,
-    Object? status = freezed,
+    Object? governateSearch = null,
+    Object? governatesSuggestions = null,
+    Object? governatesSuggestionState = null,
+    Object? citySearch = null,
+    Object? citiesSuggestions = null,
+    Object? citiesSuggestionState = null,
+    Object? neighborhoodSearch = null,
+    Object? neighborhoodsSuggestions = null,
+    Object? neighborhoodsSuggestionState = null,
+    Object? governateOrNull = null,
+    Object? cityOrNull = null,
+    Object? neighborhoodOrNull = null,
+    Object? distribtionAreas = null,
+    Object? addressStatus = null,
+    Object? status = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_$_DistributionAreasState(
-      governateSearch: governateSearch == freezed
+      governateSearch: null == governateSearch
           ? _value.governateSearch
           : governateSearch // ignore: cast_nullable_to_non_nullable
               as String,
-      governatesSuggestions: governatesSuggestions == freezed
+      governatesSuggestions: null == governatesSuggestions
           ? _value._governatesSuggestions
           : governatesSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefGovernate>,
-      governatesSuggestionState: governatesSuggestionState == freezed
+      governatesSuggestionState: null == governatesSuggestionState
           ? _value.governatesSuggestionState
           : governatesSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      citySearch: citySearch == freezed
+      citySearch: null == citySearch
           ? _value.citySearch
           : citySearch // ignore: cast_nullable_to_non_nullable
               as String,
-      citiesSuggestions: citiesSuggestions == freezed
+      citiesSuggestions: null == citiesSuggestions
           ? _value._citiesSuggestions
           : citiesSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefCity>,
-      citiesSuggestionState: citiesSuggestionState == freezed
+      citiesSuggestionState: null == citiesSuggestionState
           ? _value.citiesSuggestionState
           : citiesSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      neighborhoodSearch: neighborhoodSearch == freezed
+      neighborhoodSearch: null == neighborhoodSearch
           ? _value.neighborhoodSearch
           : neighborhoodSearch // ignore: cast_nullable_to_non_nullable
               as String,
-      neighborhoodsSuggestions: neighborhoodsSuggestions == freezed
+      neighborhoodsSuggestions: null == neighborhoodsSuggestions
           ? _value._neighborhoodsSuggestions
           : neighborhoodsSuggestions // ignore: cast_nullable_to_non_nullable
               as List<RefNeighborhood>,
-      neighborhoodsSuggestionState: neighborhoodsSuggestionState == freezed
+      neighborhoodsSuggestionState: null == neighborhoodsSuggestionState
           ? _value.neighborhoodsSuggestionState
           : neighborhoodsSuggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      governateOrNull: governateOrNull == freezed
+      governateOrNull: null == governateOrNull
           ? _value.governateOrNull
           : governateOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefGovernate>,
-      cityOrNull: cityOrNull == freezed
+      cityOrNull: null == cityOrNull
           ? _value.cityOrNull
           : cityOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefCity>,
-      neighborhoodOrNull: neighborhoodOrNull == freezed
+      neighborhoodOrNull: null == neighborhoodOrNull
           ? _value.neighborhoodOrNull
           : neighborhoodOrNull // ignore: cast_nullable_to_non_nullable
               as Option<RefNeighborhood>,
-      distribtionAreas: distribtionAreas == freezed
+      distribtionAreas: null == distribtionAreas
           ? _value._distribtionAreas
           : distribtionAreas // ignore: cast_nullable_to_non_nullable
               as List<DistributionArea>,
-      addressStatus: addressStatus == freezed
+      addressStatus: null == addressStatus
           ? _value.addressStatus
           : addressStatus // ignore: cast_nullable_to_non_nullable
               as AddressSuggestionsStatus,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as DistributionAreasStatus,
-      errorMessage: errorMessage == freezed
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -4102,62 +4085,65 @@ class _$_DistributionAreasState implements _DistributionAreasState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DistributionAreasState &&
-            const DeepCollectionEquality()
-                .equals(other.governateSearch, governateSearch) &&
+            (identical(other.governateSearch, governateSearch) ||
+                other.governateSearch == governateSearch) &&
             const DeepCollectionEquality()
                 .equals(other._governatesSuggestions, _governatesSuggestions) &&
-            const DeepCollectionEquality().equals(
-                other.governatesSuggestionState, governatesSuggestionState) &&
-            const DeepCollectionEquality()
-                .equals(other.citySearch, citySearch) &&
+            (identical(other.governatesSuggestionState,
+                    governatesSuggestionState) ||
+                other.governatesSuggestionState == governatesSuggestionState) &&
+            (identical(other.citySearch, citySearch) ||
+                other.citySearch == citySearch) &&
             const DeepCollectionEquality()
                 .equals(other._citiesSuggestions, _citiesSuggestions) &&
-            const DeepCollectionEquality()
-                .equals(other.citiesSuggestionState, citiesSuggestionState) &&
-            const DeepCollectionEquality()
-                .equals(other.neighborhoodSearch, neighborhoodSearch) &&
+            (identical(other.citiesSuggestionState, citiesSuggestionState) ||
+                other.citiesSuggestionState == citiesSuggestionState) &&
+            (identical(other.neighborhoodSearch, neighborhoodSearch) ||
+                other.neighborhoodSearch == neighborhoodSearch) &&
             const DeepCollectionEquality().equals(
                 other._neighborhoodsSuggestions, _neighborhoodsSuggestions) &&
-            const DeepCollectionEquality().equals(
-                other.neighborhoodsSuggestionState,
-                neighborhoodsSuggestionState) &&
-            const DeepCollectionEquality()
-                .equals(other.governateOrNull, governateOrNull) &&
-            const DeepCollectionEquality()
-                .equals(other.cityOrNull, cityOrNull) &&
-            const DeepCollectionEquality()
-                .equals(other.neighborhoodOrNull, neighborhoodOrNull) &&
+            (identical(other.neighborhoodsSuggestionState,
+                    neighborhoodsSuggestionState) ||
+                other.neighborhoodsSuggestionState ==
+                    neighborhoodsSuggestionState) &&
+            (identical(other.governateOrNull, governateOrNull) ||
+                other.governateOrNull == governateOrNull) &&
+            (identical(other.cityOrNull, cityOrNull) ||
+                other.cityOrNull == cityOrNull) &&
+            (identical(other.neighborhoodOrNull, neighborhoodOrNull) ||
+                other.neighborhoodOrNull == neighborhoodOrNull) &&
             const DeepCollectionEquality()
                 .equals(other._distribtionAreas, _distribtionAreas) &&
-            const DeepCollectionEquality()
-                .equals(other.addressStatus, addressStatus) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            (identical(other.addressStatus, addressStatus) ||
+                other.addressStatus == addressStatus) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(governateSearch),
+      governateSearch,
       const DeepCollectionEquality().hash(_governatesSuggestions),
-      const DeepCollectionEquality().hash(governatesSuggestionState),
-      const DeepCollectionEquality().hash(citySearch),
+      governatesSuggestionState,
+      citySearch,
       const DeepCollectionEquality().hash(_citiesSuggestions),
-      const DeepCollectionEquality().hash(citiesSuggestionState),
-      const DeepCollectionEquality().hash(neighborhoodSearch),
+      citiesSuggestionState,
+      neighborhoodSearch,
       const DeepCollectionEquality().hash(_neighborhoodsSuggestions),
-      const DeepCollectionEquality().hash(neighborhoodsSuggestionState),
-      const DeepCollectionEquality().hash(governateOrNull),
-      const DeepCollectionEquality().hash(cityOrNull),
-      const DeepCollectionEquality().hash(neighborhoodOrNull),
+      neighborhoodsSuggestionState,
+      governateOrNull,
+      cityOrNull,
+      neighborhoodOrNull,
       const DeepCollectionEquality().hash(_distribtionAreas),
-      const DeepCollectionEquality().hash(addressStatus),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(errorMessage));
+      addressStatus,
+      status,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DistributionAreasStateCopyWith<_$_DistributionAreasState> get copyWith =>
       __$$_DistributionAreasStateCopyWithImpl<_$_DistributionAreasState>(
           this, _$identity);

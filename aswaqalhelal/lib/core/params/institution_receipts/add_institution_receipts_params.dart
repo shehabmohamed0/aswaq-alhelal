@@ -27,18 +27,18 @@ class AddInstitutionReceiptParams {
     required this.sellerId,
   });
 
-  OrderModel toModel(String id) => OrderModel(
-        id: id,
-        from: from,
-        institutionOwnerId: institutionOwnerId,
-        orderState: OrderState.shipping,
-        itemsModels: receiptItems.map(OrderItemModel.fromDomain).toList(),
-        to: to,
-        name: name,
-        phoneNumber: phoneNumber,
-        totalPrice: totalPrice,
-        editorId: editorId,
-        sellerId: sellerId,
-        creationTime: DateTime.now(),
-      );
+  OrderModel toModel(String id, int orderNumber) => OrderModel(
+      id: id,
+      from: from,
+      institutionOwnerId: institutionOwnerId,
+      orderState: OrderState.shipping,
+      itemsModels: receiptItems.map(OrderItemModel.fromDomain).toList(),
+      to: to,
+      name: name,
+      phoneNumber: phoneNumber,
+      totalPrice: totalPrice,
+      editorId: editorId,
+      sellerId: sellerId,
+      creationTime: DateTime.now(),
+      orderNumber: orderNumber);
 }

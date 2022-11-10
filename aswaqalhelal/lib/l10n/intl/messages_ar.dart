@@ -20,12 +20,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(number) => "${number}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Continue": MessageLookupByLibrary.simpleMessage("استمر"),
         "Current": MessageLookupByLibrary.simpleMessage("الحالى"),
         "accountInfo": MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
-        "add": MessageLookupByLibrary.simpleMessage("أضف"),
+        "add": MessageLookupByLibrary.simpleMessage("إضافة"),
         "addAddress": MessageLookupByLibrary.simpleMessage("اضف عنوان"),
         "addContact":
             MessageLookupByLibrary.simpleMessage("إضافة معلومات اتصال"),
@@ -42,14 +44,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "بالفعل ، تم إرسال عرض لهذا المستخدم"),
         "anUnknownFailureOccurred":
             MessageLookupByLibrary.simpleMessage("حدث خطأ غير معروف."),
+        "anonymousUser": MessageLookupByLibrary.simpleMessage("مستخدم مجهول"),
+        "areYouSureToAddANewReceiptPreviousData":
+            MessageLookupByLibrary.simpleMessage(
+                "هل انت متاكد من ادخال فاتورة جديدة؟ البيانات التى ادخلتها سوف يتم مسحها"),
+        "areYouSureToAddNewItemPreviousDataWill":
+            MessageLookupByLibrary.simpleMessage(
+                "هل انت متاكد من اضافة صنف جديد؟ البيانات التى ادخلتها سوف يتم مسحها"),
         "areYouSureToCancelTheOrder": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من إلغاء الطلب؟"),
         "areYouSureToDeclineTheOrder":
             MessageLookupByLibrary.simpleMessage("هل أنت متأكد من رفض الطلب؟"),
+        "areYouSureToResetTheForm": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد من إعادة ضبط النموذج؟"),
         "areYouSureYouWantTonorderNow": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد الطلب الآن؟"),
         "areaExistsBefore":
-            MessageLookupByLibrary.simpleMessage("Area exists before"),
+            MessageLookupByLibrary.simpleMessage("المنطقة مسجلة مسبقا"),
         "aswaqAlhilal": MessageLookupByLibrary.simpleMessage("أسواق الهلال"),
         "authenticationFailure":
             MessageLookupByLibrary.simpleMessage("فشل فالتحقق."),
@@ -64,9 +75,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseDeliveryLocation":
             MessageLookupByLibrary.simpleMessage("اختر موقع التوصيل"),
         "city": MessageLookupByLibrary.simpleMessage("مدينة"),
+        "client": MessageLookupByLibrary.simpleMessage("عميل"),
         "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
         "contactInfo": MessageLookupByLibrary.simpleMessage("معلومات التواصل"),
         "contacts": MessageLookupByLibrary.simpleMessage("جهات الاتصال"),
+        "contains": MessageLookupByLibrary.simpleMessage("تحتوى"),
         "createAnAccount":
             MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد."),
         "creationTime": MessageLookupByLibrary.simpleMessage("وقت الانشاء"),
@@ -115,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("انثى"),
         "firestoreError": MessageLookupByLibrary.simpleMessage("خطأ بالسيرفر"),
         "from": MessageLookupByLibrary.simpleMessage("من "),
+        "fromUnit": MessageLookupByLibrary.simpleMessage("من الوحدة"),
         "gallery": MessageLookupByLibrary.simpleMessage("المعرض"),
         "genderOptional":
             MessageLookupByLibrary.simpleMessage("الجنس (اختيارى)"),
@@ -132,10 +146,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البريد الإلكترونى غير صالح."),
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح"),
-        "item": MessageLookupByLibrary.simpleMessage("صنف"),
+        "invalidPrice": MessageLookupByLibrary.simpleMessage("سعر غير صالح"),
+        "invalidQuantity":
+            MessageLookupByLibrary.simpleMessage("كمية غير صالحة"),
+        "item": MessageLookupByLibrary.simpleMessage("الصنف"),
+        "itemAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم إضافة الصنف بنجاح"),
         "itemNameAlreadyExists":
-            MessageLookupByLibrary.simpleMessage("Item name already exists"),
+            MessageLookupByLibrary.simpleMessage("الصنف مسجل مسبقا"),
         "itemUpdatedSuccefully":
+            MessageLookupByLibrary.simpleMessage("تم تحديث الصنف بنجاح"),
+        "itemUpdatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم تحديث الصنف بنجاح"),
         "items": MessageLookupByLibrary.simpleMessage("الاصناف"),
         "jobOffers": MessageLookupByLibrary.simpleMessage("عروض العمل"),
@@ -145,11 +166,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+        "mustSelectAUnit":
+            MessageLookupByLibrary.simpleMessage("يجب اختيار وحدة"),
+        "mustSelectAnItem":
+            MessageLookupByLibrary.simpleMessage("يجب اختيار صنف"),
         "myOrders": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "neighborhood": MessageLookupByLibrary.simpleMessage("حى"),
         "neighborhoodVillage": MessageLookupByLibrary.simpleMessage("حى, قرية"),
         "newEmail": MessageLookupByLibrary.simpleMessage("بريد إلكتروني جديد"),
+        "new_": MessageLookupByLibrary.simpleMessage("جديد"),
         "nickName": MessageLookupByLibrary.simpleMessage("الاسم المختصر"),
         "noEmailLinkedToTheAccount": MessageLookupByLibrary.simpleMessage(
             "لا يوجد بريد إلكتروني مرتبط بالحساب."),
@@ -184,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordIsNotStrongEnough": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور ليست قوية بما يكفى."),
+        "pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
         "phoneHasBeenUpdatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم تحديث رقم الهاتف بنجاح."),
         "phoneInfo": MessageLookupByLibrary.simpleMessage("معلومات الهاتف."),
@@ -199,12 +226,16 @@ class MessageLookup extends MessageLookupByLibrary {
                 "من فضلك ، تحقق من اتصال الإنترنت وحاول مرة أخرى."),
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "price": MessageLookupByLibrary.simpleMessage("السعر"),
+        "priceEGPf": m0,
         "priceEgp": MessageLookupByLibrary.simpleMessage("السعر بالجنيه"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "processing": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
         "providersCredentialIsNotValid":
             MessageLookupByLibrary.simpleMessage("البيانات غير صحيحة."),
         "quantity": MessageLookupByLibrary.simpleMessage("الكمية"),
         "receipt": MessageLookupByLibrary.simpleMessage("فاتورة"),
+        "receiptSavedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم حفظ الفاتورة بنجاح"),
         "receipts": MessageLookupByLibrary.simpleMessage("الفواتير"),
         "recruitment": MessageLookupByLibrary.simpleMessage("توظيف"),
         "required": MessageLookupByLibrary.simpleMessage("مطلوب"),
@@ -265,7 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا يوجد عنوان"),
         "thereIsNoAvailableInstitutionninYourAddress":
             MessageLookupByLibrary.simpleMessage(
-                "There is No Available institution\nat your address"),
+                "لا يوجد مؤسسات متاحة\nفى موقعك"),
         "thereIsNoItems": MessageLookupByLibrary.simpleMessage("لا يوجد اصناف"),
         "thereIsNoOrdersYet":
             MessageLookupByLibrary.simpleMessage("لا توجد طلبات حتى الآن"),
@@ -283,7 +314,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalPrice": MessageLookupByLibrary.simpleMessage("السعر الكلى:"),
         "totalPrice_": MessageLookupByLibrary.simpleMessage("السعر الكلى: "),
         "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجددا"),
-        "unit": MessageLookupByLibrary.simpleMessage("وحدة"),
+        "unit": MessageLookupByLibrary.simpleMessage("الوحدة"),
         "unitExsistsBefore":
             MessageLookupByLibrary.simpleMessage("الوحدة موجودة من قبل"),
         "unitName": MessageLookupByLibrary.simpleMessage("اسم الوحدة"),
@@ -313,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "work": MessageLookupByLibrary.simpleMessage("العمل"),
         "workInstitutions":
             MessageLookupByLibrary.simpleMessage("مؤسسات العمل"),
+        "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "youHaveNoInstitutions":
             MessageLookupByLibrary.simpleMessage("ليس لديك مؤسسات"),
         "youOrderHasBeenPlacedSucessfully":

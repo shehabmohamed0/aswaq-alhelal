@@ -1991,6 +1991,200 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Anonymous user`
+  String get anonymousUser {
+    return Intl.message(
+      'Anonymous user',
+      name: 'anonymousUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message(
+      'Pending',
+      name: 'pending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing`
+  String get processing {
+    return Intl.message(
+      'Processing',
+      name: 'processing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From unit`
+  String get fromUnit {
+    return Intl.message(
+      'From unit',
+      name: 'fromUnit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contains`
+  String get contains {
+    return Intl.message(
+      'Contains',
+      name: 'contains',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get client {
+    return Intl.message(
+      'Client',
+      name: 'client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get new_ {
+    return Intl.message(
+      'New',
+      name: 'new_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item updated successfully`
+  String get itemUpdatedSuccessfully {
+    return Intl.message(
+      'Item updated successfully',
+      name: 'itemUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item added successfully`
+  String get itemAddedSuccessfully {
+    return Intl.message(
+      'Item added successfully',
+      name: 'itemAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure to add new item? previous data will be removed`
+  String get areYouSureToAddNewItemPreviousDataWill {
+    return Intl.message(
+      'Are you sure to add new item? previous data will be removed',
+      name: 'areYouSureToAddNewItemPreviousDataWill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must select an item`
+  String get mustSelectAnItem {
+    return Intl.message(
+      'Must select an item',
+      name: 'mustSelectAnItem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must select a unit`
+  String get mustSelectAUnit {
+    return Intl.message(
+      'Must select a unit',
+      name: 'mustSelectAUnit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid price`
+  String get invalidPrice {
+    return Intl.message(
+      'Invalid price',
+      name: 'invalidPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid quantity`
+  String get invalidQuantity {
+    return Intl.message(
+      'Invalid quantity',
+      name: 'invalidQuantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receipt saved successfully`
+  String get receiptSavedSuccessfully {
+    return Intl.message(
+      'Receipt saved successfully',
+      name: 'receiptSavedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{number}`
+  String priceEGPf(double number) {
+    final NumberFormat numberNumberFormat = NumberFormat.currency(
+        locale: Intl.getCurrentLocale(), symbol: 'e£', decimalDigits: 2);
+    final String numberString = numberNumberFormat.format(number);
+
+    return Intl.message(
+      '$numberString',
+      name: 'priceEGPf',
+      desc: '',
+      args: [numberString],
+    );
+  }
+
+  /// `Are you sure to reset the form?`
+  String get areYouSureToResetTheForm {
+    return Intl.message(
+      'Are you sure to reset the form?',
+      name: 'areYouSureToResetTheForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure to add a new receipt? previous data will be removed`
+  String get areYouSureToAddANewReceiptPreviousData {
+    return Intl.message(
+      'Are you sure to add a new receipt? previous data will be removed',
+      name: 'areYouSureToAddANewReceiptPreviousData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

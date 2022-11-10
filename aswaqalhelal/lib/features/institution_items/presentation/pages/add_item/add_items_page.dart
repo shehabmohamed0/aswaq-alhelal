@@ -2,8 +2,9 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:root_package/core/form_inputs/nullable_number.dart';
 import 'package:root_package/core/form_inputs/number.dart';
-import 'package:root_package/locator/locator.dart';
+import 'package:root_package/core/form_inputs/required_object.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/flutter_easyloading.dart';
 import 'package:root_package/packages/flutter_hooks.dart';
@@ -12,16 +13,24 @@ import 'package:root_package/packages/formz.dart';
 import 'package:root_package/packages/image_picker.dart';
 import 'package:root_package/widgets/snack_bar.dart';
 
+import '../../../../../core/utils/dialogs.dart';
 import '../../../../../l10n/l10n.dart';
 import '../../../domain/entities/institution_item.dart';
 import '../../../domain/entities/reference_item.dart';
 import '../../../domain/entities/unit.dart';
+import '../../DTOs/unit_entry_row.dart';
 import '../../bloc/add_item/add_item_bloc.dart';
+import '../../bloc/item_units/units_bloc.dart';
 import '../../bloc/unit_entry/unit_entry_bloc.dart';
 import '../../cubit/institution_items/institution_items_cubit.dart';
 import 'widgets/auto_suggest_text_field.dart';
 import 'widgets/image_bottom_sheet_widget.dart';
 
+part 'components/item_image_component.dart';
+part 'components/item_name_suggestiions_component.dart';
+part 'components/item_units_component.dart';
+part 'components/new_button_component.dart';
+part 'components/submit_button_component.dart';
 part 'widgets/unit_entry_widget.dart';
 
 class AddItemPage extends HookWidget {
@@ -32,10 +41,7 @@ class AddItemPage extends HookWidget {
     final intl = AppLocalizations.of(context);
     final controller = useTextEditingController();
     final focusNode = useFocusNode();
-    final bloc = context.read<AddItemBloc>();
-    final institutionId = ModalRoute.of(context)!.settings.arguments as String;
     final cubit = context.read<InstitutionItemsCubit>();
-
     return MultiBlocListener(
       listeners: [
         BlocListener<AddItemBloc, AddItemState>(
@@ -48,41 +54,40 @@ class AddItemPage extends HookWidget {
           },
         ),
         BlocListener<AddItemBloc, AddItemState>(
-          listenWhen: (p, c) =>
-              (p.status != c.status &&
-                  p.suggestionState != c.suggestionState) ||
-              p.status != c.status && p.suggestionState == c.suggestionState,
+          listenWhen: (p, c) => p.status != c.status,
           listener: (context, state) {
-            if (state.status.isSubmissionFailure) {
-              EasyLoading.dismiss();
-              showErrorSnackBar(context, state.errorMessage ?? '');
-            }
-          },
-        ),
-        BlocListener<AddItemBloc, AddItemState>(
-          listener: (context, state) {
-            if (state.status.isSubmissionInProgress) {
-              EasyLoading.show(
-                status: intl.loading,
-                indicator: const FittedBox(
-                  child: SpinKitRipple(
-                    duration: Duration(milliseconds: 1200),
-                    color: Colors.white,
-                  ),
-                ),
-              );
-            } else if (state.status.isSubmissionSuccess) {
-              EasyLoading.dismiss();
+            switch (state.status) {
+              case AddItemStatus.initial:
+                break;
+              case AddItemStatus.loading:
+                showLoadingDialog();
+                break;
+              case AddItemStatus.failed:
+                EasyLoading.dismiss();
+                showErrorSnackBar(context, state.errorMessage ?? '');
+                break;
 
-              if (state.isEdit) {
-                cubit.updateInstitution(state.institutionItem!);
-                Navigator.pop(context);
-                showSuccessSnackBar(context, intl.itemUpdatedSuccefully);
-                return;
-              }
-
-              cubit.addItem(state.institutionItem!);
-              Navigator.pop(context);
+              case AddItemStatus.success:
+                dismissLoadingDialog();
+                if (state.isEdit) {
+                  cubit.updateInstitution(state.institutionItem!);
+                  showSuccessSnackBar(context, intl.itemUpdatedSuccefully);
+                  break;
+                }
+                FocusScope.of(context).unfocus();
+                cubit.addItem(state.institutionItem!);
+                // Navigator.pop(context);
+                showSuccessSnackBar(
+                  context,
+                  state.isEdit
+                      ? intl.itemUpdatedSuccessfully
+                      : intl.itemAddedSuccessfully,
+                );
+                break;
+              case AddItemStatus.reset:
+                controller.clear();
+                context.read<ItemUnitsBloc>().add(const ResetUnits());
+                break;
             }
           },
         ),
@@ -100,298 +105,113 @@ class AddItemPage extends HookWidget {
         ),
         BlocListener<AddItemBloc, AddItemState>(
           listenWhen: (previous, current) =>
-              previous.unitStatus != current.unitStatus,
+              previous.itemFromReference != current.itemFromReference,
           listener: (context, state) {
-            switch (state.unitStatus) {
-              case UnitStatus.initial:
-                break;
-              case UnitStatus.exsists:
-                showErrorSnackBar(context, intl.unitExsistsBefore);
-
-                break;
+            if (state.itemFromReference) {
+              context.read<ItemUnitsBloc>().add(
+                    ItemUnitsEvent.initForEdit(
+                      units: state.selectedItem.value?.units ??
+                          state.oldItem!.units,
+                    ),
+                  );
             }
           },
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(title: Text(intl.addItem)),
-        body: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: SizedBox(height: 8)),
-            SliverToBoxAdapter(
-              child: Center(
-                child: SizedBox.square(
-                  dimension: MediaQuery.of(context).size.width / 2,
-                  child: Material(
-                    color: Colors.grey.shade200,
-                    child: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) => ImageBottomSheetWidget(
-                                  onCameraPressed: () {
-                                    bloc.add(
-                                      SelectImagePressed(
-                                        ImageSource.camera,
-                                      ),
-                                    );
-                                    Navigator.pop(context);
-                                  },
-                                  onGalleryPressed: () {
-                                    bloc.add(
-                                      SelectImagePressed(
-                                        ImageSource.gallery,
-                                      ),
-                                    );
-                                    Navigator.pop(context);
-                                  },
-                                ));
-                      },
-                      child: BlocBuilder<AddItemBloc, AddItemState>(
-                        buildWhen: ((p, c) =>
-                            p.imageFile != c.imageFile ||
-                            p.imageUrl != c.imageUrl),
-                        builder: (context, state) {
-                          if (state.imageFile.value != null) {
-                            return Stack(children: [
-                              Positioned.fill(
-                                child: Image.file(
-                                  state.imageFile.value!,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                top: 4,
-                                right: 4,
-                                child: Container(
-                                  padding: const EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        bloc.add(DeleteImageFile());
-                                      },
-                                      child: const Icon(Icons.close,
-                                          size: 18, color: Colors.red)),
-                                ),
-                              ),
-                            ]);
-                          } else if (state.imageFile.value == null &&
-                              state.imageUrl.value != null) {
-                            return Stack(children: [
-                              Positioned.fill(
-                                child: CachedNetworkImage(
-                                  imageUrl: state.imageUrl.value!,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                  top: 4,
-                                  right: 4,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          bloc.add(DeleteImageUrl());
-                                        },
-                                        child: const Icon(Icons.close,
-                                            color: Colors.red)),
-                                  ))
-                            ]);
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  intl.tapTonselectItemImage,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black45,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            BlocBuilder<AddItemBloc, AddItemState>(
-              buildWhen: (previous, current) =>
-                  previous.suggestionState != current.suggestionState ||
-                  previous.itemFromReference != current.itemFromReference ||
-                  previous.addingNewItem != current.addingNewItem,
-              builder: (context, state) {
-                return SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  sliver: SliverToBoxAdapter(
-                    child: AutoSuggestTextField<ReferenceItem>(
-                      labelText: intl.name,
-                      controller: controller,
-                      autoFocus: true,
-                      focusNode: focusNode,
-                      enabled: !state.itemFromReference && !state.addingNewItem,
-                      showRemoveButton: !state.isEdit,
-                      onRemoveSelection: () {
-                        bloc.add(RemoveSelectionPressed());
-                        controller.clear();
-                      },
-                      suggestions: state.suggestions,
-                      onSuggestionSelected: (item) {
-                        controller.text = item.name;
-                        focusNode.unfocus();
-                        bloc.add(AddItemSelectedEvent(item));
-                      },
-                      suggestionBuilder: (context, item) {
-                        return ListTile(
-                          title: Text(item.name),
-                          leading: const Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ),
-                        );
-                      },
-                      suggestionState: state.suggestionState,
-                      onEmptyWidgetClicked: () {
-                        focusNode.unfocus();
-                        bloc.add(AddNewItem(controller.text));
-                      },
-                      errorWidget: ListTile(title: Text(intl.error)),
-                      loadingWidget: const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-                      onChanged: (text) => bloc.add(AddItemSearch(text)),
-                    ),
-                  ),
-                );
-              },
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 12)),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              sliver: SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      //todo: translation
-                      'Measure units',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        bloc.add(UnitAddPressed());
-                      },
-                      icon: const Icon(Icons.add),
-                      splashRadius: 18,
-                      visualDensity: VisualDensity.compact,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            BlocBuilder<AddItemBloc, AddItemState>(
-              buildWhen: (previous, current) =>
-                  previous.selectedItem != current.selectedItem ||
-                  previous.itemFromReference != current.itemFromReference ||
-                  previous.measureUnits != current.measureUnits ||
-                  previous.measureUnits != current.measureUnits,
-              builder: (context, state) {
-                state.measureUnits
-                    .where((element) => element.isSome())
-                    .map((e) => e.toNullable()!)
-                    .toList()
-                    .forEach((element) {
-                  log(element.name);
-                });
-                return SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return BlocProvider<UnitEntryBloc>(
-                          create: (context) => locator(),
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            child: UnitEntry(
-                                onChanged: (unit) {
-                                  bloc.add(UnitChanged(unit, index));
-                                  log('${unit?.name} Changed');
-                                },
-                                firstIndex: index == 0,
-                                units: state.measureUnits
-                                    .where((element) => element.isSome())
-                                    .map((e) => e.toNullable()!)
-                                    .toList()),
-                          ),
-                        );
-                      },
-                      childCount: state.measureUnits.length,
-                    ),
-                  ),
-                );
-              },
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              sliver: SliverToBoxAdapter(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: BlocBuilder<AddItemBloc, AddItemState>(
-                    builder: (context, state) {
-                      return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8))),
-                        onPressed: state.itemName.value.isNotEmpty &&
-                                state.itemName.value.length > 2 &&
-                                state.measureUnits.isNotEmpty &&
-                                !state.status.isSubmissionInProgress
-                            ? () {
-                                final state = cubit.state;
-                                late final List<InstitutionItem> items;
-                                if (state is InstitutionItemsLoaded) {
-                                  items = state.items;
-                                } else {
-                                  items = [];
-                                }
-                                bloc.add(
-                                  AddItemSubmit(
-                                    institutionId: institutionId,
-                                    currentItems: items,
-                                  ),
-                                );
-                              }
-                            : null,
-                        child: Text(state.isEdit ? intl.update : intl.add),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-                child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-            ))
+        appBar: AppBar(
+          title: Text(intl.addItem),
+          actions: const [
+            _NewButtonComponent(),
+            _SubmitButtonComponent(),
           ],
         ),
+        body: BlocBuilder<AddItemBloc, AddItemState>(
+          buildWhen: (previous, current) =>
+              previous.status != current.status &&
+              (current.status == AddItemStatus.reset ||
+                  current.status == AddItemStatus.success),
+          builder: (_, state) {
+            log(state.status.toString());
+            return IgnorePointer(
+              ignoring: state.status == AddItemStatus.success,
+              child: CustomScrollView(
+                slivers: [
+                  const SliverToBoxAdapter(child: SizedBox(height: 8)),
+                  SliverToBoxAdapter(
+                    child: Center(
+                      child: SizedBox.square(
+                        dimension: MediaQuery.of(context).size.width / 2,
+                        child: Material(
+                          color: Colors.grey.shade200,
+                          child: InkWell(
+                            onTap: () {
+                              _showImageBottomSheet(context);
+                            },
+                            child: const _ImageComponent(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                  _ItemNameSuggestionsComponent(
+                    controller: controller,
+                    focusNode: focusNode,
+                  ),
+                  const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    sliver: SliverToBoxAdapter(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            intl.units,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _ItemUnitsComponent(),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: MediaQuery.of(context).viewInsets,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> _showImageBottomSheet(
+    BuildContext context,
+  ) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => ImageBottomSheetWidget(
+        onCameraPressed: () {
+          context.read<AddItemBloc>().add(
+                SelectImagePressed(
+                  ImageSource.gallery,
+                ),
+              );
+          Navigator.pop(context);
+        },
+        onGalleryPressed: () {
+          context.read<AddItemBloc>().add(
+                SelectImagePressed(
+                  ImageSource.gallery,
+                ),
+              );
+          Navigator.pop(context);
+        },
       ),
     );
   }

@@ -24,6 +24,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       orderState: $enumDecode(_$OrderStateEnumMap, json['orderState']),
       creationTime: const TimestampConverter()
           .fromJson(json['creationTime'] as Timestamp),
+      orderNumber: json['orderNumber'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
@@ -41,6 +42,7 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'distributorId': instance.distributorId,
       'collectorId': instance.collectorId,
       'orderState': _$OrderStateEnumMap[instance.orderState]!,
+      'orderNumber': instance.orderNumber,
       'items': instance.itemsModels.map((e) => e.toJson()).toList(),
     };
 

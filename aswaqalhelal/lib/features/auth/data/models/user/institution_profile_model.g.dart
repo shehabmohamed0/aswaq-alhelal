@@ -12,7 +12,8 @@ InstitutionProfileModel _$InstitutionProfileModelFromJson(
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
       name: json['name'] as String,
-      type: $enumDecode(_$ProfileTypeEnumMap, json['type']),
+      type: $enumDecodeNullable(_$ProfileTypeEnumMap, json['type']) ??
+          ProfileType.institution,
       nickName: json['nickName'] as String,
       emails:
           (json['emails'] as List<dynamic>).map((e) => e as String).toList(),
@@ -42,4 +43,5 @@ Map<String, dynamic> _$InstitutionProfileModelToJson(
 const _$ProfileTypeEnumMap = {
   ProfileType.user: 'user',
   ProfileType.institution: 'institution',
+  ProfileType.system: 'system',
 };

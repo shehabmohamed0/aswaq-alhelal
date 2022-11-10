@@ -11,7 +11,8 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
       name: json['name'] as String,
-      type: $enumDecode(_$ProfileTypeEnumMap, json['type']),
+      type: $enumDecodeNullable(_$ProfileTypeEnumMap, json['type']) ??
+          ProfileType.user,
       phoneNumber: json['phoneNumber'] as String,
       email: json['email'] as String?,
       photoURL: json['photoURL'] as String?,
@@ -41,4 +42,5 @@ Map<String, dynamic> _$UserProfileModelToJson(UserProfileModel instance) =>
 const _$ProfileTypeEnumMap = {
   ProfileType.user: 'user',
   ProfileType.institution: 'institution',
+  ProfileType.system: 'system',
 };

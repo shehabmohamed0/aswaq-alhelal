@@ -1,7 +1,5 @@
 import 'package:root_package/root_package.dart' hide Order;
 
-import '../../../institution_items/data/models/institution_item_model.dart';
-import '../../../institution_items/data/models/unit_model.dart';
 import '../../data/models/order_item_model.dart';
 import '../../data/models/order_model.dart';
 import '../entities/order.dart';
@@ -46,7 +44,7 @@ class PlaceOrderParams {
       required this.editorId,
       required this.sellerId});
 
-  OrderModel toModel(String id) => OrderModel(
+  OrderModel toModel(String id, int orderNumber) => OrderModel(
       id: id,
       itemsModels: orderItems.map(OrderItemModel.fromDomain).toList(),
       totalPrice: totalPrice,
@@ -58,5 +56,6 @@ class PlaceOrderParams {
       phoneNumber: phoneNumber,
       editorId: editorId,
       sellerId: sellerId,
-      creationTime: DateTime.now());
+      creationTime: DateTime.now(),
+      orderNumber: orderNumber);
 }

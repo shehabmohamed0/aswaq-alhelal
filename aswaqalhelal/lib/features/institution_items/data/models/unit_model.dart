@@ -5,7 +5,7 @@ import '../../domain/entities/unit.dart';
 
 part 'unit_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UnitModel extends Unit {
   @JsonKey(name: 'baseUnit')
   final UnitModel? baseUnitModel;

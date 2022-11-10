@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:root_package/packages/flutter_bloc.dart';
 import 'package:root_package/packages/font_awesome_flutter.dart';
 
-import '../../../client_institutions/presentation/cubit/client_institution/client_institutions_cubit.dart';
+import '../../../client_institution/presentation/cubit/client_institution/client_institution_cubit.dart';
 import '../../../orders/domain/entities/order_item.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class CartItemWidget extends StatelessWidget {
   final OrderItem cartItem;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ClientInstitutionsCubit>();
+    final cubit = context.read<ClientInstitutionCubit>();
     return Container(
       height: 120,
       color: Colors.white,
@@ -21,10 +21,10 @@ class CartItemWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: cartItem.item.imageUrl == null
-                        ? const FaIcon(FontAwesomeIcons.box)
-                        : CachedNetworkImage(
-              imageUrl: cartItem.item.imageUrl!,
-            ),
+                ? const FaIcon(FontAwesomeIcons.box)
+                : CachedNetworkImage(
+                    imageUrl: cartItem.item.imageUrl!,
+                  ),
           ),
           Expanded(
             flex: 3,
@@ -86,14 +86,14 @@ class CartItemWidget extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () => context
-                              .read<ClientInstitutionsCubit>()
+                              .read<ClientInstitutionCubit>()
                               .add(cartItem),
                           icon: const Icon(Icons.add)),
                       Text('${cartItem.quantity}'),
                       IconButton(
                           onPressed: cartItem.quantity > 0
                               ? () => context
-                                  .read<ClientInstitutionsCubit>()
+                                  .read<ClientInstitutionCubit>()
                                   .reduce(cartItem)
                               : null,
                           icon: const Icon(Icons.remove)),

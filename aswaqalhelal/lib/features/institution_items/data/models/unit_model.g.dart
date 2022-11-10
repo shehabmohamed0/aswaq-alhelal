@@ -31,5 +31,5 @@ Map<String, dynamic> _$UnitModelToJson(UnitModel instance) => <String, dynamic>{
       'p2': instance.p2,
       'p3': instance.p3,
       'p4': instance.p4,
-      'baseUnit': instance.baseUnitModel,
+      'baseUnit': instance.baseUnitModel?.toJson(),
     };

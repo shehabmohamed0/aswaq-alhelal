@@ -30,7 +30,8 @@ mixin _$UserOrdersState {
 abstract class $UserOrdersStateCopyWith<$Res> {
   factory $UserOrdersStateCopyWith(
           UserOrdersState value, $Res Function(UserOrdersState) then) =
-      _$UserOrdersStateCopyWithImpl<$Res>;
+      _$UserOrdersStateCopyWithImpl<$Res, UserOrdersState>;
+  @useResult
   $Res call(
       {List<Order> orders,
       RequestState ordersState,
@@ -39,39 +40,41 @@ abstract class $UserOrdersStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserOrdersStateCopyWithImpl<$Res>
+class _$UserOrdersStateCopyWithImpl<$Res, $Val extends UserOrdersState>
     implements $UserOrdersStateCopyWith<$Res> {
   _$UserOrdersStateCopyWithImpl(this._value, this._then);
 
-  final UserOrdersState _value;
   // ignore: unused_field
-  final $Res Function(UserOrdersState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orders = freezed,
-    Object? ordersState = freezed,
-    Object? updateState = freezed,
-    Object? errorMessage = freezed,
+    Object? orders = null,
+    Object? ordersState = null,
+    Object? updateState = null,
+    Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      orders: orders == freezed
+      orders: null == orders
           ? _value.orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      ordersState: ordersState == freezed
+      ordersState: null == ordersState
           ? _value.ordersState
           : ordersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      updateState: updateState == freezed
+      updateState: null == updateState
           ? _value.updateState
           : updateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -82,6 +85,7 @@ abstract class _$$_UserOrdersStateCopyWith<$Res>
           _$_UserOrdersState value, $Res Function(_$_UserOrdersState) then) =
       __$$_UserOrdersStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Order> orders,
       RequestState ordersState,
@@ -91,36 +95,34 @@ abstract class _$$_UserOrdersStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_UserOrdersStateCopyWithImpl<$Res>
-    extends _$UserOrdersStateCopyWithImpl<$Res>
+    extends _$UserOrdersStateCopyWithImpl<$Res, _$_UserOrdersState>
     implements _$$_UserOrdersStateCopyWith<$Res> {
   __$$_UserOrdersStateCopyWithImpl(
       _$_UserOrdersState _value, $Res Function(_$_UserOrdersState) _then)
-      : super(_value, (v) => _then(v as _$_UserOrdersState));
+      : super(_value, _then);
 
-  @override
-  _$_UserOrdersState get _value => super._value as _$_UserOrdersState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orders = freezed,
-    Object? ordersState = freezed,
-    Object? updateState = freezed,
-    Object? errorMessage = freezed,
+    Object? orders = null,
+    Object? ordersState = null,
+    Object? updateState = null,
+    Object? errorMessage = null,
   }) {
     return _then(_$_UserOrdersState(
-      orders: orders == freezed
+      orders: null == orders
           ? _value._orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
-      ordersState: ordersState == freezed
+      ordersState: null == ordersState
           ? _value.ordersState
           : ordersState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      updateState: updateState == freezed
+      updateState: null == updateState
           ? _value.updateState
           : updateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
@@ -167,24 +169,25 @@ class _$_UserOrdersState implements _UserOrdersState {
         (other.runtimeType == runtimeType &&
             other is _$_UserOrdersState &&
             const DeepCollectionEquality().equals(other._orders, _orders) &&
-            const DeepCollectionEquality()
-                .equals(other.ordersState, ordersState) &&
-            const DeepCollectionEquality()
-                .equals(other.updateState, updateState) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            (identical(other.ordersState, ordersState) ||
+                other.ordersState == ordersState) &&
+            (identical(other.updateState, updateState) ||
+                other.updateState == updateState) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_orders),
-      const DeepCollectionEquality().hash(ordersState),
-      const DeepCollectionEquality().hash(updateState),
-      const DeepCollectionEquality().hash(errorMessage));
+      ordersState,
+      updateState,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserOrdersStateCopyWith<_$_UserOrdersState> get copyWith =>
       __$$_UserOrdersStateCopyWithImpl<_$_UserOrdersState>(this, _$identity);
 }

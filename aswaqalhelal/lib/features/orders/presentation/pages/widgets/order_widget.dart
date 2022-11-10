@@ -84,20 +84,26 @@ class _OrderWidgetState extends State<OrderWidget>
         ValueListenableBuilder<bool>(
           valueListenable: expanded,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.order.name ?? 'Anonymous user',
+                    widget.order.name ?? intl.anonymousUser,
                     style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: ColorManager.primary),
                   ),
                   const Spacer(),
-                  _OrderStateWidget(orderState: widget.order.orderState),
+                  FittedBox(
+                    child: Text(
+                      '${widget.order.orderNumber}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   const SizedBox(width: 4),
+                  _OrderStateWidget(orderState: widget.order.orderState),
                 ],
               ),
               Row(
@@ -154,7 +160,7 @@ class _OrderWidgetState extends State<OrderWidget>
           builder: (context, expanded, child) => AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               padding: const EdgeInsets.all(8),
-              height: 92,
+              height: 105,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [

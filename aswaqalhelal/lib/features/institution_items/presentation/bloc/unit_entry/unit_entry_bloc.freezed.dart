@@ -30,14 +30,14 @@ mixin _$UnitEntryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,14 +67,14 @@ mixin _$UnitEntryEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,17 +96,18 @@ mixin _$UnitEntryEvent {
 abstract class $UnitEntryEventCopyWith<$Res> {
   factory $UnitEntryEventCopyWith(
           UnitEntryEvent value, $Res Function(UnitEntryEvent) then) =
-      _$UnitEntryEventCopyWithImpl<$Res>;
+      _$UnitEntryEventCopyWithImpl<$Res, UnitEntryEvent>;
 }
 
 /// @nodoc
-class _$UnitEntryEventCopyWithImpl<$Res>
+class _$UnitEntryEventCopyWithImpl<$Res, $Val extends UnitEntryEvent>
     implements $UnitEntryEventCopyWith<$Res> {
   _$UnitEntryEventCopyWithImpl(this._value, this._then);
 
-  final UnitEntryEvent _value;
   // ignore: unused_field
-  final $Res Function(UnitEntryEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -114,26 +115,25 @@ abstract class _$$UnitNameChangedCopyWith<$Res> {
   factory _$$UnitNameChangedCopyWith(
           _$UnitNameChanged value, $Res Function(_$UnitNameChanged) then) =
       __$$UnitNameChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String name});
 }
 
 /// @nodoc
 class __$$UnitNameChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$UnitNameChanged>
     implements _$$UnitNameChangedCopyWith<$Res> {
   __$$UnitNameChangedCopyWithImpl(
       _$UnitNameChanged _value, $Res Function(_$UnitNameChanged) _then)
-      : super(_value, (v) => _then(v as _$UnitNameChanged));
+      : super(_value, _then);
 
-  @override
-  _$UnitNameChanged get _value => super._value as _$UnitNameChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? name = null,
   }) {
     return _then(_$UnitNameChanged(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -159,15 +159,15 @@ class _$UnitNameChanged implements UnitNameChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitNameChanged &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UnitNameChangedCopyWith<_$UnitNameChanged> get copyWith =>
       __$$UnitNameChangedCopyWithImpl<_$UnitNameChanged>(this, _$identity);
 
@@ -189,14 +189,14 @@ class _$UnitNameChanged implements UnitNameChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return unitNameChanged?.call(name);
   }
@@ -238,14 +238,14 @@ class _$UnitNameChanged implements UnitNameChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return unitNameChanged?.call(this);
   }
@@ -285,25 +285,25 @@ abstract class _$$UnitAddedCopyWith<$Res> {
   factory _$$UnitAddedCopyWith(
           _$UnitAdded value, $Res Function(_$UnitAdded) then) =
       __$$UnitAddedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String name});
 }
 
 /// @nodoc
-class __$$UnitAddedCopyWithImpl<$Res> extends _$UnitEntryEventCopyWithImpl<$Res>
+class __$$UnitAddedCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$UnitAdded>
     implements _$$UnitAddedCopyWith<$Res> {
   __$$UnitAddedCopyWithImpl(
       _$UnitAdded _value, $Res Function(_$UnitAdded) _then)
-      : super(_value, (v) => _then(v as _$UnitAdded));
+      : super(_value, _then);
 
-  @override
-  _$UnitAdded get _value => super._value as _$UnitAdded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? name = null,
   }) {
     return _then(_$UnitAdded(
-      name == freezed
+      null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -329,15 +329,15 @@ class _$UnitAdded implements UnitAdded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitAdded &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UnitAddedCopyWith<_$UnitAdded> get copyWith =>
       __$$UnitAddedCopyWithImpl<_$UnitAdded>(this, _$identity);
 
@@ -359,14 +359,14 @@ class _$UnitAdded implements UnitAdded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return unitAdded?.call(name);
   }
@@ -408,14 +408,14 @@ class _$UnitAdded implements UnitAdded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return unitAdded?.call(this);
   }
@@ -454,26 +454,25 @@ abstract class _$$UnitSelectedCopyWith<$Res> {
   factory _$$UnitSelectedCopyWith(
           _$UnitSelected value, $Res Function(_$UnitSelected) then) =
       __$$UnitSelectedCopyWithImpl<$Res>;
+  @useResult
   $Res call({Unit unit});
 }
 
 /// @nodoc
 class __$$UnitSelectedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$UnitSelected>
     implements _$$UnitSelectedCopyWith<$Res> {
   __$$UnitSelectedCopyWithImpl(
       _$UnitSelected _value, $Res Function(_$UnitSelected) _then)
-      : super(_value, (v) => _then(v as _$UnitSelected));
+      : super(_value, _then);
 
-  @override
-  _$UnitSelected get _value => super._value as _$UnitSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unit = freezed,
+    Object? unit = null,
   }) {
     return _then(_$UnitSelected(
-      unit: unit == freezed
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
@@ -499,15 +498,15 @@ class _$UnitSelected implements UnitSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnitSelected &&
-            const DeepCollectionEquality().equals(other.unit, unit));
+            (identical(other.unit, unit) || other.unit == unit));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(unit));
+  int get hashCode => Object.hash(runtimeType, unit);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UnitSelectedCopyWith<_$UnitSelected> get copyWith =>
       __$$UnitSelectedCopyWithImpl<_$UnitSelected>(this, _$identity);
 
@@ -529,14 +528,14 @@ class _$UnitSelected implements UnitSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return unitSelected?.call(unit);
   }
@@ -578,14 +577,14 @@ class _$UnitSelected implements UnitSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return unitSelected?.call(this);
   }
@@ -628,14 +627,11 @@ abstract class _$$UnitUnselectedCopyWith<$Res> {
 
 /// @nodoc
 class __$$UnitUnselectedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$UnitUnselected>
     implements _$$UnitUnselectedCopyWith<$Res> {
   __$$UnitUnselectedCopyWithImpl(
       _$UnitUnselected _value, $Res Function(_$UnitUnselected) _then)
-      : super(_value, (v) => _then(v as _$UnitUnselected));
-
-  @override
-  _$UnitUnselected get _value => super._value as _$UnitUnselected;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -675,14 +671,14 @@ class _$UnitUnselected implements UnitUnselected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return unitUnselected?.call();
   }
@@ -724,14 +720,14 @@ class _$UnitUnselected implements UnitUnselected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return unitUnselected?.call(this);
   }
@@ -765,31 +761,30 @@ abstract class _$$FromUnitChangedCopyWith<$Res> {
   factory _$$FromUnitChangedCopyWith(
           _$FromUnitChanged value, $Res Function(_$FromUnitChanged) then) =
       __$$FromUnitChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({Unit unit, double? quantity});
 }
 
 /// @nodoc
 class __$$FromUnitChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$FromUnitChanged>
     implements _$$FromUnitChangedCopyWith<$Res> {
   __$$FromUnitChangedCopyWithImpl(
       _$FromUnitChanged _value, $Res Function(_$FromUnitChanged) _then)
-      : super(_value, (v) => _then(v as _$FromUnitChanged));
+      : super(_value, _then);
 
-  @override
-  _$FromUnitChanged get _value => super._value as _$FromUnitChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unit = freezed,
+    Object? unit = null,
     Object? quantity = freezed,
   }) {
     return _then(_$FromUnitChanged(
-      unit: unit == freezed
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
-      quantity: quantity == freezed
+      quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double?,
@@ -817,18 +812,17 @@ class _$FromUnitChanged implements FromUnitChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FromUnitChanged &&
-            const DeepCollectionEquality().equals(other.unit, unit) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity));
+            (identical(other.unit, unit) || other.unit == unit) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(unit),
-      const DeepCollectionEquality().hash(quantity));
+  int get hashCode => Object.hash(runtimeType, unit, quantity);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$FromUnitChangedCopyWith<_$FromUnitChanged> get copyWith =>
       __$$FromUnitChangedCopyWithImpl<_$FromUnitChanged>(this, _$identity);
 
@@ -850,14 +844,14 @@ class _$FromUnitChanged implements FromUnitChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return fromUnitChanged?.call(unit, quantity);
   }
@@ -899,14 +893,14 @@ class _$FromUnitChanged implements FromUnitChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return fromUnitChanged?.call(this);
   }
@@ -947,26 +941,25 @@ abstract class _$$QuantityChangedCopyWith<$Res> {
   factory _$$QuantityChangedCopyWith(
           _$QuantityChanged value, $Res Function(_$QuantityChanged) then) =
       __$$QuantityChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String quantity});
 }
 
 /// @nodoc
 class __$$QuantityChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$QuantityChanged>
     implements _$$QuantityChangedCopyWith<$Res> {
   __$$QuantityChangedCopyWithImpl(
       _$QuantityChanged _value, $Res Function(_$QuantityChanged) _then)
-      : super(_value, (v) => _then(v as _$QuantityChanged));
+      : super(_value, _then);
 
-  @override
-  _$QuantityChanged get _value => super._value as _$QuantityChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quantity = freezed,
+    Object? quantity = null,
   }) {
     return _then(_$QuantityChanged(
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as String,
@@ -992,15 +985,16 @@ class _$QuantityChanged implements QuantityChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuantityChanged &&
-            const DeepCollectionEquality().equals(other.quantity, quantity));
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(quantity));
+  int get hashCode => Object.hash(runtimeType, quantity);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$QuantityChangedCopyWith<_$QuantityChanged> get copyWith =>
       __$$QuantityChangedCopyWithImpl<_$QuantityChanged>(this, _$identity);
 
@@ -1022,14 +1016,14 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return quantityChanged?.call(quantity);
   }
@@ -1071,14 +1065,14 @@ class _$QuantityChanged implements QuantityChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return quantityChanged?.call(this);
   }
@@ -1118,26 +1112,25 @@ abstract class _$$PriceChangedCopyWith<$Res> {
   factory _$$PriceChangedCopyWith(
           _$PriceChanged value, $Res Function(_$PriceChanged) then) =
       __$$PriceChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String price});
 }
 
 /// @nodoc
 class __$$PriceChangedCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$PriceChanged>
     implements _$$PriceChangedCopyWith<$Res> {
   __$$PriceChangedCopyWithImpl(
       _$PriceChanged _value, $Res Function(_$PriceChanged) _then)
-      : super(_value, (v) => _then(v as _$PriceChanged));
+      : super(_value, _then);
 
-  @override
-  _$PriceChanged get _value => super._value as _$PriceChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? price = freezed,
+    Object? price = null,
   }) {
     return _then(_$PriceChanged(
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1163,15 +1156,15 @@ class _$PriceChanged implements PriceChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PriceChanged &&
-            const DeepCollectionEquality().equals(other.price, price));
+            (identical(other.price, price) || other.price == price));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(price));
+  int get hashCode => Object.hash(runtimeType, price);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$PriceChangedCopyWith<_$PriceChanged> get copyWith =>
       __$$PriceChangedCopyWithImpl<_$PriceChanged>(this, _$identity);
 
@@ -1193,14 +1186,14 @@ class _$PriceChanged implements PriceChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return priceChanged?.call(price);
   }
@@ -1242,14 +1235,14 @@ class _$PriceChanged implements PriceChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return priceChanged?.call(this);
   }
@@ -1288,26 +1281,25 @@ abstract class _$$InitForEditCopyWith<$Res> {
   factory _$$InitForEditCopyWith(
           _$InitForEdit value, $Res Function(_$InitForEdit) then) =
       __$$InitForEditCopyWithImpl<$Res>;
+  @useResult
   $Res call({Unit unit});
 }
 
 /// @nodoc
 class __$$InitForEditCopyWithImpl<$Res>
-    extends _$UnitEntryEventCopyWithImpl<$Res>
+    extends _$UnitEntryEventCopyWithImpl<$Res, _$InitForEdit>
     implements _$$InitForEditCopyWith<$Res> {
   __$$InitForEditCopyWithImpl(
       _$InitForEdit _value, $Res Function(_$InitForEdit) _then)
-      : super(_value, (v) => _then(v as _$InitForEdit));
+      : super(_value, _then);
 
-  @override
-  _$InitForEdit get _value => super._value as _$InitForEdit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unit = freezed,
+    Object? unit = null,
   }) {
     return _then(_$InitForEdit(
-      unit: unit == freezed
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
@@ -1333,15 +1325,15 @@ class _$InitForEdit implements InitForEdit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitForEdit &&
-            const DeepCollectionEquality().equals(other.unit, unit));
+            (identical(other.unit, unit) || other.unit == unit));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(unit));
+  int get hashCode => Object.hash(runtimeType, unit);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$InitForEditCopyWith<_$InitForEdit> get copyWith =>
       __$$InitForEditCopyWithImpl<_$InitForEdit>(this, _$identity);
 
@@ -1363,14 +1355,14 @@ class _$InitForEdit implements InitForEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String name)? unitNameChanged,
-    TResult Function(String name)? unitAdded,
-    TResult Function(Unit unit)? unitSelected,
-    TResult Function()? unitUnselected,
-    TResult Function(Unit unit, double? quantity)? fromUnitChanged,
-    TResult Function(String quantity)? quantityChanged,
-    TResult Function(String price)? priceChanged,
-    TResult Function(Unit unit)? initForEdit,
+    TResult? Function(String name)? unitNameChanged,
+    TResult? Function(String name)? unitAdded,
+    TResult? Function(Unit unit)? unitSelected,
+    TResult? Function()? unitUnselected,
+    TResult? Function(Unit unit, double? quantity)? fromUnitChanged,
+    TResult? Function(String quantity)? quantityChanged,
+    TResult? Function(String price)? priceChanged,
+    TResult? Function(Unit unit)? initForEdit,
   }) {
     return initForEdit?.call(unit);
   }
@@ -1412,14 +1404,14 @@ class _$InitForEdit implements InitForEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UnitNameChanged value)? unitNameChanged,
-    TResult Function(UnitAdded value)? unitAdded,
-    TResult Function(UnitSelected value)? unitSelected,
-    TResult Function(UnitUnselected value)? unitUnselected,
-    TResult Function(FromUnitChanged value)? fromUnitChanged,
-    TResult Function(QuantityChanged value)? quantityChanged,
-    TResult Function(PriceChanged value)? priceChanged,
-    TResult Function(InitForEdit value)? initForEdit,
+    TResult? Function(UnitNameChanged value)? unitNameChanged,
+    TResult? Function(UnitAdded value)? unitAdded,
+    TResult? Function(UnitSelected value)? unitSelected,
+    TResult? Function(UnitUnselected value)? unitUnselected,
+    TResult? Function(FromUnitChanged value)? fromUnitChanged,
+    TResult? Function(QuantityChanged value)? quantityChanged,
+    TResult? Function(PriceChanged value)? priceChanged,
+    TResult? Function(InitForEdit value)? initForEdit,
   }) {
     return initForEdit?.call(this);
   }
@@ -1475,7 +1467,8 @@ mixin _$UnitEntryState {
 abstract class $UnitEntryStateCopyWith<$Res> {
   factory $UnitEntryStateCopyWith(
           UnitEntryState value, $Res Function(UnitEntryState) then) =
-      _$UnitEntryStateCopyWithImpl<$Res>;
+      _$UnitEntryStateCopyWithImpl<$Res, UnitEntryState>;
+  @useResult
   $Res call(
       {Name name,
       List<Unit> unitSuggestions,
@@ -1489,64 +1482,66 @@ abstract class $UnitEntryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UnitEntryStateCopyWithImpl<$Res>
+class _$UnitEntryStateCopyWithImpl<$Res, $Val extends UnitEntryState>
     implements $UnitEntryStateCopyWith<$Res> {
   _$UnitEntryStateCopyWithImpl(this._value, this._then);
 
-  final UnitEntryState _value;
   // ignore: unused_field
-  final $Res Function(UnitEntryState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? unitSuggestions = freezed,
-    Object? sugggestionStatus = freezed,
-    Object? unit = freezed,
-    Object? fromUnit = freezed,
-    Object? quantity = freezed,
-    Object? price = freezed,
-    Object? status = freezed,
-    Object? errorMessage = freezed,
+    Object? name = null,
+    Object? unitSuggestions = null,
+    Object? sugggestionStatus = null,
+    Object? unit = null,
+    Object? fromUnit = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? status = null,
+    Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name,
-      unitSuggestions: unitSuggestions == freezed
+      unitSuggestions: null == unitSuggestions
           ? _value.unitSuggestions
           : unitSuggestions // ignore: cast_nullable_to_non_nullable
               as List<Unit>,
-      sugggestionStatus: sugggestionStatus == freezed
+      sugggestionStatus: null == sugggestionStatus
           ? _value.sugggestionStatus
           : sugggestionStatus // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      unit: unit == freezed
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as RequiredObject<Unit>,
-      fromUnit: fromUnit == freezed
+      fromUnit: null == fromUnit
           ? _value.fromUnit
           : fromUnit // ignore: cast_nullable_to_non_nullable
               as RequiredObject<Unit>,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as Number,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Number,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UnitEntryStatus,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1557,6 +1552,7 @@ abstract class _$$_UnitEntryStateCopyWith<$Res>
           _$_UnitEntryState value, $Res Function(_$_UnitEntryState) then) =
       __$$_UnitEntryStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Name name,
       List<Unit> unitSuggestions,
@@ -1571,61 +1567,59 @@ abstract class _$$_UnitEntryStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_UnitEntryStateCopyWithImpl<$Res>
-    extends _$UnitEntryStateCopyWithImpl<$Res>
+    extends _$UnitEntryStateCopyWithImpl<$Res, _$_UnitEntryState>
     implements _$$_UnitEntryStateCopyWith<$Res> {
   __$$_UnitEntryStateCopyWithImpl(
       _$_UnitEntryState _value, $Res Function(_$_UnitEntryState) _then)
-      : super(_value, (v) => _then(v as _$_UnitEntryState));
+      : super(_value, _then);
 
-  @override
-  _$_UnitEntryState get _value => super._value as _$_UnitEntryState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? unitSuggestions = freezed,
-    Object? sugggestionStatus = freezed,
-    Object? unit = freezed,
-    Object? fromUnit = freezed,
-    Object? quantity = freezed,
-    Object? price = freezed,
-    Object? status = freezed,
-    Object? errorMessage = freezed,
+    Object? name = null,
+    Object? unitSuggestions = null,
+    Object? sugggestionStatus = null,
+    Object? unit = null,
+    Object? fromUnit = null,
+    Object? quantity = null,
+    Object? price = null,
+    Object? status = null,
+    Object? errorMessage = null,
   }) {
     return _then(_$_UnitEntryState(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as Name,
-      unitSuggestions: unitSuggestions == freezed
+      unitSuggestions: null == unitSuggestions
           ? _value._unitSuggestions
           : unitSuggestions // ignore: cast_nullable_to_non_nullable
               as List<Unit>,
-      sugggestionStatus: sugggestionStatus == freezed
+      sugggestionStatus: null == sugggestionStatus
           ? _value.sugggestionStatus
           : sugggestionStatus // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      unit: unit == freezed
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as RequiredObject<Unit>,
-      fromUnit: fromUnit == freezed
+      fromUnit: null == fromUnit
           ? _value.fromUnit
           : fromUnit // ignore: cast_nullable_to_non_nullable
               as RequiredObject<Unit>,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as Number,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as Number,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UnitEntryStatus,
-      errorMessage: errorMessage == freezed
+      errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1692,35 +1686,38 @@ class _$_UnitEntryState implements _UnitEntryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UnitEntryState &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._unitSuggestions, _unitSuggestions) &&
-            const DeepCollectionEquality()
-                .equals(other.sugggestionStatus, sugggestionStatus) &&
-            const DeepCollectionEquality().equals(other.unit, unit) &&
-            const DeepCollectionEquality().equals(other.fromUnit, fromUnit) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+            (identical(other.sugggestionStatus, sugggestionStatus) ||
+                other.sugggestionStatus == sugggestionStatus) &&
+            (identical(other.unit, unit) || other.unit == unit) &&
+            (identical(other.fromUnit, fromUnit) ||
+                other.fromUnit == fromUnit) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
+      name,
       const DeepCollectionEquality().hash(_unitSuggestions),
-      const DeepCollectionEquality().hash(sugggestionStatus),
-      const DeepCollectionEquality().hash(unit),
-      const DeepCollectionEquality().hash(fromUnit),
-      const DeepCollectionEquality().hash(quantity),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(errorMessage));
+      sugggestionStatus,
+      unit,
+      fromUnit,
+      quantity,
+      price,
+      status,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UnitEntryStateCopyWith<_$_UnitEntryState> get copyWith =>
       __$$_UnitEntryStateCopyWithImpl<_$_UnitEntryState>(this, _$identity);
 }

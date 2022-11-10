@@ -17,6 +17,7 @@ class InstitutionOrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final intl = AppLocalizations.of(context);
     return Scaffold(
       body: DefaultTabController(
         length: tabs.length, // This is the number of tabs.
@@ -62,7 +63,10 @@ class InstitutionOrdersPage extends StatelessWidget {
                       indicatorColor: Theme.of(context).primaryColor,
                       indicatorSize: TabBarIndicatorSize.label,
                       // These are the widgets to put in each tab in the tab bar.
-                      tabs: tabs.map((String name) => Tab(text: name)).toList(),
+                      tabs: [
+                        Tab(text: intl.pending),
+                        Tab(text: intl.processing)
+                      ],
                     ),
                   ),
                 ),

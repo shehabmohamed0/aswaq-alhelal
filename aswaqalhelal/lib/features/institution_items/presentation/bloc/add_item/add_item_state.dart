@@ -10,9 +10,7 @@ class AddItemState extends Equatable {
   final bool addingNewItem;
   final RequiredObject<File> imageFile;
   final RequiredObject<String> imageUrl;
-  final List<Option<Unit>> measureUnits;
-  final FormzStatus status;
-  final UnitStatus unitStatus;
+  final AddItemStatus status;
   final String? errorMessage;
   final InstitutionItem? institutionItem;
   final InstitutionItem? oldItem;
@@ -25,11 +23,9 @@ class AddItemState extends Equatable {
     this.imageFile = const RequiredObject.pure(),
     this.imageUrl = const RequiredObject.pure(),
     this.itemName = const RequiredString.pure(),
-    this.measureUnits = const [None()],
     this.suggestionState = AutoSuggestionState.emptyText,
     this.suggestions = const [],
-    this.status = FormzStatus.pure,
-    this.unitStatus = UnitStatus.initial,
+    this.status = AddItemStatus.initial,
     this.errorMessage,
     this.institutionItem,
     this.isEdit = false,
@@ -38,7 +34,6 @@ class AddItemState extends Equatable {
 
   AddItemState copyWith({
     RequiredObject<ReferenceItem>? selectedItem,
-    List<Option<Unit>>? measureUnits,
     RequiredObject<File>? imageFile,
     RequiredObject<String>? imageUrl,
     AutoSuggestionState? suggestionState,
@@ -46,8 +41,7 @@ class AddItemState extends Equatable {
     RequiredString? itemName,
     bool? itemFromReference,
     bool? addingNewItem,
-    FormzStatus? status,
-    UnitStatus? unitStatus,
+    AddItemStatus? status,
     String? errorMessage,
     InstitutionItem? institutionItem,
     InstitutionItem? oldItem,
@@ -56,15 +50,13 @@ class AddItemState extends Equatable {
       selectedItem: selectedItem ?? this.selectedItem,
       itemName: itemName ?? this.itemName,
       addingNewItem: addingNewItem ?? this.addingNewItem,
-      measureUnits: measureUnits ?? this.measureUnits,
       suggestionState: suggestionState ?? this.suggestionState,
       suggestions: suggestions ?? this.suggestions,
       itemFromReference: itemFromReference ?? this.itemFromReference,
-      status: status ?? this.status,
-      unitStatus: unitStatus ?? this.unitStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       institutionItem: institutionItem ?? this.institutionItem,
       isEdit: isEdit,
+      status: status ?? this.status,
       imageFile: imageFile ?? this.imageFile,
       imageUrl: imageUrl ?? this.imageUrl,
       oldItem: oldItem ?? this.oldItem,
@@ -78,9 +70,7 @@ class AddItemState extends Equatable {
         suggestionState,
         selectedItem,
         itemName,
-        measureUnits,
         status,
-        unitStatus,
         errorMessage,
         institutionItem,
         isEdit,
@@ -91,4 +81,4 @@ class AddItemState extends Equatable {
       ];
 }
 
-enum UnitStatus { initial, exsists }
+enum AddItemStatus { initial, loading, success, failed, reset }

@@ -10,8 +10,7 @@ import '../../../orders/data/models/order_model.dart';
 abstract class InstitutionReceiptsApiService {
   Future<List<OrderModel>> getInstitutionReceipts(
       GetInstitutionReceiptsParams params);
-  Future<OrderModel> addInstitutionReceipt(
-      AddInstitutionReceiptParams params);
+  Future<OrderModel> addInstitutionReceipt(AddInstitutionReceiptParams params);
 }
 
 @LazySingleton(as: InstitutionReceiptsApiService)
@@ -24,13 +23,32 @@ class InstitutionReceiptsApiServiceImpl extends InstitutionReceiptsApiService {
       AddInstitutionReceiptParams params) async {
     final collection = _firestore.collection(FirestorePath.orders);
     final doc = collection.doc();
-
-    final model = params.toModel(doc.id);
-    final data = model.toJson();
-    data['creationTime'] = FieldValue.serverTimestamp();
-
-    await doc.set(data);
-    return model;
+    final counterDoc =
+        _firestore.doc('institution_orders_counter/${params.from}');
+    return _firestore.runTransaction<OrderModel>(
+      (transaction) async {
+        final counterSnapshot = await transaction.get(counterDoc);
+        late int counter;
+        if (counterSnapshot.exists) {
+          counter = (counterSnapshot.get('counter') as num).toInt();
+        } else {
+          counter = 0;
+          transaction.set(
+            counterDoc,
+            {
+              'institutionId': params.from,
+              'counter': counter,
+            },
+          );
+        }
+        final model = params.toModel(doc.id, counter);
+        final data = model.toJson();
+        data['creationTime'] = FieldValue.serverTimestamp();
+        transaction.set(doc, data);
+        transaction.update(counterDoc, {'counter': counter + 1});
+        return model;
+      },
+    );
   }
 
   @override

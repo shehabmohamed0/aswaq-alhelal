@@ -1,7 +1,8 @@
+import 'package:aswaqalhelal/features/auth/domain/entities/system_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:root_package/packages/freezed_annotation.dart';
 import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/root_package.dart' hide Unit;
+import 'package:root_package/root_package.dart' hide Unit, Order;
 
 import '../../../../core/params/add_item/params.dart';
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
@@ -10,6 +11,7 @@ import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
 import '../../../institution_items/domain/usecases/get_institution_items.dart';
+import '../../../orders/domain/entities/order.dart';
 import '../../../orders/domain/entities/order_item.dart';
 import '../../domain/usecases/add_institution_receipts.dart';
 import '../../domain/usecases/get_institution_receipts.dart';
@@ -59,11 +61,13 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
   void itemUnselected() {
     emit(state.copyWith(
-        selectedItem: none(),
-        selectedUnit: none(),
-        quantity: 0,
-        unitPrice: 0,
-        status: InstitutionReceiptStatus.itemUnselected));
+      selectedItem: none(),
+      selectedUnit: none(),
+      quantity: 0,
+      unitPrice: 0,
+      filteredItems: state.items,
+      status: InstitutionReceiptStatus.itemUnselected,
+    ));
   }
 
   void unitSelected(Unit unit) {
@@ -75,10 +79,11 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
   void unitUnselected() {
     emit(state.copyWith(
-        selectedUnit: none(),
-        quantity: 0,
-        unitPrice: 0,
-        status: InstitutionReceiptStatus.unitUnselected));
+      selectedUnit: none(),
+      quantity: 0,
+      unitPrice: 0,
+      status: InstitutionReceiptStatus.unitUnselected,
+    ));
   }
 
   void searchItem(String itemName) {
@@ -186,8 +191,8 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
 
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
-          to: null,
-          name: null,
+          to: state.purchaseClient.id,
+          name: state.purchaseClient.name,
           phoneNumber: null,
           receiptItems: state.receiptItems,
           from: institution.id,
@@ -201,12 +206,21 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
       (failure) => emit(state.copyWith(
           errorMessage: (failure as ServerFailure).message,
           status: InstitutionReceiptStatus.failure)),
-      (receipt) => emit(
+      (order) => emit(
         state.copyWith(
-          receiptSaved: true,
+          savedOrder: some(order),
           status: InstitutionReceiptStatus.success,
         ),
       ),
     );
+  }
+
+  void reset() {
+    emit(InstitutionReceiptsState(
+      items: state.items,
+      filteredItems: state.items,
+      status: InstitutionReceiptStatus.reset,
+      itemsState: RequestState.loaded,
+    ));
   }
 }

@@ -107,7 +107,7 @@
   "editAddress": "تعديل العنوان",
   "delete": "حذف",
   "description": "وصف",
-  "add": "أضف",
+  "add": "إضافة",
   "userName": "إسم المستخدم",
   "deliveryAddress": "عنوان التوصيل",
   "continue": "استمر",
@@ -158,9 +158,9 @@
   "items": "الاصناف",
   "thereIsNoItems": "لا يوجد اصناف",
   "receipt": "فاتورة",
-  "item": "صنف",
-  "unit": "وحدة",
-  "thereIsNoAvailableInstitutionninYourAddress": "There is No Available institution\nat your address",
+  "item": "الصنف",
+  "unit": "الوحدة",
+  "thereIsNoAvailableInstitutionninYourAddress": "لا يوجد مؤسسات متاحة\nفى موقعك",
   "from": "من ",
   "jobsOffers": "عروض الوظائف",
   "noJobsnoffers": "لا توجد\nعروض عمل",
@@ -202,6 +202,37 @@
   "creationTime": "وقت الانشاء",
   "alphabetically": "ابجدى",
   "areYouSureYouWantTonorderNow": "هل أنت متأكد أنك تريد الطلب الآن؟",
-  "areaExistsBefore": "Area exists before",
-  "itemNameAlreadyExists": "Item name already exists"
+  "areaExistsBefore": "المنطقة مسجلة مسبقا",
+  "itemNameAlreadyExists": "الصنف مسجل مسبقا",
+  "anonymousUser": "مستخدم مجهول",
+  "pending": "قيد الانتظار",
+  "processing": "قيد المعالجة",
+  "fromUnit": "من الوحدة",
+  "contains": "تحتوى",
+  "client": "عميل",
+  "new_": "جديد",
+  "itemUpdatedSuccessfully": "تم تحديث الصنف بنجاح",
+  "itemAddedSuccessfully": "تم إضافة الصنف بنجاح",
+  "yes": "نعم",
+  "areYouSureToAddNewItemPreviousDataWill": "هل انت متاكد من اضافة صنف جديد؟ البيانات التى ادخلتها سوف يتم مسحها",
+  "mustSelectAnItem": "يجب اختيار صنف",
+  "mustSelectAUnit": "يجب اختيار وحدة",
+  "invalidPrice": "سعر غير صالح",
+  "invalidQuantity": "كمية غير صالحة",
+  "receiptSavedSuccessfully": "تم حفظ الفاتورة بنجاح",
+  "priceEGPf": "{number}",
+  "@priceEGPf": {
+    "placeholders": {
+      "number": {
+        "type": "double",
+        "format": "currency",
+        "optionalParameters": {
+          "symbol": "e£",
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "areYouSureToResetTheForm": "هل أنت متأكد من إعادة ضبط النموذج؟",
+  "areYouSureToAddANewReceiptPreviousData": "هل انت متاكد من ادخال فاتورة جديدة؟ البيانات التى ادخلتها سوف يتم مسحها"
 }

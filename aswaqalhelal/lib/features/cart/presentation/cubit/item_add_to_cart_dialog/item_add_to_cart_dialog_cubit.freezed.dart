@@ -30,7 +30,8 @@ mixin _$ItemAddToCartDialogState {
 abstract class $ItemAddToCartDialogStateCopyWith<$Res> {
   factory $ItemAddToCartDialogStateCopyWith(ItemAddToCartDialogState value,
           $Res Function(ItemAddToCartDialogState) then) =
-      _$ItemAddToCartDialogStateCopyWithImpl<$Res>;
+      _$ItemAddToCartDialogStateCopyWithImpl<$Res, ItemAddToCartDialogState>;
+  @useResult
   $Res call(
       {Unit? selectedUnit,
       double totalPrice,
@@ -39,39 +40,42 @@ abstract class $ItemAddToCartDialogStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ItemAddToCartDialogStateCopyWithImpl<$Res>
+class _$ItemAddToCartDialogStateCopyWithImpl<$Res,
+        $Val extends ItemAddToCartDialogState>
     implements $ItemAddToCartDialogStateCopyWith<$Res> {
   _$ItemAddToCartDialogStateCopyWithImpl(this._value, this._then);
 
-  final ItemAddToCartDialogState _value;
   // ignore: unused_field
-  final $Res Function(ItemAddToCartDialogState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? selectedUnit = freezed,
-    Object? totalPrice = freezed,
-    Object? cartSubmitted = freezed,
-    Object? quantity = freezed,
+    Object? totalPrice = null,
+    Object? cartSubmitted = null,
+    Object? quantity = null,
   }) {
     return _then(_value.copyWith(
-      selectedUnit: selectedUnit == freezed
+      selectedUnit: freezed == selectedUnit
           ? _value.selectedUnit
           : selectedUnit // ignore: cast_nullable_to_non_nullable
               as Unit?,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      cartSubmitted: cartSubmitted == freezed
+      cartSubmitted: null == cartSubmitted
           ? _value.cartSubmitted
           : cartSubmitted // ignore: cast_nullable_to_non_nullable
               as bool,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,6 +87,7 @@ abstract class _$$_ItemAddToCartDialogStateCopyWith<$Res>
           $Res Function(_$_ItemAddToCartDialogState) then) =
       __$$_ItemAddToCartDialogStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Unit? selectedUnit,
       double totalPrice,
@@ -92,37 +97,35 @@ abstract class _$$_ItemAddToCartDialogStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_ItemAddToCartDialogStateCopyWithImpl<$Res>
-    extends _$ItemAddToCartDialogStateCopyWithImpl<$Res>
+    extends _$ItemAddToCartDialogStateCopyWithImpl<$Res,
+        _$_ItemAddToCartDialogState>
     implements _$$_ItemAddToCartDialogStateCopyWith<$Res> {
   __$$_ItemAddToCartDialogStateCopyWithImpl(_$_ItemAddToCartDialogState _value,
       $Res Function(_$_ItemAddToCartDialogState) _then)
-      : super(_value, (v) => _then(v as _$_ItemAddToCartDialogState));
+      : super(_value, _then);
 
-  @override
-  _$_ItemAddToCartDialogState get _value =>
-      super._value as _$_ItemAddToCartDialogState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? selectedUnit = freezed,
-    Object? totalPrice = freezed,
-    Object? cartSubmitted = freezed,
-    Object? quantity = freezed,
+    Object? totalPrice = null,
+    Object? cartSubmitted = null,
+    Object? quantity = null,
   }) {
     return _then(_$_ItemAddToCartDialogState(
-      selectedUnit: selectedUnit == freezed
+      selectedUnit: freezed == selectedUnit
           ? _value.selectedUnit
           : selectedUnit // ignore: cast_nullable_to_non_nullable
               as Unit?,
-      totalPrice: totalPrice == freezed
+      totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      cartSubmitted: cartSubmitted == freezed
+      cartSubmitted: null == cartSubmitted
           ? _value.cartSubmitted
           : cartSubmitted // ignore: cast_nullable_to_non_nullable
               as bool,
-      quantity: quantity == freezed
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
@@ -161,25 +164,23 @@ class _$_ItemAddToCartDialogState implements _ItemAddToCartDialogState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ItemAddToCartDialogState &&
-            const DeepCollectionEquality()
-                .equals(other.selectedUnit, selectedUnit) &&
-            const DeepCollectionEquality()
-                .equals(other.totalPrice, totalPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.cartSubmitted, cartSubmitted) &&
-            const DeepCollectionEquality().equals(other.quantity, quantity));
+            (identical(other.selectedUnit, selectedUnit) ||
+                other.selectedUnit == selectedUnit) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.cartSubmitted, cartSubmitted) ||
+                other.cartSubmitted == cartSubmitted) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedUnit),
-      const DeepCollectionEquality().hash(totalPrice),
-      const DeepCollectionEquality().hash(cartSubmitted),
-      const DeepCollectionEquality().hash(quantity));
+      runtimeType, selectedUnit, totalPrice, cartSubmitted, quantity);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ItemAddToCartDialogStateCopyWith<_$_ItemAddToCartDialogState>
       get copyWith => __$$_ItemAddToCartDialogStateCopyWithImpl<
           _$_ItemAddToCartDialogState>(this, _$identity);

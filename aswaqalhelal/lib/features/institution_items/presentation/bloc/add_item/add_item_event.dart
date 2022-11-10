@@ -13,22 +13,6 @@ class AddItemSelectedEvent extends AddItemEvent {
   AddItemSelectedEvent(this.item);
 }
 
-class AddUnitEvent extends AddItemEvent {
-  final Unit unit;
-  AddUnitEvent(this.unit);
-}
-
-class RemoveUnitEvent extends AddItemEvent {
-  final int index;
-  RemoveUnitEvent(this.index);
-}
-
-class UpdateUnitEvent extends AddItemEvent {
-  final Unit unit;
-  final int index;
-  UpdateUnitEvent(this.unit, this.index);
-}
-
 class AddNewItem extends AddItemEvent {
   final String itemName;
   AddNewItem(this.itemName);
@@ -37,7 +21,14 @@ class AddNewItem extends AddItemEvent {
 class AddItemSubmit extends AddItemEvent {
   final String institutionId;
   final List<InstitutionItem> currentItems;
-  AddItemSubmit({required this.institutionId, required this.currentItems});
+  final List<UnitEntryRow> units;
+  final Unit baseUnit;
+  AddItemSubmit({
+    required this.institutionId,
+    required this.currentItems,
+    required this.units,
+    required this.baseUnit,
+  });
 }
 
 class RemoveSelectionPressed extends AddItemEvent {
@@ -63,12 +54,6 @@ class DeleteImageUrl extends AddItemEvent {
   DeleteImageUrl();
 }
 
-class UnitChanged extends AddItemEvent {
-  final Unit? unit;
-  final int index;
-  UnitChanged(this.unit, this.index);
-}
-
-class UnitAddPressed extends AddItemEvent {
-  UnitAddPressed();
+class NewButtonClicked extends AddItemEvent {
+  NewButtonClicked();
 }

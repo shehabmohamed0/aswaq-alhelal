@@ -1,4 +1,3 @@
-
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -13,28 +12,29 @@ enum AutoSuggestionState {
 }
 
 class AutoSuggestTextField<T> extends StatefulWidget {
-  const AutoSuggestTextField({
-    Key? key,
-    required this.controller,
-    required this.focusNode,
-    this.errorText,
-    required this.suggestions,
-    required this.suggestionBuilder,
-    required this.onSuggestionSelected,
-    this.errorWidget,
-    this.labelText,
-    this.emptyWidget,
-    required this.onEmptyWidgetClicked,
-    this.loadingWidget,
-    required this.onChanged,
-    required this.suggestionState,
-    required this.onRemoveSelection,
-    this.enabled = true,
-    this.showRemoveButton = true,
-    this.validator,
-    this.autovalidateMode,
-this.autoFocus = false
-  }) : super(key: key);
+  const AutoSuggestTextField(
+      {Key? key,
+      required this.controller,
+      required this.focusNode,
+      this.errorText,
+      required this.suggestions,
+      required this.suggestionBuilder,
+      required this.onSuggestionSelected,
+      this.errorWidget,
+      this.labelText,
+      this.emptyWidget,
+      required this.onEmptyWidgetClicked,
+      this.loadingWidget,
+      required this.onChanged,
+      required this.suggestionState,
+      required this.onRemoveSelection,
+      this.enabled = true,
+      this.showRemoveButton = true,
+      this.validator,
+      this.autovalidateMode,
+      this.autoFocus = false,
+      this.errorStyle})
+      : super(key: key);
 
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -55,6 +55,7 @@ this.autoFocus = false
   final bool autoFocus;
   final String? Function(String?)? validator;
   final AutovalidateMode? autovalidateMode;
+  final TextStyle? errorStyle;
   @override
   State<AutoSuggestTextField<T>> createState() =>
       _AutoSuggestTextFieldState<T>();
@@ -81,7 +82,6 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
     if (widget.focusNode.hasFocus) {
       showOverlay();
     } else {
-
       hideOverlay();
     }
   }
@@ -179,11 +179,12 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               .toList(),
         );
       case AutoSuggestionState.error:
-        return widget.errorWidget ??  ListTile(title: Text(AppLocalizations.of(context).error));
+        return widget.errorWidget ??
+            ListTile(title: Text(AppLocalizations.of(context).error));
       case AutoSuggestionState.emptyText:
         return const SizedBox.shrink();
       case AutoSuggestionState.emptyShowNoSuggestions:
-        return  ListTile(
+        return ListTile(
           title: Text(AppLocalizations.of(context).noSuggestions),
         );
     }
@@ -212,7 +213,9 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         hideOverlay();
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          showOverlay();
+          if (widget.focusNode.hasFocus) {
+            showOverlay();
+          }
         });
       });
     }
@@ -239,12 +242,12 @@ class _AutoSuggestTextFieldState<T> extends State<AutoSuggestTextField<T>> {
               autovalidateMode: widget.autovalidateMode,
               validator: widget.validator,
               decoration: InputDecoration(
-                labelText: widget.labelText,
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                filled: !widget.enabled,
-                fillColor: widget.enabled ? null : Colors.grey.shade200,
-                errorText: widget.errorText,
-              ),
+                  labelText: widget.labelText,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  filled: !widget.enabled,
+                  fillColor: widget.enabled ? null : Colors.grey.shade200,
+                  errorText: widget.errorText,
+                  errorStyle: widget.errorStyle),
             ),
           ),
           if (!widget.enabled && widget.showRemoveButton)

@@ -79,7 +79,7 @@ class ItemsApiServiceImpl implements ItemsApiService {
         id: ref.id,
         institutionId: params.institutionId,
         name: params.itemName,
-        imageUrl: params.imageUrl!,
+        imageUrl: params.imageUrl,
         creationTime: DateTime.now(),
         referenceId: params.referenceId,
         unitModels: units.map((e) => UnitModel.fromJson(e)).toList(),

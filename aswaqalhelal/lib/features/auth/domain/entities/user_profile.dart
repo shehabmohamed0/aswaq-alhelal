@@ -12,7 +12,7 @@ class UserProfile extends BaseProfile {
     required super.id,
     required super.userId,
     required super.name,
-    required super.type,
+    super.type = ProfileType.user,
     required this.phoneNumber,
     super.photoURL,
     this.email,

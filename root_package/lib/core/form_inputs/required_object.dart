@@ -21,7 +21,7 @@ class RequiredObject<T> extends FormzInput<T?, RequiredObjectValidationError> {
 
   @override
   RequiredObjectValidationError? validator(T? value) {
-    if(value != null) return null;
+    if (value != null) return null;
     return RequiredObjectValidationError.invalid;
   }
 }
@@ -31,10 +31,12 @@ extension RequiredObjectValidationMessage on RequiredObject {
     final intl = locator<RootPackageLocalizations>();
 
     if (invalid) {
+      print(error.runtimeType);
       if (error == RequiredObjectValidationError.invalid) {
         return intl.required;
       }
     }
+    print('here');
     return null;
   }
 }

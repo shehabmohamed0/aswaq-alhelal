@@ -31,7 +31,7 @@ class _AppState extends State<App>
     with WidgetsBindingObserver
     implements NotificationDelegate {
   final _appBloc = locator<AppBloc>();
-  final _localeCubit = locator<LocaleCubit>();
+  final _localeCubit = locator<LocaleCubit>()..init();
   final _notificationCubit = locator<NotificationsBloc>()
     ..add(GetBadgeCounter());
   @override
