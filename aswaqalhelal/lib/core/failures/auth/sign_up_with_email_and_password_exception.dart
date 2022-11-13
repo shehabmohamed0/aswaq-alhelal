@@ -1,7 +1,6 @@
-import 'package:root_package/core/failures/failures.dart';
-import 'package:root_package/locator/locator.dart';
-
 import '../../../l10n/l10n.dart';
+import '../../../locator/locator.dart';
+import '../failure.dart';
 
 /// {@template sign_up_with_email_and_password_exception}
 /// Thrown if during the sign up process if a failure occurs.

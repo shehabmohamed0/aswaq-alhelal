@@ -1,4 +1,4 @@
-import 'package:root_package/core/failures/failures.dart';
+import '../failure.dart';
 
 class SignInWithCredentialFailure implements Failure {
   /// The associated error message.

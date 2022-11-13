@@ -1,7 +1,6 @@
+import 'package:aswaqalhelal/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/address/domain/entities/address.dart';
 import 'features/address/domain/entities/geo_point.dart';
@@ -21,6 +20,7 @@ import 'features/client_institution/presentation/pages/client_institution_page.d
 import 'features/distribution_areas/presentation/bloc/distribution_areas_bloc.dart';
 import 'features/distribution_areas/presentation/pages/distribution_areas_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
+import 'features/institution_clients/presentation/bloc/institution_clients_bloc.dart';
 import 'features/institution_clients/presentation/pages/institution_clients_page.dart';
 import 'features/institution_items/presentation/bloc/add_item/add_item_bloc.dart';
 import 'features/institution_items/presentation/bloc/item_units/units_bloc.dart';
@@ -59,6 +59,7 @@ import 'features/start_up/presentation/pages/splash_screen.dart';
 import 'features/work_institutions/presentation/cubit/work_institutions_cubit.dart';
 import 'features/work_institutions/presentation/pages/ins_page.dart';
 import 'features/work_institutions/presentation/pages/work_institution_page.dart';
+import 'locator/locator.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -369,7 +370,10 @@ class AppRouter {
           arguments: settings.arguments,
           routeName: settings.name,
           builder: (context) {
-            return const InstitutionClientsPage();
+            return BlocProvider<InstitutionClientsBloc>(
+              create: (context) => locator(),
+              child: const InstitutionClientsPage(),
+            );
           },
         );
 

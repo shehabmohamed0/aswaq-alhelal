@@ -1,5 +1,6 @@
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/locator/locator.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/locator/locator.dart';
 
 import '../../../l10n/l10n.dart';
 

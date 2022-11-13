@@ -1,5 +1,6 @@
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/packages/dartz.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:dartz/dartz.dart';
 
 import '../../../../core/params/addresses/add_address_params.dart';
 import '../../../../core/params/addresses/add_first_address_params.dart';
@@ -14,9 +15,11 @@ abstract class AddressesRepository {
   Future<Either<Failure, String>> removeAddress(RemoveAddressParams params);
 
   Future<Either<Failure, Address>> updateAddress(UpdateAddressParams params);
-  Future<Either<Failure, Address>> updateMainAddress(UpdateAddressParams params);
+  Future<Either<Failure, Address>> updateMainAddress(
+      UpdateAddressParams params);
 
   Future<Either<Failure, GeoPoint>> getCurrentLocation();
 
-  Future<Either<Failure, Address>> addFirstAddress(AddFirstAddressParams params);
+  Future<Either<Failure, Address>> addFirstAddress(
+      AddFirstAddressParams params);
 }

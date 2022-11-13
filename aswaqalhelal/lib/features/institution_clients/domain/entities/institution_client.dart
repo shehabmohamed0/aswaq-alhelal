@@ -1,5 +1,5 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/base_profile.dart';
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 class InstitutionClient extends Equatable {
   final String id;

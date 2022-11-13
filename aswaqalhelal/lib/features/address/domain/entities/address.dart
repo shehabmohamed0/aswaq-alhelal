@@ -1,5 +1,5 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
 
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
@@ -52,8 +52,6 @@ class Address extends Equatable {
           name: neighborhood,
         ),
       );
-
-  
 
   @override
   List<Object?> get props => [

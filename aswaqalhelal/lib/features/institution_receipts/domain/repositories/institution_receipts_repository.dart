@@ -1,5 +1,6 @@
-import 'package:root_package/root_package.dart' hide Order;
+import 'package:dartz/dartz.dart' hide Order;
 
+import '../../../../core/failures/failure.dart';
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/params/institution_receipts/get_institution_receipts_params.dart';
 import '../../../orders/domain/entities/order.dart';

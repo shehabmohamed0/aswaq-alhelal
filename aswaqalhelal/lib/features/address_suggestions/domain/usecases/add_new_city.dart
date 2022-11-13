@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/usecase/usecase.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/params/usecase/usecase.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
 import '../entities/entities.dart';
@@ -9,8 +10,8 @@ import '../repositories/address_suggestions_repository.dart';
 
 @LazySingleton()
 class AddNewCity extends UseCase<RefCity, AddNewCityParams>
-    // implements AddRefCity 
-    {
+// implements AddRefCity
+{
   final AddressSuggestionsRepository _repository;
 
   AddNewCity(this._repository);
@@ -18,5 +19,4 @@ class AddNewCity extends UseCase<RefCity, AddNewCityParams>
   Future<Either<Failure, RefCity>> call({required AddNewCityParams params}) {
     return _repository.addNewCity(params);
   }
-
 }

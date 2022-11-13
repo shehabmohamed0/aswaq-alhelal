@@ -1,5 +1,5 @@
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/extensions/prepare_for_search.dart';
 import '../../domain/repositories/units_repository.dart';

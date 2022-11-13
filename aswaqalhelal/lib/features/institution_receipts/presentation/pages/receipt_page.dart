@@ -1,23 +1,21 @@
 import 'dart:io';
 
-import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/packages/path_provider.dart';
-import 'package:root_package/widgets/snack_bar.dart';
 
 import '../../../../core/request_state.dart';
+import '../../../../core/utils/dialogs.dart';
 import '../../../../l10n/l10n.dart';
+import '../../../../locator/locator.dart';
+import '../../../../widgets/snack_bar.dart';
 import '../../../auth/domain/entities/base_profile.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
@@ -25,6 +23,7 @@ import '../../../institution_items/data/datasources/units_api_service.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
 import '../../../institution_items/domain/repositories/units_repository.dart';
+import '../../../orders/domain/entities/order.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../cubit/institution_receipts_cubit.dart';
 import '../widgets/compo_box_widget.dart';
@@ -604,26 +603,18 @@ class InstitutionReceiptPage extends HookWidget {
 
         break;
       case InstitutionReceiptStatus.loading:
-        EasyLoading.show(
-          indicator: const FittedBox(
-            child: SpinKitRipple(
-              duration: Duration(milliseconds: 1200),
-              color: Colors.white,
-            ),
-          ),
-          dismissOnTap: false,
-        );
+        showLoadingDialog();
         break;
 
       case InstitutionReceiptStatus.success:
         FocusScope.of(context).unfocus();
-        EasyLoading.dismiss();
+        dismissLoadingDialog();
         showSuccessSnackBar(
             context, AppLocalizations.of(context).receiptSavedSuccessfully);
         break;
       case InstitutionReceiptStatus.failure:
         showErrorSnackBar(context, state.errorMessage!);
-        EasyLoading.dismiss();
+        dismissLoadingDialog();
         break;
 
       case InstitutionReceiptStatus.reset:

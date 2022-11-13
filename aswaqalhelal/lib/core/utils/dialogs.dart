@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' show FittedBox, Colors;
-import 'package:root_package/packages/flutter_easyloading.dart'
-    show EasyLoading;
-import 'package:root_package/packages/flutter_spinkit.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../l10n/l10n.dart';
 

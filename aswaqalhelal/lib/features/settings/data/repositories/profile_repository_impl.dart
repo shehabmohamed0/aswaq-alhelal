@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:aswaqalhelal/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/failures/firestore_failure.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/failures/failures.dart';
-import 'package:root_package/core/services/network_info.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
 
 import '../../../../core/failures/settings/update_email_failure.dart';
 import '../../../../core/failures/settings/update_phone_number_failure.dart';

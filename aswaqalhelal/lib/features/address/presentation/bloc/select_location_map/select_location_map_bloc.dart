@@ -1,15 +1,15 @@
 import 'dart:async';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/packages/app_settings.dart';
-import 'package:root_package/packages/bloc_concurrency.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/packages/stream_transform.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 import '../../../../../core/failures/address/location_failure.dart';
 import '../../../domain/entities/geo_point.dart';

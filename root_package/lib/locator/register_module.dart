@@ -10,24 +10,5 @@ import '../packages/location.dart';
 
 @module
 abstract class RegisterModule {
-  @preResolve
-  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
-
-  @injectable
-  InternetConnectionChecker get internetConnectionChecker =>
-      InternetConnectionChecker();
-  @injectable
-  FirebaseAuth get auth => FirebaseAuth.instance;
-
-  @injectable
-  FirebaseFirestore get firestore => FirebaseFirestore.instance;
-
-  @injectable
-  FirebaseFunctions get cloudFunctions => FirebaseFunctions.instance;
-
-  @injectable
-  FirebaseRemoteConfig get remoteConfig => FirebaseRemoteConfig.instance;
-  
-  @injectable
-  Location get location => Location();
+ 
 }

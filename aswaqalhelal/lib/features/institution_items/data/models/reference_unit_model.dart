@@ -1,7 +1,7 @@
 import 'package:aswaqalhelal/features/institution_items/domain/entities/reference_unit.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/json_converters/time_stamp_converter.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:aswaqalhelal/core/json_converters/time_stamp_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 part 'reference_unit_model.g.dart';
 
 @JsonSerializable(converters: [TimestampConverter()])

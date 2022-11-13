@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/json_converters/time_stamp_converter.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:aswaqalhelal/core/json_converters/time_stamp_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/job_offer.dart';
 
@@ -12,7 +12,7 @@ class JobOfferModel extends JobOffer {
     required String id,
     required String ownerId,
     required String institutionId,
-     String? institutionName,
+    String? institutionName,
     required String phoneNumber,
     required String role,
     required OfferState state,

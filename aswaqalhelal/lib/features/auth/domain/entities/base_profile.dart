@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/equatable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../data/models/user/institution_profile_model.dart';
 import '../../data/models/user/system_profile_model.dart';

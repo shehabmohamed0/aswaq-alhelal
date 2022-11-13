@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../institution_items/data/models/institution_item_model.dart';
 import '../../../institution_items/data/models/unit_model.dart';

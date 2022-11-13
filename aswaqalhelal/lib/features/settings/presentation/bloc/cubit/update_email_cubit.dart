@@ -2,10 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/failures/failures.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/locator/locator.dart';
+import 'package:aswaqalhelal/core/form_inputs/email.dart';
+import 'package:aswaqalhelal/core/form_inputs/password.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
 
+import '../../../../../core/failures/firestore_failure.dart';
+import '../../../../../core/failures/server_failure.dart';
 import '../../../../../core/failures/settings/update_email_failure.dart';
 import '../../../../../core/params/settings/update_email_params.dart';
 import '../../../../../l10n/l10n.dart';

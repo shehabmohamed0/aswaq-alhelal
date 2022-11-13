@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/widgets/ensure_visible_when_focused.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/form_inputs/minimum_lenght_string.dart';
 import '../../../../../../l10n/l10n.dart';
+import '../../../../../../widgets/ensure_visible_when_focused.dart';
 import '../../../../../address/domain/entities/entities.dart';
 import '../../../../../address/presentation/DTOs/full_address_details.dart';
 import '../../../../../address_suggestions/presentation/DTOs/ref_address_details.dart';

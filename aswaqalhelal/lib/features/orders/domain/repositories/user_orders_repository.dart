@@ -1,8 +1,8 @@
-import 'package:root_package/root_package.dart' hide Order;
-
+import 'package:aswaqalhelal/core/failures/failure.dart';
+import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
+import 'package:dartz/dartz.dart' hide Order;
 import '../../data/models/order_item_model.dart';
 import '../../data/models/order_model.dart';
-import '../entities/order.dart';
 import '../entities/order_item.dart';
 
 abstract class UserOrdersRepository {

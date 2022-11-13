@@ -1,11 +1,11 @@
-import 'package:aswaqalhelal/features/notifications/presentation/bloc/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
 
+import '../../../../../core/utils/dialogs.dart';
+import '../../../../../locator/locator.dart';
 import '../../../../address/presentation/cubit/add_first_address/add_first_address_cubit.dart';
 import '../../../../address/presentation/pages/add_first_address/add_first_address_page.dart';
+import '../../../../notifications/presentation/bloc/notifications_bloc.dart';
 import '../../bloc/app_status/app_bloc.dart';
 import '../../bloc/sign_in/phone_sign_in_form_cubit.dart';
 import '../signin/login_page.dart';
@@ -24,7 +24,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   void dispose() {
-    EasyLoading.dismiss();
+    dismissLoadingDialog();
     super.dispose();
   }
 
@@ -39,7 +39,7 @@ class _LandingPageState extends State<LandingPage> {
       },
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        EasyLoading.dismiss();
+        dismissLoadingDialog();
         switch (state.status) {
           case AppStatus.authenticated:
             return widget.homePage;

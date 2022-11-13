@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../institution_items/domain/entities/institution_item.dart';
 import '../../../domain/usecases/get_items.dart';

@@ -1,14 +1,14 @@
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/international_phone_text_field.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import '../../../../../core/form_inputs/email.dart';
+import '../../../../../core/form_inputs/minimum_lenght_string.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 
+import '../../../../../core/form_inputs/phone_number.dart';
 import '../../../../../l10n/l10n.dart';
+import '../../../../../widgets/international_phone_text_field.dart';
 import '../../cubit/add_institution/add_institution_cubit.dart';
 import 'widgets/address_step.dart';
 
@@ -27,7 +27,7 @@ class AddInstitutionPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title:  Text(intl.addInstitution),
+        title: Text(intl.addInstitution),
       ),
       body: BlocConsumer<AddInstitutionCubit, AddInstitutionState>(
         listenWhen: (previous, current) => previous.status != current.status,
@@ -36,22 +36,14 @@ class AddInstitutionPage extends StatelessWidget {
             case AddInstitutionStatus.initial:
               break;
             case AddInstitutionStatus.loading:
-              EasyLoading.show(
-                indicator: const FittedBox(
-                  child: SpinKitRipple(
-                    duration: Duration(milliseconds: 1200),
-                    color: Colors.white,
-                  ),
-                ),
-                dismissOnTap: false,
-              );
+              showLoadingDialog();
               break;
             case AddInstitutionStatus.failure:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               showErrorSnackBar(context, state.errorMessage!);
               break;
             case AddInstitutionStatus.success:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               Navigator.of(context).pop(state.addedInstitution);
               break;
           }
@@ -79,16 +71,16 @@ class AddInstitutionPage extends StatelessWidget {
                       type: StepperType.horizontal,
                       steps: [
                         Step(
-                          title:  Text(intl.name),
+                          title: Text(intl.name),
                           isActive: cubit.isActive(0),
                           content: _NameStepWidget(cubit: cubit),
                         ),
                         Step(
-                            title:  Text(intl.contacts),
+                            title: Text(intl.contacts),
                             isActive: cubit.isActive(1),
                             content: const _ContactsStepWidget()),
                         Step(
-                            title:  Text(AppLocalizations.of(context).address),
+                            title: Text(AppLocalizations.of(context).address),
                             isActive: cubit.isActive(2),
                             content: AddUpdateAddressWidget(
                               onAddressDetailsChanged: (addressDetails) {

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
 
 import '../../../../core/params/settings/add_email_params.dart';
 import '../../../../core/params/settings/update_email_params.dart';

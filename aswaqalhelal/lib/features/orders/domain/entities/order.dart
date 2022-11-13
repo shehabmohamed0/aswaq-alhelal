@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 import 'order_item.dart';
 

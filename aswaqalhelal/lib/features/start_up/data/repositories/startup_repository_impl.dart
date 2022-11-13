@@ -1,11 +1,12 @@
 import 'package:aswaqalhelal/features/start_up/data/datasources/startup_remote_api.dart';
-import 'package:root_package/core/failures/cache_failure.dart';
 
+import '../../../../core/failures/cache_failure.dart';
 import '../../domain/repositories/start_up_repository.dart';
 import '../datasources/startup_local_api.dart';
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: StartUpRepository)
 class StartUpRepositoryImpl extends StartUpRepository {

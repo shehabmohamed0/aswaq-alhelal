@@ -1,5 +1,7 @@
-import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
-import 'package:root_package/root_package.dart' hide Order;
+import 'package:dartz/dartz.dart' hide Order;
+
+import '../../../../core/failures/failure.dart';
+import '../entities/order.dart';
 
 abstract class InstitutionOrdersRepository {
   Future<Either<Failure, List<Order>>> getOrders(

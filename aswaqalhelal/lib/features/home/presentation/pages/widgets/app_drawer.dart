@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/core/locale/locale_cubit.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/font_awesome_flutter.dart';
-import 'package:root_package/packages/url_launcher.dart';
-import 'package:root_package/routes/routes.dart';
-import 'package:root_package/widgets/avatar.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/locale/locale_cubit.dart';
 import '../../../../../l10n/l10n.dart';
+import '../../../../../widgets/avatar.dart';
+import '../../../../../widgets/snack_bar.dart';
 import '../../../../auth/domain/entities/base_profile.dart';
 import '../../../../auth/domain/entities/user_profile.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';

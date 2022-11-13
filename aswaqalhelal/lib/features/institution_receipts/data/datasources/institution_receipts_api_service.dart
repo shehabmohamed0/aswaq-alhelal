@@ -1,7 +1,7 @@
 import 'package:aswaqalhelal/core/firebase/firebase_path.dart';
 import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/params/institution_receipts/get_institution_receipts_params.dart';

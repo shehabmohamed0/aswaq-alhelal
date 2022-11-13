@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/request_state.dart';
 import '../../../../../../l10n/l10n.dart';
@@ -36,7 +36,7 @@ class OffersTabView extends StatelessWidget {
               });
             case RequestState.loaded:
               if (state.jobsOffers.isEmpty) {
-                return  Center(
+                return Center(
                   child: Text(intl.noSentOffers),
                 );
               }
@@ -49,7 +49,7 @@ class OffersTabView extends StatelessWidget {
                 // The PageStorageKey should be unique to this ScrollView;
                 // it allows the list to remember its scroll position when
                 // the tab view is not on the screen.
-                key:  const PageStorageKey<String>('Offers'),
+                key: const PageStorageKey<String>('Offers'),
                 slivers: <Widget>[
                   SliverOverlapInjector(
                     // This is the flip side of the SliverOverlapAbsorber

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../features/notifications/domain/entities/fstore_notification_item.dart';
 import '../utils/logs.dart';

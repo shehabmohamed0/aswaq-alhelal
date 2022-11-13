@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/ref_neighborhood.dart';
 
@@ -27,11 +27,7 @@ class RefNeighborhoodModel extends RefNeighborhood {
     return address._copyWithId(document.id);
   }
   RefNeighborhoodModel _copyWithId(String id) => RefNeighborhoodModel(
-      id: id,
-      country: country,
-      governate: governate,
-      city: city,
-      name: name);
+      id: id, country: country, governate: governate, city: city, name: name);
   factory RefNeighborhoodModel.fromJson(Map<String, dynamic> json) =>
       _$RefNeighborhoodModelFromJson(json);
 

@@ -1,6 +1,7 @@
 import 'package:aswaqalhelal/l10n/l10n.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/locator/locator.dart';
+
+import '../../../locator/locator.dart';
+import '../failure.dart';
 
 class PhoneCredentialFailure implements Failure {
   final String message;

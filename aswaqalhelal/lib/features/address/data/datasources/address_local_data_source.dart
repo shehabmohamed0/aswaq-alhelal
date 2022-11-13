@@ -1,5 +1,5 @@
-import 'package:root_package/packages/geolocator.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/exceptions/address/location_exceptions.dart';
 import '../models/geo_point_model.dart';
@@ -10,14 +10,11 @@ abstract class AddressesLocalDataSource {
 
 @LazySingleton(as: AddressesLocalDataSource)
 class AddressesLocalDataSourceImpl implements AddressesLocalDataSource {
-  
   AddressesLocalDataSourceImpl();
 
   @override
   Future<GeoPointModel> getCurrentLocation() async {
     LocationPermission permission;
-
-  
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -34,7 +31,7 @@ class AddressesLocalDataSourceImpl implements AddressesLocalDataSource {
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-             throw LocationDeniedForeverException();
+      throw LocationDeniedForeverException();
     }
     final position = await Geolocator.getCurrentPosition();
     // When we reach here, permissions are granted and we can

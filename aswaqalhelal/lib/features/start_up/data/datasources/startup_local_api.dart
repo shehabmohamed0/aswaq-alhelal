@@ -1,5 +1,5 @@
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/packages/shared_preferences.dart';
+import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StartupLocalApi {
   Future<bool> seenBefore();

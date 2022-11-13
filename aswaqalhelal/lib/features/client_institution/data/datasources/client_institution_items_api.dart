@@ -1,6 +1,6 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../institution_items/data/models/institution_item_model.dart';
 
@@ -14,7 +14,8 @@ class ClientInstitutionItemsApiImpl extends ClientInstitutionItemsApi {
 
   ClientInstitutionItemsApiImpl(this._firestore);
   @override
-  Future<List<InstitutionItemModel>> getItems(InstitutionProfile institution) async {
+  Future<List<InstitutionItemModel>> getItems(
+      InstitutionProfile institution) async {
     final collection = _firestore
         .collection('items')
         .where('institutionId', isEqualTo: institution.id);

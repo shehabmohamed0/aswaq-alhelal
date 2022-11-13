@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:injectable/injectable.dart';
-import 'package:root_package/packages/firebase_auth.dart' hide User;
-import 'package:root_package/root_package.dart';
 
+import 'package:aswaqalhelal/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:dartz/dartz.dart';
 import '../../../../core/failures/auth/link_email_and_password_failure.dart';
 import '../../../../core/failures/auth/phone_credential_failure.dart';
 import '../../../../core/failures/auth/reauthenticate_user_failure.dart';
+import '../../../../core/failures/cache_failure.dart';
 import '../../../../core/params/auth/link_email_and_password_params.dart';
 import '../../../../core/params/auth/phone_sign_in_params.dart';
 import '../../../../core/params/auth/verify_phone_params.dart';

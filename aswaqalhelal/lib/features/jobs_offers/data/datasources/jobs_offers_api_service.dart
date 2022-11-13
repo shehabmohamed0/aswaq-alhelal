@@ -1,6 +1,6 @@
 import 'package:aswaqalhelal/features/recruitment/domain/entities/job_offer.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../recruitment/data/models/job_offer_model.dart';
 import '../../domain/repositories/jobs_offers_repository.dart';

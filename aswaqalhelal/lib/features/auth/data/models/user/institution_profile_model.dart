@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/json_converters/time_stamp_converter.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:aswaqalhelal/core/json_converters/time_stamp_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../address/data/models/address_model.dart';
 import '../../../domain/entities/base_profile.dart';
@@ -28,7 +28,8 @@ class InstitutionProfileModel extends InstitutionProfile {
 
   factory InstitutionProfileModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final institutionProfile = InstitutionProfileModel.fromJson(document.data()!);
+    final institutionProfile =
+        InstitutionProfileModel.fromJson(document.data()!);
 
     return institutionProfile._copyWithId(document.id);
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:root_package/packages/path_provider.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 // const appFolder = 'FluxBuilder/';
 const appFolder = 'AswaqAlhelal/';
@@ -8,8 +9,6 @@ class LocalStorageKey {
   /// FLUXBUILDER
   static const String app = 'fstore';
   static const String notification = '${appFolder}notification';
-
- 
 }
 
 class FileHelper {

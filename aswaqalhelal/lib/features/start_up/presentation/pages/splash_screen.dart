@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:root_package/core/resources/assets_manager.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/resources/assets_manager.dart';
 import '../cubit/start_up/start_up_cubit.dart';
 
 class SplashScreen extends StatelessWidget {

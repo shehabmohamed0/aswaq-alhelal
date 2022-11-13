@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/json_converters/time_stamp_converter.dart';
+import 'package:equatable/equatable.dart';
+import 'package:aswaqalhelal/core/json_converters/time_stamp_converter.dart';
 import 'unit.dart';
 
 abstract class BaseItem extends Equatable {

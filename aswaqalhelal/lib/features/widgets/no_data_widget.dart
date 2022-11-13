@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NoDataWidget extends StatelessWidget {
   const NoDataWidget({Key? key, required this.message}) : super(key: key);

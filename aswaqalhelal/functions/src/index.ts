@@ -17,6 +17,18 @@ export const isPhoneExist = functions.https.onCall(async (data, context) => {
     }
 });
 
+export const getUserByPhoneNumber = functions.https.onCall(async (data, context) => {
+    const phoneNumber = data.phoneNumber;
+    let snapshot = await admin.firestore().collection('profiles').where('phoneNumber', '==', phoneNumber).limit(1).get()
+    if (snapshot.size == 0) {
+        throw new functions.https.HttpsError('not-found', 'user does not exsists');
+    } else {
+
+        return snapshot.docs.at(0)?.data();
+    }
+
+});
+
 export const onNotification = functions.firestore.document('notifications/{notification}').onCreate(async (snapshot, context) => {
     functions.logger.log('notification start');
     const fcm = admin.messaging();

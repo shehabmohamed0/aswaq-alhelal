@@ -1,5 +1,6 @@
-import 'package:root_package/root_package.dart';
+import 'package:dartz/dartz.dart';
 
+import '../../../../core/failures/failure.dart';
 import '../../../recruitment/data/models/job_offer_model.dart';
 import '../../../recruitment/domain/entities/job_offer.dart';
 

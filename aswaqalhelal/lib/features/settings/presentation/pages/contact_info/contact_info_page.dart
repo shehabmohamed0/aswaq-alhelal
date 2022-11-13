@@ -1,12 +1,11 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../../../l10n/l10n.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
-
 
 class ContactInfoPage extends StatelessWidget {
   const ContactInfoPage({Key? key}) : super(key: key);
@@ -14,7 +13,8 @@ class ContactInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final intl = locator<AppLocalizations>();
-    final user = context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
+    final user =
+        context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
     return Scaffold(
       appBar: AppBar(
         title: Text(intl.contactInfo),

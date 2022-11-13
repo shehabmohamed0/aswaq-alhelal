@@ -1,4 +1,4 @@
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../address/domain/entities/address.dart';
 import '../../domain/entities/entities.dart';

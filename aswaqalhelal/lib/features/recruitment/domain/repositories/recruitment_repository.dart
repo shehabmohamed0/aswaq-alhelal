@@ -1,5 +1,6 @@
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/packages/dartz.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:dartz/dartz.dart';
 
 import '../../data/models/job_offer_model.dart';
 import '../entities/employee.dart';

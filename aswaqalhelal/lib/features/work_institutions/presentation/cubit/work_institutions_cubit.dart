@@ -1,7 +1,7 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/request_state.dart';
 import '../../domain/usecases/get_work_institutions.dart';

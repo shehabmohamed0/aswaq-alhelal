@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/exceptions/exceptions.dart';
-import 'package:root_package/packages/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../core/exceptions/exceptions.dart';
 import '../../../domain/entities/base_profile.dart';
 
 abstract class AuthLocalService {

@@ -4,12 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/packages/firebase_auth.dart';
-import 'package:root_package/root_package.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../../../core/failures/auth/phone_credential_failure.dart';
 import '../../../../../../core/params/auth/phone_sign_in_params.dart';
 import '../../../../../../core/params/auth/verify_phone_params.dart';
+import '../../../../../core/failures/server_failure.dart';
+import '../../../../../core/form_inputs/otp.dart';
+import '../../../../../core/form_inputs/phone_number.dart';
 import '../../../domain/usecases/usecases.dart';
 
 part 'phone_sign_in_form_state.dart';
@@ -56,8 +58,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
             verificationCompleted: true,
           ));
         },
-        codeAutoRetrievalTimeout: (timeOut) {
-        },
+        codeAutoRetrievalTimeout: (timeOut) {},
         codeSent: (verificationId, forceSent) {
           emit(state.copyWith(
             verificationId: verificationId,
@@ -86,8 +87,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
           ),
         );
       }
-    }, (_) {
-    });
+    }, (_) {});
   }
 
   Future<void> signInWithPhoneNumber() async {
@@ -116,7 +116,7 @@ class PhoneSignInFormCubit extends Cubit<PhoneSignInFormState> {
         );
       }
     }, (success) {
-     // emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      // emit(state.copyWith(status: FormzStatus.submissionSuccess));
     });
   }
 }

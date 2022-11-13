@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/params/add_item/params.dart';
 import '../../../domain/entities/institution_item.dart';

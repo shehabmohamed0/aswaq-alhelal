@@ -1,5 +1,6 @@
-import 'package:root_package/root_package.dart';
+import 'package:dartz/dartz.dart';
 
+import '../../../../core/failures/failure.dart';
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../data/models/distribution_area_model.dart';
 import '../entities/distribution_area.dart';

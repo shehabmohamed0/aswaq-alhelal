@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/exceptions/file_upload_exception.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/failures/file_upload_failure.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/services/network_info.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
 
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../core/exceptions/file_upload_exception.dart';
+import '../../../../core/failures/file_upload_failure.dart';
 import '../../../../core/params/add_item/params.dart';
 import '../../domain/entities/institution_item.dart';
 import '../../domain/entities/reference_item.dart';

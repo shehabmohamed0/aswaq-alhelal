@@ -1,11 +1,10 @@
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../l10n/l10n.dart';
+import '../../../../widgets/snack_bar.dart';
 import '../../../address_suggestions/domain/entities/entities.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
@@ -71,20 +70,13 @@ class DistributionAreasPage extends HookWidget {
                       listener: (context, state) {
                         switch (state.status) {
                           case DistributionAreasStatus.loading:
-                            EasyLoading.show(
-                              indicator: const FittedBox(
-                                child: SpinKitRipple(
-                                    duration: Duration(milliseconds: 1200),
-                                    color: Colors.white),
-                              ),
-                              dismissOnTap: false,
-                            );
+                            showLoadingDialog();
                             break;
                           case DistributionAreasStatus.success:
-                            EasyLoading.dismiss();
+                            dismissLoadingDialog();
                             break;
                           case DistributionAreasStatus.failure:
-                            EasyLoading.dismiss();
+                            dismissLoadingDialog();
                             showErrorSnackBar(context, state.errorMessage!);
                             break;
                           default:
@@ -128,29 +120,20 @@ class DistributionAreasPage extends HookWidget {
                             neighborhoodController.clear();
                             break;
                           case AddressSuggestionsStatus.loading:
-                            EasyLoading.show(
-                              indicator: const FittedBox(
-                                child: SpinKitRipple(
-                                  duration: Duration(milliseconds: 1200),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              dismissOnTap: false,
-                            );
+                            showLoadingDialog();
                             break;
                           case AddressSuggestionsStatus.addingGovernateSucess:
                             governateFocusNode.unfocus();
-                            EasyLoading.dismiss();
+                            dismissLoadingDialog();
                             break;
                           case AddressSuggestionsStatus.addingCitySuccess:
                             cityFocusNode.unfocus();
-                            EasyLoading.dismiss();
+                            dismissLoadingDialog();
                             break;
                           case AddressSuggestionsStatus
                               .addingNeighborhoodSuccess:
                             neighborhoodFocusNode.unfocus();
-                            EasyLoading.dismiss();
-                            // _checkGeoPointAndUpdateAddress(context, state);
+                            dismissLoadingDialog(); // _checkGeoPointAndUpdateAddress(context, state);
 
                             break;
                         }

@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/root_package.dart' show UseCase, Failure;
 
+import '../../../../core/failures/failure.dart';
 import '../../../../core/params/auth/phone_sign_in_params.dart';
+import '../../../../core/params/usecase/usecase.dart';
 import '../repositories/auth_repository.dart';
 
 @lazySingleton

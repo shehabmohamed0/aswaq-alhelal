@@ -1,6 +1,6 @@
-import 'package:root_package/core/failures/failures.dart';
-import 'package:root_package/locator/locator.dart';
 import '../../../l10n/l10n.dart';
+import '../../../locator/locator.dart';
+import '../failure.dart';
 
 class LinkEmailAndPasswordFailure implements Failure {
   final String message;

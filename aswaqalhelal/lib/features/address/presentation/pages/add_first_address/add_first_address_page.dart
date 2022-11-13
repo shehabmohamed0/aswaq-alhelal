@@ -1,14 +1,14 @@
+import 'package:aswaqalhelal/core/form_inputs/minimum_lenght_string.dart';
+import 'package:aswaqalhelal/core/form_inputs/name.dart';
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/core/form_inputs/name.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/packages/formz.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:formz/formz.dart';
 
+import '../../../../../widgets/snack_bar.dart';
 import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
@@ -47,19 +47,13 @@ class AddFirstAddressPage extends StatelessWidget {
         listener: (context, state) {
           switch (state.status) {
             case FormzStatus.submissionInProgress:
-              EasyLoading.show(
-                  indicator: const FittedBox(
-                child: SpinKitRipple(
-                  duration: Duration(milliseconds: 1200),
-                  color: Colors.white,
-                ),
-              ));
+              showLoadingDialog();
               break;
             case FormzStatus.submissionSuccess:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               break;
             case FormzStatus.submissionFailure:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               showErrorSnackBar(context, state.errorMessage!);
               break;
             default:

@@ -50,11 +50,181 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Hello World!`
-  String get helloWorld {
+  /// `Invalid email address.`
+  String get invalidEmailAddress {
     return Intl.message(
-      'Hello World!',
-      name: 'helloWorld',
+      'Invalid email address.',
+      name: 'invalidEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid user name.`
+  String get invalidName {
+    return Intl.message(
+      'Invalid user name.',
+      name: 'invalidName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 character.`
+  String get invalidPassword {
+    return Intl.message(
+      'Password must be at least 8 character.',
+      name: 'invalidPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid phone number.`
+  String get invalidPhoneNumber {
+    return Intl.message(
+      'Invalid phone number.',
+      name: 'invalidPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The phone number is already registered.`
+  String get phoneNumberIsAlreadyRegistered {
+    return Intl.message(
+      'The phone number is already registered.',
+      name: 'phoneNumberIsAlreadyRegistered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please, check internet connection.`
+  String get checkInternetConnection {
+    return Intl.message(
+      'Please, check internet connection.',
+      name: 'checkInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong.`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong.',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required`
+  String get required {
+    return Intl.message(
+      'Required',
+      name: 'required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try again`
+  String get tryAgain {
+    return Intl.message(
+      'Try again',
+      name: 'tryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cachire`
+  String get cachire {
+    return Intl.message(
+      'Cachire',
+      name: 'cachire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the image.`
+  String get failedToUploadTheImage {
+    return Intl.message(
+      'Failed to upload the image.',
+      name: 'failedToUploadTheImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the file.`
+  String get failedToUploadTheFile {
+    return Intl.message(
+      'Failed to upload the file.',
+      name: 'failedToUploadTheFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to upload the images.`
+  String get failedToUploadTheImages {
+    return Intl.message(
+      'Failed to upload the images.',
+      name: 'failedToUploadTheImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must be at least {howMany, plural, one{1 character} other{{howMany} characters}}`
+  String mustBeAtLeastNumberCharacter(num howMany) {
+    return Intl.message(
+      'Must be at least ${Intl.plural(howMany, one: '1 character', other: '$howMany characters')}',
+      name: 'mustBeAtLeastNumberCharacter',
+      desc: '',
+      args: [howMany],
+    );
+  }
+
+  /// `Zero is an invalid number.`
+  String get zeroIsAnInvalidNumber {
+    return Intl.message(
+      'Zero is an invalid number.',
+      name: 'zeroIsAnInvalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepts Integers only.`
+  String get acceptsIntegersOnly {
+    return Intl.message(
+      'Accepts Integers only.',
+      name: 'acceptsIntegersOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The number can not be negative.`
+  String get theNumberCanNotBeNegative {
+    return Intl.message(
+      'The number can not be negative.',
+      name: 'theNumberCanNotBeNegative',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid number.`
+  String get invalidNumber {
+    return Intl.message(
+      'Invalid number.',
+      name: 'invalidNumber',
       desc: '',
       args: [],
     );
@@ -370,16 +540,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Invalid phone number.`
-  String get invalidPhoneNumber {
-    return Intl.message(
-      'Invalid phone number.',
-      name: 'invalidPhoneNumber',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Email is not valid or badly formatted.`
   String get emailIsNotValidOrBadlyFormatted {
     return Intl.message(
@@ -485,16 +645,6 @@ class AppLocalizations {
     return Intl.message(
       'Phone number already in use.',
       name: 'phoneNumberAlreadyInUse',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Something went wrong.`
-  String get somethingWentWrong {
-    return Intl.message(
-      'Something went wrong.',
-      name: 'somethingWentWrong',
       desc: '',
       args: [],
     );
@@ -1472,16 +1622,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Required`
-  String get required {
-    return Intl.message(
-      'Required',
-      name: 'required',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Price`
   String get price {
     return Intl.message(
@@ -1887,26 +2027,6 @@ class AppLocalizations {
     return Intl.message(
       'You have no institutions',
       name: 'youHaveNoInstitutions',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Check internet connection`
-  String get checkInternetConnection {
-    return Intl.message(
-      'Check internet connection',
-      name: 'checkInternetConnection',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Try again`
-  String get tryAgain {
-    return Intl.message(
-      'Try again',
-      name: 'tryAgain',
       desc: '',
       args: [],
     );

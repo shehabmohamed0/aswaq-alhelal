@@ -1,6 +1,9 @@
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/root_package.dart';
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
+import '../../../../core/failures/failure.dart';
+import '../../../../core/failures/server_failure.dart';
+import '../../../../core/params/services/network_info.dart';
 import '../../../address/domain/entities/address.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../domain/repositories/institutions_repository.dart';

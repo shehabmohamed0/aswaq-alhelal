@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../../l10n/l10n.dart';
@@ -28,7 +28,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(AppLocalizations.of(context).notifications)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).notifications)),
       body: BlocBuilder<NotificationsBloc, NotificationsState>(
         builder: (context, state) {
           switch (state.initStatus) {

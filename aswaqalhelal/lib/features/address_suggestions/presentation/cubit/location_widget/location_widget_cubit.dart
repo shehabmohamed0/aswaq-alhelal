@@ -1,10 +1,10 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/packages/app_settings.dart';
-import 'package:root_package/packages/dartz.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/failures/address/location_failure.dart';
 import '../../../../address/domain/entities/geo_point.dart';

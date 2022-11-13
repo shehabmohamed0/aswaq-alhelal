@@ -3,8 +3,8 @@ import 'package:aswaqalhelal/features/orders/domain/entities/order.dart';
 import 'package:aswaqalhelal/features/orders/domain/repositories/user_orders_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/request_state.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';

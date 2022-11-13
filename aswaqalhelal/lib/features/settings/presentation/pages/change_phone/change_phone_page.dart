@@ -1,17 +1,17 @@
+import 'package:aswaqalhelal/core/extensions/formz_extesion.dart';
+import 'package:aswaqalhelal/core/form_inputs/phone_number.dart';
 import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:formz/formz.dart';
-import 'package:root_package/core/extensions/formz_extesion.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/resources/values_manager.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/routes/routes.dart';
-import 'package:root_package/widgets/international_phone_text_field.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 
+import '../../../../../core/resources/values_manager.dart';
 import '../../../../../l10n/l10n.dart';
+import '../../../../../widgets/international_phone_text_field.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../auth/presentation/pages/verifiy_phone/verifiy_phone_page.dart';
 import '../../bloc/change_phone/update_phone_cubit.dart';
@@ -23,7 +23,8 @@ class ChangePhonePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final intl = locator<AppLocalizations>();
-    final user = context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
+    final user =
+        context.select((AppBloc bloc) => bloc.state.profile) as UserProfile;
     final textController = useTextEditingController();
     return BlocProvider<UpdatePhoneCubit>(
       create: (context) => locator(),

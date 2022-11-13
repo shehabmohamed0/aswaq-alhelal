@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart' hide Order;
-import 'package:root_package/core/failures/failures.dart';
-import 'package:root_package/core/services/network_info.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:injectable/injectable.dart';
 
+import '../../../../core/failures/failure.dart';
+import '../../../../core/failures/server_failure.dart';
 import '../../../../core/params/institution_receipts/add_institution_receipts_params.dart';
 import '../../../../core/params/institution_receipts/get_institution_receipts_params.dart';
 import '../../../orders/domain/entities/order.dart';

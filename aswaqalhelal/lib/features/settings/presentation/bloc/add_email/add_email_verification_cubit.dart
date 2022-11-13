@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../../../../core/failures/auth/link_email_and_password_failure.dart';
 import '../../../../../core/params/auth/link_email_and_password_params.dart';
 import '../../../../auth/domain/usecases/link_email_and_password.dart';
 import '../../../../auth/presentation/bloc/verifiy_phone/verifiy_phone_cubit.dart';
-
 
 @injectable
 class AddEmailVerificationCubit extends VerifiyPhoneCubit {

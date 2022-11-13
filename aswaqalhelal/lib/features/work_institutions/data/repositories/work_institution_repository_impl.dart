@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/services/network_info.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../domain/work_institution_repository.dart';

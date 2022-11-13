@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/address_suggestion/params.dart';

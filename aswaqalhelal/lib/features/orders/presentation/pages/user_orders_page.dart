@@ -1,7 +1,8 @@
+import 'package:aswaqalhelal/features/widgets/check_internet_connection_widget.dart';
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/widgets/check_internet_connection_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aswaqalhelal/features/widgets/check_internet_connection_widget.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../widgets/constants.dart';
@@ -16,7 +17,7 @@ class UserOrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(AppLocalizations.of(context).myOrders)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).myOrders)),
       body: BlocConsumer<UserOrdersBloc, UserOrdersState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -29,7 +30,7 @@ class UserOrdersPage extends StatelessWidget {
               return CheckInternetConnection(onPressed: () {});
             case RequestState.loaded:
               if (state.orders.isEmpty) {
-                return  Center(
+                return Center(
                   child: NoDataWidget(
                     message: AppLocalizations.of(context).thereIsNoOrdersYet,
                   ),

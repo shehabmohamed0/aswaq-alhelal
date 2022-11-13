@@ -1,6 +1,9 @@
 import 'package:aswaqalhelal/features/auth/domain/entities/user.dart';
-import 'package:root_package/root_package.dart';
 
+import 'package:aswaqalhelal/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:dartz/dartz.dart';
 import '../../../../core/params/auth/link_email_and_password_params.dart';
 import '../../../../core/params/auth/phone_sign_in_params.dart';
 import '../../../../core/params/auth/verify_phone_params.dart';

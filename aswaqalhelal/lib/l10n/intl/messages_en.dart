@@ -20,12 +20,17 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(number) => "${number}";
+  static String m0(howMany) =>
+      "Must be at least ${Intl.plural(howMany, one: '1 character', other: '${howMany} characters')}";
+
+  static String m1(number) => "${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Continue": MessageLookupByLibrary.simpleMessage("Continue"),
         "Current": MessageLookupByLibrary.simpleMessage("Current"),
+        "acceptsIntegersOnly":
+            MessageLookupByLibrary.simpleMessage("Accepts Integers only."),
         "accountInfo": MessageLookupByLibrary.simpleMessage("Account info"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAddress": MessageLookupByLibrary.simpleMessage("Add address"),
@@ -67,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aswaqAlhilal": MessageLookupByLibrary.simpleMessage("Aswaq Alhilal"),
         "authenticationFailure":
             MessageLookupByLibrary.simpleMessage("Authentication Failure"),
+        "cachire": MessageLookupByLibrary.simpleMessage("Cachire"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cashier": MessageLookupByLibrary.simpleMessage("Cashier"),
         "change": MessageLookupByLibrary.simpleMessage("Change"),
@@ -74,8 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change number failure"),
         "changePhoneNumber":
             MessageLookupByLibrary.simpleMessage("Change phone number"),
-        "checkInternetConnection":
-            MessageLookupByLibrary.simpleMessage("Check internet connection"),
+        "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
+            "Please, check internet connection."),
         "chooseDeliveryLocation":
             MessageLookupByLibrary.simpleMessage("Choose delivery location"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
@@ -128,6 +134,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
+        "failedToUploadTheFile":
+            MessageLookupByLibrary.simpleMessage("Failed to upload the file."),
+        "failedToUploadTheImage":
+            MessageLookupByLibrary.simpleMessage("Failed to upload the image."),
+        "failedToUploadTheImages": MessageLookupByLibrary.simpleMessage(
+            "Failed to upload the images."),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "firestoreError":
             MessageLookupByLibrary.simpleMessage("Firestore error"),
@@ -137,7 +149,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "genderOptional":
             MessageLookupByLibrary.simpleMessage("Gender (optional)"),
         "governate": MessageLookupByLibrary.simpleMessage("Governate"),
-        "helloWorld": MessageLookupByLibrary.simpleMessage("Hello World!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "incorrectNumber":
             MessageLookupByLibrary.simpleMessage("incorrect number"),
@@ -150,6 +161,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidCode": MessageLookupByLibrary.simpleMessage("invalid Code."),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Email is not valid."),
+        "invalidEmailAddress":
+            MessageLookupByLibrary.simpleMessage("Invalid email address."),
+        "invalidName":
+            MessageLookupByLibrary.simpleMessage("Invalid user name."),
+        "invalidNumber":
+            MessageLookupByLibrary.simpleMessage("Invalid number."),
+        "invalidPassword": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 8 character."),
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Invalid phone number."),
         "invalidPrice": MessageLookupByLibrary.simpleMessage("Invalid price"),
@@ -172,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "mustBeAtLeastNumberCharacter": m0,
         "mustSelectAUnit":
             MessageLookupByLibrary.simpleMessage("Must select a unit"),
         "mustSelectAnItem":
@@ -222,6 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Phone number already in use."),
         "phoneNumberAlreadyIsUse": MessageLookupByLibrary.simpleMessage(
             "Phone number already is use."),
+        "phoneNumberIsAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
+            "The phone number is already registered."),
         "phoneNumberIsNotRegistered": MessageLookupByLibrary.simpleMessage(
             "Phone number is not registered."),
         "pleaseCheckInternetConnectionAndTryAgain":
@@ -229,7 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please, check internet connection and try again."),
         "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
-        "priceEGPf": m0,
+        "priceEGPf": m1,
         "priceEgp": MessageLookupByLibrary.simpleMessage("Price EGP"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
@@ -280,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The Email has already been linked to the user."),
         "theNewEmailIsInvalid":
             MessageLookupByLibrary.simpleMessage("The new email is invalid."),
+        "theNumberCanNotBeNegative": MessageLookupByLibrary.simpleMessage(
+            "The number can not be negative."),
         "thePasswordIsNotCorrect": MessageLookupByLibrary.simpleMessage(
             "The password is not correct."),
         "thePhoneNumberDoesNotCorrespondToAnyUser":
@@ -356,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("You have no institutions"),
         "youOrderHasBeenPlacedSucessfully":
             MessageLookupByLibrary.simpleMessage(
-                "You order has been placed sucessfully")
+                "You order has been placed sucessfully"),
+        "zeroIsAnInvalidNumber":
+            MessageLookupByLibrary.simpleMessage("Zero is an invalid number.")
       };
 }

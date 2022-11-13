@@ -1,4 +1,5 @@
-import 'package:root_package/core/failures/failures.dart';
+
+import '../failure.dart';
 
 /// Thrown during the logout process if a failure occurs.
 

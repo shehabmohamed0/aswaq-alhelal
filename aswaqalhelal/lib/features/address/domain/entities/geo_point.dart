@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/equatable.dart';
-class GeoPoint extends Equatable{
+import 'package:equatable/equatable.dart';
+
+class GeoPoint extends Equatable {
   @JsonKey()
   final double lat;
   @JsonKey()
@@ -8,6 +9,5 @@ class GeoPoint extends Equatable{
   const GeoPoint({required this.lat, required this.long});
 
   @override
-  List<Object?> get props => [lat,long];
-  
+  List<Object?> get props => [lat, long];
 }

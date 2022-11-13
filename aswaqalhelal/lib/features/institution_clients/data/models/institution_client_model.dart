@@ -1,6 +1,6 @@
 import 'package:aswaqalhelal/features/institution_clients/domain/entities/institution_client.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../auth/domain/entities/base_profile.dart';
 

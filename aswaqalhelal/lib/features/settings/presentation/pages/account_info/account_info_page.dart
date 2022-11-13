@@ -1,3 +1,5 @@
+import 'package:aswaqalhelal/core/form_inputs/name.dart';
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -5,12 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:formz/formz.dart';
 import 'package:intl/intl.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/resources/values_manager.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/routes/routes.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 
+import '../../../../../core/resources/values_manager.dart';
 import '../../../../../l10n/l10n.dart';
 import '../../../../auth/domain/entities/user_profile.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
@@ -48,20 +49,13 @@ class AccountInfoPage extends HookWidget {
           child: BlocConsumer<AccountInfoCubit, AccountInfoState>(
             listener: (context, state) {
               if (state.status.isSubmissionInProgress) {
-                EasyLoading.show(
-                    status: intl.loading,
-                    indicator: const FittedBox(
-                      child: SpinKitRipple(
-                        duration: Duration(milliseconds: 1200),
-                        color: Colors.white,
-                      ),
-                    ));
+                showLoadingDialog();
               } else if (state.status.isSubmissionFailure) {
-                EasyLoading.dismiss();
+                dismissLoadingDialog();
                 showErrorSnackBar(
                     context, state.errorMessage ?? intl.updateFailed);
               } else if (state.status.isSubmissionSuccess) {
-                EasyLoading.dismiss();
+                dismissLoadingDialog();
                 Navigator.pop(context);
               }
             },

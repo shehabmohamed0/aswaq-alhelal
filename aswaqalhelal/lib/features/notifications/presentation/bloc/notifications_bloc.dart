@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:developer';
 
-import 'package:root_package/packages/bloc_concurrency.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/packages/stream_transform.dart';
+import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 import '../../../../core/request_state.dart';
 import '../../domain/entities/fstore_notification_item.dart';
@@ -46,7 +46,6 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
     either.fold(
       (_) => emit(state.copyWith(initStatus: RequestState.error)),
       (notifications) {
-
         final newList = List.of(state.notifications);
         FStoreNotificationItem notification;
         for (int i = 0; i < notifications.length; i++) {

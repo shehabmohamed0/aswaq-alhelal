@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/core/resources/values_manager.dart';
+
+import '../../../../core/resources/values_manager.dart';
 
 class SettingTextFormField extends StatelessWidget {
   const SettingTextFormField({

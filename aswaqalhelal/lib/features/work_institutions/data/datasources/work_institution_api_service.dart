@@ -1,7 +1,7 @@
 import 'package:aswaqalhelal/features/auth/data/models/user/institution_profile_model.dart';
 import 'package:aswaqalhelal/features/work_institutions/domain/work_institution_repository.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class WorkIstitutionsApiService {
   Future<List<InstitutionProfileModel>> getWorkInstitutions(

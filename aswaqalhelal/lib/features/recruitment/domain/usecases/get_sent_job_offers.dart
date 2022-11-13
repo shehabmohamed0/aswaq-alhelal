@@ -1,7 +1,8 @@
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/usecase/usecase.dart';
-import 'package:root_package/packages/dartz.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/params/usecase/usecase.dart';
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../entities/job_offer.dart';
 import '../repositories/recruitment_repository.dart';
@@ -12,7 +13,8 @@ class GetSentJobOffers extends UseCase<List<JobOffer>, GetSentJobOffersParams> {
 
   GetSentJobOffers(this._repository);
   @override
-  Future<Either<Failure, List<JobOffer>>> call({required GetSentJobOffersParams params}) {
+  Future<Either<Failure, List<JobOffer>>> call(
+      {required GetSentJobOffersParams params}) {
     return _repository.getSentJobOffers(params);
   }
 }

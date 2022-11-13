@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:root_package/core/locale/locale_cubit.dart';
-import 'package:root_package/core/resources/theme_manager.dart';
-import 'package:root_package/l10n/l10n.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
 
+import 'core/locale/locale_cubit.dart';
+import 'core/resources/theme_manager.dart';
 import 'core/services/notification_service.dart';
 import 'core/utils/logs.dart';
 import 'features/auth/presentation/bloc/app_status/app_bloc.dart';
@@ -15,6 +13,7 @@ import 'features/notifications/domain/entities/fstore_notification_item.dart';
 import 'features/notifications/presentation/bloc/notifications_bloc.dart';
 import 'features/start_up/presentation/cubit/start_up/start_up_cubit.dart';
 import 'l10n/l10n.dart';
+import 'locator/locator.dart';
 import 'router.dart';
 
 class App extends StatefulWidget {
@@ -115,7 +114,7 @@ class _AppState extends State<App>
             ),
             localizationsDelegates: const [
               AppLocalizations.delegate,
-              RootPackageLocalizations.delegate,
+              AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -129,8 +128,7 @@ class _AppState extends State<App>
                 return const Locale('en', '');
               }
             },
-            supportedLocales:
-                RootPackageLocalizations.delegate.supportedLocales,
+            supportedLocales: AppLocalizations.delegate.supportedLocales,
             locale: state.locale,
           );
         },

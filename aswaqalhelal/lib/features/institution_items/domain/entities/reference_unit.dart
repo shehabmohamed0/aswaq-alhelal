@@ -1,4 +1,4 @@
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 class ReferenceUnit extends Equatable {
   final String id;

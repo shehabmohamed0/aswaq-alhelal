@@ -1,4 +1,4 @@
-import 'package:root_package/core/failures/failure.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
 
 class LocationDeniedForeverFailure extends Failure {
   final String message;
@@ -7,6 +7,5 @@ class LocationDeniedForeverFailure extends Failure {
 }
 
 class LocationDeniedFailure extends Failure {
-
   LocationDeniedFailure();
 }

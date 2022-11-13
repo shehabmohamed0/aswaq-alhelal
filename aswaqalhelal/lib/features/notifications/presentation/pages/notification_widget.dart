@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 import 'package:timeago/timeago.dart' as timeage;
 
 import '../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';

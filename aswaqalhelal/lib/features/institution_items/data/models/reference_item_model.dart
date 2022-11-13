@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/json_converters/time_stamp_converter.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:aswaqalhelal/core/json_converters/time_stamp_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/reference_item.dart';
 import 'unit_model.dart';
@@ -36,7 +36,7 @@ class ReferenceItemModel extends ReferenceItem {
   ReferenceItemModel _copyWithId(String id) => ReferenceItemModel(
         id: id,
         name: name,
-        imageUrl:imageUrl,
+        imageUrl: imageUrl,
         institutionId: institutionId,
         unitModels: unitModels,
         creationTime: creationTime,

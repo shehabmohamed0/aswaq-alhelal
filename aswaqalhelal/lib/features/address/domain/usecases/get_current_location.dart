@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/core/usecase/usecase.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:aswaqalhelal/core/params/usecase/usecase.dart';
+import 'package:injectable/injectable.dart';
 
 import '../entities/geo_point.dart';
 import '../repositories/addresses_repository.dart';

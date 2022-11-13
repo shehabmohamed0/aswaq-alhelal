@@ -1,12 +1,12 @@
+import 'package:aswaqalhelal/core/resources/color_manager.dart';
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:root_package/core/resources/color_manager.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/font_awesome_flutter.dart';
-import 'package:root_package/packages/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../domain/entities/order.dart';

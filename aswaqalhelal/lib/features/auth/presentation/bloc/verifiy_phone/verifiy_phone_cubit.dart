@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:root_package/core/form_inputs/otp.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+
+import '../../../../../core/form_inputs/otp.dart';
 
 part 'verifiy_phone_state.dart';
 

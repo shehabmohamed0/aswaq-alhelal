@@ -1,16 +1,17 @@
+import 'package:aswaqalhelal/core/form_inputs/phone_number.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/resources/color_manager.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/formz.dart';
-import 'package:root_package/packages/url_launcher.dart';
-import 'package:root_package/widgets/ensure_visible_when_focused.dart';
-import 'package:root_package/widgets/international_phone_text_field.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:formz/formz.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/resources/color_manager.dart';
 import '../../../../../l10n/l10n.dart';
+import '../../../../../widgets/ensure_visible_when_focused.dart';
+import '../../../../../widgets/international_phone_text_field.dart';
+import '../../../../../widgets/snack_bar.dart';
 import '../../bloc/sign_in/phone_sign_in_form_cubit.dart';
 import '../verifiy_phone/widgets/otp_widget.dart';
 

@@ -1,12 +1,13 @@
+import 'package:aswaqalhelal/core/form_inputs/required_object.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/core/form_inputs/required_object.dart';
-import 'package:root_package/packages/dartz.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
 
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../../core/form_inputs/minimum_lenght_string.dart';
 import '../../../../../core/params/addresses/add_address_params.dart';
 import '../../../../../core/params/addresses/update_address_params.dart';
 import '../../../../address_suggestions/domain/entities/entities.dart';

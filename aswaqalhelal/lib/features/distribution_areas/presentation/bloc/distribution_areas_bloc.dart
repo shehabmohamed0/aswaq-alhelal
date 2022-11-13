@@ -3,11 +3,11 @@ import 'dart:collection';
 
 import 'package:aswaqalhelal/core/extensions/prepare_for_search.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/packages/dartz.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/packages/stream_transform.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:dartz/dartz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 import '../../../../core/params/address_suggestion/params.dart';
 import '../../../../l10n/l10n.dart';

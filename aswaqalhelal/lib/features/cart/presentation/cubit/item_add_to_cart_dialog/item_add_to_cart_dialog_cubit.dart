@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../institution_items/domain/entities/unit.dart';
 

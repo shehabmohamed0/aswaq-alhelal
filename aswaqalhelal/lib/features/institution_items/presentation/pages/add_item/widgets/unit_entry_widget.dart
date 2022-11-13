@@ -115,15 +115,10 @@ class _UnitEntryState extends State<UnitEntry> {
           listener: (context, state) {
             switch (state.status) {
               case UnitEntryStatus.loading:
-                EasyLoading.show(
-                    indicator: const FittedBox(
-                  child: SpinKitRipple(
-                      duration: Duration(milliseconds: 1200),
-                      color: Colors.white),
-                ));
+                showLoadingDialog();
                 break;
               case UnitEntryStatus.success:
-                EasyLoading.dismiss();
+                dismissLoadingDialog();
                 nameController.text = state.unit.value!.name;
                 nameFocusNode.unfocus();
                 if (widget.firstIndex &&
@@ -136,7 +131,7 @@ class _UnitEntryState extends State<UnitEntry> {
                 break;
               case UnitEntryStatus.failure:
                 showErrorSnackBar(context, state.errorMessage);
-                EasyLoading.dismiss();
+                dismissLoadingDialog();
                 break;
               case UnitEntryStatus.unitSelected:
                 nameController.text = state.unit.value!.name;

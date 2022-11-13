@@ -1,8 +1,7 @@
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../../l10n/l10n.dart';
@@ -80,19 +79,13 @@ class InstitutionOrdersPage extends StatelessWidget {
                   case RequestState.initial:
                     break;
                   case RequestState.loading:
-                    EasyLoading.show(
-                        indicator: const FittedBox(
-                      child: SpinKitRipple(
-                        duration: Duration(milliseconds: 1200),
-                        color: Colors.white,
-                      ),
-                    ));
+                    showLoadingDialog();
                     break;
                   case RequestState.loaded:
-                    EasyLoading.dismiss();
+                    dismissLoadingDialog();
                     break;
                   case RequestState.error:
-                    EasyLoading.dismiss();
+                    dismissLoadingDialog();
                     showErrorSnackBar(context, state.errorMessage);
                     break;
                 }

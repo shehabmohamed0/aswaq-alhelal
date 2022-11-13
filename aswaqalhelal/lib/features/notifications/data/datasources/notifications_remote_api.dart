@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/firebase_auth.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/fstore_notification_item.dart';
 import '../../domain/repositories/notifications_repository.dart';
@@ -43,7 +43,6 @@ class NotificationsApiServiceImpl extends NotificationsApiService {
             FStoreNotificationItem.fromJson(docSnapshot.data(), docSnapshot))
         .toList();
 
-    
     return notifications;
   }
 

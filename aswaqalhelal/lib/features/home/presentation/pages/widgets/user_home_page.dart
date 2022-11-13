@@ -34,8 +34,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
         return false;
       },
       listener: (context, state) {
-        EasyLoading.dismiss();
-
+        dismissLoadingDialog();
         widget.cubit.getInstitutions(state.profile.toUser().address!);
       },
       buildWhen: (previous, current) {
@@ -210,14 +209,7 @@ class _AddressesBottomSheetState extends State<AddressesBottomSheet> {
                           onTap: widget.currentAddress.id == address.id
                               ? () {}
                               : () {
-                                  EasyLoading.show(
-                                    indicator: const FittedBox(
-                                      child: SpinKitRipple(
-                                        duration: Duration(milliseconds: 1200),
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  );
+                                  showLoadingDialog();
                                   FirebaseFirestore.instance
                                       .doc(FirestorePath.profile(widget.userId))
                                       .update({
@@ -228,7 +220,7 @@ class _AddressesBottomSheetState extends State<AddressesBottomSheet> {
                                     // EasyLoading.dismiss();
                                     Navigator.pop(context);
                                   }).onError((error, stackTrace) {
-                                    EasyLoading.dismiss();
+                                    dismissLoadingDialog();
                                     showErrorSnackBar(
                                         context, intl.somethingWentWrong);
                                   });

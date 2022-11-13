@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:aswaqalhelal/features/institution_items/domain/entities/unit.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../../../l10n/l10n.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';
@@ -122,7 +122,6 @@ class _InstitutionsLoadedWidget extends StatelessWidget {
             itemName: item.name,
             unitName: item.units.first.name,
             unitPrice: item.units.first.price,
-            
             onLongPressed: () {
               Navigator.push(
                 context,

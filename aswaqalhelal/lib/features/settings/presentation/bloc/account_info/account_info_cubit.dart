@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/form_inputs/name.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/form_inputs/name.dart';
 
 import '../../../../../core/params/settings/update_profile_params.dart';
 import '../../../../auth/domain/entities/user_profile.dart';

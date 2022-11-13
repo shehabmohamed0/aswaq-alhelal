@@ -1,13 +1,13 @@
+import 'package:aswaqalhelal/core/extensions/formz_extesion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:formz/formz.dart';
-import 'package:root_package/core/extensions/formz_extesion.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/widgets/ensure_visible_when_focused.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
 
 import '../../../../../l10n/l10n.dart';
+import '../../../../../widgets/ensure_visible_when_focused.dart';
+import '../../../../../widgets/snack_bar.dart';
 import '../../bloc/verifiy_phone/verifiy_phone_cubit.dart';
 import 'widgets/otp_widget.dart';
 

@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:root_package/core/form_inputs/name.dart';
-import 'package:root_package/core/form_inputs/nullable_number.dart';
-import 'package:root_package/core/form_inputs/number.dart';
-import 'package:root_package/core/form_inputs/required_object.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
+import 'package:aswaqalhelal/core/form_inputs/name.dart';
+import 'package:aswaqalhelal/core/form_inputs/required_object.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/form_inputs/nullable_number.dart';
+import '../../../../core/form_inputs/number.dart';
 import '../../domain/entities/unit.dart';
 import '../pages/add_item/widgets/auto_suggest_text_field.dart';
 

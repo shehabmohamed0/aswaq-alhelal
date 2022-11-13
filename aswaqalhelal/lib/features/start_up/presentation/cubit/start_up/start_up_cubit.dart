@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:injectable/injectable.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../domain/usecases/needs_a_forced_update.dart';
 import '../../../domain/usecases/check_if_seen_before.dart';

@@ -1,23 +1,4 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
-  "invalidEmailAddress": "Invalid email address.",
-  "invalidName": "Invalid user name.",
-  "invalidPassword": "Password must be at least 8 character.",
-  "invalidPhoneNumber": "Invalid phone number.",
-  "phoneNumberIsAlreadyRegistered": "The phone number is already registered.",
-  "checkInternetConnection": "Please, check internet connection.",
-  "somethingWentWrong": "Something went wrong.",
-  "required": "Required",
-  "tryAgain": "Try again",
-  "failedToUploadTheImage": "Failed to upload the image.",
-  "failedToUploadTheFile": "Failed to upload the file.",
-  "failedToUploadTheImages": "Failed to upload the images.",
-  "mustBeAtLeastNumberCharacter": "Must be at least {howMany, plural, one{1 character} other{{howMany} characters}}",
-  "zeroIsAnInvalidNumber": "Zero is an invalid number.",
-  "acceptsIntegersOnly": "Accepts Integers only.",
-  "theNumberCanNotBeNegative": "The number can not be negative.",
-  "invalidNumber": "Invalid number."
+ 
+ 
 }

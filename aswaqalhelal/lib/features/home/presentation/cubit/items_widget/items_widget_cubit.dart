@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../../../core/extensions/prepare_for_search.dart';
 

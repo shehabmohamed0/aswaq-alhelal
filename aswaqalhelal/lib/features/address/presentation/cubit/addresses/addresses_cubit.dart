@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:root_package/core/params/no_args_params.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/params/no_args_params.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/address.dart';
 import '../../../domain/usecases/get_addresses.dart';

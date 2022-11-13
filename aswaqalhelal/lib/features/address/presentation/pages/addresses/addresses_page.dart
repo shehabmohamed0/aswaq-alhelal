@@ -1,7 +1,8 @@
 import 'package:aswaqalhelal/l10n/l10n.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../widgets/check_internet_connection_widget.dart';
@@ -18,7 +19,7 @@ class AddressesPage extends StatelessWidget {
     final user = context.read<AppBloc>().state.profile.toUser();
     return Scaffold(
       appBar: AppBar(
-        title:  Text(AppLocalizations.of(context).addresses),
+        title: Text(AppLocalizations.of(context).addresses),
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [
@@ -36,8 +37,8 @@ class AddressesPage extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               alignment: Alignment.center,
-              child:  Text(
-              intl.add,
+              child: Text(
+                intl.add,
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
@@ -85,7 +86,7 @@ class AddressesPage extends StatelessWidget {
               case AddressesEmpty:
                 return Center(
                   child: Text(
-                   intl.theirIsNoAddress,
+                    intl.theirIsNoAddress,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 );

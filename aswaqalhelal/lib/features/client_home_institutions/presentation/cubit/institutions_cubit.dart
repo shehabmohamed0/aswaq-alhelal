@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
-import 'package:root_package/packages/freezed_annotation.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../address/domain/entities/address.dart';
 import '../../domain/usecases/get_institutions.dart';

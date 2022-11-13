@@ -18,11 +18,11 @@ class RequiredObject<T> extends FormzInput<T?, RequiredObjectValidationError> {
 
   /// {@macro required object}
   const RequiredObject.dirty(T? value) : super.dirty(value);
-
+  bool get isNull => pure || invalid;
+  bool get isNotNull => valid;
   @override
   RequiredObjectValidationError? validator(T? value) {
-    if (value != null) return null;
-    return RequiredObjectValidationError.invalid;
+    return value == null ? RequiredObjectValidationError.invalid : null;
   }
 }
 
@@ -36,6 +36,7 @@ extension RequiredObjectValidationMessage on RequiredObject {
         return intl.required;
       }
     }
+
     print('here');
     return null;
   }

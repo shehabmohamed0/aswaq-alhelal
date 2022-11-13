@@ -1,7 +1,7 @@
 import 'dart:collection';
 
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../address/domain/entities/address.dart';
 import '../../../auth/data/models/user/institution_profile_model.dart';
@@ -56,7 +56,7 @@ class InstitutionsApiServiceImpl extends InstitutionsApiService {
     final docs = await Future.wait(futures);
 
     final models = docs.map((e) {
-     return InstitutionProfileModel.fromFirestore(e);
+      return InstitutionProfileModel.fromFirestore(e);
     }).toList();
     return models;
   }

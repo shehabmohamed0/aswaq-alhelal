@@ -1,16 +1,13 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/form_inputs/phone_number.dart';
 
 import '../../../../../core/failures/auth/phone_credential_failure.dart';
+import '../../../../../core/failures/server_failure.dart';
+import '../../../../../core/form_inputs/phone_number.dart';
 import '../../../../../core/params/auth/verify_phone_params.dart';
 import '../../../../auth/domain/usecases/verify_phone_number.dart';
-
 
 part 'update_phone_state.dart';
 
@@ -41,8 +38,7 @@ class UpdatePhoneCubit extends Cubit<UpdatePhoneState> {
           ));
         },
         verificationFailed: (authException) {
-          final failure =
-              PhoneCredentialFailure.fromCode(authException.code);
+          final failure = PhoneCredentialFailure.fromCode(authException.code);
           emit(
             state.copyWith(
               errorMessage: failure.message,

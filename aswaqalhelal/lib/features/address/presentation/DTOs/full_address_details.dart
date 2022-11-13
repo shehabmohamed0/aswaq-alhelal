@@ -1,5 +1,5 @@
 import 'package:aswaqalhelal/features/address/domain/entities/address.dart';
-import 'package:root_package/packages/equatable.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../address_suggestions/presentation/DTOs/ref_address_details.dart';
 import '../../domain/entities/geo_point.dart';

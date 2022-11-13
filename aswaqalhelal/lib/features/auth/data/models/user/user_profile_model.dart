@@ -1,12 +1,14 @@
 import 'package:aswaqalhelal/features/address/data/models/address_model.dart';
 import 'package:aswaqalhelal/features/auth/domain/entities/base_profile.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../domain/entities/user_profile.dart';
 part 'user_profile_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(
+  explicitToJson: true,
+)
 class UserProfileModel extends UserProfile {
   @JsonKey(name: 'address')
   final AddressModel? addressModel;

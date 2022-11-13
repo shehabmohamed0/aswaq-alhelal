@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../bloc/notifications_bloc.dart';
 

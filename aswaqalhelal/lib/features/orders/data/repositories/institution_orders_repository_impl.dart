@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:aswaqalhelal/core/failures/orders/update_order_failure.dart';
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:dartz/dartz.dart' hide Order;
-import 'package:root_package/core/exceptions/exceptions.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/services/network_info.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import 'package:aswaqalhelal/core/params/services/network_info.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/exceptions/orders/accept_order_exception.dart';
 import '../../domain/entities/order.dart';

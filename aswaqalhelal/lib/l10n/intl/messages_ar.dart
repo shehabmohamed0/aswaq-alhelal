@@ -20,12 +20,17 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(number) => "${number}";
+  static String m0(howMany) =>
+      "يجب ان تكون على الاقل ${Intl.plural(howMany, one: 'حرف واحد', two: 'حرفين', other: '${howMany} حروف')}";
+
+  static String m1(number) => "${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Continue": MessageLookupByLibrary.simpleMessage("استمر"),
         "Current": MessageLookupByLibrary.simpleMessage("الحالى"),
+        "acceptsIntegersOnly":
+            MessageLookupByLibrary.simpleMessage("يقبل الاعداد الصحيحة فقط"),
         "accountInfo": MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "add": MessageLookupByLibrary.simpleMessage("إضافة"),
         "addAddress": MessageLookupByLibrary.simpleMessage("اضف عنوان"),
@@ -64,14 +69,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "aswaqAlhilal": MessageLookupByLibrary.simpleMessage("أسواق الهلال"),
         "authenticationFailure":
             MessageLookupByLibrary.simpleMessage("فشل فالتحقق."),
+        "cachire": MessageLookupByLibrary.simpleMessage("كاشير"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "change": MessageLookupByLibrary.simpleMessage("تغيير"),
         "changeNumberFailure":
             MessageLookupByLibrary.simpleMessage("فشل تغيير الرقم"),
         "changePhoneNumber":
             MessageLookupByLibrary.simpleMessage("تغيير رقم الهاتف"),
-        "checkInternetConnection":
-            MessageLookupByLibrary.simpleMessage("تحقق من اتصال الإنترنت"),
+        "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
+            "رجاءََ٫ تفقد اتصال الانترنت."),
         "chooseDeliveryLocation":
             MessageLookupByLibrary.simpleMessage("اختر موقع التوصيل"),
         "city": MessageLookupByLibrary.simpleMessage("مدينة"),
@@ -125,6 +131,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "employees": MessageLookupByLibrary.simpleMessage("الموظفين"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "failed": MessageLookupByLibrary.simpleMessage("فشل"),
+        "failedToUploadTheFile":
+            MessageLookupByLibrary.simpleMessage("فشل رفع الملف"),
+        "failedToUploadTheImage":
+            MessageLookupByLibrary.simpleMessage("فشل رفع الصورة"),
+        "failedToUploadTheImages":
+            MessageLookupByLibrary.simpleMessage("فشل رفع الصور"),
         "female": MessageLookupByLibrary.simpleMessage("انثى"),
         "firestoreError": MessageLookupByLibrary.simpleMessage("خطأ بالسيرفر"),
         "from": MessageLookupByLibrary.simpleMessage("من "),
@@ -133,7 +145,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "genderOptional":
             MessageLookupByLibrary.simpleMessage("الجنس (اختيارى)"),
         "governate": MessageLookupByLibrary.simpleMessage("محافظة"),
-        "helloWorld": MessageLookupByLibrary.simpleMessage("اهلا بالعالم"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "incorrectNumber": MessageLookupByLibrary.simpleMessage("رقم غير صالح"),
         "incorrectPasswordPleaseTryAgain": MessageLookupByLibrary.simpleMessage(
@@ -144,8 +155,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidCode": MessageLookupByLibrary.simpleMessage("رمو خاطىْ"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("البريد الإلكترونى غير صالح."),
+        "invalidEmailAddress":
+            MessageLookupByLibrary.simpleMessage("البريد الإلكترونى غير صحيح."),
+        "invalidName":
+            MessageLookupByLibrary.simpleMessage("اسم المستخدم غير صحيح."),
+        "invalidNumber": MessageLookupByLibrary.simpleMessage("رقم غير صحيح"),
+        "invalidPassword": MessageLookupByLibrary.simpleMessage(
+            "كلمة المرور يجب ان تكون على الاقل ٨ حروف"),
         "invalidPhoneNumber":
-            MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح"),
+            MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح."),
         "invalidPrice": MessageLookupByLibrary.simpleMessage("سعر غير صالح"),
         "invalidQuantity":
             MessageLookupByLibrary.simpleMessage("كمية غير صالحة"),
@@ -166,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+        "mustBeAtLeastNumberCharacter": m0,
         "mustSelectAUnit":
             MessageLookupByLibrary.simpleMessage("يجب اختيار وحدة"),
         "mustSelectAnItem":
@@ -219,6 +238,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "رقم الهاتف قيد الاستخدام بالفعل."),
         "phoneNumberAlreadyIsUse":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف مستخدم بالفعل."),
+        "phoneNumberIsAlreadyRegistered":
+            MessageLookupByLibrary.simpleMessage("رقم الهاتف مسجل مسبقا."),
         "phoneNumberIsNotRegistered":
             MessageLookupByLibrary.simpleMessage("رقم الهاتف غير مسجل."),
         "pleaseCheckInternetConnectionAndTryAgain":
@@ -226,7 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "من فضلك ، تحقق من اتصال الإنترنت وحاول مرة أخرى."),
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "price": MessageLookupByLibrary.simpleMessage("السعر"),
-        "priceEGPf": m0,
+        "priceEGPf": m1,
         "priceEgp": MessageLookupByLibrary.simpleMessage("السعر بالجنيه"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "processing": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
@@ -254,7 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "سجل الدخول اولا لتطبيق هذه التعديلات."),
         "signUp": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "somethingWentWrong":
-            MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+            MessageLookupByLibrary.simpleMessage("حدث خطأ ما."),
         "submit": MessageLookupByLibrary.simpleMessage("تسليم"),
         "switchCurrencies":
             MessageLookupByLibrary.simpleMessage("تبديل العملات"),
@@ -275,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "البريدالالكترونى تم ربطه بالحساب مسبقاََ."),
         "theNewEmailIsInvalid": MessageLookupByLibrary.simpleMessage(
             "البريد الالتكترونى الجديد غير صالح."),
+        "theNumberCanNotBeNegative": MessageLookupByLibrary.simpleMessage(
+            "لا يمكن ان يكون العدد سالباََ"),
         "thePasswordIsNotCorrect":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير صحيحة."),
         "thePhoneNumberDoesNotCorrespondToAnyUser":
@@ -313,7 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "لقد قمت بعدد كبير من الطلبات."),
         "totalPrice": MessageLookupByLibrary.simpleMessage("السعر الكلى:"),
         "totalPrice_": MessageLookupByLibrary.simpleMessage("السعر الكلى: "),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجددا"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجدداََ"),
         "unit": MessageLookupByLibrary.simpleMessage("الوحدة"),
         "unitExsistsBefore":
             MessageLookupByLibrary.simpleMessage("الوحدة موجودة من قبل"),
@@ -348,6 +371,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveNoInstitutions":
             MessageLookupByLibrary.simpleMessage("ليس لديك مؤسسات"),
         "youOrderHasBeenPlacedSucessfully":
-            MessageLookupByLibrary.simpleMessage("تم إسال طلبك بنجاح")
+            MessageLookupByLibrary.simpleMessage("تم إسال طلبك بنجاح"),
+        "zeroIsAnInvalidNumber":
+            MessageLookupByLibrary.simpleMessage("الصفر رقم غير صحيح")
       };
 }

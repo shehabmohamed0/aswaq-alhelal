@@ -1,16 +1,15 @@
 import 'dart:developer';
 
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/routes/routes.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../../core/firebase/firebase_path.dart';
 import '../../../../l10n/l10n.dart';
+import '../../../../widgets/snack_bar.dart';
 import '../../../address/data/models/address_model.dart';
 import '../../../address/domain/entities/address.dart';
 import '../../../address/presentation/pages/addresses/widgets/address_widget.dart';

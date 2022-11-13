@@ -1,8 +1,13 @@
-import 'package:root_package/packages/injectable.dart';
-import 'package:root_package/root_package.dart';
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../core/failures/failure.dart';
+import '../../../../core/params/usecase/usecase.dart';
+import '../repositories/distribution_area_repository.dart';
+
 
 import '../entities/distribution_area.dart';
-import '../repositories/distribution_area_repository.dart';
+
 @LazySingleton()
 class UpdateDistributionArea
     extends UseCase<DistributionArea, UpdateDistributionAreaParams> {

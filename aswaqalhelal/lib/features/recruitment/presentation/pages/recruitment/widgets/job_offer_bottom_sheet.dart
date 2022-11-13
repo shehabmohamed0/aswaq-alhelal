@@ -1,8 +1,8 @@
+import 'package:aswaqalhelal/widgets/international_phone_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/widgets/international_phone_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/form_inputs/phone_number.dart';
 import '../../../../../../l10n/l10n.dart';
 import '../../../cubit/job_offers/send_job_offers_cubit.dart';
 import '../DTOs/recruitment_page_arguments.dart';

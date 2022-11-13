@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../l10n/l10n.dart';
 import '../../../../address/presentation/widgets/normal_text_field.dart';

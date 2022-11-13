@@ -1,13 +1,14 @@
+import 'package:aswaqalhelal/core/form_inputs/minimum_lenght_string.dart';
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../../../locator/locator.dart';
+import '../../../../../widgets/snack_bar.dart';
 import '../../../../address_suggestions/presentation/bloc/address_suggestions_bloc.dart';
 import '../../../../address_suggestions/presentation/cubit/location_widget/location_widget_cubit.dart';
 import '../../../../address_suggestions/presentation/widgets/address_details_widget.dart';
@@ -47,6 +48,7 @@ class AddEditAddressPage extends HookWidget {
             case AddEditAddressStatus.initial:
               break;
             case AddEditAddressStatus.loading:
+              showLoadingDialog();
               EasyLoading.show(
                   indicator: const FittedBox(
                 child: SpinKitRipple(
@@ -56,7 +58,7 @@ class AddEditAddressPage extends HookWidget {
               ));
               break;
             case AddEditAddressStatus.success:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               Navigator.pop(context, state.address);
               showSuccessSnackBar(
                   context,
@@ -65,7 +67,7 @@ class AddEditAddressPage extends HookWidget {
                       : intl.updatedSuccefully);
               break;
             case AddEditAddressStatus.failure:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               showErrorSnackBar(context, state.errorMessage!);
               break;
           }

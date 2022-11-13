@@ -1,6 +1,6 @@
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/cloud_functions.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/repositories/recruitment_repository.dart';
 import '../models/employee_model.dart';

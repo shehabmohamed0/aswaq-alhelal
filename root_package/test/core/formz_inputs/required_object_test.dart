@@ -11,12 +11,17 @@ void main() {
       },
     );
     test(
-      'RequiredObject.dirty() is invalid',
+      'RequiredObject.pure() valid equals false',
       () {
-        const test1 = RequiredObject<int>.pure();
-        final test = RequiredObject<int>.dirty(test1.value);
+        const test = RequiredObject<int>.pure();
+        expect(test.valid, false);
+      },
+    );
+    test(
+      'RequiredObject.pure() invalid == true',
+      () {
+        const test = RequiredObject<int>.pure();
         expect(test.invalid, true);
-        expect(test.error, RequiredObjectValidationError.invalid);
       },
     );
   });

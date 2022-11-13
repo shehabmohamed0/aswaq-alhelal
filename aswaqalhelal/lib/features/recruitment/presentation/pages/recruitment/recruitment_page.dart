@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_hooks.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 
 import '../../../../../core/request_state.dart';
 import '../../../../../l10n/l10n.dart';
@@ -90,26 +89,21 @@ class RecruitmentPage extends HookWidget {
               case RequestState.initial:
                 break;
               case RequestState.loading:
-                EasyLoading.show(
-                    indicator: const FittedBox(
-                  child: SpinKitRipple(
-                    duration: Duration(milliseconds: 1200),
-                    color: Colors.white,
-                  ),
-                ));
+                showLoadingDialog();
+                
 
                 break;
               case RequestState.loaded:
                 controller?.close();
-                EasyLoading.dismiss();
-
-                showSuccessSnackBar(context, AppLocalizations.of(context).sendSuccessfuly);
+                dismissLoadingDialog();
+                showSuccessSnackBar(
+                    context, AppLocalizations.of(context).sendSuccessfuly);
                 break;
               case RequestState.error:
                 // controller?.close();
 
                 showErrorSnackBar(context, state.errorMessage!);
-                EasyLoading.dismiss();
+                dismissLoadingDialog();
                 break;
             }
           },
@@ -148,8 +142,8 @@ class RecruitmentPage extends HookWidget {
                         context),
                     sliver: SliverAppBar(
                       centerTitle: false,
-                      title:  Text(
-                          AppLocalizations.of(context).recruitment), // This is the title in the app bar.
+                      title: Text(AppLocalizations.of(context)
+                          .recruitment), // This is the title in the app bar.
                       pinned: true,
                       floating: true,
                       // The "forceElevated" property causes the SliverAppBar to show

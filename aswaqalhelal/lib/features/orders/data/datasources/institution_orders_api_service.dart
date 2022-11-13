@@ -1,7 +1,6 @@
 import 'package:aswaqalhelal/features/orders/data/models/order_model.dart';
-import 'package:root_package/core/exceptions/exceptions.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/exceptions/orders/accept_order_exception.dart';
 import '../../../../core/firebase/firebase_path.dart';

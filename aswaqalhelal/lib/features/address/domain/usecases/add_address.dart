@@ -1,7 +1,9 @@
+import 'package:aswaqalhelal/core/params/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
-import 'package:root_package/core/failures/failure.dart';
-import 'package:root_package/core/usecase/usecase.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/failure.dart';
+
+import 'package:aswaqalhelal/core/params/usecase/usecase.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/params/addresses/add_address_params.dart';
 import '../entities/address.dart';

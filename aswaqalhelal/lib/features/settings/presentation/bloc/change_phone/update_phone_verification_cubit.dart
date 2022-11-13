@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:root_package/core/failures/firestore_failure.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../../../core/failures/firestore_failure.dart';
 import '../../../../../core/failures/settings/update_phone_number_failure.dart';
 import '../../../../../core/params/settings/update_phone_params.dart';
 import '../../../../auth/presentation/bloc/verifiy_phone/verifiy_phone_cubit.dart';

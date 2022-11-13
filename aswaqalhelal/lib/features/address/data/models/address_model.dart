@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/address.dart';
 import 'geo_point_model.dart';
@@ -59,5 +59,4 @@ class AddressModel extends Address {
 
   /// Connect the generated [_$AddressModelToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$AddressModelToJson(this);
-
 }

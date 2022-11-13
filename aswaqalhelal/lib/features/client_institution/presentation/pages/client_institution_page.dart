@@ -1,13 +1,12 @@
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/packages/font_awesome_flutter.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../../l10n/l10n.dart';
+import '../../../../widgets/snack_bar.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/domain/entities/user_profile.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
@@ -39,16 +38,10 @@ class ClientInstitutionPage extends StatelessWidget {
             case RequestState.initial:
               break;
             case RequestState.loading:
-              EasyLoading.show(
-                  indicator: const FittedBox(
-                child: SpinKitRipple(
-                  duration: Duration(milliseconds: 1200),
-                  color: Colors.white,
-                ),
-              ));
+              showLoadingDialog();
               break;
             case RequestState.loaded:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               showSuccessSnackBar(
                   context, intl.youOrderHasBeenPlacedSucessfully);
               Navigator.pop(context);

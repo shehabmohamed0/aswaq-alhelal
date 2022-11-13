@@ -1,13 +1,14 @@
+import 'package:aswaqalhelal/core/form_inputs/email.dart';
+import 'package:aswaqalhelal/core/form_inputs/phone_number.dart';
 import 'package:aswaqalhelal/features/auth/domain/entities/institution_profile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/core/failures/server_failure.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/core/form_inputs/minimum_lenght_string.dart';
-import 'package:root_package/core/form_inputs/required_object.dart';
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/formz.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:aswaqalhelal/core/failures/server_failure.dart';
+import '../../../../../core/form_inputs/minimum_lenght_string.dart';
+import 'package:aswaqalhelal/core/form_inputs/required_object.dart';
+import 'package:equatable/equatable.dart';
+import 'package:formz/formz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/params/add_institution_params/add_institution_params.dart';
 import '../../../../address_suggestions/domain/entities/entities.dart';

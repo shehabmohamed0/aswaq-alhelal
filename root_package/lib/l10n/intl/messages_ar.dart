@@ -20,41 +20,6 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(howMany) =>
-      "يجب ان تكون على الاقل ${Intl.plural(howMany, one: 'حرف واحد', two: 'حرفين', other: '${howMany} حروف')}";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "acceptsIntegersOnly":
-            MessageLookupByLibrary.simpleMessage("يقبل الاعداد الصحيحة فقط"),
-        "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
-            "رجاءََ٫ تفقد اتصال الانترنت."),
-        "failedToUploadTheFile":
-            MessageLookupByLibrary.simpleMessage("فشل رفع الملف"),
-        "failedToUploadTheImage":
-            MessageLookupByLibrary.simpleMessage("فشل رفع الصورة"),
-        "failedToUploadTheImages":
-            MessageLookupByLibrary.simpleMessage("فشل رفع الصور"),
-        "helloWorld": MessageLookupByLibrary.simpleMessage("اهلا بالعالم"),
-        "invalidEmailAddress":
-            MessageLookupByLibrary.simpleMessage("البريد الإلكترونى غير صحيح."),
-        "invalidName":
-            MessageLookupByLibrary.simpleMessage("اسم المستخدم غير صحيح."),
-        "invalidNumber": MessageLookupByLibrary.simpleMessage("رقم غير صحيح"),
-        "invalidPassword": MessageLookupByLibrary.simpleMessage(
-            "كلمة المرور يجب ان تكون على الاقل ٨ حروف"),
-        "invalidPhoneNumber":
-            MessageLookupByLibrary.simpleMessage("رقم الهاتف غير صحيح."),
-        "mustBeAtLeastNumberCharacter": m0,
-        "phoneNumberIsAlreadyRegistered":
-            MessageLookupByLibrary.simpleMessage("رقم الهاتف مسجل مسبقا."),
-        "required": MessageLookupByLibrary.simpleMessage("مطلوب"),
-        "somethingWentWrong":
-            MessageLookupByLibrary.simpleMessage("حدث خطأ ما."),
-        "theNumberCanNotBeNegative": MessageLookupByLibrary.simpleMessage(
-            "لا يمكن ان يكون العدد سالباََ"),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مجدداََ"),
-        "zeroIsAnInvalidNumber":
-            MessageLookupByLibrary.simpleMessage("الصفر رقم غير صحيح")
-      };
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
 }

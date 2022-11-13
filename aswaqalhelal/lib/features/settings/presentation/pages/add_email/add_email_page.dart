@@ -1,15 +1,16 @@
+import 'package:aswaqalhelal/core/extensions/formz_extesion.dart';
 import 'package:aswaqalhelal/features/auth/domain/entities/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:root_package/core/extensions/formz_extesion.dart';
-import 'package:root_package/core/form_inputs/form_inputs.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/routes/routes.dart';
-import 'package:root_package/widgets/custom_text_field.dart';
-import 'package:root_package/widgets/password_text_field.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:aswaqalhelal/core/form_inputs/email.dart';
+import 'package:aswaqalhelal/core/form_inputs/password.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
+import 'package:aswaqalhelal/widgets/snack_bar.dart';
 
+import '../../../../../widgets/custom_text_field.dart';
+import '../../../../../widgets/password_text_field.dart';
 import '../../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../../auth/presentation/pages/verifiy_phone/verifiy_phone_page.dart';
 import '../../bloc/add_email/add_email_cubit.dart';

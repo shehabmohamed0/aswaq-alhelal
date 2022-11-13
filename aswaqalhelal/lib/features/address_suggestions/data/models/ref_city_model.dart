@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/ref_city.dart';
 
@@ -7,7 +7,7 @@ part 'ref_city_model.g.dart';
 
 @JsonSerializable()
 class RefCityModel extends RefCity {
-   const RefCityModel(
+  const RefCityModel(
       {required String id,
       required String country,
       required String governate,

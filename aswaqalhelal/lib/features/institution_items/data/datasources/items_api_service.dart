@@ -1,12 +1,12 @@
 import 'package:path/path.dart';
-import 'package:root_package/core/utils/upload_file_method.dart';
-import 'package:root_package/packages/cloud_firestore.dart';
-import 'package:root_package/packages/firebase_auth.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/extensions/prepare_for_search.dart';
 import '../../../../core/firebase/firebase_path.dart';
 import '../../../../core/params/add_item/params.dart';
+import '../../../../core/utils/upload_file_method.dart';
 import '../../domain/entities/institution_item.dart';
 import '../models/institution_item_model.dart';
 import '../models/reference_item_model.dart';

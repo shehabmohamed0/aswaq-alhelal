@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:root_package/locator/locator.dart';
-import 'package:root_package/routes/routes.dart';
+import 'package:aswaqalhelal/locator/locator.dart';
+import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../../../l10n/l10n.dart';
 import '../../widgets/settings_list_tile.dart';

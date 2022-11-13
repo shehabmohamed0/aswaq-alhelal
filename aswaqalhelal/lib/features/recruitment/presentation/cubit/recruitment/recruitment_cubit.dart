@@ -1,6 +1,6 @@
-import 'package:root_package/packages/equatable.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/injectable.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'recruitment_state.dart';
 
@@ -12,7 +12,7 @@ class RecruitmentCubit extends Cubit<RecruitmentState> {
     emit(const RecruitmentState(bottomSheetOpened: true));
   }
 
-  void onClosed( ) {
+  void onClosed() {
     emit(const RecruitmentState(bottomSheetOpened: false));
   }
 }

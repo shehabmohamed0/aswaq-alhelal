@@ -1,11 +1,11 @@
+import 'package:aswaqalhelal/core/utils/dialogs.dart';
 import 'package:flutter/material.dart';
-import 'package:root_package/packages/flutter_bloc.dart';
-import 'package:root_package/packages/flutter_easyloading.dart';
-import 'package:root_package/packages/flutter_spinkit.dart';
-import 'package:root_package/widgets/snack_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../../core/request_state.dart';
 import '../../../../l10n/l10n.dart';
+import '../../../../widgets/snack_bar.dart';
 import '../../../auth/presentation/bloc/app_status/app_bloc.dart';
 import '../../../widgets/check_internet_connection_widget.dart';
 import '../../../widgets/constants.dart';
@@ -22,7 +22,7 @@ class JobsOffersPage extends StatelessWidget {
     final userId = context.select((AppBloc e) => e.state.profile.id);
     return Scaffold(
       appBar: AppBar(
-        title:  Text(AppLocalizations.of(context).jobsOffers),
+        title: Text(AppLocalizations.of(context).jobsOffers),
         elevation: 0,
       ),
       body: BlocConsumer<JobsOffersCubit, JobsOffersState>(
@@ -33,21 +33,13 @@ class JobsOffersPage extends StatelessWidget {
             case RequestState.initial:
               break;
             case RequestState.loading:
-              EasyLoading.show(
-                indicator: const FittedBox(
-                  child: SpinKitRipple(
-                    duration: Duration(milliseconds: 1200),
-                    color: Colors.white,
-                  ),
-                ),
-                dismissOnTap: false,
-              );
+              showLoadingDialog();
               break;
             case RequestState.loaded:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               break;
             case RequestState.error:
-              EasyLoading.dismiss();
+              dismissLoadingDialog();
               showErrorSnackBar(context, state.errorMessage!);
               break;
           }
