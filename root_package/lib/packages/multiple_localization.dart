@@ -1,1 +1,0 @@
-export 'package:multiple_localization/multiple_localization.dart';

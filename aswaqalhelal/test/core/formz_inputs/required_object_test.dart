@@ -1,5 +1,5 @@
+import 'package:aswaqalhelal/core/form_inputs/required_object.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:root_package/core/form_inputs/required_object.dart';
 
 void main() {
   group('RequiredObject', () {
