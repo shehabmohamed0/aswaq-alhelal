@@ -19,54 +19,66 @@ mixin _$InstitutionClientsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
     required TResult Function() newPhoneNumberClicked,
     required TResult Function(UserProfile userProfile) userSelected,
     required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
     TResult? Function()? newPhoneNumberClicked,
     TResult? Function(UserProfile userProfile)? userSelected,
     TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
     TResult Function()? newPhoneNumberClicked,
     TResult Function(UserProfile userProfile)? userSelected,
     TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
     required TResult Function(NewPhoneNumberClicked value)
         newPhoneNumberClicked,
     required TResult Function(UserProfileSelected value) userSelected,
     required TResult Function(RemoveSelectionButtonClicked value)
         removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
     TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult? Function(UserProfileSelected value)? userSelected,
     TResult? Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
     TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult Function(UserProfileSelected value)? userSelected,
     TResult Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -158,9 +170,11 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
     required TResult Function() newPhoneNumberClicked,
     required TResult Function(UserProfile userProfile) userSelected,
     required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
   }) {
     return phoneNumberChanged(phoneNumber);
   }
@@ -169,9 +183,11 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
     TResult? Function()? newPhoneNumberClicked,
     TResult? Function(UserProfile userProfile)? userSelected,
     TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
   }) {
     return phoneNumberChanged?.call(phoneNumber);
   }
@@ -180,9 +196,11 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
     TResult Function()? newPhoneNumberClicked,
     TResult Function(UserProfile userProfile)? userSelected,
     TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (phoneNumberChanged != null) {
@@ -195,11 +213,13 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
     required TResult Function(NewPhoneNumberClicked value)
         newPhoneNumberClicked,
     required TResult Function(UserProfileSelected value) userSelected,
     required TResult Function(RemoveSelectionButtonClicked value)
         removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
   }) {
     return phoneNumberChanged(this);
   }
@@ -208,10 +228,12 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
     TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult? Function(UserProfileSelected value)? userSelected,
     TResult? Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
   }) {
     return phoneNumberChanged?.call(this);
   }
@@ -220,10 +242,12 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
     TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult Function(UserProfileSelected value)? userSelected,
     TResult Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (phoneNumberChanged != null) {
@@ -240,6 +264,167 @@ abstract class PhoneNumberChanged implements InstitutionClientsEvent {
   String get phoneNumber;
   @JsonKey(ignore: true)
   _$$PhoneNumberChangedCopyWith<_$PhoneNumberChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NameChangedCopyWith<$Res> {
+  factory _$$NameChangedCopyWith(
+          _$NameChanged value, $Res Function(_$NameChanged) then) =
+      __$$NameChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class __$$NameChangedCopyWithImpl<$Res>
+    extends _$InstitutionClientsEventCopyWithImpl<$Res, _$NameChanged>
+    implements _$$NameChangedCopyWith<$Res> {
+  __$$NameChangedCopyWithImpl(
+      _$NameChanged _value, $Res Function(_$NameChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_$NameChanged(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NameChanged implements NameChanged {
+  const _$NameChanged({required this.name});
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'InstitutionClientsEvent.nameChanged(name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NameChanged &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NameChangedCopyWith<_$NameChanged> get copyWith =>
+      __$$NameChangedCopyWithImpl<_$NameChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
+    required TResult Function() newPhoneNumberClicked,
+    required TResult Function(UserProfile userProfile) userSelected,
+    required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
+  }) {
+    return nameChanged(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
+    TResult? Function()? newPhoneNumberClicked,
+    TResult? Function(UserProfile userProfile)? userSelected,
+    TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
+  }) {
+    return nameChanged?.call(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
+    TResult Function()? newPhoneNumberClicked,
+    TResult Function(UserProfile userProfile)? userSelected,
+    TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
+    required TResult orElse(),
+  }) {
+    if (nameChanged != null) {
+      return nameChanged(name);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
+    required TResult Function(NewPhoneNumberClicked value)
+        newPhoneNumberClicked,
+    required TResult Function(UserProfileSelected value) userSelected,
+    required TResult Function(RemoveSelectionButtonClicked value)
+        removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
+  }) {
+    return nameChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
+    TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
+    TResult? Function(UserProfileSelected value)? userSelected,
+    TResult? Function(RemoveSelectionButtonClicked value)?
+        removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
+  }) {
+    return nameChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
+    TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
+    TResult Function(UserProfileSelected value)? userSelected,
+    TResult Function(RemoveSelectionButtonClicked value)?
+        removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
+    required TResult orElse(),
+  }) {
+    if (nameChanged != null) {
+      return nameChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NameChanged implements InstitutionClientsEvent {
+  const factory NameChanged({required final String name}) = _$NameChanged;
+
+  String get name;
+  @JsonKey(ignore: true)
+  _$$NameChangedCopyWith<_$NameChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -282,9 +467,11 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
     required TResult Function() newPhoneNumberClicked,
     required TResult Function(UserProfile userProfile) userSelected,
     required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
   }) {
     return newPhoneNumberClicked();
   }
@@ -293,9 +480,11 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
     TResult? Function()? newPhoneNumberClicked,
     TResult? Function(UserProfile userProfile)? userSelected,
     TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
   }) {
     return newPhoneNumberClicked?.call();
   }
@@ -304,9 +493,11 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
     TResult Function()? newPhoneNumberClicked,
     TResult Function(UserProfile userProfile)? userSelected,
     TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (newPhoneNumberClicked != null) {
@@ -319,11 +510,13 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
     required TResult Function(NewPhoneNumberClicked value)
         newPhoneNumberClicked,
     required TResult Function(UserProfileSelected value) userSelected,
     required TResult Function(RemoveSelectionButtonClicked value)
         removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
   }) {
     return newPhoneNumberClicked(this);
   }
@@ -332,10 +525,12 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
     TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult? Function(UserProfileSelected value)? userSelected,
     TResult? Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
   }) {
     return newPhoneNumberClicked?.call(this);
   }
@@ -344,10 +539,12 @@ class _$NewPhoneNumberClicked implements NewPhoneNumberClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
     TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult Function(UserProfileSelected value)? userSelected,
     TResult Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (newPhoneNumberClicked != null) {
@@ -428,9 +625,11 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
     required TResult Function() newPhoneNumberClicked,
     required TResult Function(UserProfile userProfile) userSelected,
     required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
   }) {
     return userSelected(userProfile);
   }
@@ -439,9 +638,11 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
     TResult? Function()? newPhoneNumberClicked,
     TResult? Function(UserProfile userProfile)? userSelected,
     TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
   }) {
     return userSelected?.call(userProfile);
   }
@@ -450,9 +651,11 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
     TResult Function()? newPhoneNumberClicked,
     TResult Function(UserProfile userProfile)? userSelected,
     TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (userSelected != null) {
@@ -465,11 +668,13 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
     required TResult Function(NewPhoneNumberClicked value)
         newPhoneNumberClicked,
     required TResult Function(UserProfileSelected value) userSelected,
     required TResult Function(RemoveSelectionButtonClicked value)
         removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
   }) {
     return userSelected(this);
   }
@@ -478,10 +683,12 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
     TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult? Function(UserProfileSelected value)? userSelected,
     TResult? Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
   }) {
     return userSelected?.call(this);
   }
@@ -490,10 +697,12 @@ class _$UserProfileSelected implements UserProfileSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
     TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult Function(UserProfileSelected value)? userSelected,
     TResult Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (userSelected != null) {
@@ -556,9 +765,11 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
     required TResult Function() newPhoneNumberClicked,
     required TResult Function(UserProfile userProfile) userSelected,
     required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
   }) {
     return removeSelectionButtonClicked();
   }
@@ -567,9 +778,11 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
     TResult? Function()? newPhoneNumberClicked,
     TResult? Function(UserProfile userProfile)? userSelected,
     TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
   }) {
     return removeSelectionButtonClicked?.call();
   }
@@ -578,9 +791,11 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
     TResult Function()? newPhoneNumberClicked,
     TResult Function(UserProfile userProfile)? userSelected,
     TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (removeSelectionButtonClicked != null) {
@@ -593,11 +808,13 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
     required TResult Function(NewPhoneNumberClicked value)
         newPhoneNumberClicked,
     required TResult Function(UserProfileSelected value) userSelected,
     required TResult Function(RemoveSelectionButtonClicked value)
         removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
   }) {
     return removeSelectionButtonClicked(this);
   }
@@ -606,10 +823,12 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
     TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult? Function(UserProfileSelected value)? userSelected,
     TResult? Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
   }) {
     return removeSelectionButtonClicked?.call(this);
   }
@@ -618,10 +837,12 @@ class _$RemoveSelectionButtonClicked implements RemoveSelectionButtonClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
     TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
     TResult Function(UserProfileSelected value)? userSelected,
     TResult Function(RemoveSelectionButtonClicked value)?
         removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
     required TResult orElse(),
   }) {
     if (removeSelectionButtonClicked != null) {
@@ -636,16 +857,180 @@ abstract class RemoveSelectionButtonClicked implements InstitutionClientsEvent {
 }
 
 /// @nodoc
+abstract class _$$AddButtonClickedCopyWith<$Res> {
+  factory _$$AddButtonClickedCopyWith(
+          _$AddButtonClicked value, $Res Function(_$AddButtonClicked) then) =
+      __$$AddButtonClickedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String institutionId});
+}
+
+/// @nodoc
+class __$$AddButtonClickedCopyWithImpl<$Res>
+    extends _$InstitutionClientsEventCopyWithImpl<$Res, _$AddButtonClicked>
+    implements _$$AddButtonClickedCopyWith<$Res> {
+  __$$AddButtonClickedCopyWithImpl(
+      _$AddButtonClicked _value, $Res Function(_$AddButtonClicked) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? institutionId = null,
+  }) {
+    return _then(_$AddButtonClicked(
+      institutionId: null == institutionId
+          ? _value.institutionId
+          : institutionId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddButtonClicked implements AddButtonClicked {
+  const _$AddButtonClicked({required this.institutionId});
+
+  @override
+  final String institutionId;
+
+  @override
+  String toString() {
+    return 'InstitutionClientsEvent.addButtonClicked(institutionId: $institutionId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddButtonClicked &&
+            (identical(other.institutionId, institutionId) ||
+                other.institutionId == institutionId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, institutionId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddButtonClickedCopyWith<_$AddButtonClicked> get copyWith =>
+      __$$AddButtonClickedCopyWithImpl<_$AddButtonClicked>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String name) nameChanged,
+    required TResult Function() newPhoneNumberClicked,
+    required TResult Function(UserProfile userProfile) userSelected,
+    required TResult Function() removeSelectionButtonClicked,
+    required TResult Function(String institutionId) addButtonClicked,
+  }) {
+    return addButtonClicked(institutionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber)? phoneNumberChanged,
+    TResult? Function(String name)? nameChanged,
+    TResult? Function()? newPhoneNumberClicked,
+    TResult? Function(UserProfile userProfile)? userSelected,
+    TResult? Function()? removeSelectionButtonClicked,
+    TResult? Function(String institutionId)? addButtonClicked,
+  }) {
+    return addButtonClicked?.call(institutionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String name)? nameChanged,
+    TResult Function()? newPhoneNumberClicked,
+    TResult Function(UserProfile userProfile)? userSelected,
+    TResult Function()? removeSelectionButtonClicked,
+    TResult Function(String institutionId)? addButtonClicked,
+    required TResult orElse(),
+  }) {
+    if (addButtonClicked != null) {
+      return addButtonClicked(institutionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(NameChanged value) nameChanged,
+    required TResult Function(NewPhoneNumberClicked value)
+        newPhoneNumberClicked,
+    required TResult Function(UserProfileSelected value) userSelected,
+    required TResult Function(RemoveSelectionButtonClicked value)
+        removeSelectionButtonClicked,
+    required TResult Function(AddButtonClicked value) addButtonClicked,
+  }) {
+    return addButtonClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult? Function(NameChanged value)? nameChanged,
+    TResult? Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
+    TResult? Function(UserProfileSelected value)? userSelected,
+    TResult? Function(RemoveSelectionButtonClicked value)?
+        removeSelectionButtonClicked,
+    TResult? Function(AddButtonClicked value)? addButtonClicked,
+  }) {
+    return addButtonClicked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(NameChanged value)? nameChanged,
+    TResult Function(NewPhoneNumberClicked value)? newPhoneNumberClicked,
+    TResult Function(UserProfileSelected value)? userSelected,
+    TResult Function(RemoveSelectionButtonClicked value)?
+        removeSelectionButtonClicked,
+    TResult Function(AddButtonClicked value)? addButtonClicked,
+    required TResult orElse(),
+  }) {
+    if (addButtonClicked != null) {
+      return addButtonClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddButtonClicked implements InstitutionClientsEvent {
+  const factory AddButtonClicked({required final String institutionId}) =
+      _$AddButtonClicked;
+
+  String get institutionId;
+  @JsonKey(ignore: true)
+  _$$AddButtonClickedCopyWith<_$AddButtonClicked> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$InstitutionClientsState {
   PhoneNumber get phoneNumber => throw _privateConstructorUsedError;
-  bool get isAddingClientWithoutUserProfile =>
-      throw _privateConstructorUsedError;
+  Name get name => throw _privateConstructorUsedError;
+  Option<UserProfile> get userProfile => throw _privateConstructorUsedError;
+  bool get addingNonExistentProfile => throw _privateConstructorUsedError;
   Iterable<UserProfile> get userSuggestions =>
       throw _privateConstructorUsedError;
   AutoSuggestionState get suggestionState => throw _privateConstructorUsedError;
-  RequiredObject<UserProfile> get userProfile =>
-      throw _privateConstructorUsedError;
   InstitutionClientsStatus get status => throw _privateConstructorUsedError;
+  String get errorMessage => throw _privateConstructorUsedError;
+  InstitutionClient? get addedClient => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InstitutionClientsStateCopyWith<InstitutionClientsState> get copyWith =>
@@ -660,11 +1045,14 @@ abstract class $InstitutionClientsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {PhoneNumber phoneNumber,
-      bool isAddingClientWithoutUserProfile,
+      Name name,
+      Option<UserProfile> userProfile,
+      bool addingNonExistentProfile,
       Iterable<UserProfile> userSuggestions,
       AutoSuggestionState suggestionState,
-      RequiredObject<UserProfile> userProfile,
-      InstitutionClientsStatus status});
+      InstitutionClientsStatus status,
+      String errorMessage,
+      InstitutionClient? addedClient});
 }
 
 /// @nodoc
@@ -682,20 +1070,31 @@ class _$InstitutionClientsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? phoneNumber = null,
-    Object? isAddingClientWithoutUserProfile = null,
+    Object? name = null,
+    Object? userProfile = null,
+    Object? addingNonExistentProfile = null,
     Object? userSuggestions = null,
     Object? suggestionState = null,
-    Object? userProfile = null,
     Object? status = null,
+    Object? errorMessage = null,
+    Object? addedClient = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
-      isAddingClientWithoutUserProfile: null == isAddingClientWithoutUserProfile
-          ? _value.isAddingClientWithoutUserProfile
-          : isAddingClientWithoutUserProfile // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Name,
+      userProfile: null == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as Option<UserProfile>,
+      addingNonExistentProfile: null == addingNonExistentProfile
+          ? _value.addingNonExistentProfile
+          : addingNonExistentProfile // ignore: cast_nullable_to_non_nullable
               as bool,
       userSuggestions: null == userSuggestions
           ? _value.userSuggestions
@@ -705,14 +1104,18 @@ class _$InstitutionClientsStateCopyWithImpl<$Res,
           ? _value.suggestionState
           : suggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      userProfile: null == userProfile
-          ? _value.userProfile
-          : userProfile // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<UserProfile>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InstitutionClientsStatus,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      addedClient: freezed == addedClient
+          ? _value.addedClient
+          : addedClient // ignore: cast_nullable_to_non_nullable
+              as InstitutionClient?,
     ) as $Val);
   }
 }
@@ -727,11 +1130,14 @@ abstract class _$$_InstitutionClientsStateCopyWith<$Res>
   @useResult
   $Res call(
       {PhoneNumber phoneNumber,
-      bool isAddingClientWithoutUserProfile,
+      Name name,
+      Option<UserProfile> userProfile,
+      bool addingNonExistentProfile,
       Iterable<UserProfile> userSuggestions,
       AutoSuggestionState suggestionState,
-      RequiredObject<UserProfile> userProfile,
-      InstitutionClientsStatus status});
+      InstitutionClientsStatus status,
+      String errorMessage,
+      InstitutionClient? addedClient});
 }
 
 /// @nodoc
@@ -747,20 +1153,31 @@ class __$$_InstitutionClientsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? phoneNumber = null,
-    Object? isAddingClientWithoutUserProfile = null,
+    Object? name = null,
+    Object? userProfile = null,
+    Object? addingNonExistentProfile = null,
     Object? userSuggestions = null,
     Object? suggestionState = null,
-    Object? userProfile = null,
     Object? status = null,
+    Object? errorMessage = null,
+    Object? addedClient = freezed,
   }) {
     return _then(_$_InstitutionClientsState(
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
-      isAddingClientWithoutUserProfile: null == isAddingClientWithoutUserProfile
-          ? _value.isAddingClientWithoutUserProfile
-          : isAddingClientWithoutUserProfile // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Name,
+      userProfile: null == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as Option<UserProfile>,
+      addingNonExistentProfile: null == addingNonExistentProfile
+          ? _value.addingNonExistentProfile
+          : addingNonExistentProfile // ignore: cast_nullable_to_non_nullable
               as bool,
       userSuggestions: null == userSuggestions
           ? _value.userSuggestions
@@ -770,14 +1187,18 @@ class __$$_InstitutionClientsStateCopyWithImpl<$Res>
           ? _value.suggestionState
           : suggestionState // ignore: cast_nullable_to_non_nullable
               as AutoSuggestionState,
-      userProfile: null == userProfile
-          ? _value.userProfile
-          : userProfile // ignore: cast_nullable_to_non_nullable
-              as RequiredObject<UserProfile>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InstitutionClientsStatus,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      addedClient: freezed == addedClient
+          ? _value.addedClient
+          : addedClient // ignore: cast_nullable_to_non_nullable
+              as InstitutionClient?,
     ));
   }
 }
@@ -787,18 +1208,27 @@ class __$$_InstitutionClientsStateCopyWithImpl<$Res>
 class _$_InstitutionClientsState implements _InstitutionClientsState {
   const _$_InstitutionClientsState(
       {this.phoneNumber = const PhoneNumber.pure(),
-      this.isAddingClientWithoutUserProfile = false,
+      this.name = const Name.pure(),
+      this.userProfile = const None<UserProfile>(),
+      this.addingNonExistentProfile = false,
       this.userSuggestions = const Iterable.empty(),
       this.suggestionState = AutoSuggestionState.emptyText,
-      this.userProfile = const RequiredObject<UserProfile>.pure(),
-      this.status = InstitutionClientsStatus.initial});
+      this.status = InstitutionClientsStatus.initial,
+      this.errorMessage = '',
+      this.addedClient});
 
   @override
   @JsonKey()
   final PhoneNumber phoneNumber;
   @override
   @JsonKey()
-  final bool isAddingClientWithoutUserProfile;
+  final Name name;
+  @override
+  @JsonKey()
+  final Option<UserProfile> userProfile;
+  @override
+  @JsonKey()
+  final bool addingNonExistentProfile;
   @override
   @JsonKey()
   final Iterable<UserProfile> userSuggestions;
@@ -807,14 +1237,16 @@ class _$_InstitutionClientsState implements _InstitutionClientsState {
   final AutoSuggestionState suggestionState;
   @override
   @JsonKey()
-  final RequiredObject<UserProfile> userProfile;
+  final InstitutionClientsStatus status;
   @override
   @JsonKey()
-  final InstitutionClientsStatus status;
+  final String errorMessage;
+  @override
+  final InstitutionClient? addedClient;
 
   @override
   String toString() {
-    return 'InstitutionClientsState(phoneNumber: $phoneNumber, isAddingClientWithoutUserProfile: $isAddingClientWithoutUserProfile, userSuggestions: $userSuggestions, suggestionState: $suggestionState, userProfile: $userProfile, status: $status)';
+    return 'InstitutionClientsState(phoneNumber: $phoneNumber, name: $name, userProfile: $userProfile, addingNonExistentProfile: $addingNonExistentProfile, userSuggestions: $userSuggestions, suggestionState: $suggestionState, status: $status, errorMessage: $errorMessage, addedClient: $addedClient)';
   }
 
   @override
@@ -824,28 +1256,35 @@ class _$_InstitutionClientsState implements _InstitutionClientsState {
             other is _$_InstitutionClientsState &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
-            (identical(other.isAddingClientWithoutUserProfile,
-                    isAddingClientWithoutUserProfile) ||
-                other.isAddingClientWithoutUserProfile ==
-                    isAddingClientWithoutUserProfile) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.userProfile, userProfile) ||
+                other.userProfile == userProfile) &&
+            (identical(
+                    other.addingNonExistentProfile, addingNonExistentProfile) ||
+                other.addingNonExistentProfile == addingNonExistentProfile) &&
             const DeepCollectionEquality()
                 .equals(other.userSuggestions, userSuggestions) &&
             (identical(other.suggestionState, suggestionState) ||
                 other.suggestionState == suggestionState) &&
-            (identical(other.userProfile, userProfile) ||
-                other.userProfile == userProfile) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.addedClient, addedClient) ||
+                other.addedClient == addedClient));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       phoneNumber,
-      isAddingClientWithoutUserProfile,
+      name,
+      userProfile,
+      addingNonExistentProfile,
       const DeepCollectionEquality().hash(userSuggestions),
       suggestionState,
-      userProfile,
-      status);
+      status,
+      errorMessage,
+      addedClient);
 
   @JsonKey(ignore: true)
   @override
@@ -859,24 +1298,33 @@ class _$_InstitutionClientsState implements _InstitutionClientsState {
 abstract class _InstitutionClientsState implements InstitutionClientsState {
   const factory _InstitutionClientsState(
       {final PhoneNumber phoneNumber,
-      final bool isAddingClientWithoutUserProfile,
+      final Name name,
+      final Option<UserProfile> userProfile,
+      final bool addingNonExistentProfile,
       final Iterable<UserProfile> userSuggestions,
       final AutoSuggestionState suggestionState,
-      final RequiredObject<UserProfile> userProfile,
-      final InstitutionClientsStatus status}) = _$_InstitutionClientsState;
+      final InstitutionClientsStatus status,
+      final String errorMessage,
+      final InstitutionClient? addedClient}) = _$_InstitutionClientsState;
 
   @override
   PhoneNumber get phoneNumber;
   @override
-  bool get isAddingClientWithoutUserProfile;
+  Name get name;
+  @override
+  Option<UserProfile> get userProfile;
+  @override
+  bool get addingNonExistentProfile;
   @override
   Iterable<UserProfile> get userSuggestions;
   @override
   AutoSuggestionState get suggestionState;
   @override
-  RequiredObject<UserProfile> get userProfile;
-  @override
   InstitutionClientsStatus get status;
+  @override
+  String get errorMessage;
+  @override
+  InstitutionClient? get addedClient;
   @override
   @JsonKey(ignore: true)
   _$$_InstitutionClientsStateCopyWith<_$_InstitutionClientsState>

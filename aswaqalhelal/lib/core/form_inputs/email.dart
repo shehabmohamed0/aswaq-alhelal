@@ -2,7 +2,6 @@ import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:formz/formz.dart';
 
 import '../../locator/locator.dart';
-import '../mixin/contact_mixin.dart';
 
 /// Validation errors for the [Email] [FormzInput].
 enum EmailValidationError {
@@ -14,8 +13,7 @@ enum EmailValidationError {
 /// Form input for an email input.
 /// {@endtemplate}
 class Email extends FormzInput<String, EmailValidationError>
-    implements ContactInput {
-  /// {@macro email}
+    {
   const Email.pure() : super.pure('');
 
   /// {@macro email}
@@ -32,10 +30,7 @@ class Email extends FormzInput<String, EmailValidationError>
         : EmailValidationError.invalid;
   }
 
-  @override
-  String content() {
-    return value;
-  }
+  
 }
 
 extension EmailValidationMessage on Email {

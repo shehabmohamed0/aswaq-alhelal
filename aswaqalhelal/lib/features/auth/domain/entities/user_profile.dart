@@ -1,5 +1,4 @@
-import 'package:aswaqalhelal/features/address/domain/entities/address.dart';
-
+import '../../../address/domain/entities/address.dart';
 import 'base_profile.dart';
 
 class UserProfile extends BaseProfile {
@@ -20,6 +19,7 @@ class UserProfile extends BaseProfile {
     this.gender,
     this.address,
   });
+  
   @override
   List<Object?> get props => [
         id,

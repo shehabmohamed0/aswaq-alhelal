@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import 'package:aswaqalhelal/core/utils/dialogs.dart';
-import 'package:flutter/material.dart';
-import 'package:aswaqalhelal/locator/locator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aswaqalhelal/routes/routes.dart';
 
 import '../../../../core/firebase/firebase_path.dart';
+import '../../../../core/utils/dialogs.dart';
 import '../../../../l10n/l10n.dart';
+import '../../../../locator/locator.dart';
+import '../../../../routes/routes.dart';
 import '../../../../widgets/snack_bar.dart';
 import '../../../address/data/models/address_model.dart';
 import '../../../address/domain/entities/address.dart';
@@ -35,30 +35,37 @@ class HomePage extends StatelessWidget {
     return BlocProvider<ItemsCubit>(
       create: (context) => locator()..getItems(),
       child: BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) {
-          return previous.profile.id != current.profile.id;
-        },
-        builder: (context, state) {
-          return Scaffold(
-              drawer: const AppDrawer(),
-              appBar: AppBar(
-                title: state.profile.fold(
-                    (user) => Text(AppLocalizations.of(context).aswaqAlhilal),
-                    (institution) => Text(institution.name)),
-                elevation: 0,
-                actions: const [NotificationsBell()],
-              ),
-              body: state.profile.fold((user) {
-                final cubit = locator<InstitutionsCubit>()
-                  ..getInstitutions(user.address!);
-                return BlocProvider.value(
-                  value: cubit,
-                  child: UserHomeWidget(cubit: cubit),
-                );
-              },
-                  (institution) =>
-                      InstitutionPageBody(institution: institution)));
-        },
+        buildWhen: (previous, current) =>
+            previous.profile.id != current.profile.id,
+        builder: (context, state) => Scaffold(
+          drawer: const AppDrawer(),
+          appBar: AppBar(
+            elevation: 0,
+            title: state.profile.mapOrElse(
+              userProfile: (user) =>
+                  Text(AppLocalizations.of(context).aswaqAlhilal),
+              institutionProfile: (institution) => Text(institution.name),
+              orElse: () => const Text('Error'),
+            ),
+            actions: const [
+              NotificationsBell(),
+            ],
+          ),
+          body: state.profile.mapOrElse(
+            userProfile: (user) {
+              final cubit = locator<InstitutionsCubit>()
+                ..getInstitutions(user.address!);
+              return BlocProvider.value(
+                value: cubit,
+                child: UserHomeWidget(cubit: cubit),
+              );
+            },
+            institutionProfile: (institution) => InstitutionPageBody(
+              institution: institution,
+            ),
+            orElse: () => const Text('Error'),
+          ),
+        ),
       ),
     );
   }

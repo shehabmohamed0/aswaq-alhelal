@@ -59,7 +59,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(16),
                 sliver: SliverToBoxAdapter(
                   child: Row(
                     children: [

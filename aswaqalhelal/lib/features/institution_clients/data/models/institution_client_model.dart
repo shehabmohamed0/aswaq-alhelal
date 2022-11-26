@@ -10,10 +10,11 @@ part 'institution_client_model.g.dart';
 class InstitutionClientModel extends InstitutionClient {
   const InstitutionClientModel({
     required super.id,
+    required super.institutionId,
     required super.profile,
   });
-  InstitutionClientModel _copyWithId(String id) =>
-      InstitutionClientModel(id: id, profile: profile);
+  InstitutionClientModel _copyWithId(String id) => InstitutionClientModel(
+      id: id, institutionId: institutionId, profile: profile);
 
   factory InstitutionClientModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {

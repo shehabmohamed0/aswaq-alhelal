@@ -29,4 +29,5 @@ const _$ProfileTypeEnumMap = {
   ProfileType.user: 'user',
   ProfileType.institution: 'institution',
   ProfileType.system: 'system',
+  ProfileType.nonRegistered: 'nonRegistered',
 };

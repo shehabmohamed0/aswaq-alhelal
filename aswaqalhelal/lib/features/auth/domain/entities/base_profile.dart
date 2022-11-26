@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../data/models/user/institution_profile_model.dart';
+import '../../data/models/user/non_registered_profile_model.dart';
 import '../../data/models/user/system_profile_model.dart';
 import '../../data/models/user/user_profile_model.dart';
 import 'institution_profile.dart';
+import 'non_registered_profile.dart';
+import 'system_profile.dart';
 import 'user_profile.dart';
 
 @immutable
@@ -27,8 +30,14 @@ abstract class BaseProfile extends Equatable {
   bool get isEmpty => id.isEmpty;
   bool get isUser => type == ProfileType.user;
   bool get isInstitution => type == ProfileType.institution;
+
   static const empty = UserProfile(
-      id: '', userId: '', name: '', phoneNumber: '', type: ProfileType.user);
+    id: '',
+    userId: '',
+    name: '',
+    phoneNumber: '',
+    type: ProfileType.user,
+  );
 
   factory BaseProfile.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document) {
@@ -38,6 +47,8 @@ abstract class BaseProfile extends Equatable {
         return UserProfileModel.fromFirestore(document);
       case ProfileType.institution:
         return InstitutionProfileModel.fromFirestore(document);
+      case ProfileType.nonRegistered:
+        return NonRegisteredProfileModel.fromFirestore(document);
       case ProfileType.system:
         return SystemProfileModel.fromFirestore(document);
     }
@@ -49,6 +60,8 @@ abstract class BaseProfile extends Equatable {
         return UserProfileModel.fromJson(json);
       case ProfileType.institution:
         return InstitutionProfileModel.fromJson(json);
+      case ProfileType.nonRegistered:
+        return NonRegisteredProfileModel.fromJson(json);
       case ProfileType.system:
         return SystemProfileModel.fromJson(json);
     }
@@ -73,27 +86,58 @@ abstract class BaseProfile extends Equatable {
         'type': _$ProfileTypeEnumMap[type]
       };
 
-  T fold<T>(
-    T Function(UserProfile user) onUser,
-    T Function(InstitutionProfile institution) onInstitution,
+  T mapOrException<T>(
+    T Function(UserProfile profile)? userProfile,
+    T Function(InstitutionProfile institutionProfile)? institutionProfile,
+    T Function(NonRegisteredProfile profile)? nonRegisteredProfile,
+    T Function(SystemProfile profile)? systemProfile,
   ) {
+    T? result;
+
     if (this is UserProfile) {
-      return onUser(this as UserProfile);
-    } else {
-      return onInstitution(this as InstitutionProfile);
+      result = userProfile?.call(this as UserProfile);
+    } else if (this is InstitutionProfile) {
+      result = institutionProfile?.call(this as InstitutionProfile);
+    } else if (this is InstitutionProfile) {
+      result = systemProfile?.call(this as SystemProfile);
+    } else if (this is InstitutionProfile) {
+      result = nonRegisteredProfile?.call(this as NonRegisteredProfile);
     }
+    return result!;
   }
 
   UserProfile toUser() {
     if (this is UserProfile) return this as UserProfile;
     throw Exception();
   }
+
+  T mapOrElse<T>({
+    T Function(UserProfile profile)? userProfile,
+    T Function(InstitutionProfile profile)? institutionProfile,
+    T Function(SystemProfile profile)? systemProfile,
+    T Function(NonRegisteredProfile profile)? nonRegisteredProfile,
+    required T Function() orElse,
+  }) {
+    T? result;
+
+    if (this is UserProfile) {
+      result = userProfile?.call(this as UserProfile);
+    } else if (this is InstitutionProfile) {
+      result = institutionProfile?.call(this as InstitutionProfile);
+    } else if (this is InstitutionProfile) {
+      result = systemProfile?.call(this as SystemProfile);
+    } else if (this is InstitutionProfile) {
+      result = nonRegisteredProfile?.call(this as NonRegisteredProfile);
+    }
+    return result ?? orElse();
+  }
 }
 
 enum ProfileType {
   user,
   institution,
-  system;
+  system,
+  nonRegistered;
 
   @override
   String toString() {
@@ -104,6 +148,8 @@ enum ProfileType {
         return 'institution';
       case ProfileType.system:
         return 'system';
+      case ProfileType.nonRegistered:
+        return 'nonRegistered';
     }
   }
 }
@@ -111,5 +157,6 @@ enum ProfileType {
 const _$ProfileTypeEnumMap = {
   ProfileType.user: 'user',
   ProfileType.institution: 'institution',
+  ProfileType.nonRegistered: 'nonRegistered',
   ProfileType.system: 'system',
 };

@@ -16,12 +16,14 @@ class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   bool _canChangeProfile(BaseProfile profile) {
-    return profile.fold(
-        (user) =>
-            user.phoneNumber == '+201553583931' ||
-            user.phoneNumber == '+201001042111' ||
-            user.phoneNumber == '+201111354351',
-        (institution) => true);
+    return profile.mapOrElse(
+      userProfile: (user) =>
+          user.phoneNumber == '+201553583931' ||
+          user.phoneNumber == '+201001042111' ||
+          user.phoneNumber == '+201111354351',
+      institutionProfile: (institution) => true,
+      orElse: () => false,
+    );
   }
 
   @override
@@ -44,6 +46,7 @@ class AppDrawer extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (_) => Dialog(
+                            clipBehavior: Clip.antiAlias,
                             child: ChangeProfileDialog(
                               onProfileClicked: (profile) {
                                 context
@@ -227,12 +230,13 @@ class _DrawerHeader extends StatelessWidget {
         decoration: BoxDecoration(color: Theme.of(context).primaryColor),
         child: Column(
           children: [
-            profile.fold(
-              (user) => Flexible(
+            profile.mapOrElse(
+              userProfile: (user) => Flexible(
                   child: Avatar(photo: profile.photoURL, onTap: onTap)),
-              (institution) => const Flexible(
+              institutionProfile: (institution) => const Flexible(
                 child: InstitutionAvatar(),
               ),
+              orElse: () => const Text('Error'),
             ),
             const SizedBox(height: 8),
             if (profile.name.isNotEmpty)

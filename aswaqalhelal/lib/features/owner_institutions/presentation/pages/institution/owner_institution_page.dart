@@ -6,22 +6,18 @@ import '../../../../../l10n/l10n.dart';
 import '../../../../auth/domain/entities/institution_profile.dart';
 import '../../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_page_arguments.dart';
 
-class OwnerInstitutionPage extends StatelessWidget {
-  const OwnerInstitutionPage({Key? key}) : super(key: key);
+// class OwnerInstitutionPage extends StatelessWidget {
+//   const OwnerInstitutionPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final institution =
-        ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(institution.name),
-        elevation: 0,
-      ),
-      body: InstitutionPageBody(institution: institution),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final institution =
+//         ModalRoute.of(context)!.settings.arguments as InstitutionProfile;
+//     return Scaffold(
+//       body: InstitutionPageBody(institution: institution),
+//     );
+//   }
+// }
 
 class InstitutionPageBody extends StatelessWidget {
   const InstitutionPageBody({
@@ -34,78 +30,75 @@ class InstitutionPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final intl = AppLocalizations.of(context);
-    return Padding(
+    return GridView.count(
       padding: const EdgeInsets.all(8.0),
-      child: GridView.count(
-        physics: const BouncingScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        children: [
-          GridTile(
-            backgroundColor: Colors.lightBlueAccent,
-            iconData: Icons.category_rounded,
-            title: intl.items,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.institutionItems,
-                  arguments: institution);
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.tealAccent.shade400,
-            iconData: Icons.list_alt_rounded,
-            title: intl.orders,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.institutionOrders,
-                  arguments: institution);
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.orangeAccent,
-            iconData: Icons.local_shipping_rounded,
-            title: intl.distribution,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.distributionAreas,
-                  arguments: institution);
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.lightGreen,
-            iconData: FontAwesomeIcons.receipt,
-            title: intl.receipts,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.institutionReceipts,
-                  arguments: institution);
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.redAccent.shade400,
-            iconData: Icons.group_work_rounded,
-            title: intl.recruitment,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.recruitment,
-                  arguments: RecruitmentPageArguments(
-                      ownerId: institution.userId,
-                      institutionId: institution.id));
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.pinkAccent,
-            iconData: Icons.people_rounded,
-            title: 'Clients',
-            onTap: () {
-              Navigator.pushNamed(context, Routes.institutionClients,
-                  arguments: institution);
-            },
-          ),
-          GridTile(
-            backgroundColor: Colors.deepPurpleAccent,
-            iconData: Icons.settings,
-            title: intl.settings,
-            onTap: () {},
-          ),
-        ],
-      ),
+      crossAxisCount: 2,
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
+      children: [
+        GridTile(
+          backgroundColor: Colors.lightBlueAccent,
+          iconData: Icons.category_rounded,
+          title: intl.items,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.institutionItems,
+                arguments: institution);
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.tealAccent.shade400,
+          iconData: Icons.list_alt_rounded,
+          title: intl.orders,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.institutionOrders,
+                arguments: institution);
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.orangeAccent,
+          iconData: Icons.local_shipping_rounded,
+          title: intl.distribution,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.distributionAreas,
+                arguments: institution);
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.lightGreen,
+          iconData: FontAwesomeIcons.receipt,
+          title: intl.receipts,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.institutionReceipts,
+                arguments: institution);
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.redAccent.shade400,
+          iconData: Icons.group_work_rounded,
+          title: intl.recruitment,
+          onTap: () {
+            Navigator.pushNamed(context, Routes.recruitment,
+                arguments: RecruitmentPageArguments(
+                    ownerId: institution.userId,
+                    institutionId: institution.id));
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.pinkAccent,
+          iconData: Icons.people_rounded,
+          title: 'Clients',
+          onTap: () {
+            Navigator.pushNamed(context, Routes.institutionClients,
+                arguments: institution);
+          },
+        ),
+        GridTile(
+          backgroundColor: Colors.deepPurpleAccent,
+          iconData: Icons.settings,
+          title: intl.settings,
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

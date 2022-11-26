@@ -1,0 +1,3 @@
+class ClientExsitsBeforeException implements Exception {
+  
+}

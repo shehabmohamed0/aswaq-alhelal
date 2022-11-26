@@ -7,7 +7,6 @@ import 'values_manager.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
-    // main colors
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.lightPrimary,
     primaryColorDark: ColorManager.darkPrimary,
@@ -17,8 +16,6 @@ ThemeData getApplicationTheme() {
         FloatingActionButtonThemeData(backgroundColor: ColorManager.primary),
     progressIndicatorTheme:
         ProgressIndicatorThemeData(color: ColorManager.primary),
-    // ripple effect color
-    // cardview theme
     iconTheme: IconThemeData(color: ColorManager.primary),
     colorScheme:
         const ColorScheme.light().copyWith(primary: ColorManager.primary),
@@ -36,8 +33,11 @@ ThemeData getApplicationTheme() {
       color: ColorManager.white,
       elevation: AppSize.s1,
       foregroundColor: ColorManager.darkGrey,
-      titleTextStyle:
-          getRegularStyle(fontSize: FontSize.s20, color: ColorManager.darkGrey),
+      surfaceTintColor: Colors.white,
+      titleTextStyle: getRegularStyle(
+        fontSize: FontSize.s20,
+        color: ColorManager.darkGrey,
+      ),
     ),
     // button theme
     buttonTheme: ButtonThemeData(
@@ -72,6 +72,7 @@ ThemeData getApplicationTheme() {
       // content padding>
       contentPadding: const EdgeInsets.all(AppPadding.p8),
       // hint styles
+      floatingLabelBehavior: FloatingLabelBehavior.always,
       iconColor: ColorManager.primary,
       hintStyle: getRegularStyle(
           color: ColorManager.grey.withOpacity(0.8), fontSize: FontSize.s14),

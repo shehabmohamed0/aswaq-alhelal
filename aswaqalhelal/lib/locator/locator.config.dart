@@ -690,8 +690,10 @@ Future<_i1.GetIt> $initGetIt(
       () => _i152.GetUserInstitutions(get<_i117.UserInstitutionsRepository>()));
   gh.lazySingleton<_i153.GetWorkInstitutions>(
       () => _i153.GetWorkInstitutions(get<_i121.WorkInstitutionRepository>()));
-  gh.factory<_i154.InstitutionClientsBloc>(
-      () => _i154.InstitutionClientsBloc(get<_i151.GetUserByPhoneNumber>()));
+  gh.factory<_i154.InstitutionClientsBloc>(() => _i154.InstitutionClientsBloc(
+        get<_i151.GetUserByPhoneNumber>(),
+        get<_i127.AddInstitutionClient>(),
+      ));
   gh.factory<_i155.InstitutionItemsCubit>(
       () => _i155.InstitutionItemsCubit(get<_i146.GetInstitutionItems>()));
   gh.factory<_i156.InstitutionOrdersCubit>(() => _i156.InstitutionOrdersCubit(

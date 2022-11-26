@@ -18,7 +18,7 @@ void main() {
       },
     );
     test(
-      'RequiredObject.pure() invalid == true',
+      'RequiredObject.pure() invalid == flase',
       () {
         const test = RequiredObject<int>.pure();
         expect(test.invalid, true);

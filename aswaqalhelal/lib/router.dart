@@ -181,12 +181,7 @@ class AppRouter {
       //       child: const OwnerInstitutionsPage(),
       //     ),
       //   );
-      case Routes.ownerInstitution:
-        return _getPageRoute(
-          arguments: settings.arguments,
-          routeName: settings.name,
-          builder: (context) => const OwnerInstitutionPage(),
-        );
+
       case Routes.addInstitution:
         final user = settings.arguments as UserProfile;
 

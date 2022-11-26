@@ -4,12 +4,14 @@ part of 'institution_clients_bloc.dart';
 class InstitutionClientsState with _$InstitutionClientsState {
   const factory InstitutionClientsState({
     @Default(PhoneNumber.pure()) PhoneNumber phoneNumber,
-    @Default(false) bool isAddingClientWithoutUserProfile,
+    @Default(Name.pure()) Name name,
+    @Default(None<UserProfile>()) Option<UserProfile> userProfile,
+    @Default(false) bool addingNonExistentProfile,
     @Default(Iterable.empty()) Iterable<UserProfile> userSuggestions,
     @Default(AutoSuggestionState.emptyText) AutoSuggestionState suggestionState,
-    @Default(RequiredObject<UserProfile>.pure())
-        RequiredObject<UserProfile> userProfile,
     @Default(InstitutionClientsStatus.initial) InstitutionClientsStatus status,
+    @Default('') String errorMessage,
+    InstitutionClient? addedClient,
   }) = _InstitutionClientsState;
 }
 
@@ -18,4 +20,7 @@ enum InstitutionClientsStatus {
   newPhoneNumberSelected,
   newUserSelected,
   clientSelectionRemoved,
+  loading,
+  success,
+  failure,
 }
