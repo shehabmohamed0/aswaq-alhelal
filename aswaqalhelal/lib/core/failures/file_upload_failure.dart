@@ -3,9 +3,8 @@ import 'package:aswaqalhelal/l10n/l10n.dart';
 import 'package:aswaqalhelal/locator/locator.dart';
 
 class UploadFileFailure extends Failure {
-  final String message;
 
-  UploadFileFailure._(this.message);
+  const UploadFileFailure._(super.message);
 
   factory UploadFileFailure() {
     final intl = locator<AppLocalizations>();

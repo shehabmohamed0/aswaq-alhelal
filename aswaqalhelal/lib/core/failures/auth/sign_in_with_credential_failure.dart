@@ -1,13 +1,10 @@
 import '../failure.dart';
 
-class SignInWithCredentialFailure implements Failure {
+class SignInWithCredentialFailure extends Failure {
   /// The associated error message.
-  final String message;
 
   /// {@macro log_in_with_google_failure}
-  const SignInWithCredentialFailure([
-    this.message = 'An unknown exception occurred.',
-  ]);
+  const SignInWithCredentialFailure(super.message);
 
   /// Create an authentication message
   /// from a firebase authentication exception code.
@@ -59,21 +56,12 @@ class SignInWithCredentialFailure implements Failure {
         );
 
       default:
-        return const SignInWithCredentialFailure();
+        return const SignInWithCredentialFailure(
+            'An unknown exception occurred.');
     }
   }
-
-  @override
-  List<Object?> get props => [message];
-
-  @override
-  bool? get stringify => true;
 }
 
-class GoogleSignInWithGoogleCanceledFailure implements Failure {
-  @override
-  List<Object?> get props => [];
-
-  @override
-  bool? get stringify => true;
+class GoogleSignInWithGoogleCanceledFailure extends Failure {
+  const GoogleSignInWithGoogleCanceledFailure() : super('');
 }

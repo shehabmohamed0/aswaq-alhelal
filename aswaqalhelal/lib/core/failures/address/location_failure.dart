@@ -1,11 +1,9 @@
 import 'package:aswaqalhelal/core/failures/failure.dart';
 
 class LocationDeniedForeverFailure extends Failure {
-  final String message;
-
-  LocationDeniedForeverFailure(this.message);
+  const LocationDeniedForeverFailure(super.message);
 }
 
 class LocationDeniedFailure extends Failure {
-  LocationDeniedFailure();
+  const LocationDeniedFailure() : super('');
 }

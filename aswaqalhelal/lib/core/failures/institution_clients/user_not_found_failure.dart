@@ -1,3 +1,5 @@
 import '../failure.dart';
 
-class UserNotFoundFailure extends Failure {}
+class UserNotFoundFailure extends Failure {
+  const UserNotFoundFailure() : super('');
+}

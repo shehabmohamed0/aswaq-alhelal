@@ -38,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } on Exception catch (e) {
       log(e.toString());
-      return Left(CacheFailure());
+      return const Left(CacheFailure());
     }
   }
 
@@ -98,7 +98,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
-        return Left(ReAuthenticateUserFailure());
+        return const Left(ReAuthenticateUserFailure());
       }
       return Left(LinkEmailAndPasswordFailure.fromCode(e.code));
     } on Exception catch (e) {
@@ -113,7 +113,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await authLocalService.saveCurrentProfile(baseProfile);
       return const Right(null);
     } catch (e) {
-      return Future.value(Left(CacheFailure()));
+      return Future.value(const Left(CacheFailure()));
     }
   }
 
@@ -124,7 +124,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Future.value(Right(profile));
     } catch (e) {
       log(e.toString());
-      return Future.value(Left(CacheFailure()));
+      return Future.value(const Left(CacheFailure()));
     }
   }
 }
