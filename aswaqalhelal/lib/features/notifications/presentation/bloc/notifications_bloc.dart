@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -120,7 +119,7 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
       ids: state.ids..add(event.notification.id),
       notifications: [event.notification, ...state.notifications],
       badgeCounter: state.badgeCounter + 1,
-    ));
+    ),);
   }
 
   FutureOr<void> _onNotificationClicked(

@@ -11,7 +11,7 @@ InstitutionProfileModel _$InstitutionProfileModelFromJson(
     InstitutionProfileModel(
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
-      name: json['name'] as String,
+      name: json['name'] as String? ?? '',
       type: $enumDecodeNullable(_$ProfileTypeEnumMap, json['type']) ??
           ProfileType.institution,
       nickName: json['nickName'] as String,

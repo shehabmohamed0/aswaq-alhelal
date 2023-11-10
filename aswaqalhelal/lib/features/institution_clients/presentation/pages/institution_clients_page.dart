@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../core/form_inputs/name.dart';
 import '../../../../core/form_inputs/phone_number.dart';
 import '../../../../core/utils/dialogs.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../../widgets/snack_bar.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/domain/entities/user_profile.dart';
@@ -45,17 +46,21 @@ class InstitutionClientsPage extends HookWidget {
             showLoadingDialog();
             break;
           case InstitutionClientsStatus.success:
-            showSuccessSnackBar(context, 'Client added successfully');
+            showSuccessSnackBar(context,
+                AppLocalizations.current.theClientHasBeenAddedSuccessfully);
             dismissLoadingDialog();
+            Navigator.pop(context);
             break;
           case InstitutionClientsStatus.failure:
+            dismissLoadingDialog();
             showErrorSnackBar(context, state.errorMessage);
+
             break;
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Clients'),
+          title: Text(AppLocalizations.of(context).clients),
         ),
         body: BlocBuilder<InstitutionClientsBloc, InstitutionClientsState>(
           builder: (context, state) {
@@ -65,7 +70,7 @@ class InstitutionClientsPage extends HookWidget {
                 AutoSuggestTextField<UserProfile>(
                   controller: controller,
                   focusNode: focusNode,
-                  labelText: 'Phone number',
+                  labelText: AppLocalizations.of(context).phoneNumber,
                   suggestions: state.userSuggestions.toList(),
                   suggestionState: state.suggestionState,
                   suggestionBuilder: (context, profile) => ListTile(
@@ -99,7 +104,7 @@ class InstitutionClientsPage extends HookWidget {
                 TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                      labelText: 'Name',
+                      labelText: AppLocalizations.current.name,
                       enabled: state.addingNonExistentProfile,
                       errorText: state.name.validationMessage()),
                   onChanged: (name) => bloc.add(
@@ -116,7 +121,7 @@ class InstitutionClientsPage extends HookWidget {
                             ),
                           )
                       : null,
-                  child: const Text('Add'),
+                  child: Text(AppLocalizations.current.add),
                 ),
               ],
             );

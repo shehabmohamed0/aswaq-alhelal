@@ -67,7 +67,7 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
     }
 
     _overlayEntry = _createOverlayEntry();
-    Overlay.of(context)!.insert(_overlayEntry);
+    Overlay.of(context).insert(_overlayEntry);
   }
 
   void _removeOverlay() {
@@ -140,8 +140,7 @@ class _CustDropDownState<T> extends State<CustDropDown<T>>
                                                 _isAnyItemSelected = true;
                                                 _itemSelected = item.child;
                                                 _removeOverlay();
-                                                if (widget.onChanged != null)
-                                                  widget.onChanged(item.value);
+                                                widget.onChanged(item.value);
                                               });
                                             }
                                           },

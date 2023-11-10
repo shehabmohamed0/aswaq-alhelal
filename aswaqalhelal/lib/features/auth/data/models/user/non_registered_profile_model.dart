@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../domain/entities/base_profile.dart';
 import '../../../domain/entities/non_registered_profile.dart';
 
 part 'non_registered_profile_model.g.dart';
@@ -12,6 +13,7 @@ class NonRegisteredProfileModel extends NonRegisteredProfile {
     required super.userId,
     required super.name,
     required super.phoneNumber,
+    super.type = ProfileType.nonRegistered,
   });
 
   factory NonRegisteredProfileModel.fromFirestore(
@@ -25,6 +27,7 @@ class NonRegisteredProfileModel extends NonRegisteredProfile {
         userId: userId,
         name: name,
         phoneNumber: phoneNumber,
+        type: type,
       );
   factory NonRegisteredProfileModel.fromJson(Map<String, dynamic> json) =>
       _$NonRegisteredProfileModelFromJson(json);

@@ -17,6 +17,7 @@ abstract class BaseProfile extends Equatable {
   @JsonKey(defaultValue: '')
   final String id;
   final String userId;
+  @JsonKey(defaultValue: '')
   final String name;
   final String? photoURL;
   final ProfileType type;
@@ -130,6 +131,26 @@ abstract class BaseProfile extends Equatable {
       result = nonRegisteredProfile?.call(this as NonRegisteredProfile);
     }
     return result ?? orElse();
+  }
+
+  T? mapOrNull<T>({
+    T Function(UserProfile profile)? userProfile,
+    T Function(InstitutionProfile profile)? institutionProfile,
+    T Function(SystemProfile profile)? systemProfile,
+    T Function(NonRegisteredProfile profile)? nonRegisteredProfile,
+  }) {
+    T? result;
+
+    if (this is UserProfile) {
+      result = userProfile?.call(this as UserProfile);
+    } else if (this is InstitutionProfile) {
+      result = institutionProfile?.call(this as InstitutionProfile);
+    } else if (this is InstitutionProfile) {
+      result = systemProfile?.call(this as SystemProfile);
+    } else if (this is InstitutionProfile) {
+      result = nonRegisteredProfile?.call(this as NonRegisteredProfile);
+    }
+    return result;
   }
 }
 

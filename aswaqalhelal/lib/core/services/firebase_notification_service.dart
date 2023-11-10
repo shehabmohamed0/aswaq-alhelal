@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../features/notifications/domain/entities/fstore_notification_item.dart';
 import '../utils/logs.dart';
-import 'notification_service.dart';
 import '../utils/platform.dart';
+import 'notification_service.dart';
 
 @LazySingleton(as: NotificationService)
 class FirebaseNotificationService extends NotificationService {

@@ -57,7 +57,7 @@ class _ComboBoxWidgetState<T> extends State<ComboBoxWidget<T>> {
   }
 
   void showOverlay() {
-    final overlay = Overlay.of(context)!;
+    final overlay = Overlay.of(context);
 
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;

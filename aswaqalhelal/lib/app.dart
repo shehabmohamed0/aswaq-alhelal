@@ -39,11 +39,6 @@ class _AppState extends State<App>
     WidgetsBinding.instance.addObserver(this);
     _appInitialModules();
 
-    // FirebaseFirestore.instance
-    //     .collection('profiles')
-    //     .where('type', isEqualTo: 'institution')
-    //     .get()
-    //     .then((value) => print(value.docs.map((e) => e.data())));
     super.initState();
   }
 
@@ -149,19 +144,5 @@ class _AppState extends State<App>
   void onMessageOpenedApp(FStoreNotificationItem notification) {
     printLog(notification.toJson());
     _notificationCubit.add(NotificationReceived(notification));
-  }
-}
-
-class TR {
-  int? x;
-  int? y;
-
-  TR(int l, int f) {
-    x = l;
-    y = y;
-  }
-
-  void asd() {
-    TR n = new TR(5, 10);
   }
 }

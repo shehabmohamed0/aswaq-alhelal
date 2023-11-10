@@ -9,7 +9,8 @@ class LocalNotificationService {
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
-            android: AndroidInitializationSettings('@mipmap/ic_launcher'));
+      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+    );
 
     _notificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? id) async {

@@ -34,13 +34,21 @@ class AccountInfoCubit extends Cubit<AccountInfoState> {
 
   void genderChanged(String? gender) {
     emit(state.copyWith(
-        gender: gender ?? '', status: Formz.validate([state.name])));
+      gender: gender ?? '',
+      status: Formz.validate(
+        [state.name],
+      ),
+    ));
   }
 
   void birthDateChanged(DateTime birthDate, TextEditingController controller) {
     controller.text = DateFormat.yMd().format(birthDate).toString();
     emit(state.copyWith(
-        birthDate: birthDate, status: Formz.validate([state.name])));
+      birthDate: birthDate,
+      status: Formz.validate(
+        [state.name],
+      ),
+    ));
   }
 
   Future<void> updateProfile() async {

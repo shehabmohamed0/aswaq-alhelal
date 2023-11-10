@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:aswaqalhelal/routes/routes.dart';
@@ -19,13 +21,30 @@ import '../../../../recruitment/presentation/pages/recruitment/DTOs/recruitment_
 //   }
 // }
 
-class InstitutionPageBody extends StatelessWidget {
+class InstitutionPageBody extends StatefulWidget {
   const InstitutionPageBody({
     Key? key,
     required this.institution,
   }) : super(key: key);
 
   final InstitutionProfile institution;
+
+  @override
+  State<InstitutionPageBody> createState() => _InstitutionPageBodyState();
+}
+
+class _InstitutionPageBodyState extends State<InstitutionPageBody> {
+  @override
+  void initState() {
+    log('init');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    log('disposed');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +61,7 @@ class InstitutionPageBody extends StatelessWidget {
           title: intl.items,
           onTap: () {
             Navigator.pushNamed(context, Routes.institutionItems,
-                arguments: institution);
+                arguments: widget.institution);
           },
         ),
         GridTile(
@@ -51,7 +70,7 @@ class InstitutionPageBody extends StatelessWidget {
           title: intl.orders,
           onTap: () {
             Navigator.pushNamed(context, Routes.institutionOrders,
-                arguments: institution);
+                arguments: widget.institution);
           },
         ),
         GridTile(
@@ -60,7 +79,7 @@ class InstitutionPageBody extends StatelessWidget {
           title: intl.distribution,
           onTap: () {
             Navigator.pushNamed(context, Routes.distributionAreas,
-                arguments: institution);
+                arguments: widget.institution);
           },
         ),
         GridTile(
@@ -69,7 +88,7 @@ class InstitutionPageBody extends StatelessWidget {
           title: intl.receipts,
           onTap: () {
             Navigator.pushNamed(context, Routes.institutionReceipts,
-                arguments: institution);
+                arguments: widget.institution);
           },
         ),
         GridTile(
@@ -79,8 +98,8 @@ class InstitutionPageBody extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, Routes.recruitment,
                 arguments: RecruitmentPageArguments(
-                    ownerId: institution.userId,
-                    institutionId: institution.id));
+                    ownerId: widget.institution.userId,
+                    institutionId: widget.institution.id));
           },
         ),
         GridTile(
@@ -89,7 +108,7 @@ class InstitutionPageBody extends StatelessWidget {
           title: 'Clients',
           onTap: () {
             Navigator.pushNamed(context, Routes.institutionClients,
-                arguments: institution);
+                arguments: widget.institution);
           },
         ),
         GridTile(

@@ -243,5 +243,8 @@
     }
   },
   "areYouSureToResetTheForm": "Are you sure to reset the form?",
-  "areYouSureToAddANewReceiptPreviousData": "Are you sure to add a new receipt? previous data will be removed"
+  "areYouSureToAddANewReceiptPreviousData": "Are you sure to add a new receipt? previous data will be removed",
+  "theClientHasBeenAddedSuccessfully": "The client has been added successfully",
+  "clients": "Clients",
+  "thisClientAlreadyBeenAdded": "This client already been added"
 }

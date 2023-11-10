@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:aswaqalhelal/core/failures/institution_clients/client_exsists_failure.dart';
-import 'package:aswaqalhelal/core/failures/server_failure.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +8,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/failures/institution_clients/user_not_found_failure.dart';
 import '../../../../core/form_inputs/name.dart';
 import '../../../../core/form_inputs/phone_number.dart';
-import '../../../../core/form_inputs/required_object.dart';
 import '../../../../core/utils/phone_number_parser.dart';
 import '../../../auth/domain/entities/user_profile.dart';
 import '../../../institution_items/presentation/pages/add_item/widgets/auto_suggest_text_field.dart';
@@ -138,9 +135,7 @@ class InstitutionClientsBloc
       (failure) => emit(
         state.copyWith(
           status: InstitutionClientsStatus.failure,
-          errorMessage: failure is ServerFailure
-              ? failure.message
-              : (failure as ClientExsistsBeforeFailure).message,
+          errorMessage: failure.message,
         ),
       ),
       (client) => emit(state.copyWith(

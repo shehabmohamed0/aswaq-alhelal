@@ -5,6 +5,7 @@ class InstitutionReceiptsState with _$InstitutionReceiptsState {
   const factory InstitutionReceiptsState({
     @Default([]) List<InstitutionItem> items,
     @Default([]) List<InstitutionItem> filteredItems,
+    @Default(None()) Option<InstitutionClient> client,
     @Default(RequestState.loading) RequestState itemsState,
     @Default(None()) Option<InstitutionItem> selectedItem,
     @Default(None()) Option<Unit> selectedUnit,
@@ -14,13 +15,14 @@ class InstitutionReceiptsState with _$InstitutionReceiptsState {
     @Default(InstitutionReceiptStatus.initial) InstitutionReceiptStatus status,
     @Default(None()) Option<Order> savedOrder,
     @Default([]) List<OrderItem> receiptItems,
-    @Default(defaultPurchaseClient) SystemProfile purchaseClient,
     String? errorMessage,
   }) = _InstitutionReceiptsState;
 }
 
 enum InstitutionReceiptStatus {
   initial,
+  clientSelected,
+  clientUnSelected,
   itemSelected,
   itemUnselected,
   unitSelected,
@@ -29,6 +31,7 @@ enum InstitutionReceiptStatus {
   invalidUnit,
   invalidPrice,
   invalidQuantity,
+  invalidClient,
   receiptItemAdded,
   loading,
   success,

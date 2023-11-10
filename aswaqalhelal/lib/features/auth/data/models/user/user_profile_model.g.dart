@@ -10,7 +10,7 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
     UserProfileModel(
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
-      name: json['name'] as String,
+      name: json['name'] as String? ?? '',
       type: $enumDecodeNullable(_$ProfileTypeEnumMap, json['type']) ??
           ProfileType.user,
       phoneNumber: json['phoneNumber'] as String,

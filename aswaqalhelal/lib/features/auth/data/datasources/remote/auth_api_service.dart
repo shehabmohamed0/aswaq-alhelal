@@ -114,7 +114,7 @@ class AuthApiServiceImpl implements AuthApiService {
       final data = {
         'id': profileDoc.id,
         'userId': profileDoc.id,
-        'name': '',
+        'name': null,
         'phoneNumber': phoneNumber,
         'type': ProfileType.user.toString(),
         'address': null

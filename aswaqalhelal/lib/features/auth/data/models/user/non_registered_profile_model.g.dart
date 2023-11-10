@@ -11,8 +11,10 @@ NonRegisteredProfileModel _$NonRegisteredProfileModelFromJson(
     NonRegisteredProfileModel(
       id: json['id'] as String? ?? '',
       userId: json['userId'] as String,
-      name: json['name'] as String,
+      name: json['name'] as String? ?? '',
       phoneNumber: json['phoneNumber'] as String,
+      type: $enumDecodeNullable(_$ProfileTypeEnumMap, json['type']) ??
+          ProfileType.nonRegistered,
     );
 
 Map<String, dynamic> _$NonRegisteredProfileModelToJson(
@@ -21,5 +23,13 @@ Map<String, dynamic> _$NonRegisteredProfileModelToJson(
       'id': instance.id,
       'userId': instance.userId,
       'name': instance.name,
+      'type': _$ProfileTypeEnumMap[instance.type]!,
       'phoneNumber': instance.phoneNumber,
     };
+
+const _$ProfileTypeEnumMap = {
+  ProfileType.user: 'user',
+  ProfileType.institution: 'institution',
+  ProfileType.system: 'system',
+  ProfileType.nonRegistered: 'nonRegistered',
+};

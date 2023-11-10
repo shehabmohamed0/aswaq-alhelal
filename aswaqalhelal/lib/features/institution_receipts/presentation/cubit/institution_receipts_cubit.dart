@@ -9,6 +9,7 @@ import '../../../../core/params/institution_receipts/add_institution_receipts_pa
 import '../../../../core/request_state.dart';
 import '../../../auth/domain/entities/institution_profile.dart';
 import '../../../auth/domain/entities/system_profile.dart';
+import '../../../institution_clients/domain/entities/institution_client.dart';
 import '../../../institution_items/domain/entities/institution_item.dart';
 import '../../../institution_items/domain/entities/unit.dart';
 import '../../../institution_items/domain/usecases/get_institution_items.dart';
@@ -48,6 +49,20 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
             filteredItems: items));
       },
     );
+  }
+
+  void clientSelected(InstitutionClient client) {
+    emit(state.copyWith(
+      client: some(client),
+      status: InstitutionReceiptStatus.clientSelected,
+    ));
+  }
+
+  void clientUnselected() {
+    emit(state.copyWith(
+      client: none(),
+      status: InstitutionReceiptStatus.clientUnSelected,
+    ));
   }
 
   void itemSelected(InstitutionItem item) {
@@ -147,17 +162,24 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
       newList.add(receiptItem);
     }
     emit(state.copyWith(
-        receiptItems: newList,
-        totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
-        selectedItem: none(),
-        selectedUnit: none(),
-        unitPrice: 0,
-        quantity: 0,
-        status: InstitutionReceiptStatus.receiptItemAdded));
+      receiptItems: newList,
+      totalPrice: state.totalPrice + receiptItem.price * receiptItem.quantity,
+      selectedItem: none(),
+      selectedUnit: none(),
+      unitPrice: 0,
+      quantity: 0,
+      status: InstitutionReceiptStatus.receiptItemAdded,
+    ));
   }
 
   bool _inValidReceipt() {
     emit(state.copyWith(status: InstitutionReceiptStatus.initial));
+
+    if (state.client.isNone()) {
+      emit(state.copyWith(status: InstitutionReceiptStatus.invalidClient));
+      return true;
+    }
+
     if (state.selectedItem.isNone()) {
       emit(state.copyWith(status: InstitutionReceiptStatus.invalidItem));
       return true;
@@ -189,18 +211,21 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
       InstitutionProfile institution, String employeeId) async {
     if (state.status == InstitutionReceiptStatus.loading) return;
     emit(state.copyWith(status: InstitutionReceiptStatus.loading));
-
+    final profile = state.client.toNullable()!.profile;
     final either = await _addInstitutionReceipt(
       params: AddInstitutionReceiptParams(
-          to: state.purchaseClient.id,
-          name: state.purchaseClient.name,
-          phoneNumber: null,
-          receiptItems: state.receiptItems,
-          from: institution.id,
-          institutionOwnerId: institution.userId,
-          totalPrice: state.totalPrice,
-          editorId: employeeId,
-          sellerId: employeeId),
+        to: profile.id,
+        name: profile.name,
+        phoneNumber: profile.mapOrNull(
+          userProfile: (profile) => profile.phoneNumber,
+        ),
+        receiptItems: state.receiptItems,
+        from: institution.id,
+        institutionOwnerId: institution.userId,
+        totalPrice: state.totalPrice,
+        editorId: employeeId,
+        sellerId: employeeId,
+      ),
     );
 
     either.fold(
@@ -219,6 +244,7 @@ class InstitutionReceiptsCubit extends Cubit<InstitutionReceiptsState> {
   void reset() {
     emit(InstitutionReceiptsState(
       items: state.items,
+      client: state.client,
       filteredItems: state.items,
       status: InstitutionReceiptStatus.reset,
       itemsState: RequestState.loaded,

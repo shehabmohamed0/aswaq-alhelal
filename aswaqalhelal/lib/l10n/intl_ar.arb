@@ -247,5 +247,8 @@
     }
   },
   "areYouSureToResetTheForm": "هل أنت متأكد من إعادة ضبط النموذج؟",
-  "areYouSureToAddANewReceiptPreviousData": "هل انت متاكد من ادخال فاتورة جديدة؟ البيانات التى ادخلتها سوف يتم مسحها"
+  "areYouSureToAddANewReceiptPreviousData": "هل انت متاكد من ادخال فاتورة جديدة؟ البيانات التى ادخلتها سوف يتم مسحها",
+  "theClientHasBeenAddedSuccessfully": "The client has been added successfully",
+  "clients": "Clients",
+  "thisClientAlreadyBeenAdded": "This client already been added"
 }

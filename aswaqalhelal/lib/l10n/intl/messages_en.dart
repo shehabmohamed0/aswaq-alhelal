@@ -86,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose delivery location"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "client": MessageLookupByLibrary.simpleMessage("Client"),
+        "clients": MessageLookupByLibrary.simpleMessage("Clients"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contactInfo": MessageLookupByLibrary.simpleMessage("Contact info"),
         "contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
@@ -288,6 +289,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhoto": MessageLookupByLibrary.simpleMessage("Take Photo"),
         "tapTonselectItemImage":
             MessageLookupByLibrary.simpleMessage("Tap to\nSelect item image."),
+        "theClientHasBeenAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage(
+                "The client has been added successfully"),
         "theCredentialGivenDoesNotCorrespondToAnyExistingUser":
             MessageLookupByLibrary.simpleMessage(
                 "The credential given does not correspond to any existing user."),
@@ -330,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("there are no items"),
         "thereIsNoOrdersYet":
             MessageLookupByLibrary.simpleMessage("There are no orders yet"),
+        "thisClientAlreadyBeenAdded": MessageLookupByLibrary.simpleMessage(
+            "This client already been added"),
         "thisOrderHasBeenCanceledByTheUser":
             MessageLookupByLibrary.simpleMessage(
                 "This order has been canceled by the user"),

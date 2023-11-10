@@ -2305,6 +2305,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `The client has been added successfully`
+  String get theClientHasBeenAddedSuccessfully {
+    return Intl.message(
+      'The client has been added successfully',
+      name: 'theClientHasBeenAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clients`
+  String get clients {
+    return Intl.message(
+      'Clients',
+      name: 'clients',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This client already been added`
+  String get thisClientAlreadyBeenAdded {
+    return Intl.message(
+      'This client already been added',
+      name: 'thisClientAlreadyBeenAdded',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

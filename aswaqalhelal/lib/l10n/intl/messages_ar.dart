@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر موقع التوصيل"),
         "city": MessageLookupByLibrary.simpleMessage("مدينة"),
         "client": MessageLookupByLibrary.simpleMessage("عميل"),
+        "clients": MessageLookupByLibrary.simpleMessage("Clients"),
         "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
         "contactInfo": MessageLookupByLibrary.simpleMessage("معلومات التواصل"),
         "contacts": MessageLookupByLibrary.simpleMessage("جهات الاتصال"),
@@ -282,6 +283,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "takePhoto": MessageLookupByLibrary.simpleMessage("خذ صورة"),
         "tapTonselectItemImage":
             MessageLookupByLibrary.simpleMessage("انقر لتحديث \nصورة الصنف"),
+        "theClientHasBeenAddedSuccessfully":
+            MessageLookupByLibrary.simpleMessage(
+                "The client has been added successfully"),
         "theCredentialGivenDoesNotCorrespondToAnyExistingUser":
             MessageLookupByLibrary.simpleMessage(
                 "بيانات الاعتماد المقدمة لا تتوافق مع أي مستخدم موجود."),
@@ -323,6 +327,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thereIsNoItems": MessageLookupByLibrary.simpleMessage("لا يوجد اصناف"),
         "thereIsNoOrdersYet":
             MessageLookupByLibrary.simpleMessage("لا توجد طلبات حتى الآن"),
+        "thisClientAlreadyBeenAdded": MessageLookupByLibrary.simpleMessage(
+            "This client already been added"),
         "thisOrderHasBeenCanceledByTheUser":
             MessageLookupByLibrary.simpleMessage(
                 "هذا الطلب تم اللغاؤه من قبل المستخدم"),

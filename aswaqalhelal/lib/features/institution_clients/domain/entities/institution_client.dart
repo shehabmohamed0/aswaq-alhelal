@@ -7,6 +7,7 @@ class InstitutionClient extends Equatable {
   final String institutionId;
   final BaseProfile profile;
 
+
   const InstitutionClient({
     required this.id,
     required this.institutionId,

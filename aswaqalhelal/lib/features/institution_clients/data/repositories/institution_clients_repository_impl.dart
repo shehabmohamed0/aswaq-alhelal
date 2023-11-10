@@ -34,7 +34,7 @@ class InstitutionClientsRepositoryImpl extends InstitutionClientsRepository {
       return Right(institutionClient);
     } on ClientExsitsBeforeException {
       //todo: add error message here
-      return Left(ClientExsistsBeforeFailure('Your Error message here '));
+      return  Left(ClientExsistsBeforeFailure());
     } catch (e) {
       return Left(ServerFailure.general());
     }

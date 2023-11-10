@@ -7,7 +7,8 @@ class NonRegisteredProfile extends BaseProfile {
     required super.userId,
     required super.name,
     required this.phoneNumber,
-  }) : super(type: ProfileType.nonRegistered);
+    super.type = ProfileType.nonRegistered,
+  });
 
   @override
   List<Object?> get props => [id, userId, name, phoneNumber, type];

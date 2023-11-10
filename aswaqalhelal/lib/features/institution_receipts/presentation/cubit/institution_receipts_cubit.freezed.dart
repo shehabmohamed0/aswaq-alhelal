@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$InstitutionReceiptsState {
   List<InstitutionItem> get items => throw _privateConstructorUsedError;
   List<InstitutionItem> get filteredItems => throw _privateConstructorUsedError;
+  Option<InstitutionClient> get client => throw _privateConstructorUsedError;
   RequestState get itemsState => throw _privateConstructorUsedError;
   Option<InstitutionItem> get selectedItem =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,6 @@ mixin _$InstitutionReceiptsState {
   InstitutionReceiptStatus get status => throw _privateConstructorUsedError;
   Option<Order> get savedOrder => throw _privateConstructorUsedError;
   List<OrderItem> get receiptItems => throw _privateConstructorUsedError;
-  SystemProfile get purchaseClient => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,6 +45,7 @@ abstract class $InstitutionReceiptsStateCopyWith<$Res> {
   $Res call(
       {List<InstitutionItem> items,
       List<InstitutionItem> filteredItems,
+      Option<InstitutionClient> client,
       RequestState itemsState,
       Option<InstitutionItem> selectedItem,
       Option<Unit> selectedUnit,
@@ -54,7 +55,6 @@ abstract class $InstitutionReceiptsStateCopyWith<$Res> {
       InstitutionReceiptStatus status,
       Option<Order> savedOrder,
       List<OrderItem> receiptItems,
-      SystemProfile purchaseClient,
       String? errorMessage});
 }
 
@@ -74,6 +74,7 @@ class _$InstitutionReceiptsStateCopyWithImpl<$Res,
   $Res call({
     Object? items = null,
     Object? filteredItems = null,
+    Object? client = null,
     Object? itemsState = null,
     Object? selectedItem = null,
     Object? selectedUnit = null,
@@ -83,7 +84,6 @@ class _$InstitutionReceiptsStateCopyWithImpl<$Res,
     Object? status = null,
     Object? savedOrder = null,
     Object? receiptItems = null,
-    Object? purchaseClient = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +95,10 @@ class _$InstitutionReceiptsStateCopyWithImpl<$Res,
           ? _value.filteredItems
           : filteredItems // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
+      client: null == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as Option<InstitutionClient>,
       itemsState: null == itemsState
           ? _value.itemsState
           : itemsState // ignore: cast_nullable_to_non_nullable
@@ -131,10 +135,6 @@ class _$InstitutionReceiptsStateCopyWithImpl<$Res,
           ? _value.receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      purchaseClient: null == purchaseClient
-          ? _value.purchaseClient
-          : purchaseClient // ignore: cast_nullable_to_non_nullable
-              as SystemProfile,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -155,6 +155,7 @@ abstract class _$$_InstitutionReceiptsStateCopyWith<$Res>
   $Res call(
       {List<InstitutionItem> items,
       List<InstitutionItem> filteredItems,
+      Option<InstitutionClient> client,
       RequestState itemsState,
       Option<InstitutionItem> selectedItem,
       Option<Unit> selectedUnit,
@@ -164,7 +165,6 @@ abstract class _$$_InstitutionReceiptsStateCopyWith<$Res>
       InstitutionReceiptStatus status,
       Option<Order> savedOrder,
       List<OrderItem> receiptItems,
-      SystemProfile purchaseClient,
       String? errorMessage});
 }
 
@@ -182,6 +182,7 @@ class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
   $Res call({
     Object? items = null,
     Object? filteredItems = null,
+    Object? client = null,
     Object? itemsState = null,
     Object? selectedItem = null,
     Object? selectedUnit = null,
@@ -191,7 +192,6 @@ class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
     Object? status = null,
     Object? savedOrder = null,
     Object? receiptItems = null,
-    Object? purchaseClient = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_$_InstitutionReceiptsState(
@@ -203,6 +203,10 @@ class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
           ? _value._filteredItems
           : filteredItems // ignore: cast_nullable_to_non_nullable
               as List<InstitutionItem>,
+      client: null == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as Option<InstitutionClient>,
       itemsState: null == itemsState
           ? _value.itemsState
           : itemsState // ignore: cast_nullable_to_non_nullable
@@ -239,10 +243,6 @@ class __$$_InstitutionReceiptsStateCopyWithImpl<$Res>
           ? _value._receiptItems
           : receiptItems // ignore: cast_nullable_to_non_nullable
               as List<OrderItem>,
-      purchaseClient: null == purchaseClient
-          ? _value.purchaseClient
-          : purchaseClient // ignore: cast_nullable_to_non_nullable
-              as SystemProfile,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -257,6 +257,7 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
   const _$_InstitutionReceiptsState(
       {final List<InstitutionItem> items = const [],
       final List<InstitutionItem> filteredItems = const [],
+      this.client = const None(),
       this.itemsState = RequestState.loading,
       this.selectedItem = const None(),
       this.selectedUnit = const None(),
@@ -266,7 +267,6 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       this.status = InstitutionReceiptStatus.initial,
       this.savedOrder = const None(),
       final List<OrderItem> receiptItems = const [],
-      this.purchaseClient = defaultPurchaseClient,
       this.errorMessage})
       : _items = items,
         _filteredItems = filteredItems,
@@ -288,6 +288,9 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
     return EqualUnmodifiableListView(_filteredItems);
   }
 
+  @override
+  @JsonKey()
+  final Option<InstitutionClient> client;
   @override
   @JsonKey()
   final RequestState itemsState;
@@ -321,14 +324,11 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
   }
 
   @override
-  @JsonKey()
-  final SystemProfile purchaseClient;
-  @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'InstitutionReceiptsState(items: $items, filteredItems: $filteredItems, itemsState: $itemsState, selectedItem: $selectedItem, selectedUnit: $selectedUnit, unitPrice: $unitPrice, quantity: $quantity, totalPrice: $totalPrice, status: $status, savedOrder: $savedOrder, receiptItems: $receiptItems, purchaseClient: $purchaseClient, errorMessage: $errorMessage)';
+    return 'InstitutionReceiptsState(items: $items, filteredItems: $filteredItems, client: $client, itemsState: $itemsState, selectedItem: $selectedItem, selectedUnit: $selectedUnit, unitPrice: $unitPrice, quantity: $quantity, totalPrice: $totalPrice, status: $status, savedOrder: $savedOrder, receiptItems: $receiptItems, errorMessage: $errorMessage)';
   }
 
   @override
@@ -339,6 +339,7 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
             const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality()
                 .equals(other._filteredItems, _filteredItems) &&
+            (identical(other.client, client) || other.client == client) &&
             (identical(other.itemsState, itemsState) ||
                 other.itemsState == itemsState) &&
             (identical(other.selectedItem, selectedItem) ||
@@ -356,8 +357,6 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
                 other.savedOrder == savedOrder) &&
             const DeepCollectionEquality()
                 .equals(other._receiptItems, _receiptItems) &&
-            (identical(other.purchaseClient, purchaseClient) ||
-                other.purchaseClient == purchaseClient) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
@@ -367,6 +366,7 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       runtimeType,
       const DeepCollectionEquality().hash(_items),
       const DeepCollectionEquality().hash(_filteredItems),
+      client,
       itemsState,
       selectedItem,
       selectedUnit,
@@ -376,7 +376,6 @@ class _$_InstitutionReceiptsState implements _InstitutionReceiptsState {
       status,
       savedOrder,
       const DeepCollectionEquality().hash(_receiptItems),
-      purchaseClient,
       errorMessage);
 
   @JsonKey(ignore: true)
@@ -391,6 +390,7 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
   const factory _InstitutionReceiptsState(
       {final List<InstitutionItem> items,
       final List<InstitutionItem> filteredItems,
+      final Option<InstitutionClient> client,
       final RequestState itemsState,
       final Option<InstitutionItem> selectedItem,
       final Option<Unit> selectedUnit,
@@ -400,13 +400,14 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
       final InstitutionReceiptStatus status,
       final Option<Order> savedOrder,
       final List<OrderItem> receiptItems,
-      final SystemProfile purchaseClient,
       final String? errorMessage}) = _$_InstitutionReceiptsState;
 
   @override
   List<InstitutionItem> get items;
   @override
   List<InstitutionItem> get filteredItems;
+  @override
+  Option<InstitutionClient> get client;
   @override
   RequestState get itemsState;
   @override
@@ -425,8 +426,6 @@ abstract class _InstitutionReceiptsState implements InstitutionReceiptsState {
   Option<Order> get savedOrder;
   @override
   List<OrderItem> get receiptItems;
-  @override
-  SystemProfile get purchaseClient;
   @override
   String? get errorMessage;
   @override

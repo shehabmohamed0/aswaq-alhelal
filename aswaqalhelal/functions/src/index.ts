@@ -58,22 +58,46 @@ export const onNotification = functions.firestore.document('notifications/{notif
 export const onProfile = functions.firestore.document('profiles/{profile}').onWrite(async (snapshot, context) => {
     const firestore = admin.firestore();
     const data = snapshot.after.data();
-
-    if (!snapshot.before.exists && snapshot.after.data()!.type == 'user') {
-        return;
+    let type = snapshot.after.data()!.type;
+    if (type == 'user') {
+        if (isUserProfileJustCompleted()) {
+            //here we don't copy change into user record because we update it from client side
+            //We just check if the user phone number already exsist before to link the profile to it or not
+            let snapshot = await firestore.collection('institution_clients')
+                .where('profile.id', '==', data!.phoneNumber).get();
+            let exsists = snapshot.docs.length > 0;
+            let oldDocs = snapshot.docs;
+            if (exsists) {
+                let docsIndex = 0;
+                while (docsIndex < oldDocs.length) {
+                    let batch = firestore.batch();
+                    let counter = 0;
+                    while (counter < 500 && docsIndex < oldDocs.length) {
+                        batch.update(
+                            oldDocs[docsIndex].ref,
+                            {
+                                'profile': getProfileDataWitholdName(data!, oldDocs[docsIndex].get('name')!)
+                            }
+                        )
+                        counter++;
+                        docsIndex++;
+                    }
+                    await batch.commit();
+                }
+            }
+        }
     }
-
-    if (!snapshot.before.exists && snapshot.after.data()!.type == 'institution') {
+    if (isNewProfile() && type == 'institution') {
         let defaultCacheClient = await firestore.doc('profiles/zN9HD2x9hgfaih9KaqBM').get();
         const institutionId = data!.id;
         let clientProfileData = defaultCacheClient.data()!;
         let institutionClientData = {
             'institutionId': institutionId,
             'profile': clientProfileData,
-
         };
         await firestore.collection('institution_clients').add(institutionClientData);
     }
+
     const profileId = snapshot.after.id;
     const userDoc = admin.firestore().doc('users/' + (data!.userId));
     userDoc.set({
@@ -85,6 +109,35 @@ export const onProfile = functions.firestore.document('profiles/{profile}').onWr
     })
 
 
+
+    function isNewProfile(): boolean {
+        return !snapshot.before.exists;
+    }
+
+    function isUserProfileJustCompleted(): boolean {
+
+        return snapshot.before.exists
+            && snapshot.before.data()!['address'] == null
+            && snapshot.after.data()!['address'] != null
+            && snapshot.before.data()!['name'] == null
+            && snapshot.after.data()!['name'] != null;
+    }
+    function getProfileDataWitholdName(
+        data: admin.firestore.DocumentData,
+        name: string
+    ): admin.firestore.DocumentData {
+
+        return {
+            'id': data.id,
+            'address': data.address,
+            'name': name,
+            'phoneNumber': data.phoneNumber,
+            'type': data.type,
+            'userId': data.userId
+        }
+
+
+    }
 });
 
 
